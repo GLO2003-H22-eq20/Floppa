@@ -15,6 +15,8 @@ public class Main {
         URI uri = URI.create("http://localhost:8080/");
 
         HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig);
+
         server.start();
     }
+
 }
