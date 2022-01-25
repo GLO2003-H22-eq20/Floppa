@@ -10,9 +10,11 @@ import java.net.URI;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        ResourceConfig resourceConfig = new ResourceConfig()
-                .packages("ulaval.glo2003");
         URI uri = URI.create("http://localhost:8080/");
+        SellerRepository sellerRepository = new SellerRepository();
+        ResourceConfig resourceConfig = new ResourceConfig()
+                .register(new SellerResource(sellerRepository, uri))
+                .packages("ulaval.glo2003");
 
         HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig);
 
