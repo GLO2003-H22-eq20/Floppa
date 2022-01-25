@@ -17,13 +17,14 @@ public class SellerResource {
         this.baseUri = baseUri;
     }
 
+
     @POST
     public Response createSeller(SellerRequest sellerRequest) {
         Seller newSeller = SellerAssembler.fromRequest(sellerRequest);
 
-        int sellerId = sellerRepository.addSeller(newSeller);
+        sellerRepository.addSeller(newSeller);
 
-        return Response.created(URI.create(baseUri.toString() + "sellers/" + sellerId)).build();
+        return Response.created(URI.create(baseUri.toString() + "sellers/" + newSeller.id.toString())).build();
     }
 
 }

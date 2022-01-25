@@ -7,8 +7,8 @@ import java.util.Date;
 
 public class SellerAssembler {
     static public Seller fromRequest(SellerRequest sellerRequest) {
-        Date minDate =  Date.from(LocalDateTime.now().minusYears(18).toInstant(ZoneOffset.UTC));
-        if(sellerRequest.birthDate.after(minDate)){
+        Date minDate = Date.from(LocalDateTime.now().minusYears(18).toInstant(ZoneOffset.UTC));
+        if (sellerRequest.birthDate.after(minDate)) {
             throw new InvalidParameterException("Seller must be at least 18 years old");
         }
 

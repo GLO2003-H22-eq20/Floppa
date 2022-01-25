@@ -10,8 +10,15 @@ public class SellerRepository {
         sellerList = new ArrayList<>();
     }
 
-    public int addSeller(Seller seller) {
-        sellerList.add(seller);
-        return sellerList.size();
+    public boolean addSeller(Seller newSeller) {
+        if(!checkIfSellerExists(newSeller))
+        {
+            return sellerList.add(newSeller);
+        }
+        return false;
+    }
+
+    private boolean checkIfSellerExists(Seller seller) {
+        return sellerList.stream().anyMatch(savedSeller -> savedSeller.id == seller.id );
     }
 }
