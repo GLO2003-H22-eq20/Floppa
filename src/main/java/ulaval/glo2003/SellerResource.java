@@ -23,6 +23,7 @@ public class SellerResource {
 
         int sellerId = sellerRepository.addSeller(newSeller);
 
-        return Response.created(URI.create(baseUri.toString()+"sellers/"+sellerId)).build();
+        return Response.created(URI.create(baseUri.toString() + "sellers/" + sellerId)).build();
     }
+
 }

@@ -11,7 +11,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         URI uri = URI.create("http://localhost:8080/");
+
         SellerRepository sellerRepository = new SellerRepository();
+
         ResourceConfig resourceConfig = new ResourceConfig()
                 .register(new SellerResource(sellerRepository, uri))
                 .packages("ulaval.glo2003");
