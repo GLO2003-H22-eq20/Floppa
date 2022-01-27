@@ -32,6 +32,6 @@ public class SellerResource {
 
         sellerRepository.addSeller(newSeller);
 
-        return Response.created(URI.create(baseUri.toString() + "sellers/" + newSeller.id.toString())).build();
+        return Response.created(URI.create(baseUri.toString() + "sellers/" + newSeller.getId().toString())).build();
     }
 }

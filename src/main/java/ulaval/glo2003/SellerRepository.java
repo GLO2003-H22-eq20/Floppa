@@ -22,7 +22,7 @@ public class SellerRepository {
 
     public Seller findSeller(String id) {
         for(Seller seller : sellerList) {
-            if(Objects.equals(seller.id.toString(), id)) {
+            if(Objects.equals(seller.getId().toString(), id)) {
                 return seller;
             }
         }
@@ -30,6 +30,6 @@ public class SellerRepository {
     }
 
     private boolean checkIfSellerExists(Seller seller) {
-        return sellerList.stream().anyMatch(savedSeller -> savedSeller.id == seller.id );
+        return sellerList.stream().anyMatch(savedSeller -> savedSeller.getId() == seller.getId() );
     }
 }
