@@ -2,6 +2,8 @@ package ulaval.glo2003;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 public class SellerRepository {
     private List<Seller> sellerList;
@@ -16,6 +18,15 @@ public class SellerRepository {
             return sellerList.add(newSeller);
         }
         return false;
+    }
+
+    public Seller findSeller(String id) {
+        for(Seller seller : sellerList) {
+            if(Objects.equals(seller.id.toString(), id)) {
+                return seller;
+            }
+        }
+        return null;
     }
 
     private boolean checkIfSellerExists(Seller seller) {

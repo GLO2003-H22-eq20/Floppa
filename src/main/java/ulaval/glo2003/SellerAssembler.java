@@ -14,4 +14,8 @@ public class SellerAssembler {
 
         return new Seller(sellerRequest.name, sellerRequest.bio, sellerRequest.birthDate);
     }
+
+    static public SellerResponse toResponse(Seller seller) {
+        return new SellerResponse(seller.id, seller.name, seller.createdAt, seller.bio, seller.products);
+    }
 }
