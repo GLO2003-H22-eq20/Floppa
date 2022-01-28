@@ -33,6 +33,6 @@ public class SellerResource {
 
         sellerRepository.saveSeller(seller);
 
-        return Response.created(URI.create(baseUri.toString() + "sellers/" + seller.id.toString())).build();
+        return Response.created(URI.create(baseUri.toString() + "sellers/" + seller.getId().toString())).build();
     }
 }
