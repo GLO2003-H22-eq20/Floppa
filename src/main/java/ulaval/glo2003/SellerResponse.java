@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.UUID;
 
 public class SellerResponse {
-    private final UUID id;
+    private final String id;
     private final String name;
     private final Instant createdAt;
     private final String bio;
     private final List<Product> products;
 
-    public SellerResponse(UUID id, String name, Instant createdAt, String bio, List<Product> products) {
+    public SellerResponse(String id, String name, Instant createdAt, String bio, List<Product> products) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
@@ -19,7 +19,7 @@ public class SellerResponse {
         this.products = products;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 

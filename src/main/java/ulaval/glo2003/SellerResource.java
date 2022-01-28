@@ -4,6 +4,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 
 import java.net.URI;
+import java.util.Optional;
 
 @Path("/sellers")
 public class SellerResource {
@@ -19,19 +20,19 @@ public class SellerResource {
     @Path("{id}")
     @GET
     public Response getSeller(@PathParam("id") String id) {
-        Seller seller = sellerRepository.findSeller(id);
+        Optional<Seller> seller = sellerRepository.findById(id);
 
-        SellerResponse sellerResponse = SellerAssembler.toResponse(seller);
+        SellerResponse sellerResponse = SellerAssembler.toResponse(seller.get());
 
         return Response.status(Response.Status.OK).entity(sellerResponse).build();
     }
 
     @POST
     public Response createSeller(SellerRequest sellerRequest) {
-        Seller newSeller = SellerAssembler.fromRequest(sellerRequest);
+        Seller seller = SellerAssembler.fromRequest(sellerRequest);
 
-        sellerRepository.addSeller(newSeller);
+        sellerRepository.saveSeller(seller);
 
-        return Response.created(URI.create(baseUri.toString() + "sellers/" + newSeller.id.toString())).build();
+        return Response.created(URI.create(baseUri.toString() + "sellers/" + seller.id.toString())).build();
     }
 }

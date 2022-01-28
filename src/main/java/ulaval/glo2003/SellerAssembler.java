@@ -16,6 +16,6 @@ public class SellerAssembler {
     }
 
     static public SellerResponse toResponse(Seller seller) {
-        return new SellerResponse(seller.id, seller.name, seller.createdAt, seller.bio, seller.products);
+        return new SellerResponse(seller.id.toString(), seller.name, seller.createdAt, seller.bio, seller.products);
     }
 }

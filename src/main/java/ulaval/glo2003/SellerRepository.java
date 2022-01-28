@@ -1,35 +1,19 @@
 package ulaval.glo2003;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class SellerRepository {
-    private List<Seller> sellerList;
+    private final Map<String, Seller> sellerMap = Collections.synchronizedMap(new HashMap<>());
 
-    public SellerRepository() {
-        sellerList = new ArrayList<>();
-    }
-
-    public boolean addSeller(Seller newSeller) {
-        if(!checkIfSellerExists(newSeller))
-        {
-            return sellerList.add(newSeller);
+    public void saveSeller(Seller seller) {
+        if (sellerMap.containsKey(seller.getId())) {
+//            throw new Exception();
         }
-        return false;
+
+        sellerMap.put(seller.getId().toString(), seller);
     }
 
-    public Seller findSeller(String id) {
-        for(Seller seller : sellerList) {
-            if(Objects.equals(seller.id.toString(), id)) {
-                return seller;
-            }
-        }
-        return null;
-    }
-
-    private boolean checkIfSellerExists(Seller seller) {
-        return sellerList.stream().anyMatch(savedSeller -> savedSeller.id == seller.id );
+    public Optional<Seller> findById(String id) {
+        return Optional.ofNullable(sellerMap.get(id));
     }
 }

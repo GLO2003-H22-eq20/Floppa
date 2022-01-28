@@ -17,8 +17,12 @@ public class Seller {
     public Seller(String name, String bio, Date birthDate) {
         this.id = UUID.randomUUID();
         this.name = name;
-        this.bio = bio;
         this.birthDate = birthDate;
+        this.bio = bio;
         this.createdAt = Instant.now();
+    }
+
+    public UUID getId() {
+        return id;
     }
 }
