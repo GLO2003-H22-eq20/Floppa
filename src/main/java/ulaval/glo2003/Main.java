@@ -15,8 +15,11 @@ public class Main {
         SellerRepository sellerRepository = new SellerRepository();
 
         ResourceConfig resourceConfig = new ResourceConfig()
+                .register(ItemNotFoundExceptionsMapper.class)
+                .register(InvalidParameterExceptionMapper.class)
+                .register(MissingParameterExceptionMapper.class)
                 .register(new SellerResource(sellerRepository, uri))
-                .register(new ItemNotFoundExceptionsMapper())
+                .register(HealthResource.class)
                 .packages("ulaval.glo2003");
 
         HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig);

@@ -1,12 +1,19 @@
 package ulaval.glo2003;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 
 import java.net.URI;
 import java.util.Optional;
 
-@Path("/sellers")
+@Path("sellers")
+@Produces(MediaType.APPLICATION_JSON)
 public class SellerResource {
 
     private SellerRepository sellerRepository;
@@ -28,7 +35,8 @@ public class SellerResource {
     }
 
     @POST
-    public Response createSeller(SellerRequest sellerRequest) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createSeller(@NotNull SellerRequest sellerRequest) {
         Seller seller = SellerAssembler.fromRequest(sellerRequest);
 
         sellerRepository.saveSeller(seller);
