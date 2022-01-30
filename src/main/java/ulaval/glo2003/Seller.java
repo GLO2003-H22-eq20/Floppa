@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.UUID;
 
 public class Seller {
-    private UUID id;
-    private String name;
-    private String bio;
-    private Date birthDate;
-    private Instant createdAt;
-    private List<Product> products = new ArrayList<>();
+    private final UUID id;
+    private final String name;
+    private final String bio;
+    private final Date birthDate;
+    private final Instant createdAt;
+    private List<Product> products;
 
     public Seller(String name, String bio, Date birthDate) {
         this.id = UUID.randomUUID();
@@ -20,6 +20,7 @@ public class Seller {
         this.bio = bio;
         this.birthDate = birthDate;
         this.createdAt = Instant.now();
+        this.products = new ArrayList<>();
     }
 
     public UUID getId() {
