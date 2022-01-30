@@ -15,6 +15,8 @@ public class Main {
         SellerRepository sellerRepository = new SellerRepository();
 
         ResourceConfig resourceConfig = new ResourceConfig()
+                .register(InvalidParameterExceptionMapper.class)
+                .register(MissingParameterExceptionMapper.class)
                 .register(new SellerResource(sellerRepository, uri))
                 .packages("ulaval.glo2003");
 
