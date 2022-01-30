@@ -6,7 +6,7 @@ public class SellerRepository {
     private final Map<String, Seller> sellerMap = Collections.synchronizedMap(new HashMap<>());
 
     public void saveSeller(Seller seller) {
-        if (sellerMap.containsKey(seller.getId())) {
+        if (sellerMap.containsKey(seller.getId().toString())) {
 //            throw new Exception();
         }
 
