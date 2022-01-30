@@ -18,6 +18,7 @@ public class Main {
                 .register(InvalidParameterExceptionMapper.class)
                 .register(MissingParameterExceptionMapper.class)
                 .register(new SellerResource(sellerRepository, uri))
+                .register(HealthResource.class)
                 .packages("ulaval.glo2003");
 
         HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig);
