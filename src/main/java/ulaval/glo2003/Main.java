@@ -16,6 +16,7 @@ public class Main {
 
         ResourceConfig resourceConfig = new ResourceConfig()
                 .register(new SellerResource(sellerRepository, uri))
+                .register(new ItemNotFoundExceptionsMapper())
                 .packages("ulaval.glo2003");
 
         HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig);

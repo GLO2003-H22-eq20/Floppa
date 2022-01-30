@@ -13,7 +13,10 @@ public class SellerRepository {
         sellerMap.put(seller.getId().toString(), seller);
     }
 
-    public Optional<Seller> findById(String id) {
-        return Optional.ofNullable(sellerMap.get(id));
+    public Seller findById(String id) {
+        if (sellerMap.get(id) == null) {
+            throw new ItemNotFoundException();
+        }
+        return sellerMap.get(id);
     }
 }

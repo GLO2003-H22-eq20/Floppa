@@ -20,9 +20,9 @@ public class SellerResource {
     @Path("{id}")
     @GET
     public Response getSeller(@PathParam("id") String id) {
-        Optional<Seller> seller = sellerRepository.findById(id);
+        Seller seller = sellerRepository.findById(id);
 
-        SellerResponse sellerResponse = SellerAssembler.toResponse(seller.get());
+        SellerResponse sellerResponse = SellerAssembler.toResponse(seller);
 
         return Response.status(Response.Status.OK).entity(sellerResponse).build();
     }
