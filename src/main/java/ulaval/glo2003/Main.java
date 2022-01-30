@@ -11,6 +11,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         ResourceConfig resourceConfig = new ResourceConfig()
+                .register(HealthResource.class)
                 .packages("ulaval.glo2003");
         URI uri = URI.create("http://localhost:8080/");
 
