@@ -1,10 +1,10 @@
-package ulaval.glo2003;
+package ulaval.glo2003.domain;
 
-public class Offers {
+public class Offer {
     private Float mean;
     private Integer count;
 
-    public Offers(Float mean, Integer count) {
+    public Offer(Float mean, Integer count) {
         this.mean = mean;
         this.count = count;
     }

@@ -1,4 +1,4 @@
-package ulaval.glo2003;
+package ulaval.glo2003.controllers.exceptionMappers.response;
 
 public class ExceptionResponse {
     private final String code;

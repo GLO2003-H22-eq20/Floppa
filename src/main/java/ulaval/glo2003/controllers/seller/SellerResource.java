@@ -1,4 +1,4 @@
-package ulaval.glo2003;
+package ulaval.glo2003.controllers.seller;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.Consumes;
@@ -8,9 +8,13 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
+import ulaval.glo2003.controllers.seller.dtos.SellerAssembler;
+import ulaval.glo2003.controllers.seller.dtos.SellerRequest;
+import ulaval.glo2003.controllers.seller.dtos.SellerResponse;
+import ulaval.glo2003.domain.Seller;
+import ulaval.glo2003.infrastructure.SellerRepository;
 
 import java.net.URI;
-import java.util.Optional;
 
 @Path("sellers")
 @Produces(MediaType.APPLICATION_JSON)

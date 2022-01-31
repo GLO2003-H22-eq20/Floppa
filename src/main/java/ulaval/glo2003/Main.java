@@ -3,6 +3,13 @@ package ulaval.glo2003;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import ulaval.glo2003.controllers.health.HealthResource;
+import ulaval.glo2003.controllers.seller.SellerResource;
+import ulaval.glo2003.controllers.exceptionMappers.InvalidParameterExceptionMapper;
+import ulaval.glo2003.controllers.exceptionMappers.ItemNotFoundExceptionsMapper;
+import ulaval.glo2003.controllers.exceptionMappers.MissingParameterExceptionMapper;
+import ulaval.glo2003.controllers.exceptions.SellerAlreadyExistsException;
+import ulaval.glo2003.infrastructure.SellerRepository;
 
 import java.io.IOException;
 import java.net.URI;
@@ -15,6 +22,7 @@ public class Main {
         SellerRepository sellerRepository = new SellerRepository();
 
         ResourceConfig resourceConfig = new ResourceConfig()
+                .register(SellerAlreadyExistsException.class)
                 .register(ItemNotFoundExceptionsMapper.class)
                 .register(InvalidParameterExceptionMapper.class)
                 .register(MissingParameterExceptionMapper.class)

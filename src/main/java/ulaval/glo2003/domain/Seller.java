@@ -1,4 +1,6 @@
-package ulaval.glo2003;
+package ulaval.glo2003.domain;
+
+import ulaval.glo2003.domain.Product;
 
 import java.time.Instant;
 import java.util.ArrayList;

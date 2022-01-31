@@ -1,4 +1,6 @@
-package ulaval.glo2003;
+package ulaval.glo2003.domain;
+
+import ulaval.glo2003.domain.Offer;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -9,15 +11,15 @@ public class Product {
     private String title;
     private String description;
     private Float suggestedPrice;
-    private Offers offers;
+    private Offer offer;
 
-    public Product(UUID id, Instant createdAt, String title, String description, Float suggestedPrice, Offers offers) {
+    public Product(UUID id, Instant createdAt, String title, String description, Float suggestedPrice, Offer offer) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
         this.description = description;
         this.suggestedPrice = suggestedPrice;
-        this.offers = offers;
+        this.offer = offer;
     }
 
     public UUID getId() {
@@ -40,7 +42,7 @@ public class Product {
         return suggestedPrice;
     }
 
-    public Offers getOffers() {
-        return offers;
+    public Offer getOffers() {
+        return offer;
     }
 }

@@ -1,4 +1,4 @@
-package ulaval.glo2003;
+package ulaval.glo2003.controllers.seller.dtos;
 
 import java.util.Date;
 
