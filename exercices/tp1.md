@@ -47,3 +47,19 @@ Une pull request doit être approuvé par 2 membres de l'équipe pour être merg
 Lors de la review, les membres de l'équipe peuvent faire des demandes de changement.
 
 Merge vers Master sauf en cas d'exception (hotfix sur branche de release, etc.)
+
+##Screenshots
+
+
+1. Project
+![Alt text](tp1_screenshots/Project.PNG?raw=true "1. Project")
+2. Milestones
+![Alt text](tp1_screenshots/Milestones.PNG?raw=true "2. Milestones")
+3. Issues
+![Alt text](tp1_screenshots/Issue1.PNG?raw=true "3. Issue 1")
+![Alt text](tp1_screenshots/Issue2.PNG?raw=true "3. Issue 2")
+![Alt text](tp1_screenshots/Issue3.PNG?raw=true "3. Issue 3")
+4. Pull requests
+![Alt text](tp1_screenshots/PR1.PNG?raw=true "4. Pull request 1")
+![Alt text](tp1_screenshots/PR2.PNG?raw=true "4. Pull request 2")
+![Alt text](tp1_screenshots/PR3.PNG?raw=true "4. Pull request 3")
