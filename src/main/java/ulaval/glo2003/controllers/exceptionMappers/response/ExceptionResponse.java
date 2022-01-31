@@ -1,6 +1,4 @@
-package ulaval.glo2003;
-
-import org.eclipse.persistence.exceptions.JPARSErrorCodes;
+package ulaval.glo2003.controllers.exceptionMappers.response;
 
 public class ExceptionResponse {
     private final String code;

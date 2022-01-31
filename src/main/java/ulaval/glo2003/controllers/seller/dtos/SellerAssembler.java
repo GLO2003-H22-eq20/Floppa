@@ -1,4 +1,7 @@
-package ulaval.glo2003;
+package ulaval.glo2003.controllers.seller.dtos;
+
+import ulaval.glo2003.controllers.exceptions.MissingParameterException;
+import ulaval.glo2003.domain.Seller;
 
 import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
