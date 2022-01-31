@@ -8,7 +8,6 @@ import ulaval.glo2003.controllers.seller.SellerResource;
 import ulaval.glo2003.controllers.exceptionMappers.InvalidParameterExceptionMapper;
 import ulaval.glo2003.controllers.exceptionMappers.ItemNotFoundExceptionsMapper;
 import ulaval.glo2003.controllers.exceptionMappers.MissingParameterExceptionMapper;
-import ulaval.glo2003.controllers.exceptions.SellerAlreadyExistsException;
 import ulaval.glo2003.infrastructure.SellerRepository;
 
 import java.io.IOException;
@@ -22,7 +21,6 @@ public class Main {
         SellerRepository sellerRepository = new SellerRepository();
 
         ResourceConfig resourceConfig = new ResourceConfig()
-                .register(SellerAlreadyExistsException.class)
                 .register(ItemNotFoundExceptionsMapper.class)
                 .register(InvalidParameterExceptionMapper.class)
                 .register(MissingParameterExceptionMapper.class)
