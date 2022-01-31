@@ -21,10 +21,12 @@ import java.net.URI;
 public class SellerResource {
 
     private SellerRepository sellerRepository;
+    private SellerPresenter sellerPresenter;
     private URI baseUri;
 
-    public SellerResource(SellerRepository sellerRepository, URI baseUri) {
+    public SellerResource(SellerRepository sellerRepository, SellerPresenter sellerPresenter, URI baseUri) {
         this.sellerRepository = sellerRepository;
+        this.sellerPresenter = sellerPresenter;
         this.baseUri = baseUri;
     }
 
@@ -33,7 +35,7 @@ public class SellerResource {
     public Response getSeller(@PathParam("id") String id) {
         Seller seller = sellerRepository.findById(id);
 
-        SellerResponse sellerResponse = SellerAssembler.toResponse(seller);
+        SellerResponse sellerResponse = sellerPresenter.presentSeller(seller);
 
         return Response.status(Response.Status.OK).entity(sellerResponse).build();
     }

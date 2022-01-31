@@ -29,8 +29,4 @@ public class SellerAssembler {
 
         return new Seller(sellerRequest.name, sellerRequest.bio, sellerRequest.birthDate);
     }
-
-    static public SellerResponse toResponse(Seller seller) {
-        return new SellerResponse(seller.getId().toString(), seller.getName(), seller.getCreatedAt().toString(), seller.getBio(), seller.getProducts());
-    }
 }

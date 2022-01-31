@@ -1,7 +1,5 @@
 package ulaval.glo2003.domain;
 
-import ulaval.glo2003.domain.Offer;
-
 import java.time.Instant;
 import java.util.UUID;
 
@@ -42,7 +40,7 @@ public class Product {
         return suggestedPrice;
     }
 
-    public Offer getOffers() {
+    public Offer getOffer() {
         return offer;
     }
 }
