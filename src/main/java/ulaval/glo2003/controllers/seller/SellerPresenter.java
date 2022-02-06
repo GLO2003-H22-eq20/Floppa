@@ -16,10 +16,10 @@ public class SellerPresenter {
     }
 
     public List<ProductResponse> presentProducts(List<Product> productList) {
-        return productList.stream().map(product -> new ProductResponse(product.getId(), product.getCreatedAt(), product.getTitle(), product.getDescription(), product.getSuggestedPrice(), presentOffer(product.getOffer()))).collect(Collectors.toList());
+        return productList.stream().map(product -> new ProductResponse(product.getId(), product.getCreatedAt(), product.getTitle(), product.getDescription(), product.getSuggestedPrice(), new Offer(null, null))).collect(Collectors.toList());
     }
 
-    public OfferResponse presentOffer(Offer offer) {
-         return new OfferResponse(offer.getMean(), offer.getCount());
-    }
+//    public OfferResponse presentOffer(Offer offer) {
+//         return new OfferResponse(offer.getMean(), offer.getCount());
+//    }
 }
