@@ -1,6 +1,8 @@
 package ulaval.glo2003.domain;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Product {
@@ -10,13 +12,15 @@ public class Product {
     private String description;
     private Float suggestedPrice;
     private Offer offer;
+    private List<ProductCategory> categories;
 
-    public Product(String title, String description, Float suggestedPrice) {
+    public Product(String title, String description, Float suggestedPrice, List<ProductCategory> categories) {
         this.id = UUID.randomUUID();
         this.createdAt = Instant.now();
         this.title = title;
         this.description = description;
         this.suggestedPrice = suggestedPrice;
+        this.categories = categories;
     }
 
     public UUID getId() {
@@ -41,5 +45,9 @@ public class Product {
 
     public Offer getOffer() {
         return offer;
+    }
+
+    public List<ProductCategory> getCategories() {
+        return categories;
     }
 }

@@ -25,6 +25,10 @@ public class Seller {
         this.products = new ArrayList<>();
     }
 
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
     public UUID getId() {
         return id;
     }

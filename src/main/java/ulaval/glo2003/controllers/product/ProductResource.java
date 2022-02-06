@@ -10,7 +10,9 @@ import jakarta.ws.rs.core.Response;
 import ulaval.glo2003.controllers.product.dtos.ProductAssembler;
 import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.domain.Product;
+import ulaval.glo2003.domain.Seller;
 import ulaval.glo2003.infrastructure.ProductRepository;
+import ulaval.glo2003.infrastructure.SellerRepository;
 
 import java.net.URI;
 
@@ -18,11 +20,12 @@ import java.net.URI;
 @Path("products")
 public class ProductResource {
 
+    private SellerRepository sellerRepository;
     private ProductRepository productRepository;
     private URI baseUri;
 
-
-    public ProductResource(ProductRepository productRepository, URI baseUri) {
+    public ProductResource(SellerRepository sellerRepository, ProductRepository productRepository, URI baseUri) {
+        this.sellerRepository = sellerRepository;
         this.productRepository = productRepository;
         this.baseUri = baseUri;
     }
@@ -33,6 +36,8 @@ public class ProductResource {
         Product product = ProductAssembler.fromRequest(productRequest);
 
         productRepository.saveProduct(product);
+        Seller seller = sellerRepository.findById(sellerId);
+        seller.addProduct(product);
 
         return Response.created(URI.create(baseUri.toString() + "products/" + product.getId().toString())).build();
     }
