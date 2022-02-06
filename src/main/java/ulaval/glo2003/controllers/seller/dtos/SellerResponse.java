@@ -1,6 +1,6 @@
 package ulaval.glo2003.controllers.seller.dtos;
 
-import ulaval.glo2003.domain.Product;
+import ulaval.glo2003.controllers.product.dtos.ProductResponse;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package ulaval.glo2003.controllers.seller;
 
-import ulaval.glo2003.controllers.seller.dtos.OfferResponse;
-import ulaval.glo2003.controllers.seller.dtos.ProductResponse;
+import ulaval.glo2003.controllers.OfferResponse;
+import ulaval.glo2003.controllers.product.dtos.ProductResponse;
 import ulaval.glo2003.controllers.seller.dtos.SellerResponse;
 import ulaval.glo2003.domain.Offer;
 import ulaval.glo2003.domain.Product;

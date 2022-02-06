@@ -1,4 +1,4 @@
-package ulaval.glo2003.controllers.seller.dtos;
+package ulaval.glo2003.controllers;
 
 public class OfferResponse {
     private final Float mean;

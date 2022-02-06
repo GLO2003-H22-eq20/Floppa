@@ -1,6 +1,6 @@
-package ulaval.glo2003.controllers.seller.dtos;
+package ulaval.glo2003.controllers.product.dtos;
 
-import ulaval.glo2003.domain.Offer;
+import ulaval.glo2003.controllers.OfferResponse;
 
 import java.time.Instant;
 import java.util.UUID;

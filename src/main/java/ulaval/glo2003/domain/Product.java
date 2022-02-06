@@ -11,13 +11,12 @@ public class Product {
     private Float suggestedPrice;
     private Offer offer;
 
-    public Product(UUID id, Instant createdAt, String title, String description, Float suggestedPrice, Offer offer) {
-        this.id = id;
-        this.createdAt = createdAt;
+    public Product(String title, String description, Float suggestedPrice) {
+        this.id = UUID.randomUUID();
+        this.createdAt = Instant.now();
         this.title = title;
         this.description = description;
         this.suggestedPrice = suggestedPrice;
-        this.offer = offer;
     }
 
     public UUID getId() {
