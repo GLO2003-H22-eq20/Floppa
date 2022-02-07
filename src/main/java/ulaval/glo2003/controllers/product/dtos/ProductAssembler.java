@@ -14,9 +14,7 @@ public class ProductAssembler {
             throw new MissingParameterException("Missing description");
         }
 
-//        if (productRequest.suggestedPrice = ) {
-//            throw new MissingParameterException("Missing suggested price");
-//        }
+    //TODO add MISSING_PARAMETER_EXCEPTION
 
         return new Product(productRequest.title, productRequest.description, productRequest.suggestedPrice, productRequest.categories);
     }

@@ -1,6 +1,5 @@
 package ulaval.glo2003.controllers.product.dtos;
 
-import ulaval.glo2003.controllers.OfferResponse;
 import ulaval.glo2003.domain.Offer;
 
 import java.time.Instant;
