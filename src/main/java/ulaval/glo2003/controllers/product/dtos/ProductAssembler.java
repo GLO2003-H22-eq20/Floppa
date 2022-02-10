@@ -5,7 +5,7 @@ import ulaval.glo2003.domain.Product;
 
 public class ProductAssembler {
     static public Product fromRequest(ProductRequest productRequest) {
-    //TODO remove null
+        //TODO remove null
         if (productRequest.title == null) {
             throw new MissingParameterException("Missing title");
         }
@@ -14,8 +14,14 @@ public class ProductAssembler {
             throw new MissingParameterException("Missing description");
         }
 
-    //TODO add MISSING_PARAMETER_EXCEPTION
+        if (productRequest.suggestedPrice == null) {
+            throw new MissingParameterException("Missing suggested price");
+        }
 
-        return new Product(productRequest.title, productRequest.description, productRequest.suggestedPrice, productRequest.categories);
+//        if (productRequest.categories == null) {
+//            throw new MissingParameterException("Missing categories");
+//        }
+
+        return new Product(productRequest.title, productRequest.description, productRequest.suggestedPrice.get(), productRequest.categories);
     }
 }
