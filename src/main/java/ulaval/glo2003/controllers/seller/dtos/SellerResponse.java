@@ -9,9 +9,9 @@ public class SellerResponse {
     private final String name;
     private final String createdAt;
     private final String bio;
-    private final List<ProductResponse> products;
+    private final List<SellerProductResponse> products;
 
-    public SellerResponse(String id, String name, String createdAt, String bio, List<ProductResponse> products) {
+    public SellerResponse(String id, String name, String createdAt, String bio, List<SellerProductResponse> products) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
@@ -35,7 +35,7 @@ public class SellerResponse {
         return bio;
     }
 
-    public List<ProductResponse> getProducts() {
+    public List<SellerProductResponse> getProducts() {
         return products;
     }
 }
