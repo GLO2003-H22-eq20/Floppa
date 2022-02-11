@@ -1,12 +1,8 @@
 package ulaval.glo2003.controllers.seller;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import ulaval.glo2003.controllers.seller.dtos.SellerAssembler;
 import ulaval.glo2003.controllers.seller.dtos.SellerRequest;
@@ -19,10 +15,9 @@ import java.net.URI;
 @Path("sellers")
 @Produces(MediaType.APPLICATION_JSON)
 public class SellerResource {
-
-    private SellerRepository sellerRepository;
-    private SellerPresenter sellerPresenter;
-    private URI baseUri;
+    private final SellerRepository sellerRepository;
+    private final SellerPresenter sellerPresenter;
+    private final URI baseUri;
 
     public SellerResource(SellerRepository sellerRepository, SellerPresenter sellerPresenter, URI baseUri) {
         this.sellerRepository = sellerRepository;

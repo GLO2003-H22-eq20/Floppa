@@ -1,7 +1,6 @@
 package ulaval.glo2003.infrastructure;
 
 import ulaval.glo2003.domain.Product;
-import ulaval.glo2003.domain.Seller;
 
 import java.util.Collections;
 import java.util.HashMap;

@@ -1,10 +1,8 @@
 package ulaval.glo2003.domain;
 
-import ulaval.glo2003.domain.Product;
-
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,11 +10,11 @@ public class Seller {
     private final UUID id;
     private final String name;
     private final String bio;
-    private final Date birthDate;
+    private final LocalDate birthDate;
     private final Instant createdAt;
-    private List<Product> products;
+    private final List<Product> products;
 
-    public Seller(String name, String bio, Date birthDate) {
+    public Seller(String name, String bio, LocalDate birthDate) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.bio = bio;
@@ -39,10 +37,6 @@ public class Seller {
 
     public String getBio() {
         return bio;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
     }
 
     public Instant getCreatedAt() {

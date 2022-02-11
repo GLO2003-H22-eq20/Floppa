@@ -7,11 +7,11 @@ import java.util.UUID;
 public class Product {
     private final UUID id;
     private final Instant createdAt;
-    private String title;
-    private String description;
-    private Float suggestedPrice;
+    private final String title;
+    private final String description;
+    private final Float suggestedPrice;
     private Offers offers;
-    private List<ProductCategory> categories;
+    private final List<ProductCategory> categories;
 
     public Product(String title, String description, Float suggestedPrice, List<ProductCategory> categories) {
         this.id = UUID.randomUUID();

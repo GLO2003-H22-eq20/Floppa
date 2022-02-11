@@ -16,13 +16,11 @@ import ulaval.glo2003.infrastructure.SellerRepository;
 
 import java.net.URI;
 
-
 @Path("products")
 public class ProductResource {
-
-    private SellerRepository sellerRepository;
-    private ProductRepository productRepository;
-    private URI baseUri;
+    private final SellerRepository sellerRepository;
+    private final ProductRepository productRepository;
+    private final URI baseUri;
 
     public ProductResource(SellerRepository sellerRepository, ProductRepository productRepository, URI baseUri) {
         this.sellerRepository = sellerRepository;
@@ -32,7 +30,7 @@ public class ProductResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createProduct(@HeaderParam("X-Seller-Id") String sellerId, @NotNull ProductRequest productRequest) {
+    public Response createProduct(@HeaderParam(value = "X-Seller-Id") String sellerId, @NotNull ProductRequest productRequest) {
         Product product = ProductAssembler.fromRequest(productRequest);
 
         productRepository.saveProduct(product);
@@ -41,6 +39,4 @@ public class ProductResource {
 
         return Response.created(URI.create(baseUri.toString() + "products/" + product.getId().toString())).build();
     }
-
-
 }

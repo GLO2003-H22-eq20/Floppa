@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SellerPresenter {
-     public SellerResponse presentSeller(Seller seller) {
+    public SellerResponse presentSeller(Seller seller) {
         return new SellerResponse(seller.getId().toString(), seller.getName(), seller.getCreatedAt().toString(), seller.getBio(), presentProducts(seller.getProducts()));
     }
 

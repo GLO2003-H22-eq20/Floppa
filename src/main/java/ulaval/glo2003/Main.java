@@ -3,13 +3,13 @@ package ulaval.glo2003;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import ulaval.glo2003.controllers.exceptionMappers.InvalidParameterExceptionMapper;
+import ulaval.glo2003.controllers.exceptionMappers.ItemNotFoundExceptionsMapper;
+import ulaval.glo2003.controllers.exceptionMappers.MissingParameterExceptionMapper;
 import ulaval.glo2003.controllers.health.HealthResource;
 import ulaval.glo2003.controllers.product.ProductResource;
 import ulaval.glo2003.controllers.seller.SellerPresenter;
 import ulaval.glo2003.controllers.seller.SellerResource;
-import ulaval.glo2003.controllers.exceptionMappers.InvalidParameterExceptionMapper;
-import ulaval.glo2003.controllers.exceptionMappers.ItemNotFoundExceptionsMapper;
-import ulaval.glo2003.controllers.exceptionMappers.MissingParameterExceptionMapper;
 import ulaval.glo2003.infrastructure.ProductRepository;
 import ulaval.glo2003.infrastructure.SellerRepository;
 
