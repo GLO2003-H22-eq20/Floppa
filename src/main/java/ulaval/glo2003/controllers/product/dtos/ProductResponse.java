@@ -13,7 +13,12 @@ public class ProductResponse {
     private final Float suggestedPrice;
     private final Offers offers;
 
-    public ProductResponse(UUID id, Instant createdAt, String title, String description, Float suggestedPrice, Offers offers) {
+    public ProductResponse(UUID id,
+                           Instant createdAt,
+                           String title,
+                           String description,
+                           Float suggestedPrice,
+                           Offers offers) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;

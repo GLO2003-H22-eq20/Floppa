@@ -11,14 +11,17 @@ public class ProductService {
     private final SellerRepository sellerRepository;
     private final ProductFactory productFactory;
 
-    public ProductService(ProductRepository productRepository, SellerRepository sellerRepository, ProductFactory productFactory) {
+    public ProductService(ProductRepository productRepository,
+                          SellerRepository sellerRepository,
+                          ProductFactory productFactory) {
         this.productRepository = productRepository;
         this.sellerRepository = sellerRepository;
         this.productFactory = productFactory;
     }
 
     public String createProduct(String sellerId, ProductRequest productRequest) {
-        Product product = productFactory.createProduct(productRequest.title, productRequest.description, productRequest.suggestedPrice, productRequest.categories);
+        Product product = productFactory.createProduct(productRequest.title, productRequest.description,
+                                                       productRequest.suggestedPrice, productRequest.categories);
 
         productRepository.saveProduct(product);
         Seller seller = sellerRepository.findById(sellerId);

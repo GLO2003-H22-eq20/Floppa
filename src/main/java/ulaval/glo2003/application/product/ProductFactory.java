@@ -7,7 +7,10 @@ import ulaval.glo2003.domain.ProductCategory;
 import java.util.List;
 
 public class ProductFactory {
-    public Product createProduct(String title, String description, Float suggestedPrice, List<ProductCategory> categories) {
+    public Product createProduct(String title,
+                                 String description,
+                                 Float suggestedPrice,
+                                 List<ProductCategory> categories) {
         validateTitle(title);
         validateDescription(description);
         validateSuggestedPrice(suggestedPrice);

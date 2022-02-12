@@ -25,7 +25,8 @@ public class ProductResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createProduct(@HeaderParam(value = "X-Seller-Id") String sellerId, @NotNull ProductRequest productRequest) {
+    public Response createProduct(@HeaderParam(value = "X-Seller-Id") String sellerId,
+                                  @NotNull ProductRequest productRequest) {
         String productId = productService.createProduct(sellerId, productRequest);
 
         if (productRequest.title == null) {
