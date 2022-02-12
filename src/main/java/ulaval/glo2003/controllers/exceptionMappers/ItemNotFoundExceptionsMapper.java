@@ -10,6 +10,9 @@ public class ItemNotFoundExceptionsMapper implements ExceptionMapper<ItemNotFoun
     @Override
     public Response toResponse(ItemNotFoundException itemNotFoundException) {
         ExceptionResponse exceptionResponse = new ExceptionResponse("ITEM_NOT_FOUND","The item cannot be found (ID is invalid or null).");
-        return Response.status(Response.Status.NOT_FOUND).entity(exceptionResponse).type(MediaType.APPLICATION_JSON).build();
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity(exceptionResponse)
+                .type(MediaType.APPLICATION_JSON)
+                .build();
     }
 }
