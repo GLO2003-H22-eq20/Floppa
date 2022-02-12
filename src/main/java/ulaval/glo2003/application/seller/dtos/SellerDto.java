@@ -1,6 +1,6 @@
 package ulaval.glo2003.application.seller.dtos;
 
-import ulaval.glo2003.controllers.product.dtos.ProductResponse;
+import ulaval.glo2003.domain.Product;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ public class SellerDto {
     private final String name;
     private final String createdAt;
     private final String bio;
-    private final List<ProductResponse> products;
+    private final List<Product> products;
 
-    public SellerDto(String id, String name, String createdAt, String bio, List<ProductResponse> products) {
+    public SellerDto(String id, String name, String createdAt, String bio, List<Product> products) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
@@ -35,7 +35,7 @@ public class SellerDto {
         return bio;
     }
 
-    public List<ProductResponse> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 }
