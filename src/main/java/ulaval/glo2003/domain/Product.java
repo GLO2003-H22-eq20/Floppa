@@ -10,8 +10,8 @@ public class Product {
     private final String title;
     private final String description;
     private final Float suggestedPrice;
-    private Offers offers;
     private final List<ProductCategory> categories;
+    private Offers offers;
 
     public Product(String title, String description, Float suggestedPrice, List<ProductCategory> categories) {
         this.id = UUID.randomUUID();
