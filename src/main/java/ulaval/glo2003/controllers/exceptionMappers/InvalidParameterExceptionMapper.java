@@ -9,9 +9,8 @@ import ulaval.glo2003.controllers.exceptions.InvalidParameterException;
 public class InvalidParameterExceptionMapper implements ExceptionMapper<InvalidParameterException> {
     @Override
     public Response toResponse(InvalidParameterException e) {
-        ExceptionResponse exceptionResponse = new ExceptionResponse("INVALID_PARAMETER", e.getMessage());
         return Response.status(Response.Status.BAD_REQUEST)
-                .entity(exceptionResponse)
+                .entity(new ExceptionResponse("INVALID_PARAMETER", e.getMessage()))
                 .type(MediaType.APPLICATION_JSON)
                 .build();
     }

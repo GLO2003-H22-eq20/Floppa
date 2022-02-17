@@ -6,15 +6,16 @@ import java.util.UUID;
 
 public class Product {
     private final UUID id;
+    private final String sellerId;
     private final Instant createdAt;
     private final String title;
     private final String description;
     private final Float suggestedPrice;
     private final List<ProductCategory> categories;
-    private Offers offers;
 
-    public Product(String title, String description, Float suggestedPrice, List<ProductCategory> categories) {
+    public Product(String sellerId, String title, String description, Float suggestedPrice, List<ProductCategory> categories) {
         this.id = UUID.randomUUID();
+        this.sellerId = sellerId;
         this.createdAt = Instant.now();
         this.title = title;
         this.description = description;
@@ -24,6 +25,10 @@ public class Product {
 
     public UUID getId() {
         return id;
+    }
+
+    public String getSellerId() {
+        return sellerId;
     }
 
     public Instant getCreatedAt() {
@@ -40,10 +45,6 @@ public class Product {
 
     public Float getSuggestedPrice() {
         return suggestedPrice;
-    }
-
-    public Offers getOffer() {
-        return offers;
     }
 
     public List<ProductCategory> getCategories() {

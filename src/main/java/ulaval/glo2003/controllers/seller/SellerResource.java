@@ -5,11 +5,10 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import ulaval.glo2003.application.seller.SellerService;
-import ulaval.glo2003.application.seller.dtos.SellerDto;
-import ulaval.glo2003.controllers.exceptions.MissingParameterException;
 import ulaval.glo2003.controllers.seller.dtos.SellerPresenter;
 import ulaval.glo2003.controllers.seller.dtos.SellerRequest;
 import ulaval.glo2003.controllers.seller.dtos.SellerResponse;
+import ulaval.glo2003.domain.SellerProducts;
 
 import java.net.URI;
 
@@ -31,24 +30,15 @@ public class SellerResource {
     public Response createSeller(@NotNull SellerRequest sellerRequest) {
         String sellerId = sellerService.createSeller(sellerRequest);
 
-        if (sellerRequest.name == null) {
-            throw new MissingParameterException("Missing name");
-        }
-        if (sellerRequest.bio == null) {
-            throw new MissingParameterException("Missing bio");
-        }
-        if (sellerRequest.birthDate == null) {
-            throw new MissingParameterException("Missing birthdate");
-        }
         return Response.created(URI.create(baseUri.toString() + "sellers/" + sellerId)).build();
     }
 
     @Path("{id}")
     @GET
     public Response getSeller(@PathParam("id") String id) {
-        SellerDto sellerDto = sellerService.getSeller(id);
+        SellerProducts sellerProducts = sellerService.getSeller(id);
 
-        SellerResponse sellerResponse = sellerPresenter.presentSeller(sellerDto);
+        SellerResponse sellerResponse = sellerPresenter.presentSeller(sellerProducts);
 
         return Response.status(Response.Status.OK).entity(sellerResponse).build();
     }
