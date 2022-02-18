@@ -9,7 +9,9 @@ import ulaval.glo2003.controllers.exceptions.ItemNotFoundException;
 public class ItemNotFoundExceptionsMapper implements ExceptionMapper<ItemNotFoundException> {
     @Override
     public Response toResponse(ItemNotFoundException itemNotFoundException) {
-        ExceptionResponse exceptionResponse = new ExceptionResponse("ITEM_NOT_FOUND","The item cannot be found (ID is invalid or null).");
-        return Response.status(Response.Status.NOT_FOUND).entity(exceptionResponse).type(MediaType.APPLICATION_JSON).build();
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity(new ExceptionResponse("ITEM_NOT_FOUND","The item cannot be found (ID is invalid or null)."))
+                .type(MediaType.APPLICATION_JSON)
+                .build();
     }
 }

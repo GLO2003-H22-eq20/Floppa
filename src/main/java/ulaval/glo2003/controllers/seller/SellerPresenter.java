@@ -1,7 +1,6 @@
 package ulaval.glo2003.controllers.seller;
 
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
-import ulaval.glo2003.controllers.seller.dtos.SellerProductResponse;
 import ulaval.glo2003.controllers.seller.dtos.SellerResponse;
 import ulaval.glo2003.domain.Offers;
 import ulaval.glo2003.domain.Product;
@@ -15,7 +14,7 @@ public class SellerPresenter {
         return new SellerResponse(seller.getId().toString(), seller.getName(), seller.getCreatedAt().toString(), seller.getBio(), presentProducts(seller.getProducts()));
     }
 
-    public List<SellerProductResponse> presentProducts(List<Product> productList) {
-        return productList.stream().map(product -> new SellerProductResponse(product.getId(), product.getCreatedAt(), product.getTitle(), product.getDescription(), product.getSuggestedPrice(), new Offers(null, 0))).collect(Collectors.toList());
+    public List<ProductResponse> presentProducts(List<Product> productList) {
+        return productList.stream().map(product -> new ProductResponse(product.getId(), product.getCreatedAt(), product.getTitle(), product.getDescription(), product.getSuggestedPrice(), new Offers(null, 0))).collect(Collectors.toList());
     }
 }

@@ -1,8 +1,8 @@
 package ulaval.glo2003.domain;
 
 public class Offers {
-    private Float mean;
-    private Integer count;
+    private final Float mean;
+    private final Integer count;
 
     public Offers(Float mean, Integer count) {
         this.mean = mean;

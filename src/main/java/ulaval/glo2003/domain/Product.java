@@ -1,22 +1,22 @@
 package ulaval.glo2003.domain;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class Product {
     private final UUID id;
+    private final String sellerId;
     private final Instant createdAt;
-    private String title;
-    private String description;
-    private Float suggestedPrice;
-    private Offers offers;
-    private List<String> categories;
-    private Seller seller;
+    private final String title;
+    private final String description;
+    private final Float suggestedPrice;
+    private final Offers offers;
+    private final List<ProductCategory> categories;
 
-    public Product(String title, String description, Float suggestedPrice, List<String> categories, Seller seller) {
+    public Product(String sellerId, String title, String description, Float suggestedPrice, List<ProductCategory> categories) {
         this.id = UUID.randomUUID();
+        this.sellerId = sellerId;
         this.createdAt = Instant.now();
         this.title = title;
         this.description = description;
@@ -25,11 +25,14 @@ public class Product {
         liste.add(new ProductCategory("fruit"));
         liste.add(new ProductCategory("repas"));*/
         this.categories = categories;
-        this.seller = seller;
     }
 
     public UUID getId() {
         return id;
+    }
+
+    public String getSellerId() {
+        return sellerId;
     }
 
     public Instant getCreatedAt() {
@@ -52,9 +55,7 @@ public class Product {
         return offers;
     }
 
-    public List<String> getCategories() {
+    public List<ProductCategory> getCategories() {
         return categories;
     }
-
-    public Seller getSeller() {return seller;}
 }

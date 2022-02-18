@@ -6,7 +6,7 @@ import java.util.List;
 
 public class SellerResponse {
     private final String id;
-    private final String name;
+    private String name;
     private final String createdAt;
     private final String bio;
     private final List<SellerProductResponse> products;
