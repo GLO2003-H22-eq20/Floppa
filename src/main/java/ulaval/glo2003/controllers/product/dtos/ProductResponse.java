@@ -1,34 +1,34 @@
-package ulaval.glo2003.domain;
+package ulaval.glo2003.controllers.product.dtos;
+
+import ulaval.glo2003.domain.Offers;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.UUID;
 
-public class Product {
+public class ProductResponse {
     private final UUID id;
-    private final String sellerId;
     private final Instant createdAt;
     private final String title;
     private final String description;
     private final Float suggestedPrice;
-    private final List<ProductCategory> categories;
+    private final Offers offers;
 
-    public Product(String sellerId, String title, String description, Float suggestedPrice, List<ProductCategory> categories) {
-        this.id = UUID.randomUUID();
-        this.sellerId = sellerId;
-        this.createdAt = Instant.now();
+    public ProductResponse(UUID id,
+                           Instant createdAt,
+                           String title,
+                           String description,
+                           Float suggestedPrice,
+                           Offers offers) {
+        this.id = id;
+        this.createdAt = createdAt;
         this.title = title;
         this.description = description;
         this.suggestedPrice = suggestedPrice;
-        this.categories = categories;
+        this.offers = offers;
     }
 
     public UUID getId() {
         return id;
-    }
-
-    public String getSellerId() {
-        return sellerId;
     }
 
     public Instant getCreatedAt() {
@@ -47,7 +47,7 @@ public class Product {
         return suggestedPrice;
     }
 
-    public List<ProductCategory> getCategories() {
-        return categories;
+    public Offers getOffers() {
+        return offers;
     }
 }

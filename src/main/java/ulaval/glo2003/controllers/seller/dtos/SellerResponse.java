@@ -1,12 +1,12 @@
 package ulaval.glo2003.controllers.seller.dtos;
 
-import ulaval.glo2003.domain.Product;
+import ulaval.glo2003.controllers.product.dtos.ProductResponse;
 
 import java.util.List;
 
 public class SellerResponse {
     private final String id;
-    private final String name;
+    private String name;
     private final String createdAt;
     private final String bio;
     private final List<ProductResponse> products;
