@@ -12,7 +12,6 @@ public class Seller {
     private final String bio;
     private final LocalDate birthDate;
     private final Instant createdAt;
-    private final List<Product> products;
 
     public Seller(String name, String bio, LocalDate birthDate) {
         this.id = UUID.randomUUID();
@@ -20,11 +19,6 @@ public class Seller {
         this.bio = bio;
         this.birthDate = birthDate;
         this.createdAt = Instant.now();
-        this.products = new ArrayList<>();
-    }
-
-    public void addProduct(Product product) {
-        products.add(product);
     }
 
     public UUID getId() {
@@ -39,11 +33,11 @@ public class Seller {
         return bio;
     }
 
-    public Instant getCreatedAt() {
-        return createdAt;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 }
