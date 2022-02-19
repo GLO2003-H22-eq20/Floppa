@@ -3,30 +3,30 @@
 
 ## Branches
 ### Quand faire une branche
- 1. Lorsqu'on veut développer une nouvelle fonctionnalité à Master.
+ 1. Lorsqu'on veut développer une nouvelle fonctionnalité à master.
  2. Faire un fix sur master.
- 3. Rajouter de la documentation à Master.
- 4. Quand on souhaite ajouter à Master.
+ 3. Rajouter de la documentation à master.
+ 4. Quand on souhaite ajouter à master.
 
-Si nous sommes deja dans une branche de feature, faire les changements requis dans cette branche.
+Si nous sommes déjà dans une branche de feature, faire les changements requis dans cette branche.
 
 ### Comment nommer nos branches
-feat/nom-significatif
-fix/...
-doc/...
-ci/...
-etc.
+- feat/<nom-significatif>
+- fix/...
+- docs/...
+- ci/...
+- etc.
 
 Voir https://www.conventionalcommits.org/en/v1.0.0/
 
 ### Branches de base
 Nous allons nous baser sur le Trunk-based development donc nous allons avoir :
-1. Master
+1. master
 2. Branches de feature/fix/etc
-3. Branches de releases
+3. Branches de release
 
 ### Branche principale
-Master
+master
 
 ## Commits
 
