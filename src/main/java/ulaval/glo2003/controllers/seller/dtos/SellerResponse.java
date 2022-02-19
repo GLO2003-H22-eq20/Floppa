@@ -6,17 +6,24 @@ import java.util.List;
 
 public class SellerResponse {
     private final String id;
-    private String name;
+    private final String name;
     private final String createdAt;
     private final String bio;
-    private final List<SellerProductResponse> products;
+    private final List<ProductResponse> products;
 
-    public SellerResponse(String id, String name, String createdAt, String bio, List<SellerProductResponse> products) {
+    public SellerResponse(String id, String name, String createdAt, String bio, List<ProductResponse> products) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
         this.bio = bio;
         this.products = products;
+    }
+    public SellerResponse(String id, String name) {
+        this.id = id;
+        this.name = name;
+        this.createdAt = null;
+        this.bio = null;
+        this.products = null;
     }
 
     public String getId() {
@@ -35,7 +42,7 @@ public class SellerResponse {
         return bio;
     }
 
-    public List<SellerProductResponse> getProducts() {
+    public List<ProductResponse> getProducts() {
         return products;
     }
 }

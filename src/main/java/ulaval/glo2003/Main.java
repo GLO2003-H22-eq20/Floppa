@@ -11,6 +11,7 @@ import ulaval.glo2003.controllers.exceptionMappers.InvalidParameterExceptionMapp
 import ulaval.glo2003.controllers.exceptionMappers.ItemNotFoundExceptionsMapper;
 import ulaval.glo2003.controllers.exceptionMappers.MissingParameterExceptionMapper;
 import ulaval.glo2003.controllers.health.HealthResource;
+import ulaval.glo2003.controllers.product.ProductPresenter;
 import ulaval.glo2003.controllers.product.ProductResource;
 import ulaval.glo2003.controllers.seller.SellerResource;
 import ulaval.glo2003.controllers.seller.dtos.SellerPresenter;
@@ -31,7 +32,7 @@ public class Main {
         SellerService sellerService = new SellerService(sellerRepository, productRepository, sellerFactory);
         SellerPresenter sellerPresenter = new SellerPresenter();
         ProductFactory productFactory = new ProductFactory();
-        ProductService productService = new ProductService(productRepository, productFactory);
+        ProductService productService = new ProductService(productRepository, sellerRepository, productFactory);
         ProductPresenter productPresenter = new ProductPresenter();
 
         ResourceConfig resourceConfig = new ResourceConfig()
@@ -39,7 +40,7 @@ public class Main {
                 .register(InvalidParameterExceptionMapper.class)
                 .register(MissingParameterExceptionMapper.class)
                 .register(new SellerResource(sellerService, sellerPresenter, uri))
-                .register(new ProductResource(productService, productPresenter uri))
+                .register(new ProductResource(productService, productPresenter, uri))
                 .register(HealthResource.class)
                 .packages("ulaval.glo2003");
 

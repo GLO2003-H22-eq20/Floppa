@@ -1,8 +1,11 @@
 package ulaval.glo2003.controllers.product.dtos;
 
+import ulaval.glo2003.controllers.seller.dtos.SellerResponse;
 import ulaval.glo2003.domain.Offers;
+import ulaval.glo2003.domain.ProductCategory;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 public class ProductResponse {
@@ -12,15 +15,28 @@ public class ProductResponse {
     private final String description;
     private final Float suggestedPrice;
     private final Offers offers;
-    private final List<String> categories;
+    private final List<ProductCategory> categories;
+    private final SellerResponse seller;
 
-    public ProductResponse(UUID id, Instant createdAt, String title, String description, Float suggestedPrice, Offers offers, List<String> categories) {
+    public ProductResponse(UUID id, Instant createdAt, String title, String description, Float suggestedPrice, Offers offers, List<ProductCategory> categories, SellerResponse seller) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
         this.description = description;
         this.suggestedPrice = suggestedPrice;
         this.offers = offers;
+        this.categories = categories;
+        this.seller = seller;
+    }
+    public ProductResponse(UUID id, Instant createdAt, String title, String description, Float suggestedPrice, Offers offers) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.title = title;
+        this.description = description;
+        this.suggestedPrice = suggestedPrice;
+        this.offers = offers;
+        this.categories = null;
+        this.seller = null;
     }
 
     public UUID getId() {return id;}
@@ -35,5 +51,7 @@ public class ProductResponse {
 
     public Offers getOffers() {return offers;}
 
-    public List<String> getCategories() {return categories;}
+    public List<ProductCategory> getCategories() {return categories;}
+
+    public SellerResponse getSellerResponse(){return seller;}
 }

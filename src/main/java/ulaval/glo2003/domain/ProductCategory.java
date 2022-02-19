@@ -1,13 +1,19 @@
 package ulaval.glo2003.domain;
 
-public class ProductCategory {
-    private final String name;
+public enum ProductCategory {
+    sports("sports"),
+    electronics("electronics"),
+    apparel("apparel"),
+    beauty("beauty"),
+    housing("housing"),
+    other("other");
 
-    public ProductCategory(String name) {
-        this.name = name;
+
+    private final String category;
+
+    ProductCategory(final String category){
+        this.category = category;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getCategory() {return category;}
 }

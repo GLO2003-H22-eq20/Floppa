@@ -1,18 +1,17 @@
 package ulaval.glo2003.controllers.product;
 
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
-import ulaval.glo2003.controllers.product.dtos.ProductSellerResponse;
-import ulaval.glo2003.domain.Offers;
-import ulaval.glo2003.domain.Product;
+import ulaval.glo2003.controllers.seller.dtos.SellerResponse;
 import ulaval.glo2003.domain.Seller;
+import ulaval.glo2003.domain.SellerProducts;
 
 public class ProductPresenter {
 
-    public ProductResponse presentProduct(Product product) {
-        return new ProductResponse(product.getId(), product.getCreatedAt(), product.getTitle(), product.getDescription(), product.getSuggestedPrice(), new Offers(null, 0), presentSeller(product.getSeller()), product.getCategories());
+    public ProductResponse presentProduct(SellerProducts sellerProducts) {
+        return new ProductResponse(sellerProducts.getProducts().get(0).getId(), sellerProducts.getProducts().get(0).getCreatedAt(), sellerProducts.getProducts().get(0).getTitle(), sellerProducts.getProducts().get(0).getDescription(), sellerProducts.getProducts().get(0).getSuggestedPrice(), sellerProducts.getProducts().get(0).getOffer(), sellerProducts.getProducts().get(0).getCategories(), presentSeller(sellerProducts.getSeller()));
     }
 
-    public ProductSellerResponse presentSeller(Seller seller){
-        return new ProductSellerResponse(seller.getId().toString(), seller.getName());
+    public SellerResponse presentSeller(Seller seller){
+        return new SellerResponse(seller.getId().toString(), seller.getName());
     }
 }
