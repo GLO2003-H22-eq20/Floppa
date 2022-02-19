@@ -43,7 +43,7 @@ Type de commit:
 * feat : ajout d’une nouvelle fonctionnalité
 * fix : correction d’un bug
 * perf : amélioration des performances
-* refactor : modification qui n’apporte ni nouvelle fonctionalité ni d’amélioration de performances
+* refactor : modification de l'architecture logicielle ou modification qui n’apporte ni nouvelle fonctionnalité ni d’amélioration de performances
 * style : changement qui n’apporte aucune alteration fonctionnelle ou sémantique (indentation, mise en forme, ajout d’espace, renommante d’une variable…)
 * docs : rédaction ou mise à jour de documentation
 * test : ajout ou modification de tests
@@ -53,7 +53,11 @@ Type de commit:
 Suivre Conventional Commits https://www.conventionalcommits.org/en/v1.0.0/
 
 ### Quoi et quand commiter ?
-Il n'y a pas de requis minimum pour un commit excepté que l'application doit compiler.
+Il n'y a pas de requis minimum pour un commit excepté que l'application doit compiler.  
+
+**Exception** : quand un membre de l'équipe bloque et qu'il a besoin d'aide; 
+même si son code ne compile pas, il peut quand même commit.
+
 Ex : Faire un commit "random" pour qu'un collègue puisse continuer.
 
 ## Pull request
