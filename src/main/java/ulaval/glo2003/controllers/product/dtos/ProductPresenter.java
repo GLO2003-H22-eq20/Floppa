@@ -1,4 +1,4 @@
-package ulaval.glo2003.controllers.product;
+package ulaval.glo2003.controllers.product.dtos;
 
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
 import ulaval.glo2003.controllers.seller.dtos.SellerResponse;

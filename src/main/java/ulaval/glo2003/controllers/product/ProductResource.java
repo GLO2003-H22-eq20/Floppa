@@ -5,9 +5,9 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import ulaval.glo2003.application.product.ProductService;
+import ulaval.glo2003.controllers.product.dtos.ProductPresenter;
 import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
-import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.SellerProducts;
 
 import java.net.URI;

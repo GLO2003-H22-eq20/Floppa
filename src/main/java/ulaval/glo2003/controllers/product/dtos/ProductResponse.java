@@ -53,5 +53,5 @@ public class ProductResponse {
 
     public List<ProductCategory> getCategories() {return categories;}
 
-    public SellerResponse getSellerResponse(){return seller;}
+    public SellerResponse getSeller(){return seller;}
 }
