@@ -15,10 +15,11 @@ public class ProductResponse {
     private final String description;
     private final Float suggestedPrice;
     private final Offers offers;
-    private final List<ProductCategory> categories;
-    private final SellerResponse seller;
+    private List<ProductCategory> categories;
+    private SellerResponse seller;
 
-    public ProductResponse(UUID id, Instant createdAt, String title, String description, Float suggestedPrice, Offers offers, List<ProductCategory> categories, SellerResponse seller) {
+    public ProductResponse(UUID id, Instant createdAt, String title, String description, Float suggestedPrice,
+                           Offers offers, List<ProductCategory> categories, SellerResponse seller) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
@@ -28,15 +29,14 @@ public class ProductResponse {
         this.categories = categories;
         this.seller = seller;
     }
-    public ProductResponse(UUID id, Instant createdAt, String title, String description, Float suggestedPrice, Offers offers) {
+    public ProductResponse(UUID id, Instant createdAt, String title, String description,
+                           Float suggestedPrice, Offers offers) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
         this.description = description;
         this.suggestedPrice = suggestedPrice;
         this.offers = offers;
-        this.categories = null;
-        this.seller = null;
     }
 
     public UUID getId() {return id;}

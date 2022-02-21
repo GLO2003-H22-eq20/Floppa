@@ -8,7 +8,7 @@ import ulaval.glo2003.application.product.ProductService;
 import ulaval.glo2003.controllers.product.dtos.ProductPresenter;
 import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
-import ulaval.glo2003.domain.SellerProducts;
+import ulaval.glo2003.domain.valueObject.SellerProduct;
 
 import java.net.URI;
 
@@ -36,9 +36,9 @@ public class ProductResource {
     @Path("{id}")
     @GET
     public Response getProduct(@PathParam("id") String id) {
-        SellerProducts sellerProducts = productService.getProduct(id);
+        SellerProduct sellerProduct = productService.getProduct(id);
 
-        ProductResponse productResponse = productPresenter.presentProduct(sellerProducts);
+        ProductResponse productResponse = productPresenter.presentProduct(sellerProduct);
 
         return Response.status(Response.Status.OK).entity(productResponse).build();
     }

@@ -9,11 +9,7 @@ public enum ProductCategory {
     other("other");
 
 
-    private final String category;
-
     ProductCategory(final String category){
-        this.category = category;
     }
 
-    public String getCategory() {return category;}
 }

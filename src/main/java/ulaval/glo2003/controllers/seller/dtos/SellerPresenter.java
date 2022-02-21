@@ -1,9 +1,8 @@
 package ulaval.glo2003.controllers.seller.dtos;
 
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
-import ulaval.glo2003.domain.Offers;
 import ulaval.glo2003.domain.Product;
-import ulaval.glo2003.domain.SellerProducts;
+import ulaval.glo2003.domain.valueObject.SellerProducts;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +23,6 @@ public class SellerPresenter {
                         product.getTitle(),
                         product.getDescription(),
                         product.getSuggestedPrice(),
-                        new Offers(null, 0))).collect(Collectors.toList());
+                        product.getOffer())).collect(Collectors.toList());
     }
 }
