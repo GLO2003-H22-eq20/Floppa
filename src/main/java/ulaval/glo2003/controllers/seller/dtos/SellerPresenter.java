@@ -23,6 +23,7 @@ public class SellerPresenter {
                         product.getTitle(),
                         product.getDescription(),
                         product.getSuggestedPrice(),
-                        product.getOffer())).collect(Collectors.toList());
+                        product.getOffer(),
+                        product.getCategories())).collect(Collectors.toList());
     }
 }

@@ -15,7 +15,7 @@ public class ProductResponse {
     private final String description;
     private final Float suggestedPrice;
     private final Offers offers;
-    private List<ProductCategory> categories;
+    private final List<ProductCategory> categories;
     private SellerResponse seller;
 
     public ProductResponse(UUID id, Instant createdAt, String title, String description, Float suggestedPrice,
@@ -31,13 +31,14 @@ public class ProductResponse {
     }
 
     public ProductResponse(UUID id, Instant createdAt, String title, String description,
-                           Float suggestedPrice, Offers offers) {
+                           Float suggestedPrice, Offers offers, List<ProductCategory> categories) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
         this.description = description;
         this.suggestedPrice = suggestedPrice;
         this.offers = offers;
+        this.categories = categories;
     }
 
     public UUID getId() {
