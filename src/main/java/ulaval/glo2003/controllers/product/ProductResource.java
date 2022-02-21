@@ -8,6 +8,7 @@ import ulaval.glo2003.application.product.ProductService;
 import ulaval.glo2003.controllers.product.dtos.ProductPresenter;
 import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
+import ulaval.glo2003.controllers.product.dtos.ProductsResponse;
 import ulaval.glo2003.domain.ProductCategory;
 import ulaval.glo2003.domain.Seller;
 import ulaval.glo2003.domain.SellerProduct;
@@ -56,10 +57,8 @@ public class ProductResource {
                                         @QueryParam("maxPrice") Float maxPrice)  {
         List<SellerProduct> sellerProducts = productService.getProductFiltered(sellerId, title, categories, minPrice, maxPrice);
 
-        List<ProductResponse> productResponses = sellerProducts.stream()
-                .map(productPresenter::presentProduct)
-                .collect(Collectors.toList());
+        ProductsResponse productsResponse = productPresenter.presentProducts(sellerProducts);
 
-        return Response.status(Response.Status.OK).entity(productResponses).build();
+        return Response.status(Response.Status.OK).entity(productsResponse).build();
     }
 }

@@ -3,6 +3,10 @@ package ulaval.glo2003.controllers.product.dtos;
 import ulaval.glo2003.controllers.seller.dtos.SellerResponse;
 import ulaval.glo2003.domain.Seller;
 import ulaval.glo2003.domain.SellerProduct;
+import ulaval.glo2003.controllers.product.dtos.ProductsResponse;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductPresenter {
 
@@ -15,5 +19,12 @@ public class ProductPresenter {
 
     public SellerResponse presentSeller(Seller seller){
         return new SellerResponse(seller.getId().toString(), seller.getName());
+    }
+
+    public ProductsResponse presentProducts(List<SellerProduct> sellersProducts)
+    {
+        return new ProductsResponse(sellersProducts.stream()
+                .map(this::presentProduct)
+                .collect(Collectors.toList()));
     }
 }
