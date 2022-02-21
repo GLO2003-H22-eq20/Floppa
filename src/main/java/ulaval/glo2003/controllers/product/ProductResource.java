@@ -16,8 +16,6 @@ import ulaval.glo2003.domain.SellerProducts;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Path("products")
 public class ProductResource {
@@ -55,9 +53,9 @@ public class ProductResource {
                                         @QueryParam("categories") List<ProductCategory> categories,
                                         @QueryParam("minPrice") Float minPrice,
                                         @QueryParam("maxPrice") Float maxPrice)  {
-        List<SellerProduct> sellerProducts = productService.getProductFiltered(sellerId, title, categories, minPrice, maxPrice);
+        List<SellerProduct> sellersProducts = productService.getProductFiltered(sellerId, title, categories, minPrice, maxPrice);
 
-        ProductsResponse productsResponse = productPresenter.presentProducts(sellerProducts);
+        ProductsResponse productsResponse = productPresenter.presentProducts(sellersProducts);
 
         return Response.status(Response.Status.OK).entity(productsResponse).build();
     }

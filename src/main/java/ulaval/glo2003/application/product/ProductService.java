@@ -1,7 +1,6 @@
 package ulaval.glo2003.application.product;
 
 import ulaval.glo2003.controllers.product.dtos.ProductRequest;
-import ulaval.glo2003.controllers.product.dtos.ProductResponse;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
 import ulaval.glo2003.domain.Seller;
@@ -50,7 +49,7 @@ public class ProductService {
         if(Optional.ofNullable(title).isPresent()) {
             products = filterByTitle(title, products);
         }
-        if(categories.size() != 0) {
+        if(!categories.isEmpty()) {
             products = filterByCategories(categories, products);
         }
         if(Optional.ofNullable(minPrice).isPresent()) {
