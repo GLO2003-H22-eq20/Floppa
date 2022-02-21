@@ -8,9 +8,15 @@ import ulaval.glo2003.application.product.ProductService;
 import ulaval.glo2003.controllers.product.dtos.ProductPresenter;
 import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
+import ulaval.glo2003.domain.ProductCategory;
+import ulaval.glo2003.domain.Seller;
+import ulaval.glo2003.domain.SellerProduct;
 import ulaval.glo2003.domain.SellerProducts;
 
 import java.net.URI;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Path("products")
 public class ProductResource {
@@ -36,10 +42,24 @@ public class ProductResource {
     @Path("{id}")
     @GET
     public Response getProduct(@PathParam("id") String id) {
-        SellerProducts sellerProducts = productService.getProduct(id);
+        SellerProduct sellerProduct = productService.getProduct(id);
 
-        ProductResponse productResponse = productPresenter.presentProduct(sellerProducts);
+        ProductResponse productResponse = productPresenter.presentProduct(sellerProduct);
 
         return Response.status(Response.Status.OK).entity(productResponse).build();
+    }
+    @GET
+    public Response getFilteredProducts(@QueryParam("sellerId") String sellerId,
+                                        @QueryParam("title") String title,
+                                        @QueryParam("categories") List<ProductCategory> categories,
+                                        @QueryParam("minPrice") Float minPrice,
+                                        @QueryParam("maxPrice") Float maxPrice)  {
+        List<SellerProduct> sellerProducts = productService.getProductFiltered(sellerId, title, categories, minPrice, maxPrice);
+
+        List<ProductResponse> productResponses = sellerProducts.stream()
+                .map(productPresenter::presentProduct)
+                .collect(Collectors.toList());
+
+        return Response.status(Response.Status.OK).entity(productResponses).build();
     }
 }

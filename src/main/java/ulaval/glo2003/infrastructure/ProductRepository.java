@@ -20,6 +20,9 @@ public class ProductRepository {
                 .collect(Collectors.toList());
     }
 
+    public List<Product> getProducts() {
+        return new ArrayList<>(productMap.values());
+    }
     public Product findById(String id) {
         if (productMap.get(id) == null) {
             throw new ItemNotFoundException();
