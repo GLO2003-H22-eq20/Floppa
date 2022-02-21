@@ -8,13 +8,13 @@ public class ProductPresenter {
 
     public ProductResponse presentProduct(SellerProduct sellerProduct) {
         return new ProductResponse(sellerProduct.getProduct().getId(),
-                                    sellerProduct.getProduct().getCreatedAt(),
-                                    sellerProduct.getProduct().getTitle(),
-                                    sellerProduct.getProduct().getDescription(),
-                                    sellerProduct.getProduct().getSuggestedPrice(),
-                                    sellerProduct.getProduct().getOffer(),
-                                    sellerProduct.getProduct().getCategories(),
-                                    presentSeller(sellerProduct.getSeller()));
+                                   sellerProduct.getProduct().getCreatedAt(),
+                                   sellerProduct.getProduct().getTitle(),
+                                   sellerProduct.getProduct().getDescription(),
+                                   sellerProduct.getProduct().getSuggestedPrice(),
+                                   sellerProduct.getProduct().getOffer(),
+                                   sellerProduct.getProduct().getCategories(),
+                                   presentSeller(sellerProduct.getSeller()));
     }
 
     public SellerResponse presentSeller(Seller seller){

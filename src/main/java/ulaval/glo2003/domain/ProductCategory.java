@@ -11,5 +11,4 @@ public enum ProductCategory {
 
     ProductCategory(final String category){
     }
-
 }

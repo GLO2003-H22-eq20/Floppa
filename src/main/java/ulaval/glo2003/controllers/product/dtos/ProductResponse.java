@@ -29,6 +29,7 @@ public class ProductResponse {
         this.categories = categories;
         this.seller = seller;
     }
+
     public ProductResponse(UUID id, Instant createdAt, String title, String description,
                            Float suggestedPrice, Offers offers) {
         this.id = id;
@@ -39,19 +40,35 @@ public class ProductResponse {
         this.offers = offers;
     }
 
-    public UUID getId() {return id;}
+    public UUID getId() {
+        return id;
+    }
 
-    public Instant getCreatedAt() {return createdAt;}
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
 
-    public String getTitle() {return title;}
+    public String getTitle() {
+        return title;
+    }
 
-    public String getDescription() {return description;}
+    public String getDescription() {
+        return description;
+    }
 
-    public Float getSuggestedPrice() {return suggestedPrice;}
+    public Float getSuggestedPrice() {
+        return suggestedPrice;
+    }
 
-    public Offers getOffers() {return offers;}
+    public Offers getOffers() {
+        return offers;
+    }
 
-    public List<ProductCategory> getCategories() {return categories;}
+    public List<ProductCategory> getCategories() {
+        return categories;
+    }
 
-    public SellerResponse getSeller(){return seller;}
+    public SellerResponse getSeller() {
+        return seller;
+    }
 }

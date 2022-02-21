@@ -16,6 +16,7 @@ public class ProductFactory {
         validateTitle(title);
         validateDescription(description);
         validateSuggestedPrice(suggestedPrice);
+//        validateCategories(categories);
         return new Product(sellerId, title, description, suggestedPrice, categories);
     }
 
@@ -42,4 +43,14 @@ public class ProductFactory {
             throw new InvalidParameterException("Suggested price is less than 1.0");
         }
     }
+
+//    private void validateCategories(List<ProductCategory> categories) {
+//        for (ProductCategory categorie : categories) {
+//            try {
+//                ProductCategory.valueOf(categorie.toString());
+//            } catch (IllegalArgumentException e) {
+//                throw new InvalidParameterException("Invalid categorie");
+//            }
+//        }
+//    }
 }
