@@ -8,8 +8,7 @@ import ulaval.glo2003.domain.Seller;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SellerFactoryTest {
     private static final String NAME = "Carey Price";
@@ -61,16 +60,37 @@ public class SellerFactoryTest {
     }
 
     @Test
-    public void whenCreating_thenSellerHasAnIdGenerated() {
+    public void whenCreatingSeller_thenSellerHasAnIdGenerated() {
         Seller seller = sellerFactory.createSeller(NAME, BIO, VALID_BIRTH_DATE);
 
         assertNotNull(seller.getId());
     }
 
     @Test
-    public void whenCreating_thenSellerHasATimeOfCreation() {
+    public void whenCreatingSeller_thenSellerHasATimeOfCreation() {
         Seller seller = sellerFactory.createSeller(NAME, BIO, VALID_BIRTH_DATE);
 
         assertNotNull(seller.getCreatedAt());
+    }
+
+    @Test
+    public void whenCreatingSeller_thenSellerReferencesToName() {
+        Seller seller = sellerFactory.createSeller(NAME, BIO, VALID_BIRTH_DATE);
+
+        assertEquals(NAME, seller.getName());
+    }
+
+    @Test
+    public void whenCreatingSeller_thenSellerReferencesToBio() {
+        Seller seller = sellerFactory.createSeller(NAME, BIO, VALID_BIRTH_DATE);
+
+        assertEquals(BIO, seller.getBio());
+    }
+
+    @Test
+    public void whenCreatingSeller_thenSellerReferencesToBirthDate() {
+        Seller seller = sellerFactory.createSeller(NAME, BIO, VALID_BIRTH_DATE);
+
+        assertEquals(VALID_BIRTH_DATE, seller.getBirthDate());
     }
 }
