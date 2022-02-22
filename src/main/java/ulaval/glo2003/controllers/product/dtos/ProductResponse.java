@@ -15,11 +15,11 @@ public class ProductResponse {
     private final String description;
     private final Float suggestedPrice;
     private final Offers offers;
-    private final List<ProductCategory> categories;
+    private final List<String> categories;
     private SellerResponse seller;
 
     public ProductResponse(UUID id, Instant createdAt, String title, String description, Float suggestedPrice,
-                           Offers offers, List<ProductCategory> categories, SellerResponse seller) {
+                           Offers offers, List<String> categories, SellerResponse seller) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
@@ -31,7 +31,7 @@ public class ProductResponse {
     }
 
     public ProductResponse(UUID id, Instant createdAt, String title, String description,
-                           Float suggestedPrice, Offers offers, List<ProductCategory> categories) {
+                           Float suggestedPrice, Offers offers, List<String> categories) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
@@ -65,7 +65,7 @@ public class ProductResponse {
         return offers;
     }
 
-    public List<ProductCategory> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 

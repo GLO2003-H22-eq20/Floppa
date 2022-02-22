@@ -47,14 +47,12 @@ public class ProductFactory {
 
     private void validateCategories(List<String> categories) {
         for (String categorie : categories) {
-            try {
-                ProductCategory.valueOf(categorie);
-            } catch (IllegalArgumentException e) {
+            if(!ProductCategory.contains(categorie)){
                 throw new InvalidParameterException("Invalid categorie");
             }
         }
     }
     private List<ProductCategory> parseToProductCategory(List<String> categoriesString){
-        return categoriesString.stream().map(ProductCategory::valueOf).collect(Collectors.toList());
+        return categoriesString.stream().map(categorieString -> ProductCategory.valueOf(categorieString.toUpperCase())).collect(Collectors.toList());
     }
 }

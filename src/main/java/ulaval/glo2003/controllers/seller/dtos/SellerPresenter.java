@@ -24,6 +24,7 @@ public class SellerPresenter {
                         product.getDescription(),
                         product.getSuggestedPrice(),
                         product.getOffer(),
-                        product.getCategories())).collect(Collectors.toList());
+                        product.getCategories().stream().map(Enum::toString)
+                                .collect(Collectors.toList()))).collect(Collectors.toList());
     }
 }
