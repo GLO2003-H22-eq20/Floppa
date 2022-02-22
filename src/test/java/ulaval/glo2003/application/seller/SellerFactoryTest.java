@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class SellerFactoryTest {
+public class SellerFactoryTest {
     private static final String NAME = "Carey Price";
     private static final String BIO = "Hockey";
     private static final LocalDate VALID_BIRTH_DATE = LocalDate.of(1987, 8, 16);
