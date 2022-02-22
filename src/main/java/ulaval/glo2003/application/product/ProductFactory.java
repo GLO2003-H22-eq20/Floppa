@@ -6,18 +6,19 @@ import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductFactory {
     public Product createProduct(String sellerId,
                                  String title,
                                  String description,
                                  Float suggestedPrice,
-                                 List<ProductCategory> categories) {
+                                 List<String> categories) {
         validateTitle(title);
         validateDescription(description);
         validateSuggestedPrice(suggestedPrice);
-//        validateCategories(categories);
-        return new Product(sellerId, title, description, suggestedPrice, categories);
+        validateCategories(categories);
+        return new Product(sellerId, title, description, suggestedPrice, parseToProductCategory(categories));
     }
 
     private void validateTitle(String title) {
@@ -44,13 +45,16 @@ public class ProductFactory {
         }
     }
 
-//    private void validateCategories(List<ProductCategory> categories) {
-//        for (ProductCategory categorie : categories) {
-//            try {
-//                ProductCategory.valueOf(categorie.toString());
-//            } catch (IllegalArgumentException e) {
-//                throw new InvalidParameterException("Invalid categorie");
-//            }
-//        }
-//    }
+    private void validateCategories(List<String> categories) {
+        for (String categorie : categories) {
+            try {
+                ProductCategory.valueOf(categorie);
+            } catch (IllegalArgumentException e) {
+                throw new InvalidParameterException("Invalid categorie");
+            }
+        }
+    }
+    private List<ProductCategory> parseToProductCategory(List<String> categoriesString){
+        return categoriesString.stream().map(ProductCategory::valueOf).collect(Collectors.toList());
+    }
 }

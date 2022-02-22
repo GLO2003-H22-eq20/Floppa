@@ -8,5 +8,5 @@ public class ProductRequest {
     public String title;
     public String description;
     public Float suggestedPrice;
-    public List<ProductCategory> categories;
+    public List<String> categories;
 }
