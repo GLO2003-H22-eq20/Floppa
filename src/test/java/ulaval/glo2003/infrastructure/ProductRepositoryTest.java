@@ -2,16 +2,14 @@ package ulaval.glo2003.infrastructure;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ulaval.glo2003.controllers.exceptions.ItemNotFoundException;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
-import ulaval.glo2003.domain.Seller;
 
-import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Matchers.anyString;
 
 class ProductRepositoryTest {
@@ -30,16 +28,20 @@ class ProductRepositoryTest {
         product = new Product(SELLER_ID, TITLE, DESCRIPTION, SUGGESTED_PRICE, CATEGORIES);
     }
 
-//    @Test
-//    public void givenAProduct_whenSaving_thenCanFindIt() {
-//        sellerRepository.saveSeller(seller);
-//
-//        Seller currentSeller = sellerRepository.findById(seller.getId().toString());
-//        assertEquals(seller, currentSeller);
-//    }
-//
-//    @Test
-//    public void whenRetrievingInexistantSeller_thenRetrievingByIdThrowsItemNotFoundException() {
-//        assertThrows(ItemNotFoundException.class, () -> sellerRepository.findById(anyString()));
-//    }
+    @Test
+    public void givenProducts_whenSavingTwoProducts_thenCanRetrieveAListOfProductsWithASellerId() {
+        productRepository.saveProduct(product);
+        Product anotherProductWithSameSellerId = new Product("1", "title", "anItem", 1.0f, null);
+        productRepository.saveProduct(anotherProductWithSameSellerId);
+
+        Collection<Product> products = productRepository.findProductsBySellerId(SELLER_ID);
+        assertEquals(2, products.size());
+    }
+
+    @Test
+    public void whenRetrievingProductBySellerId_thenReturnsEmptyListIfProductDoesNotExist() {
+        Collection<Product> products = productRepository.findProductsBySellerId(anyString());
+
+        assertTrue(products.isEmpty());
+    }
 }
