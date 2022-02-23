@@ -15,9 +15,9 @@ public class ProductRepository {
 
     public List<Product> findProductsBySellerId(String sellerId) {
         return productMap.values()
-                .stream()
-                .filter(product -> Objects.equals(product.getSellerId(), sellerId))
-                .collect(Collectors.toList());
+                         .stream()
+                         .filter(product -> Objects.equals(product.getSellerId(), sellerId))
+                         .collect(Collectors.toList());
     }
 
     public Product findById(String id) {

@@ -30,7 +30,7 @@ public class SellerService {
 
     public SellerProducts getSeller(String id) {
         Seller seller = sellerRepository.findById(id);
-        List<Product> products = productRepository.findProductsBySellerId(seller.getId().toString());
+        List<Product> products = productRepository.findProductsBySellerId(id);
 
         return new SellerProducts(seller, products);
     }

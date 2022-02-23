@@ -2,7 +2,6 @@ package ulaval.glo2003.controllers.product.dtos;
 
 import ulaval.glo2003.controllers.seller.dtos.SellerResponse;
 import ulaval.glo2003.domain.Offers;
-import ulaval.glo2003.domain.ProductCategory;
 
 import java.time.Instant;
 import java.util.List;
