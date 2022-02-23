@@ -23,8 +23,8 @@ public class Product {
         this.categories = categories;
     }
 
-    public UUID getId() {
-        return id;
+    public String getId() {
+        return id.toString();
     }
 
     public String getSellerId() {

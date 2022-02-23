@@ -6,14 +6,14 @@ import java.time.Instant;
 import java.util.UUID;
 
 public class ProductResponse {
-    private final UUID id;
+    private final String id;
     private final Instant createdAt;
     private final String title;
     private final String description;
     private final Float suggestedPrice;
     private final Offers offers;
 
-    public ProductResponse(UUID id,
+    public ProductResponse(String id,
                            Instant createdAt,
                            String title,
                            String description,
@@ -27,7 +27,7 @@ public class ProductResponse {
         this.offers = offers;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 

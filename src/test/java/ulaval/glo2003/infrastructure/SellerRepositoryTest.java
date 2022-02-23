@@ -7,7 +7,8 @@ import ulaval.glo2003.domain.Seller;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Matchers.anyString;
 
 public class SellerRepositoryTest {
@@ -28,7 +29,7 @@ public class SellerRepositoryTest {
     public void givenASeller_whenSaving_thenCanFindItById() {
         sellerRepository.saveSeller(seller);
 
-        Seller currentSeller = sellerRepository.findById(seller.getId().toString());
+        Seller currentSeller = sellerRepository.findById(seller.getId());
         assertEquals(seller, currentSeller);
     }
 
