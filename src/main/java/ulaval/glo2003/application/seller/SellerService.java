@@ -3,7 +3,7 @@ package ulaval.glo2003.application.seller;
 import ulaval.glo2003.controllers.seller.dtos.SellerRequest;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.Seller;
-import ulaval.glo2003.domain.SellerProducts;
+import ulaval.glo2003.domain.valueObject.SellerProducts;
 import ulaval.glo2003.infrastructure.ProductRepository;
 import ulaval.glo2003.infrastructure.SellerRepository;
 
@@ -30,7 +30,7 @@ public class SellerService {
 
     public SellerProducts getSeller(String id) {
         Seller seller = sellerRepository.findById(id);
-        List<Product> products = productRepository.findProductsBySellerId(seller.getId().toString());
+        List<Product> products = productRepository.findProductsBySellerId(id);
 
         return new SellerProducts(seller, products);
     }

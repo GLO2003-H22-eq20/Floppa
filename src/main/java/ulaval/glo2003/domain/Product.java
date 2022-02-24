@@ -11,6 +11,7 @@ public class Product {
     private final String title;
     private final String description;
     private final Float suggestedPrice;
+    private final Offers offers;
     private final List<ProductCategory> categories;
 
     public Product(String sellerId, String title, String description, Float suggestedPrice, List<ProductCategory> categories) {
@@ -20,6 +21,7 @@ public class Product {
         this.title = title;
         this.description = description;
         this.suggestedPrice = suggestedPrice;
+        this.offers = new Offers(null, 0);
         this.categories = categories;
     }
 
@@ -45,6 +47,10 @@ public class Product {
 
     public Float getSuggestedPrice() {
         return suggestedPrice;
+    }
+
+    public Offers getOffer() {
+        return offers;
     }
 
     public List<ProductCategory> getCategories() {

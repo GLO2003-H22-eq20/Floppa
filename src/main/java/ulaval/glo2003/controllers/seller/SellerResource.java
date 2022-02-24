@@ -8,7 +8,7 @@ import ulaval.glo2003.application.seller.SellerService;
 import ulaval.glo2003.controllers.seller.dtos.SellerPresenter;
 import ulaval.glo2003.controllers.seller.dtos.SellerRequest;
 import ulaval.glo2003.controllers.seller.dtos.SellerResponse;
-import ulaval.glo2003.domain.SellerProducts;
+import ulaval.glo2003.domain.valueObject.SellerProducts;
 
 import java.net.URI;
 

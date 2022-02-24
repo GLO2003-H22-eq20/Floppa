@@ -1,8 +1,10 @@
 package ulaval.glo2003.controllers.product.dtos;
 
+import ulaval.glo2003.controllers.seller.dtos.SellerResponse;
 import ulaval.glo2003.domain.Offers;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 public class ProductResponse {
@@ -12,19 +14,30 @@ public class ProductResponse {
     private final String description;
     private final Float suggestedPrice;
     private final Offers offers;
+    private final List<String> categories;
+    private SellerResponse seller;
 
-    public ProductResponse(UUID id,
-                           Instant createdAt,
-                           String title,
-                           String description,
-                           Float suggestedPrice,
-                           Offers offers) {
+    public ProductResponse(UUID id, Instant createdAt, String title, String description, Float suggestedPrice,
+                           Offers offers, List<String> categories, SellerResponse seller) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
         this.description = description;
         this.suggestedPrice = suggestedPrice;
         this.offers = offers;
+        this.categories = categories;
+        this.seller = seller;
+    }
+
+    public ProductResponse(UUID id, Instant createdAt, String title, String description,
+                           Float suggestedPrice, Offers offers, List<String> categories) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.title = title;
+        this.description = description;
+        this.suggestedPrice = suggestedPrice;
+        this.offers = offers;
+        this.categories = categories;
     }
 
     public UUID getId() {
@@ -49,5 +62,13 @@ public class ProductResponse {
 
     public Offers getOffers() {
         return offers;
+    }
+
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public SellerResponse getSeller() {
+        return seller;
     }
 }

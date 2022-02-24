@@ -6,10 +6,10 @@ import java.util.List;
 
 public class SellerResponse {
     private final String id;
-    private String name;
-    private final String createdAt;
-    private final String bio;
-    private final List<ProductResponse> products;
+    private final String name;
+    private String createdAt;
+    private String bio;
+    private List<ProductResponse> products;
 
     public SellerResponse(String id, String name, String createdAt, String bio, List<ProductResponse> products) {
         this.id = id;
@@ -17,6 +17,10 @@ public class SellerResponse {
         this.createdAt = createdAt;
         this.bio = bio;
         this.products = products;
+    }
+    public SellerResponse(String id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public String getId() {
