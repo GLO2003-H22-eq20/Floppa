@@ -1,19 +1,43 @@
 package ulaval.glo2003.domain;
 
 public enum ProductCategory {
-    sports("sports"),
-    electronics("electronics"),
-    apparel("apparel"),
-    beauty("beauty"),
-    housing("housing"),
-    other("other");
+    SPORTS {
+        public String toString() {
+            return "sports";
+        }
+    },
+    ELECTRONICS {
+        public String toString() {
+            return "electronics";
+        }
+    },
+    APPAREL {
+        public String toString() {
+            return "apparel";
+        }
+    },
+    BEAUTY {
+        public String toString() {
+            return "beauty";
+        }
+    },
+    HOUSING {
+        public String toString() {
+            return "housing";
+        }
+    },
+    OTHER {
+        public String toString() {
+            return "other";
+        }
+    };
 
-
-    private final String category;
-
-    ProductCategory(final String category){
-        this.category = category;
+    public static boolean contains(String test) {
+        for (ProductCategory category : ProductCategory.values()) {
+            if (category.toString().equals(test)) {
+                return true;
+            }
+        }
+        return false;
     }
-
-    public String getCategory() {return category;}
 }

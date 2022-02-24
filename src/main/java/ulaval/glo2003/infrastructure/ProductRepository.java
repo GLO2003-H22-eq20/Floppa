@@ -17,12 +17,12 @@ public class ProductRepository {
 
     public List<Product> findProductsBySellerId(String sellerId) {
         return productMap.values()
-                .stream()
-                .filter(product -> Objects.equals(product.getSellerId(), sellerId))
-                .collect(Collectors.toList());
+                         .stream()
+                         .filter(product -> Objects.equals(product.getSellerId(), sellerId))
+                         .collect(Collectors.toList());
     }
 
-    public Product findProductById(String id) {
+    public Product findById(String id) {
         if (productMap.get(id) == null) {
             throw new ItemNotFoundException();
         }

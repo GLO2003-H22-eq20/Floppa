@@ -1,7 +1,6 @@
 package ulaval.glo2003.domain;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +21,7 @@ public class Product {
         this.title = title;
         this.description = description;
         this.suggestedPrice = suggestedPrice;
-        this.offers = new Offers(null , 0);
+        this.offers = new Offers(null, 0);
         this.categories = categories;
     }
 

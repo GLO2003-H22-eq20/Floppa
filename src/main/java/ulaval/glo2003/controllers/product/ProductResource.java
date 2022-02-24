@@ -10,7 +10,7 @@ import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
 import ulaval.glo2003.controllers.product.dtos.ProductsResponse;
 import ulaval.glo2003.domain.ProductCategory;
-import ulaval.glo2003.domain.SellerProduct;
+import ulaval.glo2003.domain.valueObject.SellerProduct;
 
 import java.net.URI;
 import java.util.List;

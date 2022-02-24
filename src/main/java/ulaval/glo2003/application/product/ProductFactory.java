@@ -6,17 +6,19 @@ import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductFactory {
     public Product createProduct(String sellerId,
                                  String title,
                                  String description,
                                  Float suggestedPrice,
-                                 List<ProductCategory> categories) {
+                                 List<String> categories) {
         validateTitle(title);
         validateDescription(description);
         validateSuggestedPrice(suggestedPrice);
-        return new Product(sellerId, title, description, suggestedPrice, categories);
+        validateCategories(categories);
+        return new Product(sellerId, title, description, suggestedPrice, parseToProductCategory(categories));
     }
 
     private void validateTitle(String title) {
@@ -41,5 +43,19 @@ public class ProductFactory {
         } else if (suggestedPrice < 1.0) {
             throw new InvalidParameterException("Suggested price is less than 1.0");
         }
+    }
+
+    private void validateCategories(List<String> categories) {
+        for (String categorie : categories) {
+            if (!ProductCategory.contains(categorie)) {
+                throw new InvalidParameterException("Invalid categorie");
+            }
+        }
+    }
+
+    private List<ProductCategory> parseToProductCategory(List<String> categoriesString) {
+        return categoriesString.stream()
+                               .map(categorieString -> ProductCategory.valueOf(categorieString.toUpperCase()))
+                               .collect(Collectors.toList());
     }
 }

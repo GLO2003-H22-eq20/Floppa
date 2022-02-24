@@ -1,42 +1,66 @@
 # TP1
 
 
-##Branches
+## Branches
 ### Quand faire une branche
- 1. Lorsqu'on veut développer une nouvelle fonctionnalité à Master.
+ 1. Lorsqu'on veut développer une nouvelle fonctionnalité à master.
  2. Faire un fix sur master.
- 3. Rajouter de la documentation à Master.
- 4. Quand on souhaite ajouter à Master.
+ 3. Rajouter de la documentation à master.
+ 4. Quand on souhaite ajouter à master.
 
-Si nous sommes deja dans une branche de feature, faire les changements requis dans cette branche.
+Si nous sommes déjà dans une branche de feature, faire les changements requis dans cette branche.
 
 ### Comment nommer nos branches
-feat/nom-significatif
-fix/...
-doc/...
-ci/...
-etc.
+- feat/<nom-significatif>
+- fix/...
+- docs/...
+- ci/...
+- etc.
 
 Voir https://www.conventionalcommits.org/en/v1.0.0/
 
-###Branches de base
+### Branches de base
 Nous allons nous baser sur le Trunk-based development donc nous allons avoir :
-1. Master
+1. master
 2. Branches de feature/fix/etc
-3. Branches de releases
+3. Branches de release
 
-###Branche principale
-Master
+### Branche principale
+master
 
-##Commits
-###Comment nommer les commits
+## Commits
+
+Format de commit:
+
+`<portée>: <sujet>`
+
+`<description>`
+
+Type de commit: 
+
+* build : changements qui affectent le système de build ou des dépendances externes
+* ci : changements concernant les fichiers et scripts d’intégration ou de configuration
+* feat : ajout d’une nouvelle fonctionnalité
+* fix : correction d’un bug
+* perf : amélioration des performances
+* refactor : modification de l'architecture logicielle ou modification qui n’apporte ni nouvelle fonctionnalité ni d’amélioration de performances
+* style : changement qui n’apporte aucune alteration fonctionnelle ou sémantique (indentation, mise en forme, ajout d’espace, renommante d’une variable…)
+* docs : rédaction ou mise à jour de documentation
+* test : ajout ou modification de tests
+* revert : annuler un commit
+
+### Comment nommer les commits
 Suivre Conventional Commits https://www.conventionalcommits.org/en/v1.0.0/
 
-###Quoi et quand commiter ?
-Il n'y a pas de requis minimum pour un commit excepté que l'application doit compiler.
+### Quoi et quand commiter ?
+Il n'y a pas de requis minimum pour un commit excepté que l'application doit compiler.  
+
+**Exception** : quand un membre de l'équipe bloque et qu'il a besoin d'aide; 
+même si son code ne compile pas, il peut quand même commit.
+
 Ex : Faire un commit "random" pour qu'un collègue puisse continuer.
 
-##Pull request
+## Pull request
 Nous pouvons ouvrir une pull request quand :
 1. Une feature est complète.
 2. Un fix est nécessaire.
@@ -48,7 +72,7 @@ Lors de la review, les membres de l'équipe peuvent faire des demandes de change
 
 Merge vers Master sauf en cas d'exception (hotfix sur branche de release, etc.)
 
-##Screenshots
+## Screenshots
 
 
 1. Project

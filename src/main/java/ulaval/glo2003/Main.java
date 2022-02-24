@@ -11,8 +11,8 @@ import ulaval.glo2003.controllers.exceptionMappers.InvalidParameterExceptionMapp
 import ulaval.glo2003.controllers.exceptionMappers.ItemNotFoundExceptionsMapper;
 import ulaval.glo2003.controllers.exceptionMappers.MissingParameterExceptionMapper;
 import ulaval.glo2003.controllers.health.HealthResource;
-import ulaval.glo2003.controllers.product.dtos.ProductPresenter;
 import ulaval.glo2003.controllers.product.ProductResource;
+import ulaval.glo2003.controllers.product.dtos.ProductPresenter;
 import ulaval.glo2003.controllers.seller.SellerResource;
 import ulaval.glo2003.controllers.seller.dtos.SellerPresenter;
 import ulaval.glo2003.infrastructure.ProductRepository;

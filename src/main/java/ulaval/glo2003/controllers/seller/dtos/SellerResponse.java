@@ -7,9 +7,9 @@ import java.util.List;
 public class SellerResponse {
     private final String id;
     private final String name;
-    private final String createdAt;
-    private final String bio;
-    private final List<ProductResponse> products;
+    private String createdAt;
+    private String bio;
+    private List<ProductResponse> products;
 
     public SellerResponse(String id, String name, String createdAt, String bio, List<ProductResponse> products) {
         this.id = id;
@@ -21,9 +21,6 @@ public class SellerResponse {
     public SellerResponse(String id, String name) {
         this.id = id;
         this.name = name;
-        this.createdAt = null;
-        this.bio = null;
-        this.products = null;
     }
 
     public String getId() {

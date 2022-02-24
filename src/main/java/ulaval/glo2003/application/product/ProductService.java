@@ -4,14 +4,11 @@ import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
 import ulaval.glo2003.domain.Seller;
-import ulaval.glo2003.domain.SellerProduct;
+import ulaval.glo2003.domain.valueObject.SellerProduct;
 import ulaval.glo2003.infrastructure.ProductRepository;
 import ulaval.glo2003.infrastructure.SellerRepository;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ProductService {
@@ -36,7 +33,7 @@ public class ProductService {
     }
 
     public SellerProduct getProduct(String id) {
-        Product product = productRepository.findProductById(id);
+        Product product = productRepository.findById(id);
         Seller seller = sellerRepository.findById(product.getSellerId());
 
         return new SellerProduct(seller, product);
