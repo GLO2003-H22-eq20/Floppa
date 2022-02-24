@@ -9,8 +9,7 @@ public class ProductsResponse {
         this.productResponses = productResponses;
     }
 
-    public
-    List<ProductResponse> getProducts() {
+    public List<ProductResponse> getProducts() {
         return productResponses;
     }
 }

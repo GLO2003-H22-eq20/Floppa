@@ -1,7 +1,5 @@
 package ulaval.glo2003.domain;
 
-import java.util.List;
-
 public class SellerProduct {
     private final Seller seller;
     private final Product product;

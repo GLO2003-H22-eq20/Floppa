@@ -10,9 +10,7 @@ import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
 import ulaval.glo2003.controllers.product.dtos.ProductsResponse;
 import ulaval.glo2003.domain.ProductCategory;
-import ulaval.glo2003.domain.Seller;
 import ulaval.glo2003.domain.SellerProduct;
-import ulaval.glo2003.domain.SellerProducts;
 
 import java.net.URI;
 import java.util.List;
@@ -47,13 +45,14 @@ public class ProductResource {
 
         return Response.status(Response.Status.OK).entity(productResponse).build();
     }
+
     @GET
     public Response getFilteredProducts(@QueryParam("sellerId") String sellerId,
                                         @QueryParam("title") String title,
                                         @QueryParam("categories") List<ProductCategory> categories,
                                         @QueryParam("minPrice") Float minPrice,
-                                        @QueryParam("maxPrice") Float maxPrice)  {
-        List<SellerProduct> sellersProducts = productService.getProductFiltered(sellerId, title, categories, minPrice, maxPrice);
+                                        @QueryParam("maxPrice") Float maxPrice) {
+        List<SellerProduct> sellersProducts = productService.getFilteredProducts(sellerId, title, categories, minPrice, maxPrice);
 
         ProductsResponse productsResponse = productPresenter.presentProducts(sellersProducts);
 

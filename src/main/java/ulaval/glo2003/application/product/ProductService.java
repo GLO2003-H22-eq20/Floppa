@@ -8,7 +8,10 @@ import ulaval.glo2003.domain.SellerProduct;
 import ulaval.glo2003.infrastructure.ProductRepository;
 import ulaval.glo2003.infrastructure.SellerRepository;
 
-import java.util.*;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ProductService {
@@ -33,64 +36,65 @@ public class ProductService {
     }
 
     public SellerProduct getProduct(String id) {
-        Product product = productRepository.findById(id);
+        Product product = productRepository.findProductById(id);
         Seller seller = sellerRepository.findById(product.getSellerId());
 
         return new SellerProduct(seller, product);
     }
 
-    public List<SellerProduct> getProductFiltered(String sellerId, String title,
-                                                  List<ProductCategory> categories, Float minPrice,
-                                                  Float maxPrice) {
-        List<Product> products = productRepository.getProducts();
-        if(Optional.ofNullable(sellerId).isPresent()) {
+    public List<SellerProduct> getFilteredProducts(String sellerId, String title,
+                                                   List<ProductCategory> categories, Float minPrice,
+                                                   Float maxPrice) {
+        List<Product> products = productRepository.findProducts();
+        if (Optional.ofNullable(sellerId).isPresent()) {
             products = filterBySellerId(sellerId, products);
         }
-        if(Optional.ofNullable(title).isPresent()) {
+        if (Optional.ofNullable(title).isPresent()) {
             products = filterByTitle(title, products);
         }
-        if(!categories.isEmpty()) {
+        if (!categories.isEmpty()) {
             products = filterByCategories(categories, products);
         }
-        if(Optional.ofNullable(minPrice).isPresent()) {
+        if (Optional.ofNullable(minPrice).isPresent()) {
             products = filterByMinPrice(minPrice, products);
         }
-        if(Optional.ofNullable(maxPrice).isPresent()) {
+        if (Optional.ofNullable(maxPrice).isPresent()) {
             products = filterByMaxPrice(maxPrice, products);
         }
+
         return products.stream()
-                .map(product ->  new SellerProduct(sellerRepository.findById(product.getSellerId()), product))
+                .map(product -> new SellerProduct(sellerRepository.findById(product.getSellerId()), product))
                 .collect(Collectors.toList());
     }
 
     private List<Product> filterBySellerId(String sellerId, List<Product> products) {
         return products.stream()
-                .filter(product -> Objects.equals(product.getSellerId(), sellerId))
-                .collect(Collectors.toList());
+                       .filter(product -> Objects.equals(product.getSellerId(), sellerId))
+                       .collect(Collectors.toList());
     }
 
     private List<Product> filterByTitle(String title, List<Product> products) {
         return products.stream()
-                .filter(product -> product.getTitle().toLowerCase(Locale.ROOT).contains(title.toLowerCase(Locale.ROOT)))
-                .collect(Collectors.toList());
+                       .filter(product -> product.getTitle().toLowerCase(Locale.ROOT).contains(title.toLowerCase(Locale.ROOT)))
+                       .collect(Collectors.toList());
     }
 
     private List<Product> filterByCategories(List<ProductCategory> categories, List<Product> products) {
         return products.stream()
-                .filter(product -> categories.stream().anyMatch(category -> product.getCategories().contains(category)))
-                .collect(Collectors.toList());
+                       .filter(product -> categories.stream()
+                                                    .anyMatch(category -> product.getCategories().contains(category)))
+                       .collect(Collectors.toList());
     }
 
     private List<Product> filterByMinPrice(Float minPrice, List<Product> products) {
         return products.stream()
-                .filter(product -> product.getSuggestedPrice() >= minPrice)
-                .collect(Collectors.toList());
+                       .filter(product -> product.getSuggestedPrice() >= minPrice)
+                       .collect(Collectors.toList());
     }
 
     private List<Product> filterByMaxPrice(Float maxPrice, List<Product> products) {
         return products.stream()
-                .filter(product -> product.getSuggestedPrice() <= maxPrice)
-                .collect(Collectors.toList());
+                       .filter(product -> product.getSuggestedPrice() <= maxPrice)
+                       .collect(Collectors.toList());
     }
-
 }

@@ -20,10 +20,10 @@ public class SellerPresenter {
     public List<ProductResponse> presentProducts(List<Product> productList) {
         return productList.stream()
                 .map(product -> new ProductResponse(product.getId(),
-                        product.getCreatedAt(),
-                        product.getTitle(),
-                        product.getDescription(),
-                        product.getSuggestedPrice(),
-                        new Offers(null, 0))).collect(Collectors.toList());
+                                                    product.getCreatedAt(),
+                                                    product.getTitle(),
+                                                    product.getDescription(),
+                                                    product.getSuggestedPrice(),
+                                                    new Offers(null, 0))).collect(Collectors.toList());
     }
 }

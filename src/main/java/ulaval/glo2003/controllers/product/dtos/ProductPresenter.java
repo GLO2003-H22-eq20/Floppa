@@ -10,20 +10,24 @@ import java.util.stream.Collectors;
 public class ProductPresenter {
 
     public ProductResponse presentProduct(SellerProduct sellerProduct) {
-        return new ProductResponse(sellerProduct.getProducts().getId(), sellerProduct.getProducts().getCreatedAt(),
-                sellerProduct.getProducts().getTitle(), sellerProduct.getProducts().getDescription(),
-                sellerProduct.getProducts().getSuggestedPrice(), sellerProduct.getProducts().getOffer(),
-                sellerProduct.getProducts().getCategories(), presentSeller(sellerProduct.getSeller()));
+        return new ProductResponse(sellerProduct.getProducts().getId(),
+                                   sellerProduct.getProducts().getCreatedAt(),
+                                   sellerProduct.getProducts().getTitle(),
+                                   sellerProduct.getProducts().getDescription(),
+                                   sellerProduct.getProducts().getSuggestedPrice(),
+                                   sellerProduct.getProducts().getOffer(),
+                                   sellerProduct.getProducts().getCategories(),
+                                   presentSeller(sellerProduct.getSeller()));
     }
 
-    public SellerResponse presentSeller(Seller seller){
+    //TODO put this method in SellerPresenter?
+    public SellerResponse presentSeller(Seller seller) {
         return new SellerResponse(seller.getId().toString(), seller.getName());
     }
 
-    public ProductsResponse presentProducts(List<SellerProduct> sellersProducts)
-    {
+    public ProductsResponse presentProducts(List<SellerProduct> sellersProducts) {
         return new ProductsResponse(sellersProducts.stream()
-                .map(this::presentProduct)
-                .collect(Collectors.toList()));
+                                                   .map(this::presentProduct)
+                                                   .collect(Collectors.toList()));
     }
 }
