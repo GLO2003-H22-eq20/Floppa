@@ -8,9 +8,12 @@ import ulaval.glo2003.application.product.ProductService;
 import ulaval.glo2003.controllers.product.dtos.ProductPresenter;
 import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
+import ulaval.glo2003.controllers.product.dtos.ProductsResponse;
+import ulaval.glo2003.domain.ProductCategory;
 import ulaval.glo2003.domain.valueObject.SellerProduct;
 
 import java.net.URI;
+import java.util.List;
 
 @Path("products")
 public class ProductResource {
@@ -41,5 +44,18 @@ public class ProductResource {
         ProductResponse productResponse = productPresenter.presentProduct(sellerProduct);
 
         return Response.status(Response.Status.OK).entity(productResponse).build();
+    }
+
+    @GET
+    public Response getFilteredProducts(@QueryParam("sellerId") String sellerId,
+                                        @QueryParam("title") String title,
+                                        @QueryParam("categories") List<ProductCategory> categories,
+                                        @QueryParam("minPrice") Float minPrice,
+                                        @QueryParam("maxPrice") Float maxPrice) {
+        List<SellerProduct> sellersProducts = productService.getFilteredProducts(sellerId, title, categories, minPrice, maxPrice);
+
+        ProductsResponse productsResponse = productPresenter.presentProducts(sellersProducts);
+
+        return Response.status(Response.Status.OK).entity(productsResponse).build();
     }
 }
