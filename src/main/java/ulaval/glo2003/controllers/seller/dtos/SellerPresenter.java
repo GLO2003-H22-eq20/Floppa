@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class SellerPresenter {
     public SellerResponse presentSeller(SellerProducts sellerProducts) {
-        return new SellerResponse(sellerProducts.getSeller().getId().toString(),
+        return new SellerResponse(sellerProducts.getSeller().getId(),
                                   sellerProducts.getSeller().getName(),
                                   sellerProducts.getSeller().getCreatedAt().toString(),
                                   sellerProducts.getSeller().getBio(),
