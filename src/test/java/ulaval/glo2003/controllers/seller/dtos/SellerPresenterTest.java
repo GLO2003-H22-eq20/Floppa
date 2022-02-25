@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.Seller;
-import ulaval.glo2003.domain.SellerProducts;
+import ulaval.glo2003.domain.valueObject.SellerProducts;
 
 import java.time.LocalDate;
 import java.util.List;

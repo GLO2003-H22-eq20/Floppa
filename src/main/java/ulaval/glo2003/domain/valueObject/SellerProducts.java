@@ -1,11 +1,14 @@
-package ulaval.glo2003.domain;
+package ulaval.glo2003.domain.valueObject;
+
+import ulaval.glo2003.domain.Product;
+import ulaval.glo2003.domain.Seller;
 
 import java.util.List;
 import java.util.Objects;
 
 public class SellerProducts {
-    private Seller seller;
-    private List<Product> products;
+    private final Seller seller;
+    private final List<Product> products;
 
     public SellerProducts(Seller seller, List<Product> products) {
         this.seller = seller;

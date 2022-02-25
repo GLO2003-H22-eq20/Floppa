@@ -16,7 +16,7 @@ public class ProductFactoryTest {
     private static final String DESCRIPTION = "descriptionOfProduct";
     private static final Float SUGGESTED_PRICE = 7.7f;
     private static final Float INVALID_SUGGESTED_PRICE = 0.5f;
-    private final List<ProductCategory> CATEGORIES = null;
+    private final List<String> CATEGORIES = null;
 
     private ProductFactory productFactory;
 
