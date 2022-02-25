@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class ProductResponse {
-    private final UUID id;
+    private final String id;
     private final Instant createdAt;
     private final String title;
     private final String description;
@@ -17,7 +17,7 @@ public class ProductResponse {
     private final List<String> categories;
     private SellerResponse seller;
 
-    public ProductResponse(UUID id, Instant createdAt, String title, String description, Float suggestedPrice,
+    public ProductResponse(String id, Instant createdAt, String title, String description, Float suggestedPrice,
                            Offers offers, List<String> categories, SellerResponse seller) {
         this.id = id;
         this.createdAt = createdAt;
@@ -29,7 +29,7 @@ public class ProductResponse {
         this.seller = seller;
     }
 
-    public ProductResponse(UUID id, Instant createdAt, String title, String description,
+    public ProductResponse(String id, Instant createdAt, String title, String description,
                            Float suggestedPrice, Offers offers, List<String> categories) {
         this.id = id;
         this.createdAt = createdAt;
@@ -40,7 +40,7 @@ public class ProductResponse {
         this.categories = categories;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 

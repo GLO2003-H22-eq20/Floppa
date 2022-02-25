@@ -19,8 +19,8 @@ public class Seller {
         this.createdAt = Instant.now();
     }
 
-    public UUID getId() {
-        return id;
+    public String getId() {
+        return id.toString();
     }
 
     public String getName() {
