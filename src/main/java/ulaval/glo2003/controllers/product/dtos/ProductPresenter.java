@@ -23,7 +23,7 @@ public class ProductPresenter {
     }
 
     public SellerResponse presentSeller(Seller seller) {
-        return new SellerResponse(seller.getId().toString(), seller.getName());
+        return new SellerResponse(seller.getId(), seller.getName());
     }
 
     public ProductsResponse presentProducts(List<SellerProduct> sellersProducts) {

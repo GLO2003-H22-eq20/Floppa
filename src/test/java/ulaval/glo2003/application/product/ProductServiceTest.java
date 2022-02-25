@@ -1,6 +1,5 @@
 package ulaval.glo2003.application.product;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,23 +8,20 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.domain.Product;
-import ulaval.glo2003.domain.ProductCategory;
 import ulaval.glo2003.domain.Seller;
+import ulaval.glo2003.domain.valueObject.SellerProduct;
 import ulaval.glo2003.infrastructure.ProductRepository;
 import ulaval.glo2003.infrastructure.SellerRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.willReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class ProductServiceTest {
-    static final String PRODUCT_ID = "7";
+    static final String PRODUCT_ID = "1";
     static final String SELLER_ID = "1";
 
     @Mock
@@ -34,6 +30,10 @@ public class ProductServiceTest {
     SellerRepository sellerRepository;
     @Mock
     ProductFactory productFactory;
+    @Mock
+    Product product;
+    @Mock
+    Seller seller;
 
     ProductRequest request = new ProductRequest() {{
         title = "productTitle";
@@ -77,34 +77,62 @@ public class ProductServiceTest {
         assertNotNull(productId);
     }
 
+    @Test
+    public void givenAProductId_whenGettingAProduct_thenSearchesForSellerInRepository() {
+        givenAProductCanBeFound();
+
+        productService.getProduct(anyString());
+
+        verify(sellerRepository).findById(product.getSellerId());
+    }
+
+    @Test
+    public void givenAProductId_whenGettingAProduct_thenSearchesForTheProductInRepository() {
+        givenAProductCanBeFound();
+        givenASellerCanBeFound();
+
+        productService.getProduct(anyString());
+
+        verify(productRepository).findById(anyString());
+    }
+
+    @Test
+    public void givenAProductId_whenGettingAProduct_thenReturnsSellerProduct() {
+        Seller seller = givenASellerCanBeFound();
+        Product product = givenAProductCanBeFound();
+        SellerProduct expectedSellerProduct = new SellerProduct(seller, product);
+
+        SellerProduct sellerProduct = productService.getProduct(anyString());
+
+        assertEquals(expectedSellerProduct, sellerProduct);
+    }
+
+    @Test
+    public void whenGettingFilteredProducts_thenSearchesForFilteredProductsInRepository() {
+        productService.getFilteredProducts(anyString(), anyString(), any(), anyFloat(), anyFloat());
+
+        verify(productRepository).findFilteredProducts(anyString(), anyString(), any(), anyFloat(), anyFloat());
+    }
+
 //    @Test
-//    public void givenAProductId_whenGettingAProduct_thenSearchesForSellerInRepository() {
-//        givenAProductCanBeFound();
-//        givenASellerCanBeFound();
+//    public void whenGettingFilteredProducts_thenReturnsListOfSellerProduct() {
 //
-//        productService.getProduct(anyString());
-//
-//        verify(sellerRepository).findById(anyString());
 //    }
 
     private Product givenNewProductCanBeCreated() {
-        Product product = mock(Product.class);
         willReturn(product).given(productFactory).createProduct(anyString(), anyString(), anyString(), anyFloat(), any());
         willReturn(PRODUCT_ID).given(product).getId();
         return product;
     }
 
     private Product givenAProductCanBeFound() {
-        Product product = mock(Product.class);
         willReturn(product).given(productRepository).findById(anyString());
         return product;
     }
 
-//    private Seller givenASellerCanBeFound() {
-//        Seller seller = mock(Seller.class);
-//        Product product = mock(Product.class);
-//        willReturn(product).given(product).getSellerId();
-//        willReturn(seller).given(sellerRepository).findById(anyString());
-//        return seller;
-//    }
+    private Seller givenASellerCanBeFound() {
+        willReturn(seller).given(sellerRepository).findById(SELLER_ID);
+        willReturn(SELLER_ID).given(product).getSellerId();
+        return seller;
+    }
 }

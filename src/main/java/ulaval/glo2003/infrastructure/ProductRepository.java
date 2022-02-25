@@ -3,7 +3,6 @@ package ulaval.glo2003.infrastructure;
 import ulaval.glo2003.controllers.exceptions.ItemNotFoundException;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
-import ulaval.glo2003.domain.SellerProduct;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -12,7 +11,7 @@ public class ProductRepository {
     private final Map<String, Product> productMap = Collections.synchronizedMap(new HashMap<>());
 
     public void saveProduct(Product product) {
-        productMap.put(product.getId().toString(), product);
+        productMap.put(product.getId(), product);
     }
 
     public List<Product> findProductsBySellerId(String sellerId) {
@@ -29,9 +28,9 @@ public class ProductRepository {
         return productMap.get(id);
     }
 
-    public List<Product> getFilteredProducts(String sellerId, String title,
-                                             List<ProductCategory> categories, Float minPrice,
-                                             Float maxPrice) {
+    public List<Product> findFilteredProducts(String sellerId, String title,
+                                              List<ProductCategory> categories, Float minPrice,
+                                              Float maxPrice) {
         List<Product> products = new ArrayList<>(productMap.values());
         if (Optional.ofNullable(sellerId).isPresent()) {
             products = filterBySellerId(sellerId, products);

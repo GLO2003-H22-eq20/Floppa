@@ -39,10 +39,12 @@ public class ProductService {
         return new SellerProduct(seller, product);
     }
 
-    public List<SellerProduct> getFilteredProducts(String sellerId, String title,
-                                                   List<ProductCategory> categories, Float minPrice,
+    public List<SellerProduct> getFilteredProducts(String sellerId,
+                                                   String title,
+                                                   List<ProductCategory> categories,
+                                                   Float minPrice,
                                                    Float maxPrice) {
-        return productRepository.getFilteredProducts(sellerId, title, categories, minPrice, maxPrice).stream()
+        return productRepository.findFilteredProducts(sellerId, title, categories, minPrice, maxPrice).stream()
                 .map(product -> new SellerProduct(sellerRepository.findById(product.getSellerId()), product))
                 .collect(Collectors.toList());
     }
