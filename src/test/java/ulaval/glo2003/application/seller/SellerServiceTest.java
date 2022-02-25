@@ -48,7 +48,7 @@ public class SellerServiceTest {
     }
 
     @Test
-    public void givenASeller_whenCreating_thenCreatesANewSeller() {
+    public void givenASellerRequest_whenCreating_thenCreatesANewSeller() {
         givenNewSellerCanBeCreated();
 
         sellerService.createSeller(request);
@@ -57,7 +57,7 @@ public class SellerServiceTest {
     }
 
     @Test
-    public void givenASeller_whenCreating_thenSavesTheNewSeller() {
+    public void givenASellerRequest_whenCreating_thenSavesTheNewSeller() {
         Seller seller = givenNewSellerCanBeCreated();
 
         sellerService.createSeller(request);
@@ -66,7 +66,7 @@ public class SellerServiceTest {
     }
 
     @Test
-    public void givenASeller_whenCreating_thenGeneratesASellerId() {
+    public void givenASellerRequest_whenCreating_thenGeneratesASellerId() {
         givenNewSellerCanBeCreated();
 
         String sellerId = sellerService.createSeller(request);
