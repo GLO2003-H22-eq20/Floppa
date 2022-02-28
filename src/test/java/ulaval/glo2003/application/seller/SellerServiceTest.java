@@ -27,11 +27,11 @@ public class SellerServiceTest {
     static final String SELLER_ID = "1";
 
     @Mock
-    SellerFactory sellerFactory;
+    private SellerFactory sellerFactory;
     @Mock
-    SellerRepository sellerRepository;
+    private SellerRepository sellerRepository;
     @Mock
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     SellerRequest request = new SellerRequest() {{
         name = "name";

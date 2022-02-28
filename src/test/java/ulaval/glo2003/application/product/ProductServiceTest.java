@@ -13,6 +13,7 @@ import ulaval.glo2003.domain.valueObject.SellerProduct;
 import ulaval.glo2003.infrastructure.ProductRepository;
 import ulaval.glo2003.infrastructure.SellerRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,21 +28,24 @@ public class ProductServiceTest {
     static final String SELLER_ID = "1";
 
     @Mock
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
     @Mock
-    SellerRepository sellerRepository;
+    private SellerRepository sellerRepository;
     @Mock
-    ProductFactory productFactory;
+    private ProductFactory productFactory;
     @Mock
-    Product product;
+    private Product product;
     @Mock
-    Seller seller;
+    private Seller seller;
 
     ProductRequest request = new ProductRequest() {{
         title = "productTitle";
         description = "productDescription";
         suggestedPrice = 777.77f;
-        categories = null;
+        categories = new ArrayList<>() {{
+            add("beauty");
+            add("housing");
+        }};
     }};
 
     @InjectMocks
@@ -53,7 +57,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void givenAProductRequest_whenCreating_thenCreatesANewProduct() {
+    public void whenCreatingAProduct_thenCreatesANewProduct() {
         givenNewProductCanBeCreated();
 
         productService.createProduct(SELLER_ID, request);
@@ -108,17 +112,6 @@ public class ProductServiceTest {
         assertNotNull(sellerProduct);
     }
 
-//    @Test
-//    public void whenGettingAProduct_thenReturnsSellerProduct() {
-//        Seller seller = givenASellerCanBeFound();
-//        Product product = givenAProductCanBeFound();
-//        SellerProduct expectedSellerProduct = new SellerProduct(seller, product);
-//
-//        SellerProduct sellerProduct = productService.getProduct(anyString());
-//
-//        assertEquals(expectedSellerProduct, sellerProduct);
-//    }
-
     @Test
     public void whenGettingFilteredProducts_thenSearchesForFilteredProductsInRepository() {
         productService.getFilteredProducts(anyString(), anyString(), any(), anyFloat(), anyFloat());
@@ -139,14 +132,12 @@ public class ProductServiceTest {
         return product;
     }
 
-    private Product givenAProductCanBeFound() {
+    private void givenAProductCanBeFound() {
         willReturn(product).given(productRepository).findById(anyString());
-        return product;
     }
 
-    private Seller givenASellerCanBeFound() {
+    private void givenASellerCanBeFound() {
         willReturn(seller).given(sellerRepository).findById(SELLER_ID);
         willReturn(SELLER_ID).given(product).getSellerId();
-        return seller;
     }
 }

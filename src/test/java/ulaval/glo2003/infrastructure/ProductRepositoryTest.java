@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,7 +18,10 @@ class ProductRepositoryTest {
     private static final String TITLE = "item";
     private static final String DESCRIPTION = "anItem";
     private static final Float SUGGESTED_PRICE = 1.0f;
-    private static final List<ProductCategory> CATEGORIES = null;
+    private static final List<ProductCategory> CATEGORIES = new ArrayList<>() {{
+        add(ProductCategory.APPAREL);
+        add(ProductCategory.BEAUTY);
+    }};
 
     private ProductRepository productRepository;
     private Product product;
@@ -31,7 +35,7 @@ class ProductRepositoryTest {
     @Test
     public void givenProducts_whenSavingTwoProducts_thenCanRetrieveAListOfProductsWithASellerId() {
         productRepository.saveProduct(product);
-        Product anotherProductWithSameSellerId = new Product("1", "title", "anItem", 1.0f, null);
+        Product anotherProductWithSameSellerId = new Product("1", "title", "anItem", 1.0f, CATEGORIES);
         productRepository.saveProduct(anotherProductWithSameSellerId);
 
         Collection<Product> products = productRepository.findProductsBySellerId(SELLER_ID);
@@ -40,7 +44,7 @@ class ProductRepositoryTest {
 
     @Test
     public void whenRetrievingProductBySellerId_thenReturnsEmptyListIfProductDoesNotExist() {
-        Collection<Product> products = productRepository.findProductsBySellerId(anyString());
+        Collection<Product> products = productRepository.findProductsBySellerId(SELLER_ID);
 
         assertTrue(products.isEmpty());
     }

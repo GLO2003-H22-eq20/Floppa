@@ -1,5 +1,6 @@
 package ulaval.glo2003.infrastructure;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.controllers.exceptions.ItemNotFoundException;
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Matchers.anyString;
 
 public class SellerRepositoryTest {
+    private static final String ID = "50";
     private static final String NAME = "Carey Price";
     private static final String BIO = "Hockey";
     private static final LocalDate BIRTH_DATE = LocalDate.of(1987, 8, 16);
@@ -34,7 +36,7 @@ public class SellerRepositoryTest {
     }
 
     @Test
-    public void whenRetrievingInexistantSeller_thenRetrievingByIdThrowsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class, () -> sellerRepository.findById(anyString()));
+    public void whenRetrievingNonExistantSeller_thenRetrievingByIdThrowsItemNotFoundException() {
+        assertThrows(ItemNotFoundException.class, () -> sellerRepository.findById(ID));
     }
 }
