@@ -1,5 +1,6 @@
 package ulaval.glo2003.application.product;
 
+import ulaval.glo2003.controllers.exceptions.ItemNotFoundException;
 import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
@@ -24,6 +25,7 @@ public class ProductService {
     }
 
     public String createProduct(String sellerId, ProductRequest productRequest) {
+        sellerRepository.findById(sellerId);
         Product product = productFactory.createProduct(sellerId, productRequest.title, productRequest.description,
                 productRequest.suggestedPrice, productRequest.categories);
 

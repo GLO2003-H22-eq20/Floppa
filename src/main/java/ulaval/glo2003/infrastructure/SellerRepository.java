@@ -11,7 +11,7 @@ public class SellerRepository {
     private final Map<String, Seller> sellerMap = Collections.synchronizedMap(new HashMap<>());
 
     public void saveSeller(Seller seller) {
-        sellerMap.put(seller.getId().toString(), seller);
+        sellerMap.put(seller.getId(), seller);
     }
 
     public Seller findById(String id) {

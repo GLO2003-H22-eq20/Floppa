@@ -16,7 +16,7 @@ public class SellerPresenter {
                                   presentProducts(sellerProducts.getProducts()));
     }
 
-    public List<ProductResponse> presentProducts(List<Product> productList) {
+    private List<ProductResponse> presentProducts(List<Product> productList) {
         return productList.stream()
                           .map(product ->
                                   new ProductResponse(product.getId(),

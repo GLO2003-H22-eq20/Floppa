@@ -24,8 +24,10 @@ class SellerPresenterTest {
     private static final LocalDate BIRTHDATE = LocalDate.of(1996, 2, 3);
     private static final String BIO = "bio";
     private static final List<ProductResponse> CATEGORIES = null;
+
     @Mock
     List<Product> products;
+
     private SellerResponse sellerResponse;
     private SellerPresenter sellerPresenter;
     private Seller seller;
@@ -40,7 +42,7 @@ class SellerPresenterTest {
     }
 
     @Test
-    public void givenASellerProducts_whenPresentingSeller_thenReturnedSellerResponse() {
+    public void givenASellerProducts_whenPresenting_thenReturnedSellerResponse() {
         sellerResponse = sellerPresenter.presentSeller(sellerProducts);
 
         assertNotNull(sellerResponse.getId());

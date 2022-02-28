@@ -48,7 +48,7 @@ public class SellerServiceTest {
     }
 
     @Test
-    public void givenASellerRequest_whenCreating_thenCreatesANewSeller() {
+    public void whenCreatingSeller_thenCreatesANewSeller() {
         givenNewSellerCanBeCreated();
 
         sellerService.createSeller(request);
@@ -57,7 +57,7 @@ public class SellerServiceTest {
     }
 
     @Test
-    public void givenASellerRequest_whenCreating_thenSavesTheNewSeller() {
+    public void whenCreatingSeller_thenSavesTheNewSeller() {
         Seller seller = givenNewSellerCanBeCreated();
 
         sellerService.createSeller(request);
@@ -66,7 +66,7 @@ public class SellerServiceTest {
     }
 
     @Test
-    public void givenASellerRequest_whenCreating_thenGeneratesASellerId() {
+    public void whenCreatingSeller_thenGeneratesASellerId() {
         givenNewSellerCanBeCreated();
 
         String sellerId = sellerService.createSeller(request);
@@ -75,7 +75,7 @@ public class SellerServiceTest {
     }
 
     @Test
-    public void givenASellerId_whenGettingASeller_thenSearchesForTheSellerInRepository() {
+    public void whenGettingASeller_thenSearchesForTheSellerInRepository() {
         givenASellerCanBeFound();
         givenProductsExist();
 
@@ -85,7 +85,7 @@ public class SellerServiceTest {
     }
 
     @Test
-    public void givenASellerId_whenGettingASeller_thenSearchesForTheProductsInRepository() {
+    public void whenGettingASeller_thenSearchesForTheProductsInRepository() {
         givenASellerCanBeFound();
         givenProductsExist();
 
@@ -95,7 +95,7 @@ public class SellerServiceTest {
     }
 
     @Test
-    public void givenASellerId_whenGettingASeller_thenReturnsSellerProducts() {
+    public void whenGettingASeller_thenReturnsSellerProducts() {
         Seller seller = givenASellerCanBeFound();
         List<Product> products = givenProductsExist();
         SellerProducts expectedSellerProducts = new SellerProducts(seller, products);

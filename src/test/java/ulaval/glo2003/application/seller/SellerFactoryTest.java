@@ -24,37 +24,37 @@ public class SellerFactoryTest {
     }
 
     @Test
-    public void givenASeller_whenNameIsEmpty_thenThrowsInvalidParameterException() {
+    public void whenCreatingSeller_thenIfNameIsEmptyThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
                 sellerFactory.createSeller("", BIO, VALID_BIRTH_DATE));
     }
 
     @Test
-    public void givenASeller_whenBioIsEmpty_thenThrowsInvalidParameterException() {
+    public void whenCreatingSeller_thenIfBioIsEmptyThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
                 sellerFactory.createSeller(NAME, "", VALID_BIRTH_DATE));
     }
 
     @Test
-    public void givenASeller_whenAgeIsUnder18YearsOld_thenThrowsInvalidParameterException() {
+    public void whenCreatingSeller_thenIfAgeIsUnder18YearsOldThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
                 sellerFactory.createSeller(NAME, BIO, INVALID_BIRTH_DATE));
     }
 
     @Test
-    public void givenASeller_whenNameIsNotInTheRequest_thenThrowsMissingParameterException() {
+    public void whenCreatingSeller_thenIfNameIsNotInTheRequestThrowsMissingParameterException() {
         assertThrows(MissingParameterException.class, () ->
                 sellerFactory.createSeller(null, BIO, INVALID_BIRTH_DATE));
     }
 
     @Test
-    public void givenASeller_whenBioIsNotInTheRequest_thenThrowsMissingParameterException() {
+    public void whenCreatingSeller_thenIfBioIsNotInTheRequestThrowsMissingParameterException() {
         assertThrows(MissingParameterException.class, () ->
                 sellerFactory.createSeller(NAME, null, INVALID_BIRTH_DATE));
     }
 
     @Test
-    public void givenASeller_whenBirthDateIsNotInTheRequest_thenThrowsMissingParameterException() {
+    public void whenCreatingSeller_thenIfBirthDateIsNotInTheRequestThrowsMissingParameterException() {
         assertThrows(MissingParameterException.class, () ->
                 sellerFactory.createSeller(NAME, BIO, null));
     }
@@ -71,26 +71,5 @@ public class SellerFactoryTest {
         Seller seller = sellerFactory.createSeller(NAME, BIO, VALID_BIRTH_DATE);
 
         assertNotNull(seller.getCreatedAt());
-    }
-
-    @Test
-    public void whenCreatingSeller_thenSellerReferencesToName() {
-        Seller seller = sellerFactory.createSeller(NAME, BIO, VALID_BIRTH_DATE);
-
-        assertEquals(NAME, seller.getName());
-    }
-
-    @Test
-    public void whenCreatingSeller_thenSellerReferencesToBio() {
-        Seller seller = sellerFactory.createSeller(NAME, BIO, VALID_BIRTH_DATE);
-
-        assertEquals(BIO, seller.getBio());
-    }
-
-    @Test
-    public void whenCreatingSeller_thenSellerReferencesToBirthDate() {
-        Seller seller = sellerFactory.createSeller(NAME, BIO, VALID_BIRTH_DATE);
-
-        assertEquals(VALID_BIRTH_DATE, seller.getBirthDate());
     }
 }
