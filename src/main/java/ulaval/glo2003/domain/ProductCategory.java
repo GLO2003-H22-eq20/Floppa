@@ -22,22 +22,11 @@ public enum ProductCategory {
         }
     },
     HOUSING {
-        public String toString() {
-            return "housing";
-        }
+        public String toString() {return "housing";}
     },
     OTHER {
         public String toString() {
             return "other";
         }
-    };
-
-    public static boolean contains(String test) {
-        for (ProductCategory category : ProductCategory.values()) {
-            if (category.toString().equals(test)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

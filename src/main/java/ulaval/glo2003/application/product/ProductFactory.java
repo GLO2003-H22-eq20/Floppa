@@ -47,10 +47,19 @@ public class ProductFactory {
 
     private void validateCategories(List<String> categories) {
         for (String categorie : categories) {
-            if (!ProductCategory.contains(categorie)) {
+            if (!isProductCategory(categorie)) {
                 throw new InvalidParameterException("Invalid categorie");
             }
         }
+    }
+
+    public boolean isProductCategory(String productCategory) {
+        for (ProductCategory category : ProductCategory.values()) {
+            if (category.toString().equals(productCategory)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private List<ProductCategory> parseToProductCategory(List<String> categoriesString) {
