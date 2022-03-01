@@ -24,6 +24,7 @@ public class ProductService {
     }
 
     public String createProduct(String sellerId, ProductRequest productRequest) {
+        sellerRepository.findById(sellerId);
         Product product = productFactory.createProduct(sellerId, productRequest.title, productRequest.description,
                 productRequest.suggestedPrice, productRequest.categories);
 

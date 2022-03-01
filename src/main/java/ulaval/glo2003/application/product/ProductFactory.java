@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductFactory {
+
+    private final float MINIMUM_SUGGESTED_PRICE = 1.0f;
+
     public Product createProduct(String sellerId,
                                  String title,
                                  String description,
@@ -40,7 +43,7 @@ public class ProductFactory {
     private void validateSuggestedPrice(Float suggestedPrice) {
         if (suggestedPrice == null) {
             throw new MissingParameterException("Missing suggested price");
-        } else if (suggestedPrice < 1.0) {
+        } else if (suggestedPrice < MINIMUM_SUGGESTED_PRICE) {
             throw new InvalidParameterException("Suggested price is less than 1.0");
         }
     }
