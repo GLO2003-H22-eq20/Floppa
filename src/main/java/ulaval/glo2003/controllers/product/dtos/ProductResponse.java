@@ -8,16 +8,18 @@ import java.util.List;
 import java.util.UUID;
 
 public class ProductResponse {
-    private final String id;
-    private final Instant createdAt;
-    private final String title;
-    private final String description;
-    private final Float suggestedPrice;
-    private final Offers offers;
-    private final List<String> categories;
+    private String id;
+    private String createdAt;
+    private String title;
+    private String description;
+    private Float suggestedPrice;
+    private Offers offers;
+    private List<String> categories;
     private SellerResponse seller;
 
-    public ProductResponse(String id, Instant createdAt, String title, String description, Float suggestedPrice,
+    public ProductResponse() {}
+
+    public ProductResponse(String id, String createdAt, String title, String description, Float suggestedPrice,
                            Offers offers, List<String> categories, SellerResponse seller) {
         this.id = id;
         this.createdAt = createdAt;
@@ -29,7 +31,7 @@ public class ProductResponse {
         this.seller = seller;
     }
 
-    public ProductResponse(String id, Instant createdAt, String title, String description,
+    public ProductResponse(String id, String createdAt, String title, String description,
                            Float suggestedPrice, Offers offers, List<String> categories) {
         this.id = id;
         this.createdAt = createdAt;
@@ -44,7 +46,7 @@ public class ProductResponse {
         return id;
     }
 
-    public Instant getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 

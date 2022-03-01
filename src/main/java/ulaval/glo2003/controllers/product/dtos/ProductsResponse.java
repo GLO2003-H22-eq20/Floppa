@@ -3,13 +3,14 @@ package ulaval.glo2003.controllers.product.dtos;
 import java.util.List;
 
 public class ProductsResponse {
-    private final List<ProductResponse> productResponses;
+    private List<ProductResponse> products;
 
+    public ProductsResponse() {}
     public ProductsResponse(List<ProductResponse> productResponses) {
-        this.productResponses = productResponses;
+        this.products = productResponses;
     }
 
     public List<ProductResponse> getProducts() {
-        return productResponses;
+        return products;
     }
 }

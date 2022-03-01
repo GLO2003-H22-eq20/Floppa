@@ -20,7 +20,7 @@ public class SellerPresenter {
         return productList.stream()
                           .map(product ->
                                   new ProductResponse(product.getId(),
-                                                              product.getCreatedAt(),
+                                                              product.getCreatedAt().toString(),
                                                               product.getTitle(),
                                                               product.getDescription(),
                                                               product.getSuggestedPrice(),
