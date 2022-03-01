@@ -53,6 +53,6 @@ public class EndToEndTest {
 
     @AfterClass
     public static void teardown() {
-
+        Main.stop();
     }
 }
