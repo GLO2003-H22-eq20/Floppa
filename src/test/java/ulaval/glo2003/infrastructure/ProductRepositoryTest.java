@@ -95,7 +95,7 @@ class ProductRepositoryTest {
     @Test
     public void givenProduct_whenFilteringProductsByCategories_thenReturnFilteredProductList() {
         productRepository.saveProduct(product);
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null, product.getTitle(), product.getCategories(), null, null);
+        List<Product> filteredProducts = productRepository.findFilteredProducts(null, null, product.getCategories(), null, null);
 
         assertEquals(1, filteredProducts.size());
         assertTrue(filteredProducts.stream().anyMatch(filteredProduct -> filteredProduct.equals(product)));
