@@ -50,8 +50,4 @@ public class ProductService {
                 .map(product -> new SellerProduct(sellerRepository.findById(product.getSellerId()), product))
                 .collect(Collectors.toList());
     }
-
-    public void validateSellerId(String sellerId) {
-
-    }
 }
