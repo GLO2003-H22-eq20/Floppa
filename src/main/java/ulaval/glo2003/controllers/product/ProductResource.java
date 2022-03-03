@@ -13,7 +13,10 @@ import ulaval.glo2003.domain.ProductCategory;
 import ulaval.glo2003.domain.valueObject.SellerProduct;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 @Path("products")
 public class ProductResource {
@@ -49,13 +52,18 @@ public class ProductResource {
     @GET
     public Response getFilteredProducts(@QueryParam("sellerId") String sellerId,
                                         @QueryParam("title") String title,
-                                        @QueryParam("categories") List<ProductCategory> categories,
+                                        @QueryParam("categories") List<String> categories,
                                         @QueryParam("minPrice") Float minPrice,
                                         @QueryParam("maxPrice") Float maxPrice) {
-        List<SellerProduct> sellersProducts = productService.getFilteredProducts(sellerId, title, categories, minPrice, maxPrice);
-
-        ProductsResponse productsResponse = productPresenter.presentProducts(sellersProducts);
-
-        return Response.status(Response.Status.OK).entity(productsResponse).build();
+        try {
+            List<ProductCategory> productCategory = categories.stream()
+                    .map(category -> category.toUpperCase(Locale.ROOT))
+                    .map(ProductCategory::valueOf).collect(Collectors.toList());
+            List<SellerProduct> sellersProducts = productService.getFilteredProducts(sellerId, title, productCategory, minPrice, maxPrice);
+            ProductsResponse productsResponse = productPresenter.presentProducts(sellersProducts);
+            return Response.status(Response.Status.OK).entity(productsResponse).build();
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
 }

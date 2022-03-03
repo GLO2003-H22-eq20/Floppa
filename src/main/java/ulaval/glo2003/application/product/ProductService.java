@@ -28,7 +28,7 @@ public class ProductService {
         sellerRepository.findById(sellerId);
         Product product = productFactory.createProduct(sellerId, productRequest.title, productRequest.description,
                 productRequest.suggestedPrice, productRequest.categories);
-
+        sellerRepository.findById(sellerId);
         productRepository.saveProduct(product);
 
         return product.getId();
@@ -49,5 +49,9 @@ public class ProductService {
         return productRepository.findFilteredProducts(sellerId, title, categories, minPrice, maxPrice).stream()
                 .map(product -> new SellerProduct(sellerRepository.findById(product.getSellerId()), product))
                 .collect(Collectors.toList());
+    }
+
+    public void validateSellerId(String sellerId) {
+
     }
 }

@@ -6,6 +6,7 @@ import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class ProductFactory {
@@ -46,25 +47,19 @@ public class ProductFactory {
     }
 
     private void validateCategories(List<String> categories) {
-        for (String categorie : categories) {
-            if (!isProductCategory(categorie)) {
-                throw new InvalidParameterException("Invalid categorie");
+        for (String category : categories) {
+            try {
+                ProductCategory.valueOf(category.toUpperCase(Locale.ROOT));
+            } catch (IllegalArgumentException e) {
+                throw new InvalidParameterException("Invalid category");
             }
         }
     }
 
-    public boolean isProductCategory(String productCategory) {
-        for (ProductCategory category : ProductCategory.values()) {
-            if (category.toString().equals(productCategory)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private List<ProductCategory> parseToProductCategory(List<String> categoriesString) {
-        return categoriesString.stream()
-                               .map(categorieString -> ProductCategory.valueOf(categorieString.toUpperCase()))
-                               .collect(Collectors.toList());
+    private List<ProductCategory> parseToProductCategory(List<String> categories) {
+        return categories.stream()
+                .map(category -> category.toUpperCase(Locale.ROOT))
+                .map(ProductCategory::valueOf)
+                .collect(Collectors.toList());
     }
 }
