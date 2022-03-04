@@ -30,7 +30,7 @@ public class ProductService {
 
         productRepository.saveProduct(product);
 
-        return product.getId().toString();
+        return product.getId();
     }
 
     public SellerProduct getProduct(String id) {

@@ -118,14 +118,14 @@ public class ProductResourceE2ETest extends EndToEndTest {
     public void givenInclusiveFilters_whenGettingProducts_shouldReturnMatchingProducts() {
         String sellerId = givenNewSellerId();
         String productTitle = "health potion";
-        Map<String, Object> productRequest = createProductRequest(productTitle, "10HP","10",new String[] {"sports"});
+        Map<String, Object> productRequest = createProductRequest(productTitle, "10HP", "10", new String[]{"sports"});
         givenExistingProductLocation(productRequest, sellerId);
 
         ExtractableResponse<Response> response = given()
                 .queryParam("title", "PoT")
                 .queryParam("minPrice", "10")
                 .queryParam("maxPrice", "10")
-                .queryParam("categories[]","sports,electronics")
+                .queryParam("categories[]", "sports,electronics")
                 .when().get("/products")
                 .then().extract();
         ProductsResponse productsResponse = response.body().as(ProductsResponse.class);
@@ -139,11 +139,11 @@ public class ProductResourceE2ETest extends EndToEndTest {
         String sellerId = givenNewSellerId();
         String anotherSellerId = givenNewSellerId();
         String productTitle = "mana potion";
-        Map<String, Object> productRequest = createProductRequest(productTitle, "10MP","100",new String[] {"sports"});
+        Map<String, Object> productRequest = createProductRequest(productTitle, "10MP", "100", new String[]{"sports"});
         givenExistingProductLocation(productRequest, sellerId);
 
         ExtractableResponse<Response> response = given()
-                .queryParam("sellerId",anotherSellerId)
+                .queryParam("sellerId", anotherSellerId)
                 .queryParam("categories[]", "electronics")
                 .when().get("/products")
                 .then().extract();
@@ -151,8 +151,4 @@ public class ProductResourceE2ETest extends EndToEndTest {
 
         assertThat(productsResponse.getProducts()).isEmpty();
     }
-
-
-
-
 }

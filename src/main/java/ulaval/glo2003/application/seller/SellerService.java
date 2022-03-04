@@ -25,7 +25,7 @@ public class SellerService {
 
         sellerRepository.saveSeller(seller);
 
-        return seller.getId().toString();
+        return seller.getId();
     }
 
     public SellerProducts getSeller(String id) {

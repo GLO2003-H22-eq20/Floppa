@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductFactory {
-
     private final float MINIMUM_SUGGESTED_PRICE = 1.0f;
 
     public Product createProduct(String sellerId,
@@ -58,7 +57,7 @@ public class ProductFactory {
 
     private List<ProductCategory> parseToProductCategory(List<String> categoriesString) {
         return categoriesString.stream()
-                               .map(categorieString -> ProductCategory.valueOf(categorieString.toUpperCase()))
-                               .collect(Collectors.toList());
+                .map(categorieString -> ProductCategory.valueOf(categorieString.toUpperCase()))
+                .collect(Collectors.toList());
     }
 }
