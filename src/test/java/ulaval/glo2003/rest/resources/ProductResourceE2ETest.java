@@ -4,7 +4,7 @@ import io.restassured.http.Header;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.Test;
-import ulaval.glo2003.controllers.exceptionMappers.response.ExceptionResponse;
+import ulaval.glo2003.controllers.exception.response.ExceptionResponse;
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
 import ulaval.glo2003.controllers.product.dtos.ProductsResponse;
 import ulaval.glo2003.rest.EndToEndTest;
@@ -17,7 +17,7 @@ import java.util.Map;
 import static com.google.common.truth.Truth.assertThat;
 import static io.restassured.RestAssured.given;
 import static ulaval.glo2003.rest.fixtures.ProductFixture.*;
-import static ulaval.glo2003.rest.fixtures.SellerFixture.*;
+import static ulaval.glo2003.rest.fixtures.SellerFixture.givenNewSellerId;
 
 public class ProductResourceE2ETest extends EndToEndTest {
 

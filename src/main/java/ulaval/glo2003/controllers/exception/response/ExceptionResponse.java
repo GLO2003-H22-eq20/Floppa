@@ -1,10 +1,11 @@
-package ulaval.glo2003.controllers.exceptionMappers.response;
+package ulaval.glo2003.controllers.exception.response;
 
 public class ExceptionResponse {
     private String code;
     private String description;
 
-    public ExceptionResponse() {}
+    public ExceptionResponse() {
+    }
 
     public ExceptionResponse(String code, String description) {
         this.code = code;

@@ -11,15 +11,15 @@ public class ProductPresenter {
 
     public ProductResponse presentProduct(SellerProduct sellerProduct) {
         return new ProductResponse(sellerProduct.getProduct().getId(),
-                                   sellerProduct.getProduct().getCreatedAt().toString(),
-                                   sellerProduct.getProduct().getTitle(),
-                                   sellerProduct.getProduct().getDescription(),
-                                   sellerProduct.getProduct().getSuggestedPrice(),
-                                   sellerProduct.getProduct().getOffer(),
-                                   sellerProduct.getProduct().getCategories().stream()
-                                                                             .map(Enum::toString)
-                                                                             .collect(Collectors.toList()),
-                                   presentSeller(sellerProduct.getSeller()));
+                sellerProduct.getProduct().getCreatedAt().toString(),
+                sellerProduct.getProduct().getTitle(),
+                sellerProduct.getProduct().getDescription(),
+                sellerProduct.getProduct().getSuggestedPrice(),
+                sellerProduct.getProduct().getOffer(),
+                sellerProduct.getProduct().getCategories().stream()
+                        .map(Enum::toString)
+                        .collect(Collectors.toList()),
+                presentSeller(sellerProduct.getSeller()));
     }
 
     public SellerResponse presentSeller(Seller seller) {
@@ -28,7 +28,7 @@ public class ProductPresenter {
 
     public ProductsResponse presentProducts(List<SellerProduct> sellersProducts) {
         return new ProductsResponse(sellersProducts.stream()
-                                                   .map(this::presentProduct)
-                                                   .collect(Collectors.toList()));
+                .map(this::presentProduct)
+                .collect(Collectors.toList()));
     }
 }

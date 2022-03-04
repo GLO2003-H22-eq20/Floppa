@@ -3,9 +3,7 @@ package ulaval.glo2003.controllers.product.dtos;
 import ulaval.glo2003.controllers.seller.dtos.SellerResponse;
 import ulaval.glo2003.domain.Offers;
 
-import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
 
 public class ProductResponse {
     private String id;
@@ -17,7 +15,8 @@ public class ProductResponse {
     private List<String> categories;
     private SellerResponse seller;
 
-    public ProductResponse() {}
+    public ProductResponse() {
+    }
 
     public ProductResponse(String id, String createdAt, String title, String description, Float suggestedPrice,
                            Offers offers, List<String> categories, SellerResponse seller) {
