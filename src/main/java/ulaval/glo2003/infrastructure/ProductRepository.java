@@ -3,7 +3,6 @@ package ulaval.glo2003.infrastructure;
 import ulaval.glo2003.controllers.exceptions.ItemNotFoundException;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
-import ulaval.glo2003.domain.SellerProduct;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,9 +16,9 @@ public class ProductRepository {
 
     public List<Product> findProductsBySellerId(String sellerId) {
         return productMap.values()
-                         .stream()
-                         .filter(product -> Objects.equals(product.getSellerId(), sellerId))
-                         .collect(Collectors.toList());
+                .stream()
+                .filter(product -> Objects.equals(product.getSellerId(), sellerId))
+                .collect(Collectors.toList());
     }
 
     public Product findById(String id) {

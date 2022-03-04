@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 public class SellerFixture extends EndToEndTest {
 
     public static Map<String, String> givenInvalidAgeSellerRequest() {
-        Map<String,String> invalidRequest = new HashMap<>();
+        Map<String, String> invalidRequest = new HashMap<>();
         invalidRequest.put("name", "Boba Fett");
         invalidRequest.put("bio", "Bounty Hunter");
         invalidRequest.put("birthDate", LocalDate.now().toString());
@@ -20,7 +20,7 @@ public class SellerFixture extends EndToEndTest {
     }
 
     public static Map<String, String> givenValidSellerRequest() {
-        Map<String,String> sellerRequest = new HashMap<>();
+        Map<String, String> sellerRequest = new HashMap<>();
         sellerRequest.put("name", "Boba Fett");
         sellerRequest.put("bio", "Bounty Hunter");
         sellerRequest.put("birthDate", "1996-09-15");
@@ -42,7 +42,7 @@ public class SellerFixture extends EndToEndTest {
     }
 
     public static String getIdFromLocation(String location) {
-        String[] sections =  location.split("/");
+        String[] sections = location.split("/");
         return sections[sections.length - 1];
     }
 }

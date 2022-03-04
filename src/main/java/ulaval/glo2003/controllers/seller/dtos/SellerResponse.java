@@ -11,7 +11,8 @@ public class SellerResponse {
     private String bio;
     private List<ProductResponse> products;
 
-    public SellerResponse() {}
+    public SellerResponse() {
+    }
 
     public SellerResponse(String id, String name, String createdAt, String bio, List<ProductResponse> products) {
         this.id = id;
@@ -20,6 +21,7 @@ public class SellerResponse {
         this.bio = bio;
         this.products = products;
     }
+
     public SellerResponse(String id, String name) {
         this.id = id;
         this.name = name;

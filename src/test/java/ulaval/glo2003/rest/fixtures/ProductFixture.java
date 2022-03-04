@@ -7,8 +7,8 @@ import ulaval.glo2003.rest.EndToEndTest;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.*;
-import static ulaval.glo2003.rest.fixtures.SellerFixture.*;
+import static io.restassured.RestAssured.given;
+import static ulaval.glo2003.rest.fixtures.SellerFixture.getIdFromLocation;
 
 public class ProductFixture extends EndToEndTest {
 
