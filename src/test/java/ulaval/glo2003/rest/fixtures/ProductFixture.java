@@ -13,7 +13,7 @@ import static ulaval.glo2003.rest.fixtures.SellerFixture.*;
 public class ProductFixture extends EndToEndTest {
 
     public static Map<String, Object> createProductRequest(String title, String description, String suggestedPrice, String[] categories) {
-        Map<String,Object> productRequest = new HashMap<>();
+        Map<String, Object> productRequest = new HashMap<>();
         productRequest.put("title", title);
         productRequest.put("description", description);
         productRequest.put("suggestedPrice", suggestedPrice);
@@ -23,15 +23,15 @@ public class ProductFixture extends EndToEndTest {
     }
 
     public static Map<String, Object> givenValidProductRequest() {
-        return createProductRequest("Willy Waller 2006", "Epeluche patate", "10.85", new String[] {"sports"});
+        return createProductRequest("Willy Waller 2006", "Epeluche patate", "10.85", new String[]{"sports"});
     }
 
     public static Map<String, Object> givenInvalidPriceProductRequest() {
-        return createProductRequest("Willy Waller 2006", "Epeluche patate", "0.0", new String[] {"sports"});
+        return createProductRequest("Willy Waller 2006", "Epeluche patate", "0.0", new String[]{"sports"});
 
     }
 
-    public static RequestSpecification givenNewProductForSeller(Map<String, Object> request, String sellerId ) {
+    public static RequestSpecification givenNewProductForSeller(Map<String, Object> request, String sellerId) {
         return given()
                 .contentType("application/json")
                 .header(new Header("X-Seller-Id", sellerId))
@@ -51,6 +51,4 @@ public class ProductFixture extends EndToEndTest {
         String productLocation = givenExistingProductLocation(productRequest, sellerId);
         return getIdFromLocation(productLocation);
     }
-
-
 }

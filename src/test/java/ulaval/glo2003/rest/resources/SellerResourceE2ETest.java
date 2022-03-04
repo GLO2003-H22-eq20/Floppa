@@ -18,7 +18,6 @@ import static ulaval.glo2003.rest.fixtures.ProductFixture.*;
 import static ulaval.glo2003.rest.fixtures.SellerFixture.*;
 
 public class SellerResourceE2ETest extends EndToEndTest {
-
     public static final String SELLERS_ENDPOINT = "/sellers";
 
     @Test
@@ -55,7 +54,7 @@ public class SellerResourceE2ETest extends EndToEndTest {
 
     @Test
     public void givenExistingSeller_whenGettingSeller_shouldReturnSeller() throws URISyntaxException {
-        Map<String,String> sellerRequest = givenValidSellerRequest();
+        Map<String, String> sellerRequest = givenValidSellerRequest();
         String sellerLocation = givenExistingSellerLocation(sellerRequest);
 
         ExtractableResponse<Response> response = given().when().get(new URI(sellerLocation)).then().extract();
