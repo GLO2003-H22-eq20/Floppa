@@ -5,6 +5,7 @@ import ulaval.glo2003.controllers.exceptions.MissingParameterException;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -49,6 +50,8 @@ public class ProductFactory {
     private void validateCategories(List<String> categories) {
         for (String category : categories) {
             try {
+                if (!category.equals(category.toLowerCase(Locale.ROOT)))
+                    throw new InvalidParameterException("Invalid category");
                 ProductCategory.valueOf(category.toUpperCase(Locale.ROOT));
             } catch (IllegalArgumentException e) {
                 throw new InvalidParameterException("Invalid category");

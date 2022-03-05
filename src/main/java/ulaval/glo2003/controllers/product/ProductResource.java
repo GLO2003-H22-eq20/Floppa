@@ -56,6 +56,11 @@ public class ProductResource {
                                         @QueryParam("minPrice") Float minPrice,
                                         @QueryParam("maxPrice") Float maxPrice) {
         try {
+            for(String category : categories) {
+                if (!category.equals(category.toLowerCase(Locale.ROOT))) {
+                    throw new IllegalArgumentException();
+                }
+            }
             List<ProductCategory> productCategory = categories.stream()
                     .map(category -> category.toUpperCase(Locale.ROOT))
                     .map(ProductCategory::valueOf).collect(Collectors.toList());
