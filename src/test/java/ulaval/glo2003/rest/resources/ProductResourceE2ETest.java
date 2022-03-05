@@ -16,7 +16,12 @@ import java.util.Map;
 
 import static com.google.common.truth.Truth.assertThat;
 import static io.restassured.RestAssured.given;
-import static ulaval.glo2003.rest.fixtures.ProductFixture.*;
+import static ulaval.glo2003.rest.fixtures.ProductFixture.createProductRequest;
+import static ulaval.glo2003.rest.fixtures.ProductFixture.givenExistingProductIdForSeller;
+import static ulaval.glo2003.rest.fixtures.ProductFixture.givenExistingProductLocation;
+import static ulaval.glo2003.rest.fixtures.ProductFixture.givenInvalidPriceProductRequest;
+import static ulaval.glo2003.rest.fixtures.ProductFixture.givenNewProductForSeller;
+import static ulaval.glo2003.rest.fixtures.ProductFixture.givenValidProductRequest;
 import static ulaval.glo2003.rest.fixtures.SellerFixture.givenNewSellerId;
 
 public class ProductResourceE2ETest extends EndToEndTest {
@@ -28,7 +33,9 @@ public class ProductResourceE2ETest extends EndToEndTest {
         String sellerId = givenNewSellerId();
         Map<String, Object> productRequest = givenValidProductRequest();
 
-        ExtractableResponse<Response> response = givenNewProductForSeller(productRequest, sellerId).when().post(PRODUCTS_ENDPOINT).then().extract();
+        ExtractableResponse<Response> response = givenNewProductForSeller(productRequest, sellerId)
+                .when().post(PRODUCTS_ENDPOINT)
+                .then().extract();
 
         assertThat(response.statusCode()).isEqualTo(STATUS_CREATED);
         assertThat(response.headers().get("location").getValue()).isNotEmpty();
@@ -38,7 +45,9 @@ public class ProductResourceE2ETest extends EndToEndTest {
     public void givenNoSellerId_whenCreatingProduct_shouldReturnNotFound() {
         Map<String, Object> productRequest = givenValidProductRequest();
 
-        ExtractableResponse<Response> response = givenNewProductForSeller(productRequest, null).when().post(PRODUCTS_ENDPOINT).then().extract();
+        ExtractableResponse<Response> response = givenNewProductForSeller(productRequest, null)
+                .when().post(PRODUCTS_ENDPOINT)
+                .then().extract();
 
         assertThat(response.statusCode()).isEqualTo(STATUS_NOT_FOUND);
     }
@@ -118,7 +127,11 @@ public class ProductResourceE2ETest extends EndToEndTest {
     public void givenInclusiveFilters_whenGettingProducts_shouldReturnMatchingProducts() {
         String sellerId = givenNewSellerId();
         String productTitle = "health potion";
-        Map<String, Object> productRequest = createProductRequest(productTitle, "10HP", "10", new String[]{"sports"});
+        Map<String, Object> productRequest = createProductRequest(productTitle,
+                "10HP",
+                "10",
+                new String[]{"sports"}
+        );
         givenExistingProductLocation(productRequest, sellerId);
 
         ExtractableResponse<Response> response = given()
@@ -139,7 +152,11 @@ public class ProductResourceE2ETest extends EndToEndTest {
         String sellerId = givenNewSellerId();
         String anotherSellerId = givenNewSellerId();
         String productTitle = "mana potion";
-        Map<String, Object> productRequest = createProductRequest(productTitle, "10MP", "100", new String[]{"sports"});
+        Map<String, Object> productRequest = createProductRequest(productTitle,
+                "10MP",
+                "100",
+                 new String[]{"sports"}
+        );
         givenExistingProductLocation(productRequest, sellerId);
 
         ExtractableResponse<Response> response = given()

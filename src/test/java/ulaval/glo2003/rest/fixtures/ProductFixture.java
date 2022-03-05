@@ -12,7 +12,11 @@ import static ulaval.glo2003.rest.fixtures.SellerFixture.getIdFromLocation;
 
 public class ProductFixture extends EndToEndTest {
 
-    public static Map<String, Object> createProductRequest(String title, String description, String suggestedPrice, String[] categories) {
+    public static Map<String, Object> createProductRequest(String title,
+            String description,
+            String suggestedPrice,
+            String[] categories
+    ) {
         Map<String, Object> productRequest = new HashMap<>();
         productRequest.put("title", title);
         productRequest.put("description", description);

@@ -15,6 +15,7 @@ import java.util.Map;
 import static com.google.common.truth.Truth.assertThat;
 import static io.restassured.RestAssured.given;
 import static ulaval.glo2003.rest.fixtures.ProductFixture.givenExistingProductIdForSeller;
+import static ulaval.glo2003.rest.fixtures.SellerFixture.getIdFromLocation;
 import static ulaval.glo2003.rest.fixtures.SellerFixture.givenExistingSellerLocation;
 import static ulaval.glo2003.rest.fixtures.SellerFixture.givenInvalidAgeSellerRequest;
 import static ulaval.glo2003.rest.fixtures.SellerFixture.givenValidSellerRequest;
@@ -26,7 +27,10 @@ public class SellerResourceE2ETest extends EndToEndTest {
     public void givenValidSellerRequest_whenCreatingSeller_shouldReturnCreated201() {
         Map<String, String> sellerRequest = givenValidSellerRequest();
 
-        ExtractableResponse<Response> response = given().contentType("application/json").body(sellerRequest).when().post(SELLERS_ENDPOINT).then().extract();
+        ExtractableResponse<Response> response = given().contentType("application/json")
+                .body(sellerRequest)
+                .when().post(SELLERS_ENDPOINT)
+                .then().extract();
 
         assertThat(response.statusCode()).isEqualTo(STATUS_CREATED);
         assertThat(response.headers().get("location").getValue()).isNotEmpty();
@@ -36,7 +40,10 @@ public class SellerResourceE2ETest extends EndToEndTest {
     public void givenInvalidSellerAge_whenCreatingSeller_shouldReturnInvalidParameter() {
         Map<String, String> invalidSellerRequest = givenInvalidAgeSellerRequest();
 
-        ExtractableResponse<Response> response = given().contentType("application/json").body(invalidSellerRequest).when().post(SELLERS_ENDPOINT).then().extract();
+        ExtractableResponse<Response> response = given().contentType("application/json")
+                .body(invalidSellerRequest)
+                .when().post(SELLERS_ENDPOINT)
+                .then().extract();
         ExceptionResponse error = response.body().as(ExceptionResponse.class);
 
         assertThat(response.statusCode()).isEqualTo(STATUS_BAD_REQUEST);
@@ -47,7 +54,10 @@ public class SellerResourceE2ETest extends EndToEndTest {
     public void givenMissingParams_whenCreatingSeller_shouldReturnMissingParameter() {
         Map<String, String> emptyRequest = new HashMap<>();
 
-        ExtractableResponse<Response> response = given().contentType("application/json").body(emptyRequest).when().post(SELLERS_ENDPOINT).then().extract();
+        ExtractableResponse<Response> response = given().contentType("application/json")
+                .body(emptyRequest)
+                .when().post(SELLERS_ENDPOINT)
+                .then().extract();
         ExceptionResponse error = response.body().as(ExceptionResponse.class);
 
         assertThat(response.statusCode()).isEqualTo(STATUS_BAD_REQUEST);
