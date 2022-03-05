@@ -40,10 +40,7 @@ public class SellerResourceE2ETest extends EndToEndTest {
     public void givenInvalidSellerAge_whenCreatingSeller_shouldReturnInvalidParameter() {
         Map<String, String> invalidSellerRequest = givenInvalidAgeSellerRequest();
 
-        ExtractableResponse<Response> response = given().contentType("application/json")
-                .body(invalidSellerRequest)
-                .when().post(SELLERS_ENDPOINT)
-                .then().extract();
+        ExtractableResponse<Response> response = given().contentType("application/json").body(invalidSellerRequest).when().post(SELLERS_ENDPOINT).then().extract();
         ExceptionResponse error = response.body().as(ExceptionResponse.class);
 
         assertThat(response.statusCode()).isEqualTo(STATUS_BAD_REQUEST);
