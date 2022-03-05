@@ -14,7 +14,9 @@ public class SellerService {
     private final ProductRepository productRepository;
     private final SellerFactory sellerFactory;
 
-    public SellerService(SellerRepository sellerRepository, ProductRepository productRepository, SellerFactory sellerFactory) {
+    public SellerService(SellerRepository sellerRepository,
+            ProductRepository productRepository,
+            SellerFactory sellerFactory) {
         this.sellerRepository = sellerRepository;
         this.productRepository = productRepository;
         this.sellerFactory = sellerFactory;

@@ -1,7 +1,13 @@
 package ulaval.glo2003.controllers.product;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import ulaval.glo2003.application.product.ProductService;
@@ -30,7 +36,7 @@ public class ProductResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createProduct(@HeaderParam(value = "X-Seller-Id") String sellerId,
-                                  @NotNull ProductRequest productRequest) {
+            @NotNull ProductRequest productRequest) {
         String productId = productService.createProduct(sellerId, productRequest);
 
         return Response.created(URI.create(baseUri.toString() + "products/" + productId)).build();
@@ -48,11 +54,15 @@ public class ProductResource {
 
     @GET
     public Response getFilteredProducts(@QueryParam("sellerId") String sellerId,
-                                        @QueryParam("title") String title,
-                                        @QueryParam("categories") List<ProductCategory> categories,
-                                        @QueryParam("minPrice") Float minPrice,
-                                        @QueryParam("maxPrice") Float maxPrice) {
-        List<SellerProduct> sellersProducts = productService.getFilteredProducts(sellerId, title, categories, minPrice, maxPrice);
+            @QueryParam("title") String title,
+            @QueryParam("categories") List<ProductCategory> categories,
+            @QueryParam("minPrice") Float minPrice,
+            @QueryParam("maxPrice") Float maxPrice) {
+        List<SellerProduct> sellersProducts = productService.getFilteredProducts(sellerId,
+                title,
+                categories,
+                minPrice,
+                maxPrice);
 
         ProductsResponse productsResponse = productPresenter.presentProducts(sellersProducts);
 
