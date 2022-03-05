@@ -17,6 +17,6 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Step 1 Checkstyle
-      - run: mvn checkstyle:check
+        run: mvn checkstyle:check
       - name: Step 2 Compile
-      - run: mvn compile -Dcheckstyle.skip
+        run: mvn compile -Dcheckstyle.skip
