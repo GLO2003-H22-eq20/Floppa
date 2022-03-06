@@ -46,7 +46,7 @@ public class SellerResourceE2ETest extends EndToEndTest {
                 .then().extract();
         ExceptionResponse error = response.body().as(ExceptionResponse.class);
 
-        assertThat(response.statusCode()).isEqualTo(STATUS_BAD_REQUEST);
+        assertThat(response.statusCode()).isEqualTo(STATUS_OK);
         assertThat(error.getCode()).isEqualTo("INVALID_PARAMETER");
     }
 
