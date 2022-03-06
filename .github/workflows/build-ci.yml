@@ -19,3 +19,9 @@ jobs:
 
       - name: Step 1 Checkstyle
         run: mvn checkstyle:check
+
+      - name: Step 2 Compile
+        run: mvn compile
+
+      - name: Step 3 Tests
+        run: mvn verify
