@@ -24,37 +24,37 @@ public class SellerFactoryTest {
     }
 
     @Test
-    public void whenCreatingSeller_thenIfNameIsEmptyThrowsInvalidParameterException() {
+    public void givenNameIsEmpty_whenCreatingSeller_thenThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
                 sellerFactory.createSeller("", BIO, VALID_BIRTH_DATE));
     }
 
     @Test
-    public void whenCreatingSeller_thenIfBioIsEmptyThrowsInvalidParameterException() {
+    public void givenBioIsEmpty_whenCreatingSeller_thenThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
                 sellerFactory.createSeller(NAME, "", VALID_BIRTH_DATE));
     }
 
     @Test
-    public void whenCreatingSeller_thenIfAgeIsUnder18YearsOldThrowsInvalidParameterException() {
+    public void givenAgeIsUnder18YearsOld_whenCreatingSeller_thenThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
                 sellerFactory.createSeller(NAME, BIO, INVALID_BIRTH_DATE));
     }
 
     @Test
-    public void whenCreatingSeller_thenIfNameIsNotInTheRequestThrowsMissingParameterException() {
+    public void givenNameIsNotInRequest_whenCreatingSeller_thenThrowsMissingParameterException() {
         assertThrows(MissingParameterException.class, () ->
                 sellerFactory.createSeller(null, BIO, INVALID_BIRTH_DATE));
     }
 
     @Test
-    public void whenCreatingSeller_thenIfBioIsNotInTheRequestThrowsMissingParameterException() {
+    public void givenBioIsNotInRequest_whenCreatingSeller_thenThrowsMissingParameterException() {
         assertThrows(MissingParameterException.class, () ->
                 sellerFactory.createSeller(NAME, null, INVALID_BIRTH_DATE));
     }
 
     @Test
-    public void whenCreatingSeller_thenIfBirthDateIsNotInTheRequestThrowsMissingParameterException() {
+    public void givenBirthDateIsNotInRequest_whenCreatingSeller_thenThrowsMissingParameterException() {
         assertThrows(MissingParameterException.class, () ->
                 sellerFactory.createSeller(NAME, BIO, null));
     }

@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ProductFactoryTest {
-    private static final String SELLER_ID = "1d4f5g6h7j8k9l";
+    private static final String SELLER_ID = "1";
     private static final String TITLE = "titleOfProduct";
     private static final String DESCRIPTION = "descriptionOfProduct";
     private static final Float SUGGESTED_PRICE = 7.7f;
@@ -35,43 +35,43 @@ public class ProductFactoryTest {
     }
 
     @Test
-    public void whenCreatingProduct_thenIfTitleIsEmptyThrowsInvalidParameterException() {
+    public void givenEmptyTitle_whenCreatingProduct_thenThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
                 productFactory.createProduct(SELLER_ID, "", DESCRIPTION, SUGGESTED_PRICE, CATEGORIES));
     }
 
     @Test
-    public void whenCreatingProduct_thenIfDescriptionIsEmptyThrowsInvalidParameterException() {
+    public void givenEmptyDescription_whenCreatingProduct_thenThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
                 productFactory.createProduct(SELLER_ID, TITLE, "", SUGGESTED_PRICE, CATEGORIES));
     }
 
     @Test
-    public void whenCreatingProduct_thenIfSuggestedPriceIsLowerThanOneThrowsInvalidParameterException() {
+    public void givenSuggestedPriceIsLowerThanOne_whenCreatingProduct_thenThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
                 productFactory.createProduct(SELLER_ID, TITLE, DESCRIPTION, INVALID_SUGGESTED_PRICE, CATEGORIES));
     }
 
     @Test
-    public void whenCreatingProduct_thenIfCategorieIsNotValidThrowsInvalidParameterException() {
+    public void givenCategoriesAreNotValid_whenCreatingProduct_thenThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
                 productFactory.createProduct(SELLER_ID, TITLE, DESCRIPTION, SUGGESTED_PRICE, INVALID_CATEGORIES));
     }
 
     @Test
-    public void whenCreatingProduct_thenIfTitleIsNotInTheRequestThrowsMissingParameterException() {
+    public void givenTitleIsNotInRequest_whenCreatingProduct_thenThrowsMissingParameterException() {
         assertThrows(MissingParameterException.class, () ->
                 productFactory.createProduct(SELLER_ID, null, DESCRIPTION, SUGGESTED_PRICE, CATEGORIES));
     }
 
     @Test
-    public void whenCreatingProduct_thenIfDescriptionIsNotInTheRequestThrowsMissingParameterException() {
+    public void givenDescriptionIsNotInRequest_whenCreatingProduct_thenThrowsMissingParameterException() {
         assertThrows(MissingParameterException.class, () ->
                 productFactory.createProduct(SELLER_ID, TITLE, null, SUGGESTED_PRICE, CATEGORIES));
     }
 
     @Test
-    public void whenCreatingProduct_thenIfSuggestedPriceIsNotInTheRequestThrowsMissingParameterException() {
+    public void givenSuggestedPriceIsNotInRequest_whenCreatingProduct_thenThrowsMissingParameterException() {
         assertThrows(MissingParameterException.class, () ->
                 productFactory.createProduct(SELLER_ID, TITLE, DESCRIPTION, null, CATEGORIES));
     }
@@ -89,5 +89,4 @@ public class ProductFactoryTest {
 
         assertNotNull(product.getCreatedAt());
     }
-    //TODO test parsing of categories
 }

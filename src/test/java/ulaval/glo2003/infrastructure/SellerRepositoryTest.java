@@ -1,6 +1,5 @@
 package ulaval.glo2003.infrastructure;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.controllers.exceptions.ItemNotFoundException;
@@ -10,7 +9,6 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Matchers.anyString;
 
 public class SellerRepositoryTest {
     private static final String ID = "50";

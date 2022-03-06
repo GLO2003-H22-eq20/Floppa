@@ -13,7 +13,6 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Matchers.anyString;
 
 class ProductRepositoryTest {
     private static final String SELLER_ID = "1";
