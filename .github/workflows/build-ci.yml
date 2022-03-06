@@ -16,6 +16,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven
+        run: ls
 
       - name: Step 1 Checkstyle
         run: mvn checkstyle:check
