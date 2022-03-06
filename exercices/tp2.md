@@ -39,3 +39,24 @@ Quel est le lien entre la taille de ces issues/pull-requests et le temps que ça
    le communiquer sur le Discord pour avoir du feedback rapide.
 3) Donner du suivi sur les pull-requests (exemple: j'ai fais un review et il en manque un, le signaler)
 4) Utiliser l'outil de code-review de GitHub plus efficacement pour améliorer la clarté des commentaires.
+
+
+## Screenshots
+
+1. Project
+   ![Alt text](tp2_screenshots/Project.PNG?raw=true "1. Project")
+2. Milestones
+   ![Alt text](tp2_screenshots/Milestones.PNG?raw=true "2. Milestones")
+3. Issues
+   ![Alt text](tp2_screenshots/Issue1.PNG?raw=true "3. Issue 1")
+   ![Alt text](tp2_screenshots/Issue2.PNG?raw=true "3. Issue 2")
+   ![Alt text](tp2_screenshots/Issue3.PNG?raw=true "3. Issue 3")
+4. Pull requests
+   ![Alt text](tp2_screenshots/PR1(1).PNG?raw=true "4. Pull request 1(1)")
+   ![Alt text](tp2_screenshots/PR1(2).PNG?raw=true "4. Pull request 1(2)")
+   ![Alt text](tp2_screenshots/PR2(1).PNG?raw=true "4. Pull request 2(1)")
+   ![Alt text](tp2_screenshots/PR2(2).PNG?raw=true "4. Pull request 2(2)")
+   ![Alt text](tp2_screenshots/PR3(1).PNG?raw=true "4. Pull request 3(1)")
+   ![Alt text](tp2_screenshots/PR3(2).PNG?raw=true "4. Pull request 3(2)")
+5. Arbre de commits et de branches
+   ![Alt text](tp2_screenshots/Git_arbre_commits_branches.PNG?raw=true "4. Arbre commits et branches")
