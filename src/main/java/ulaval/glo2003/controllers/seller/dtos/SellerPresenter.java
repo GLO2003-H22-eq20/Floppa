@@ -20,14 +20,14 @@ public class SellerPresenter {
         return productList.stream()
                           .map(product ->
                                   new ProductResponse(product.getId(),
-                                                              product.getCreatedAt(),
-                                                              product.getTitle(),
-                                                              product.getDescription(),
-                                                              product.getSuggestedPrice(),
-                                                              product.getOffer(),
-                                                              product.getCategories().stream()
-                                                                                     .map(Enum::toString)
-                                                                                     .collect(Collectors.toList())))
+                                                      product.getCreatedAt(),
+                                                      product.getTitle(),
+                                                      product.getDescription(),
+                                                      product.getSuggestedPrice(),
+                                                      product.getOffer(),
+                                                      product.getCategories().stream()
+                                                                             .map(Enum::toString)
+                                                                             .collect(Collectors.toList())))
                           .collect(Collectors.toList());
     }
 }
