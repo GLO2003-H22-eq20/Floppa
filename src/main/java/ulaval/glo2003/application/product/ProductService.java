@@ -45,7 +45,8 @@ public class ProductService {
                                                    List<ProductCategory> categories,
                                                    Float minPrice,
                                                    Float maxPrice) {
-        return productRepository.findFilteredProducts(sellerId, title, categories, minPrice, maxPrice).stream()
+        return productRepository.findFilteredProducts(sellerId, title, categories, minPrice, maxPrice)
+                .stream()
                 .map(product -> new SellerProduct(sellerRepository.findById(product.getSellerId()), product))
                 .collect(Collectors.toList());
     }

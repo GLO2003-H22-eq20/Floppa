@@ -50,7 +50,6 @@ public class ProductRepository {
         return products;
     }
 
-
     private List<Product> filterBySellerId(String sellerId, List<Product> products) {
         return products.stream()
                 .filter(product -> Objects.equals(product.getSellerId(), sellerId))
