@@ -16,11 +16,12 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven
-      - name: Step 0 Ls
-        run: ls
 
       - name: Step 1 Checkstyle
         run: mvn checkstyle:check
+
+      - name: Step 0 Ls
+        run: ls
 
       - name: Step 2 Compile
         run: mvn compile
