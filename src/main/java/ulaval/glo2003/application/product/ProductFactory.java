@@ -49,6 +49,9 @@ public class ProductFactory {
     }
 
     private void validateCategories(List<String> categories) {
+        if (categories == null) {
+            throw new InvalidParameterException("Invalid category");
+        }
         for (String category : categories) {
             try {
                 if (!category.equals(category.toLowerCase(Locale.ROOT))) {
