@@ -58,7 +58,11 @@ public class ProductResource {
                                         @QueryParam("minPrice") Float minPrice,
                                         @QueryParam("maxPrice") Float maxPrice) {
         try {
-            List<SellerProduct> sellersProducts = productService.getFilteredProducts(sellerId, title, categories, minPrice, maxPrice);
+            List<SellerProduct> sellersProducts = productService.getFilteredProducts(sellerId,
+                                                                                     title,
+                                                                                     categories,
+                                                                                     minPrice,
+                                                                                     maxPrice);
 
             ProductsResponse productsResponse = productPresenter.presentProducts(sellersProducts);
 

@@ -10,8 +10,7 @@ public enum ProductCategory {
 
     public final String productCategoryName;
 
-    ProductCategory(String productCategoryName)
-    {
+    ProductCategory(String productCategoryName) {
         this.productCategoryName = productCategoryName;
     }
 
