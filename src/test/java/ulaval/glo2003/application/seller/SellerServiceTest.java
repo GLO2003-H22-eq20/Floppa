@@ -36,11 +36,13 @@ public class SellerServiceTest {
     @Mock
     private ProductRepository productRepository;
 
-    SellerRequest request = new SellerRequest() {{
-        name = "name";
-        bio = "bio";
-        birthDate = LocalDate.of(1996, 1, 12);
-    }};
+    SellerRequest request = new SellerRequest() {
+        {
+            name = "name";
+            bio = "bio";
+            birthDate = LocalDate.of(1996, 1, 12);
+        }
+    };
 
     @InjectMocks
     private SellerService sellerService;

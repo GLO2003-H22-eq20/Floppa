@@ -25,10 +25,12 @@ public class SellerPresenterTest {
     private static final String PRODUCT_TITLE = "testProductTitle";
     private static final String PRODUCT_DESCRIPTION = "testProductDescription";
     private static final Float PRODUCT_SUGGESTED_PRICE = 1.0f;
-    private static final List<ProductCategory> PRODUCT_CATEGORIES = new ArrayList<>() {{
-        add(ProductCategory.APPAREL);
-        add(ProductCategory.BEAUTY);
-    }};
+    private static final List<ProductCategory> PRODUCT_CATEGORIES = new ArrayList<>() {
+        {
+            add(ProductCategory.APPAREL);
+            add(ProductCategory.BEAUTY);
+        }
+    };
 
     private SellerPresenter sellerPresenter;
     private SellerProducts sellerProducts;
@@ -41,9 +43,15 @@ public class SellerPresenterTest {
         sellerPresenter = new SellerPresenter();
 
         seller = new Seller(SELLER_NAME, SELLER_BIO, SELLER_BIRTHDATE);
-        List<Product> products = new ArrayList<>() {{
-            add(new Product(seller.getId(), PRODUCT_TITLE, PRODUCT_DESCRIPTION, PRODUCT_SUGGESTED_PRICE, PRODUCT_CATEGORIES));
-        }};
+        List<Product> products = new ArrayList<>() {
+            {
+                add(new Product(seller.getId(),
+                        PRODUCT_TITLE,
+                        PRODUCT_DESCRIPTION,
+                        PRODUCT_SUGGESTED_PRICE,
+                        PRODUCT_CATEGORIES));
+            }
+        };
         sellerProducts = new SellerProducts(seller, products);
     }
 

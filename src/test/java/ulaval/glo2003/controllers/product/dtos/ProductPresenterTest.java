@@ -22,10 +22,12 @@ public class ProductPresenterTest {
     private static final String PRODUCT_TITLE = "testProductTitle";
     private static final String PRODUCT_DESCRIPTION = "testProductDescription";
     private static final Float PRODUCT_SUGGESTED_PRICE = 1.0f;
-    private static final List<ProductCategory> PRODUCT_CATEGORIES = new ArrayList<>() {{
-        add(ProductCategory.APPAREL);
-        add(ProductCategory.BEAUTY);
-    }};
+    private static final List<ProductCategory> PRODUCT_CATEGORIES = new ArrayList<>() {
+        {
+            add(ProductCategory.APPAREL);
+            add(ProductCategory.BEAUTY);
+        }
+    };
 
     private ProductPresenter productPresenter;
     private SellerProduct sellerProduct;
@@ -40,7 +42,11 @@ public class ProductPresenterTest {
         productPresenter = new ProductPresenter();
 
         seller = new Seller(SELLER_NAME, SELLER_BIO, SELLER_BIRTHDATE);
-        product = new Product(seller.getId(), PRODUCT_TITLE, PRODUCT_DESCRIPTION, PRODUCT_SUGGESTED_PRICE, PRODUCT_CATEGORIES);
+        product = new Product(seller.getId(),
+                PRODUCT_TITLE,
+                PRODUCT_DESCRIPTION,
+                PRODUCT_SUGGESTED_PRICE,
+                PRODUCT_CATEGORIES);
         sellerProduct = new SellerProduct(seller, product);
     }
 
@@ -60,9 +66,11 @@ public class ProductPresenterTest {
 
     @Test
     public void givenASellersProductsList_whenPresenting_thenReturnProductsResponse() {
-        List<SellerProduct> sellerProductList = new ArrayList<>() {{
-            add(sellerProduct);
-        }};
+        List<SellerProduct> sellerProductList = new ArrayList<>() {
+            {
+                add(sellerProduct);
+            }
+        };
 
         ProductsResponse productsResponse = productPresenter.presentProducts(sellerProductList);
 

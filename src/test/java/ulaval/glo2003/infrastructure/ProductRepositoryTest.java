@@ -19,10 +19,12 @@ class ProductRepositoryTest {
     private static final String TITLE = "item";
     private static final String DESCRIPTION = "anItem";
     private static final Float SUGGESTED_PRICE = 1.0f;
-    private static final List<ProductCategory> CATEGORIES = new ArrayList<>() {{
-        add(ProductCategory.APPAREL);
-        add(ProductCategory.BEAUTY);
-    }};
+    private static final List<ProductCategory> CATEGORIES = new ArrayList<>() {
+        {
+            add(ProductCategory.APPAREL);
+            add(ProductCategory.BEAUTY);
+        }
+    };
 
     private ProductRepository productRepository;
     private Product product;
@@ -54,7 +56,11 @@ class ProductRepositoryTest {
     public void givenProduct_whenFilteringProductsBySellerId_thenReturnFilteredProductList() {
         productRepository.saveProduct(product);
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(product.getSellerId(), null, List.of(), null, null);
+        List<Product> filteredProducts = productRepository.findFilteredProducts(product.getSellerId(),
+                null,
+                List.of(),
+                null,
+                null);
 
         assertEquals(1, filteredProducts.size());
         assertTrue(filteredProducts.stream().anyMatch(filteredProduct -> filteredProduct.equals(product)));
@@ -74,7 +80,11 @@ class ProductRepositoryTest {
     @Test
     public void givenProduct_whenFilteringProductsByTitle_thenReturnFilteredProductList() {
         productRepository.saveProduct(product);
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null, product.getTitle(), List.of(), null, null);
+        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+                product.getTitle(),
+                List.of(),
+                null,
+                null);
 
         assertEquals(1, filteredProducts.size());
         assertTrue(filteredProducts.stream().anyMatch(filteredProduct -> filteredProduct.equals(product)));
@@ -85,7 +95,11 @@ class ProductRepositoryTest {
         productRepository.saveProduct(product);
         String invalidTitle = "NOT_VALID";
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null, invalidTitle, List.of(), null, null);
+        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+                invalidTitle,
+                List.of(),
+                null,
+                null);
 
         assertEquals(0, filteredProducts.size());
         assertTrue(filteredProducts.stream().noneMatch(filteredProduct -> filteredProduct.equals(product)));
@@ -94,7 +108,11 @@ class ProductRepositoryTest {
     @Test
     public void givenProduct_whenFilteringProductsByCategories_thenReturnFilteredProductList() {
         productRepository.saveProduct(product);
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null, null, product.getCategories(), null, null);
+        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+                null,
+                product.getCategories(),
+                null,
+                null);
 
         assertEquals(1, filteredProducts.size());
         assertTrue(filteredProducts.stream().anyMatch(filteredProduct -> filteredProduct.equals(product)));
@@ -103,10 +121,16 @@ class ProductRepositoryTest {
     @Test
     public void givenProductAndInvalidCategories_whenFilteringProductsByCategories_thenReturnFilteredProductList() {
         productRepository.saveProduct(product);
-        List<ProductCategory> invalidCategories = new ArrayList<>() {{
-            add(ProductCategory.SPORTS);
-        }};
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null, null, invalidCategories, null, null);
+        List<ProductCategory> invalidCategories = new ArrayList<>() {
+            {
+                add(ProductCategory.SPORTS);
+            }
+        };
+        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+                null,
+                invalidCategories,
+                null,
+                null);
 
         assertEquals(0, filteredProducts.size());
         assertTrue(filteredProducts.stream().noneMatch(filteredProduct -> filteredProduct.equals(product)));
@@ -117,7 +141,11 @@ class ProductRepositoryTest {
         productRepository.saveProduct(product);
         float validMinPrice = 1.0f;
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null, null, List.of(), validMinPrice, null);
+        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+                null,
+                List.of(),
+                validMinPrice,
+                null);
 
         assertEquals(1, filteredProducts.size());
         assertTrue(filteredProducts.stream().anyMatch(filteredProduct -> filteredProduct.equals(product)));
@@ -128,7 +156,11 @@ class ProductRepositoryTest {
         productRepository.saveProduct(product);
         float invalidMinPrice = 2.0f;
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null, null, List.of(), invalidMinPrice, null);
+        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+                null,
+                List.of(),
+                invalidMinPrice,
+                null);
 
         assertEquals(0, filteredProducts.size());
         assertTrue(filteredProducts.stream().noneMatch(filteredProduct -> filteredProduct.equals(product)));
@@ -139,7 +171,11 @@ class ProductRepositoryTest {
         productRepository.saveProduct(product);
         float validMaxPrice = 1.0f;
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null, null, List.of(), null, validMaxPrice);
+        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+                null,
+                List.of(),
+                null,
+                validMaxPrice);
 
         assertEquals(1, filteredProducts.size());
         assertTrue(filteredProducts.stream().anyMatch(filteredProduct -> filteredProduct.equals(product)));
@@ -150,7 +186,11 @@ class ProductRepositoryTest {
         productRepository.saveProduct(product);
         float invalidMaxPrice = 0.5f;
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null, null, List.of(), null, invalidMaxPrice);
+        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+                null,
+                List.of(),
+                null,
+                invalidMaxPrice);
 
         assertEquals(0, filteredProducts.size());
         assertTrue(filteredProducts.stream().noneMatch(filteredProduct -> filteredProduct.equals(product)));

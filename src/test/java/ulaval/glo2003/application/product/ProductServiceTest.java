@@ -29,10 +29,12 @@ public class ProductServiceTest {
     private static final String TITLE = "titleOfProduct";
     private static final Float MIMINUM_PRICE = 7.7f;
     private static final Float MAXIMUM_PRICE = 7.7f;
-    private final List<String> CATEGORIES = new ArrayList<>() {{
-        add("beauty");
-        add("housing");
-    }};
+    private final List<String> CATEGORIES = new ArrayList<>() {
+        {
+            add("beauty");
+            add("housing");
+        }
+    };
 
     @Mock
     private ProductRepository productRepository;
@@ -45,15 +47,19 @@ public class ProductServiceTest {
     @Mock
     private Seller seller;
 
-    ProductRequest request = new ProductRequest() {{
-        title = "productTitle";
-        description = "productDescription";
-        suggestedPrice = 777.77f;
-        categories = new ArrayList<>() {{
-            add("beauty");
-            add("housing");
-        }};
-    }};
+    ProductRequest request = new ProductRequest() {
+        {
+            title = "productTitle";
+            description = "productDescription";
+            suggestedPrice = 777.77f;
+            categories = new ArrayList<>() {
+                {
+                    add("beauty");
+                    add("housing");
+                }
+            };
+        }
+    };
 
     @InjectMocks
     private ProductService productService;
@@ -69,7 +75,11 @@ public class ProductServiceTest {
 
         productService.createProduct(SELLER_ID, request);
 
-        verify(productFactory).createProduct(SELLER_ID, request.title, request.description, request.suggestedPrice, request.categories);
+        verify(productFactory).createProduct(SELLER_ID,
+                request.title,
+                request.description,
+                request.suggestedPrice,
+                request.categories);
     }
 
     @Test
@@ -128,13 +138,21 @@ public class ProductServiceTest {
 
     @Test
     public void whenGettingFilteredProducts_thenReturnsListOfSellerProduct() {
-        List<SellerProduct> sellerProductList =  productService.getFilteredProducts(SELLER_ID, TITLE, CATEGORIES, MIMINUM_PRICE, MAXIMUM_PRICE);
+        List<SellerProduct> sellerProductList =  productService.getFilteredProducts(SELLER_ID,
+                TITLE,
+                CATEGORIES,
+                MIMINUM_PRICE,
+                MAXIMUM_PRICE);
 
         assertNotNull(sellerProductList);
     }
 
     private Product givenNewProductCanBeCreated() {
-        willReturn(product).given(productFactory).createProduct(anyString(), anyString(), anyString(), anyFloat(), any());
+        willReturn(product).given(productFactory).createProduct(anyString(),
+                anyString(),
+                anyString(),
+                anyFloat(),
+                any());
         willReturn(PRODUCT_ID).given(product).getId();
         return product;
     }
