@@ -28,9 +28,9 @@ public class ProductRepository {
         return productMap.get(id);
     }
 
-    public List<Product> getFilteredProducts(String sellerId, String title,
-                                             List<ProductCategory> categories, Float minPrice,
-                                             Float maxPrice) {
+    public List<Product> findFilteredProducts(String sellerId, String title,
+                                              List<ProductCategory> categories, Float minPrice,
+                                              Float maxPrice) {
         List<Product> products = new ArrayList<>(productMap.values());
         if (Optional.ofNullable(sellerId).isPresent()) {
             products = filterBySellerId(sellerId, products);
@@ -49,7 +49,6 @@ public class ProductRepository {
         }
         return products;
     }
-
 
     private List<Product> filterBySellerId(String sellerId, List<Product> products) {
         return products.stream()

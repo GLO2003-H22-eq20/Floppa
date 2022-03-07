@@ -9,6 +9,7 @@ import ulaval.glo2003.infrastructure.ProductRepository;
 import ulaval.glo2003.infrastructure.SellerRepository;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class ProductService {
@@ -40,10 +41,23 @@ public class ProductService {
         return new SellerProduct(seller, product);
     }
 
-    public List<SellerProduct> getFilteredProducts(String sellerId, String title,
-                                                   List<ProductCategory> categories, Float minPrice,
+    public List<SellerProduct> getFilteredProducts(String sellerId,
+                                                   String title,
+                                                   List<String> categories,
+                                                   Float minPrice,
                                                    Float maxPrice) {
-        return productRepository.getFilteredProducts(sellerId, title, categories, minPrice, maxPrice).stream()
+        for (String category : categories) {
+            if (!category.equals(category.toLowerCase(Locale.ROOT))) {
+                throw new IllegalArgumentException();
+            }
+        }
+
+        List<ProductCategory> productCategories = categories.stream()
+                .map(category -> category.toUpperCase(Locale.ROOT))
+                .map(ProductCategory::valueOf).collect(Collectors.toList());
+
+        return productRepository.findFilteredProducts(sellerId, title, productCategories, minPrice, maxPrice)
+                .stream()
                 .map(product -> new SellerProduct(sellerRepository.findById(product.getSellerId()), product))
                 .collect(Collectors.toList());
     }

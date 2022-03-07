@@ -11,6 +11,7 @@ public class SellerFactory {
         validateName(name);
         validateBio(bio);
         validateBirthDate(birthDate);
+
         return new Seller(name, bio, birthDate);
     }
 

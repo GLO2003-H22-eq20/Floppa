@@ -5,7 +5,9 @@ import ulaval.glo2003.controllers.exceptions.MissingParameterException;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class ProductFactory {
@@ -48,16 +50,27 @@ public class ProductFactory {
     }
 
     private void validateCategories(List<String> categories) {
-        for (String categorie : categories) {
-            if (!ProductCategory.contains(categorie)) {
-                throw new InvalidParameterException("Invalid categorie");
+        if (categories != null) {
+            for (String category : categories) {
+                try {
+                    if (!category.equals(category.toLowerCase(Locale.ROOT))) {
+                        throw new InvalidParameterException("Invalid category");
+                    }
+                    ProductCategory.valueOf(category.toUpperCase(Locale.ROOT));
+                } catch (IllegalArgumentException e) {
+                    throw new InvalidParameterException("Invalid category");
+                }
             }
         }
     }
 
-    private List<ProductCategory> parseToProductCategory(List<String> categoriesString) {
-        return categoriesString.stream()
-                .map(categorieString -> ProductCategory.valueOf(categorieString.toUpperCase()))
+    private List<ProductCategory> parseToProductCategory(List<String> categories) {
+        if (categories == null) {
+            return new LinkedList<>();
+        }
+        return categories.stream()
+                .map(category -> category.toUpperCase(Locale.ROOT))
+                .map(ProductCategory::valueOf)
                 .collect(Collectors.toList());
     }
 }

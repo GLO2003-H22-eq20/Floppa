@@ -22,13 +22,13 @@ public class ProductPresenter {
                 presentSeller(sellerProduct.getSeller()));
     }
 
-    public SellerResponse presentSeller(Seller seller) {
-        return new SellerResponse(seller.getId(), seller.getName());
-    }
-
     public ProductsResponse presentProducts(List<SellerProduct> sellersProducts) {
         return new ProductsResponse(sellersProducts.stream()
                 .map(this::presentProduct)
                 .collect(Collectors.toList()));
+    }
+
+    private SellerResponse presentSeller(Seller seller) {
+        return new SellerResponse(seller.getId(), seller.getName());
     }
 }
