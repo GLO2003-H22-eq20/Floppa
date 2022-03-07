@@ -23,6 +23,8 @@ import java.net.URI;
 
 public class Main {
 
+    private static HttpServer server;
+
     public static void main(String[] args) throws IOException {
         URI uri = URI.create("http://localhost:8080/");
 
@@ -44,8 +46,12 @@ public class Main {
                 .register(HealthResource.class)
                 .packages("ulaval.glo2003");
 
-        HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig);
+        server = GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig);
 
         server.start();
+    }
+
+    public static void stop() {
+        server.shutdownNow();
     }
 }

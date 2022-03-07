@@ -11,7 +11,7 @@ public class ProductPresenter {
 
     public ProductResponse presentProduct(SellerProduct sellerProduct) {
         return new ProductResponse(sellerProduct.getProduct().getId(),
-                                   sellerProduct.getProduct().getCreatedAt(),
+                                   sellerProduct.getProduct().getCreatedAt().toString(),
                                    sellerProduct.getProduct().getTitle(),
                                    sellerProduct.getProduct().getDescription(),
                                    sellerProduct.getProduct().getSuggestedPrice(),

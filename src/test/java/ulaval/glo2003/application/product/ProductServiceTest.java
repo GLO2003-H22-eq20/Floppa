@@ -26,6 +26,13 @@ import static org.mockito.Mockito.verify;
 public class ProductServiceTest {
     static final String PRODUCT_ID = "1";
     static final String SELLER_ID = "1";
+    private static final String TITLE = "titleOfProduct";
+    private static final Float MIMINUM_PRICE = 7.7f;
+    private static final Float MAXIMUM_PRICE = 7.7f;
+    private final List<String> CATEGORIES = new ArrayList<>() {{
+        add("beauty");
+        add("housing");
+    }};
 
     @Mock
     private ProductRepository productRepository;
@@ -114,14 +121,14 @@ public class ProductServiceTest {
 
     @Test
     public void whenGettingFilteredProducts_thenSearchesForFilteredProductsInRepository() {
-        productService.getFilteredProducts(anyString(), anyString(), any(), anyFloat(), anyFloat());
+        productService.getFilteredProducts(SELLER_ID, TITLE, CATEGORIES, MIMINUM_PRICE, MAXIMUM_PRICE);
 
         verify(productRepository).findFilteredProducts(anyString(), anyString(), any(), anyFloat(), anyFloat());
     }
 
     @Test
     public void whenGettingFilteredProducts_thenReturnsListOfSellerProduct() {
-        List<SellerProduct> sellerProductList =  productService.getFilteredProducts(anyString(), anyString(), any(), anyFloat(), anyFloat());
+        List<SellerProduct> sellerProductList =  productService.getFilteredProducts(SELLER_ID, TITLE, CATEGORIES, MIMINUM_PRICE, MAXIMUM_PRICE);
 
         assertNotNull(sellerProductList);
     }

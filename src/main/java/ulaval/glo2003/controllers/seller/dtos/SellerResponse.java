@@ -5,11 +5,13 @@ import ulaval.glo2003.controllers.product.dtos.ProductResponse;
 import java.util.List;
 
 public class SellerResponse {
-    private final String id;
-    private final String name;
+    private String id;
+    private String name;
     private String createdAt;
     private String bio;
     private List<ProductResponse> products;
+
+    public SellerResponse() {}
 
     public SellerResponse(String id, String name, String createdAt, String bio, List<ProductResponse> products) {
         this.id = id;

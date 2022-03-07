@@ -49,7 +49,7 @@ public class ProductPresenterTest {
         ProductResponse productResponse = productPresenter.presentProduct(sellerProduct);
 
         assertEquals(productResponse.getId(), sellerProduct.getProduct().getId());
-        assertEquals(productResponse.getCreatedAt(), sellerProduct.getProduct().getCreatedAt());
+        assertEquals(productResponse.getCreatedAt(), sellerProduct.getProduct().getCreatedAt().toString());
         assertEquals(productResponse.getTitle(), sellerProduct.getProduct().getTitle());
         assertEquals(productResponse.getDescription(), sellerProduct.getProduct().getDescription());
         assertEquals(productResponse.getSuggestedPrice(), sellerProduct.getProduct().getSuggestedPrice());
