@@ -7,12 +7,16 @@ import ulaval.glo2003.rest.EndToEndTest;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.*;
-import static ulaval.glo2003.rest.fixtures.SellerFixture.*;
+import static io.restassured.RestAssured.given;
+import static ulaval.glo2003.rest.fixtures.SellerFixture.getIdFromLocation;
 
 public class ProductFixture extends EndToEndTest {
 
-    public static Map<String, Object> createProductRequest(String title, String description, String suggestedPrice, String[] categories) {
+    public static Map<String, Object> createProductRequest(String title,
+            String description,
+            String suggestedPrice,
+            String[] categories
+    ) {
         Map<String, Object> productRequest = new HashMap<>();
         productRequest.put("title", title);
         productRequest.put("description", description);

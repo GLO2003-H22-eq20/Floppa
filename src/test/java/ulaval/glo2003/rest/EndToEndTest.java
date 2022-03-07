@@ -22,12 +22,12 @@ public class EndToEndTest {
         setHost();
         RestAssured.defaultParser = Parser.JSON;
 
-        Main.main(new String[] {});
+        Main.main(new String[]{});
     }
 
     private static void setHost() {
         String baseHost = System.getProperty("server.host");
-        if(baseHost==null){
+        if (baseHost == null) {
             baseHost = "http://localhost";
         }
         RestAssured.baseURI = baseHost;
@@ -35,7 +35,7 @@ public class EndToEndTest {
 
     private static void setBasePath() {
         String basePath = System.getProperty("server.base");
-        if(basePath==null){
+        if (basePath == null) {
             basePath = "/";
         }
         RestAssured.basePath = basePath;
@@ -45,8 +45,7 @@ public class EndToEndTest {
         String port = System.getProperty("server.port");
         if (port == null) {
             RestAssured.port = 8080;
-        }
-        else{
+        } else {
             RestAssured.port = Integer.parseInt(port);
         }
     }

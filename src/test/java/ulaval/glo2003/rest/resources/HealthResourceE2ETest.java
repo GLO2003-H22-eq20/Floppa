@@ -1,11 +1,10 @@
 package ulaval.glo2003.rest.resources;
 
-import jakarta.ws.rs.core.Response;
 import org.junit.Test;
 import ulaval.glo2003.rest.EndToEndTest;
 
-import static io.restassured.RestAssured.*;
-import static com.google.common.truth.Truth.*;
+import static com.google.common.truth.Truth.assertThat;
+import static io.restassured.RestAssured.when;
 
 public class HealthResourceE2ETest extends EndToEndTest {
 

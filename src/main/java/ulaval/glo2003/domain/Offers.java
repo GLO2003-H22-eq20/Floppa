@@ -4,7 +4,8 @@ public class Offers {
     private Float mean;
     private Integer count;
 
-    public Offers() {}
+    public Offers() {
+    }
 
     public Offers(Float mean, Integer count) {
         this.mean = mean;

@@ -1,9 +1,9 @@
-package ulaval.glo2003.controllers.exceptionMappers;
+package ulaval.glo2003.controllers.exception;
 
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
-import ulaval.glo2003.controllers.exceptionMappers.response.ExceptionResponse;
+import ulaval.glo2003.controllers.exception.response.ExceptionResponse;
 import ulaval.glo2003.controllers.exceptions.MissingParameterException;
 
 public class MissingParameterExceptionMapper implements ExceptionMapper<MissingParameterException> {

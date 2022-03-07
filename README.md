@@ -20,3 +20,8 @@ mvn clean install
 ```
 mvn exec:java
 ```
+
+### Checkstyle
+```
+mvn checkstyle:check
+```

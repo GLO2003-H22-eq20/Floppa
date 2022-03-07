@@ -14,7 +14,11 @@ public class Product {
     private final Offers offers;
     private final List<ProductCategory> categories;
 
-    public Product(String sellerId, String title, String description, Float suggestedPrice, List<ProductCategory> categories) {
+    public Product(String sellerId,
+            String title,
+            String description,
+            Float suggestedPrice,
+            List<ProductCategory> categories) {
         this.id = UUID.randomUUID();
         this.sellerId = sellerId;
         this.createdAt = Instant.now();

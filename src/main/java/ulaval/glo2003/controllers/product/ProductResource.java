@@ -1,7 +1,13 @@
 package ulaval.glo2003.controllers.product;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import ulaval.glo2003.application.product.ProductService;
@@ -9,13 +15,10 @@ import ulaval.glo2003.controllers.product.dtos.ProductPresenter;
 import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
 import ulaval.glo2003.controllers.product.dtos.ProductsResponse;
-import ulaval.glo2003.domain.ProductCategory;
 import ulaval.glo2003.domain.valueObject.SellerProduct;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
 
 @Path("products")
 public class ProductResource {
