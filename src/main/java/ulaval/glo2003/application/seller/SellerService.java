@@ -11,6 +11,7 @@ import ulaval.glo2003.infrastructure.ProductRepository;
 import ulaval.glo2003.infrastructure.SellerRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 public class SellerService {
     private final SellerRepository sellerRepository;
@@ -31,7 +32,8 @@ public class SellerService {
     public String createSeller(SellerRequest sellerRequest) {
         Seller seller = sellerFactory.createSeller(sellerRequest.name, sellerRequest.bio, sellerRequest.birthDate);
 
-        SellerEntity sellerEntity = new SellerEntity(new ObjectId(), "test", "je suis un test");
+
+        SellerEntity sellerEntity = new SellerEntity(new ObjectId(), "test", "je suis un test", seller.getBirthDate(), seller.getCreatedAt());
 
         this.datastoreProvider.getDatastore().save(sellerEntity);
 
