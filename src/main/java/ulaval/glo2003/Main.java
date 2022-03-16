@@ -7,6 +7,7 @@ import ulaval.glo2003.application.product.ProductFactory;
 import ulaval.glo2003.application.product.ProductService;
 import ulaval.glo2003.application.seller.SellerFactory;
 import ulaval.glo2003.application.seller.SellerService;
+import ulaval.glo2003.context.DatastoreProvider;
 import ulaval.glo2003.controllers.exception.InvalidParameterExceptionMapper;
 import ulaval.glo2003.controllers.exception.ItemNotFoundExceptionsMapper;
 import ulaval.glo2003.controllers.exception.MissingParameterExceptionMapper;
@@ -28,10 +29,11 @@ public class Main {
     public static void main(String[] args) throws IOException {
         URI uri = URI.create("http://localhost:8080/");
 
+        DatastoreProvider datastoreProvider = new DatastoreProvider();
         SellerRepository sellerRepository = new SellerRepository();
         ProductRepository productRepository = new ProductRepository();
         SellerFactory sellerFactory = new SellerFactory();
-        SellerService sellerService = new SellerService(sellerRepository, productRepository, sellerFactory);
+        SellerService sellerService = new SellerService(sellerRepository, productRepository, sellerFactory, datastoreProvider);
         SellerPresenter sellerPresenter = new SellerPresenter();
         ProductFactory productFactory = new ProductFactory();
         ProductService productService = new ProductService(productRepository, sellerRepository, productFactory);

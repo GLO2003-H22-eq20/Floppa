@@ -1,5 +1,8 @@
 package ulaval.glo2003.application.seller;
 
+import org.bson.types.ObjectId;
+import ulaval.glo2003.context.DatastoreProvider;
+import ulaval.glo2003.controllers.seller.dtos.SellerEntity;
 import ulaval.glo2003.controllers.seller.dtos.SellerRequest;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.Seller;
@@ -13,17 +16,24 @@ public class SellerService {
     private final SellerRepository sellerRepository;
     private final ProductRepository productRepository;
     private final SellerFactory sellerFactory;
+    private final DatastoreProvider datastoreProvider;
 
     public SellerService(SellerRepository sellerRepository,
             ProductRepository productRepository,
-            SellerFactory sellerFactory) {
+            SellerFactory sellerFactory,
+            DatastoreProvider datastoreProvider) {
         this.sellerRepository = sellerRepository;
         this.productRepository = productRepository;
         this.sellerFactory = sellerFactory;
+        this.datastoreProvider = datastoreProvider;
     }
 
     public String createSeller(SellerRequest sellerRequest) {
         Seller seller = sellerFactory.createSeller(sellerRequest.name, sellerRequest.bio, sellerRequest.birthDate);
+
+        SellerEntity sellerEntity = new SellerEntity(new ObjectId(), "test", "je suis un test");
+
+        this.datastoreProvider.getDatastore().save(sellerEntity);
 
         sellerRepository.saveSeller(seller);
 

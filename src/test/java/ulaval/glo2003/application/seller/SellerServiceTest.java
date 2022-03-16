@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ulaval.glo2003.context.DatastoreProvider;
 import ulaval.glo2003.controllers.seller.dtos.SellerRequest;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.Seller;
@@ -35,6 +36,8 @@ public class SellerServiceTest {
     private SellerRepository sellerRepository;
     @Mock
     private ProductRepository productRepository;
+    @Mock
+    private DatastoreProvider datastoreProvider;
 
     SellerRequest request = new SellerRequest() {
         {
@@ -49,7 +52,7 @@ public class SellerServiceTest {
 
     @BeforeEach
     public void setUp() {
-        sellerService = new SellerService(sellerRepository, productRepository, sellerFactory);
+        sellerService = new SellerService(sellerRepository, productRepository, sellerFactory, datastoreProvider);
     }
 
     @Test
