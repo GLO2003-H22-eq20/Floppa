@@ -1,0 +1,41 @@
+package ulaval.glo2003.seller;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import ulaval.glo2003.exceptions.ItemNotFoundException;
+
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public abstract class SellerRepositoryTest {
+    private static final String ID = "50";
+    private static final String NAME = "Carey Price";
+    private static final String BIO = "Hockey";
+    private static final LocalDate BIRTH_DATE = LocalDate.of(1987, 8, 16);
+
+    private SellerRepository sellerRepository;
+    private Seller seller;
+
+    @BeforeEach
+    public void setUp() {
+        sellerRepository = createSellerRepository();
+        seller = new Seller(NAME, BIO, BIRTH_DATE);
+    }
+
+    @Test
+    public void givenASeller_whenSaving_thenCanFindItById() {
+        sellerRepository.saveSeller(seller);
+
+        Seller currentSeller = sellerRepository.findById(seller.getId());
+        assertEquals(seller, currentSeller);
+    }
+
+    @Test
+    public void whenRetrievingNonExistantSeller_thenRetrievingByIdThrowsItemNotFoundException() {
+        assertThrows(ItemNotFoundException.class, () -> sellerRepository.findById(ID));
+    }
+
+    protected abstract SellerRepository createSellerRepository();
+}
