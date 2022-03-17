@@ -16,8 +16,7 @@ import ulaval.glo2003.controllers.product.ProductResource;
 import ulaval.glo2003.controllers.product.dtos.ProductPresenter;
 import ulaval.glo2003.controllers.seller.SellerResource;
 import ulaval.glo2003.controllers.seller.dtos.SellerPresenter;
-import ulaval.glo2003.infrastructure.ProductRepository;
-import ulaval.glo2003.infrastructure.SellerRepository;
+import ulaval.glo2003.infrastructure.*;
 
 import java.io.IOException;
 import java.net.URI;
@@ -30,10 +29,10 @@ public class Main {
         URI uri = URI.create("http://localhost:8080/");
 
         DatastoreProvider datastoreProvider = new DatastoreProvider();
-        SellerRepository sellerRepository = new SellerRepository();
-        ProductRepository productRepository = new ProductRepository();
+        SellerRepository sellerRepository = new SellerMongoRepository(datastoreProvider);
+        ProductRepository productRepository = new ProductMongoRepository(datastoreProvider);
         SellerFactory sellerFactory = new SellerFactory();
-        SellerService sellerService = new SellerService(sellerRepository, productRepository, sellerFactory, datastoreProvider);
+        SellerService sellerService = new SellerService(sellerRepository, productRepository, sellerFactory);
         SellerPresenter sellerPresenter = new SellerPresenter();
         ProductFactory productFactory = new ProductFactory();
         ProductService productService = new ProductService(productRepository, sellerRepository, productFactory);

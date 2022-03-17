@@ -10,13 +10,12 @@ import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.Seller;
 import ulaval.glo2003.domain.valueObject.SellerProduct;
-import ulaval.glo2003.infrastructure.ProductRepository;
-import ulaval.glo2003.infrastructure.SellerRepository;
+import ulaval.glo2003.infrastructure.ProductInMemoryRepository;
+import ulaval.glo2003.infrastructure.SellerInMemoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.willReturn;
@@ -37,9 +36,9 @@ public class ProductServiceTest {
     };
 
     @Mock
-    private ProductRepository productRepository;
+    private ProductInMemoryRepository productRepository;
     @Mock
-    private SellerRepository sellerRepository;
+    private SellerInMemoryRepository sellerInMemoryRepository;
     @Mock
     private ProductFactory productFactory;
     @Mock
@@ -66,7 +65,7 @@ public class ProductServiceTest {
 
     @BeforeEach
     public void setUp() {
-        productService = new ProductService(productRepository, sellerRepository, productFactory);
+        productService = new ProductService(productRepository, sellerInMemoryRepository, productFactory);
     }
 
     @Test
@@ -106,7 +105,7 @@ public class ProductServiceTest {
 
         productService.getProduct(anyString());
 
-        verify(sellerRepository).findById(product.getSellerId());
+        verify(sellerInMemoryRepository).findById(product.getSellerId());
     }
 
     @Test
@@ -162,7 +161,7 @@ public class ProductServiceTest {
     }
 
     private void givenASellerCanBeFound() {
-        willReturn(seller).given(sellerRepository).findById(SELLER_ID);
+        willReturn(seller).given(sellerInMemoryRepository).findById(SELLER_ID);
         willReturn(SELLER_ID).given(product).getSellerId();
     }
 }

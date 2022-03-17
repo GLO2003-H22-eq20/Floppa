@@ -1,6 +1,5 @@
 package ulaval.glo2003.infrastructure;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.domain.Product;
@@ -26,37 +25,37 @@ class ProductRepositoryTest {
         }
     };
 
-    private ProductRepository productRepository;
+    private ProductInMemoryRepository productInMemoryRepository;
     private Product product;
 
     @BeforeEach
     public void setUp() {
-        productRepository = new ProductRepository();
+        productInMemoryRepository = new ProductInMemoryRepository();
         product = new Product(SELLER_ID, TITLE, DESCRIPTION, SUGGESTED_PRICE, CATEGORIES);
     }
 
     @Test
     public void givenProducts_whenSavingTwoProducts_thenCanRetrieveAListOfProductsWithASellerId() {
-        productRepository.saveProduct(product);
+        productInMemoryRepository.saveProduct(product);
         Product anotherProductWithSameSellerId = new Product("1", "title", "anItem", 1.0f, CATEGORIES);
-        productRepository.saveProduct(anotherProductWithSameSellerId);
+        productInMemoryRepository.saveProduct(anotherProductWithSameSellerId);
 
-        Collection<Product> products = productRepository.findProductsBySellerId(SELLER_ID);
+        Collection<Product> products = productInMemoryRepository.findProductsBySellerId(SELLER_ID);
         assertEquals(2, products.size());
     }
 
     @Test
     public void whenRetrievingProductBySellerId_thenReturnsEmptyListIfProductDoesNotExist() {
-        Collection<Product> products = productRepository.findProductsBySellerId(SELLER_ID);
+        Collection<Product> products = productInMemoryRepository.findProductsBySellerId(SELLER_ID);
 
         assertTrue(products.isEmpty());
     }
 
     @Test
     public void givenProduct_whenFilteringProductsBySellerId_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productInMemoryRepository.saveProduct(product);
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(product.getSellerId(),
+        List<Product> filteredProducts = productInMemoryRepository.findFilteredProducts(product.getSellerId(),
                 null,
                 List.of(),
                 null,
@@ -68,10 +67,10 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndInvalidId_whenFilteringProductsBySellerId_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productInMemoryRepository.saveProduct(product);
         String invalidId = UUID.randomUUID().toString();
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(invalidId, null, List.of(), null, null);
+        List<Product> filteredProducts = productInMemoryRepository.findFilteredProducts(invalidId, null, List.of(), null, null);
 
         assertEquals(0, filteredProducts.size());
         assertTrue(filteredProducts.stream().noneMatch(filteredProduct -> filteredProduct.equals(product)));
@@ -79,8 +78,8 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProduct_whenFilteringProductsByTitle_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+        productInMemoryRepository.saveProduct(product);
+        List<Product> filteredProducts = productInMemoryRepository.findFilteredProducts(null,
                 product.getTitle(),
                 List.of(),
                 null,
@@ -92,10 +91,10 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndInvalidTitle_whenFilteringProductsByTitle_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productInMemoryRepository.saveProduct(product);
         String invalidTitle = "NOT_VALID";
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+        List<Product> filteredProducts = productInMemoryRepository.findFilteredProducts(null,
                 invalidTitle,
                 List.of(),
                 null,
@@ -107,8 +106,8 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProduct_whenFilteringProductsByCategories_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+        productInMemoryRepository.saveProduct(product);
+        List<Product> filteredProducts = productInMemoryRepository.findFilteredProducts(null,
                 null,
                 product.getCategories(),
                 null,
@@ -120,13 +119,13 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndInvalidCategories_whenFilteringProductsByCategories_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productInMemoryRepository.saveProduct(product);
         List<ProductCategory> invalidCategories = new ArrayList<>() {
             {
                 add(ProductCategory.SPORTS);
             }
         };
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+        List<Product> filteredProducts = productInMemoryRepository.findFilteredProducts(null,
                 null,
                 invalidCategories,
                 null,
@@ -138,10 +137,10 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndValidMinPrice_whenFilteringProductsByEmptyCategories_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productInMemoryRepository.saveProduct(product);
         float validMinPrice = 1.0f;
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+        List<Product> filteredProducts = productInMemoryRepository.findFilteredProducts(null,
                 null,
                 List.of(),
                 validMinPrice,
@@ -153,10 +152,10 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndInvalidMinPrice_whenFilteringProductsByEmptyCategories_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productInMemoryRepository.saveProduct(product);
         float invalidMinPrice = 2.0f;
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+        List<Product> filteredProducts = productInMemoryRepository.findFilteredProducts(null,
                 null,
                 List.of(),
                 invalidMinPrice,
@@ -168,10 +167,10 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndValidMaxPrice_whenFilteringProductsByEmptyCategories_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productInMemoryRepository.saveProduct(product);
         float validMaxPrice = 1.0f;
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+        List<Product> filteredProducts = productInMemoryRepository.findFilteredProducts(null,
                 null,
                 List.of(),
                 null,
@@ -183,10 +182,10 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndInvalidMaxPrice_whenFilteringProductsByEmptyCategories_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productInMemoryRepository.saveProduct(product);
         float invalidMaxPrice = 0.5f;
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(null,
+        List<Product> filteredProducts = productInMemoryRepository.findFilteredProducts(null,
                 null,
                 List.of(),
                 null,

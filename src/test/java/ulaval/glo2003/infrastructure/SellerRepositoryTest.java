@@ -16,25 +16,25 @@ public class SellerRepositoryTest {
     private static final String BIO = "Hockey";
     private static final LocalDate BIRTH_DATE = LocalDate.of(1987, 8, 16);
 
-    private SellerRepository sellerRepository;
+    private SellerInMemoryRepository sellerInMemoryRepository;
     private Seller seller;
 
     @BeforeEach
     public void setUp() {
-        sellerRepository = new SellerRepository();
+        sellerInMemoryRepository = new SellerInMemoryRepository();
         seller = new Seller(NAME, BIO, BIRTH_DATE);
     }
 
     @Test
     public void givenASeller_whenSaving_thenCanFindItById() {
-        sellerRepository.saveSeller(seller);
+        sellerInMemoryRepository.saveSeller(seller);
 
-        Seller currentSeller = sellerRepository.findById(seller.getId());
+        Seller currentSeller = sellerInMemoryRepository.findById(seller.getId());
         assertEquals(seller, currentSeller);
     }
 
     @Test
     public void whenRetrievingNonExistantSeller_thenRetrievingByIdThrowsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class, () -> sellerRepository.findById(ID));
+        assertThrows(ItemNotFoundException.class, () -> sellerInMemoryRepository.findById(ID));
     }
 }

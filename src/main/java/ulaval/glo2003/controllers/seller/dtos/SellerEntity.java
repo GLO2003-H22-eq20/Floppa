@@ -25,7 +25,25 @@ public class SellerEntity {
         this.bio = bio;
         this.birthDate = birthDate;
         this.createdAt = createdAt;
+    }
 
+    public ObjectId getId() {
+        return id;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 }

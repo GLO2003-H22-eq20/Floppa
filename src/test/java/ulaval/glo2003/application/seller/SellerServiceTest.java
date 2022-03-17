@@ -11,8 +11,8 @@ import ulaval.glo2003.controllers.seller.dtos.SellerRequest;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.Seller;
 import ulaval.glo2003.domain.valueObject.SellerProducts;
-import ulaval.glo2003.infrastructure.ProductRepository;
-import ulaval.glo2003.infrastructure.SellerRepository;
+import ulaval.glo2003.infrastructure.ProductInMemoryRepository;
+import ulaval.glo2003.infrastructure.SellerInMemoryRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,11 +33,9 @@ public class SellerServiceTest {
     @Mock
     private SellerFactory sellerFactory;
     @Mock
-    private SellerRepository sellerRepository;
+    private SellerInMemoryRepository sellerInMemoryRepository;
     @Mock
-    private ProductRepository productRepository;
-    @Mock
-    private DatastoreProvider datastoreProvider;
+    private ProductInMemoryRepository productRepository;
 
     SellerRequest request = new SellerRequest() {
         {
@@ -52,7 +50,7 @@ public class SellerServiceTest {
 
     @BeforeEach
     public void setUp() {
-        sellerService = new SellerService(sellerRepository, productRepository, sellerFactory, datastoreProvider);
+        sellerService = new SellerService(sellerInMemoryRepository, productRepository, sellerFactory);
     }
 
     @Test
@@ -70,7 +68,7 @@ public class SellerServiceTest {
 
         sellerService.createSeller(request);
 
-        verify(sellerRepository).saveSeller(seller);
+        verify(sellerInMemoryRepository).saveSeller(seller);
     }
 
     @Test
@@ -89,7 +87,7 @@ public class SellerServiceTest {
 
         sellerService.getSeller(anyString());
 
-        verify(sellerRepository).findById(anyString());
+        verify(sellerInMemoryRepository).findById(anyString());
     }
 
     @Test
@@ -122,7 +120,7 @@ public class SellerServiceTest {
 
     private Seller givenASellerCanBeFound() {
         Seller seller = mock(Seller.class);
-        willReturn(seller).given(sellerRepository).findById(anyString());
+        willReturn(seller).given(sellerInMemoryRepository).findById(anyString());
         return seller;
     }
 

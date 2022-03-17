@@ -1,5 +1,7 @@
 package ulaval.glo2003.domain;
 
+import org.bson.types.ObjectId;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -17,6 +19,14 @@ public class Seller {
         this.bio = bio;
         this.birthDate = birthDate;
         this.createdAt = Instant.now();
+    }
+
+    public Seller(String id, String name, String bio, LocalDate birthDate, Instant createdAt){
+        this.id = UUID.fromString(id);
+        this.name = name;
+        this.bio = bio;
+        this.birthDate = birthDate;
+        this.createdAt = createdAt;
     }
 
     public String getId() {
