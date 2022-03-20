@@ -7,9 +7,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ulaval.glo2003.controllers.product.dtos.ProductRequest;
+import ulaval.glo2003.domain.Offers;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.Seller;
 import ulaval.glo2003.domain.valueObject.SellerProduct;
+import ulaval.glo2003.infrastructure.OfferRepository;
 import ulaval.glo2003.infrastructure.ProductRepository;
 import ulaval.glo2003.infrastructure.SellerRepository;
 
@@ -41,11 +43,15 @@ public class ProductServiceTest {
     @Mock
     private SellerRepository sellerRepository;
     @Mock
+    private OfferRepository offerRepository;
+    @Mock
     private ProductFactory productFactory;
     @Mock
     private Product product;
     @Mock
     private Seller seller;
+    @Mock
+    private Offers offers;
 
     ProductRequest request = new ProductRequest() {
         {
@@ -66,7 +72,7 @@ public class ProductServiceTest {
 
     @BeforeEach
     public void setUp() {
-        productService = new ProductService(productRepository, sellerRepository, productFactory);
+        productService = new ProductService(productRepository, sellerRepository, offerRepository, productFactory);
     }
 
     @Test
@@ -120,9 +126,20 @@ public class ProductServiceTest {
     }
 
     @Test
+    public void whenGettingAProduct_thenSearchesForOffersInRepository() {
+        givenAProductCanBeFound();
+        givenAOfferCanBeFound();
+
+        productService.getProduct(anyString());
+
+        verify(offerRepository).getOffers(anyString());
+    }
+
+    @Test
     public void whenGettingAProduct_thenReturnsSellerProduct() {
         givenASellerCanBeFound();
         givenAProductCanBeFound();
+        givenAOfferCanBeFound();
 
         SellerProduct sellerProduct = productService.getProduct(anyString());
 
@@ -164,5 +181,9 @@ public class ProductServiceTest {
     private void givenASellerCanBeFound() {
         willReturn(seller).given(sellerRepository).findById(SELLER_ID);
         willReturn(SELLER_ID).given(product).getSellerId();
+    }
+
+    private void givenAOfferCanBeFound() {
+        willReturn(offers).given(offerRepository).getOffers(anyString());
     }
 }

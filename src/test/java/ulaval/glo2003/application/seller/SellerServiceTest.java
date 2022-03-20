@@ -7,15 +7,20 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ulaval.glo2003.controllers.seller.dtos.SellerRequest;
+import ulaval.glo2003.domain.Offer;
+import ulaval.glo2003.domain.Offers;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.Seller;
+import ulaval.glo2003.domain.valueObject.ProductOffers;
 import ulaval.glo2003.domain.valueObject.SellerProducts;
+import ulaval.glo2003.infrastructure.OfferRepository;
 import ulaval.glo2003.infrastructure.ProductRepository;
 import ulaval.glo2003.infrastructure.SellerRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -35,6 +40,8 @@ public class SellerServiceTest {
     private SellerRepository sellerRepository;
     @Mock
     private ProductRepository productRepository;
+    @Mock
+    private OfferRepository offerRepository;
 
     SellerRequest request = new SellerRequest() {
         {
@@ -49,7 +56,7 @@ public class SellerServiceTest {
 
     @BeforeEach
     public void setUp() {
-        sellerService = new SellerService(sellerRepository, productRepository, sellerFactory);
+        sellerService = new SellerService(sellerRepository, productRepository, offerRepository, sellerFactory);
     }
 
     @Test
@@ -103,7 +110,9 @@ public class SellerServiceTest {
     public void whenGettingASeller_thenReturnsSellerProducts() {
         Seller seller = givenASellerCanBeFound();
         List<Product> products = givenProductsExist();
-        SellerProducts expectedSellerProducts = new SellerProducts(seller, products);
+        List<ProductOffers> productsOffers = products.stream()
+                .map(product -> new ProductOffers(product, givenOffersCanBeFound())).collect(Collectors.toList());
+        SellerProducts expectedSellerProducts = new SellerProducts(seller, productsOffers);
 
         SellerProducts sellerProducts = sellerService.getSeller(anyString());
 
@@ -127,5 +136,10 @@ public class SellerServiceTest {
         List<Product> products = new ArrayList<>();
         willReturn(products).given(productRepository).findProductsBySellerId(anyString());
         return products;
+    }
+    private Offers givenOffersCanBeFound() {
+        Offers offers =  mock(Offers.class);
+        willReturn(offers).given(offerRepository).getOffers(anyString());
+        return offers;
     }
 }

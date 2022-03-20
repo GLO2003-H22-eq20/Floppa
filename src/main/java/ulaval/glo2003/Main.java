@@ -15,6 +15,7 @@ import ulaval.glo2003.controllers.product.ProductResource;
 import ulaval.glo2003.controllers.product.dtos.ProductPresenter;
 import ulaval.glo2003.controllers.seller.SellerResource;
 import ulaval.glo2003.controllers.seller.dtos.SellerPresenter;
+import ulaval.glo2003.infrastructure.OfferRepository;
 import ulaval.glo2003.infrastructure.ProductRepository;
 import ulaval.glo2003.infrastructure.SellerRepository;
 
@@ -30,11 +31,14 @@ public class Main {
 
         SellerRepository sellerRepository = new SellerRepository();
         ProductRepository productRepository = new ProductRepository();
+        OfferRepository offerRepository = new OfferRepository();
         SellerFactory sellerFactory = new SellerFactory();
-        SellerService sellerService = new SellerService(sellerRepository, productRepository, sellerFactory);
+        SellerService sellerService = new SellerService(sellerRepository, productRepository, offerRepository,
+                sellerFactory);
         SellerPresenter sellerPresenter = new SellerPresenter();
         ProductFactory productFactory = new ProductFactory();
-        ProductService productService = new ProductService(productRepository, sellerRepository, productFactory);
+        ProductService productService = new ProductService(productRepository, sellerRepository, offerRepository,
+                productFactory);
         ProductPresenter productPresenter = new ProductPresenter();
 
         ResourceConfig resourceConfig = new ResourceConfig()

@@ -3,16 +3,18 @@ package ulaval.glo2003.controllers.seller.dtos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ulaval.glo2003.domain.Offers;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
 import ulaval.glo2003.domain.Seller;
+import ulaval.glo2003.domain.valueObject.ProductOffers;
 import ulaval.glo2003.domain.valueObject.SellerProducts;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -31,12 +33,12 @@ public class SellerPresenterTest {
             add(ProductCategory.BEAUTY);
         }
     };
+    private static final Double OFFERS_MEAN = 20.5;
+    private static final Long OFFERS_COUNT = 2L;
 
-    private SellerPresenter sellerPresenter;
     private SellerProducts sellerProducts;
-
-    @Mock
     private Seller seller;
+    private SellerPresenter sellerPresenter;
 
     @BeforeEach
     public void setUp() {
@@ -52,7 +54,10 @@ public class SellerPresenterTest {
                         PRODUCT_CATEGORIES));
             }
         };
-        sellerProducts = new SellerProducts(seller, products);
+        Offers offers = new Offers(OFFERS_MEAN, OFFERS_COUNT);
+        List<ProductOffers> productsOffers = products.stream()
+                .map(product -> new ProductOffers(product, offers)).collect(Collectors.toList());
+        sellerProducts = new SellerProducts(seller, productsOffers);
     }
 
     @Test
