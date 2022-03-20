@@ -8,19 +8,19 @@ import java.util.Objects;
 
 public class SellerProducts {
     private final Seller seller;
-    private final List<Product> products;
+    private final List<ProductOffers> productsOffers;
 
-    public SellerProducts(Seller seller, List<Product> products) {
+    public SellerProducts(Seller seller, List<ProductOffers> productsOffers) {
         this.seller = seller;
-        this.products = products;
+        this.productsOffers = productsOffers;
     }
 
     public Seller getSeller() {
         return seller;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<ProductOffers> getProducts() {
+        return productsOffers;
     }
 
     @Override
@@ -32,11 +32,11 @@ public class SellerProducts {
             return false;
         }
         SellerProducts that = (SellerProducts) o;
-        return ((Objects.equals(seller, that.seller)) & (Objects.equals(products, that.products)));
+        return ((Objects.equals(seller, that.seller)) & (Objects.equals(productsOffers, that.productsOffers)));
     }
 
     @Override
     public int hashCode() {
-        return ((Objects.hashCode(seller)) & (Objects.hashCode(products)));
+        return ((Objects.hashCode(seller)) & (Objects.hashCode(productsOffers)));
     }
 }

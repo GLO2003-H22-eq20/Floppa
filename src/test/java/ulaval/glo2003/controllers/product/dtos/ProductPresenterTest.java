@@ -2,10 +2,11 @@ package ulaval.glo2003.controllers.product.dtos;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
+import ulaval.glo2003.domain.Offers;
 import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.domain.ProductCategory;
 import ulaval.glo2003.domain.Seller;
+import ulaval.glo2003.domain.valueObject.ProductOffers;
 import ulaval.glo2003.domain.valueObject.SellerProduct;
 
 import java.time.LocalDate;
@@ -28,26 +29,26 @@ public class ProductPresenterTest {
             add(ProductCategory.BEAUTY);
         }
     };
+    private static final Double OFFERS_MEAN = 20.5;
+    private static final Long OFFERS_COUNT = 2L;
 
-    private ProductPresenter productPresenter;
     private SellerProduct sellerProduct;
 
-    @Mock
-    private Seller seller;
-    @Mock
-    private Product product;
+    private ProductPresenter productPresenter;
 
     @BeforeEach
     public void setUp() {
         productPresenter = new ProductPresenter();
 
-        seller = new Seller(SELLER_NAME, SELLER_BIO, SELLER_BIRTHDATE);
-        product = new Product(seller.getId(),
+        Seller seller = new Seller(SELLER_NAME, SELLER_BIO, SELLER_BIRTHDATE);
+        Product product = new Product(seller.getId(),
                 PRODUCT_TITLE,
                 PRODUCT_DESCRIPTION,
                 PRODUCT_SUGGESTED_PRICE,
                 PRODUCT_CATEGORIES);
-        sellerProduct = new SellerProduct(seller, product);
+        Offers offers = new Offers(OFFERS_MEAN, OFFERS_COUNT);
+        ProductOffers productOffers = new ProductOffers(product, offers);
+        sellerProduct = new SellerProduct(seller, productOffers);
     }
 
     @Test
