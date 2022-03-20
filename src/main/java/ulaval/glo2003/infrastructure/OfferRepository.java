@@ -18,11 +18,11 @@ public class OfferRepository {
         offerMap.put(offer.getId().toString(), offer);
     }
 
-    public Long getCount(String productId) {
+    private Long getCount(String productId) {
         return offerMap.values().stream().filter(offer -> Objects.equals(productId,offer.getProductId())).count();
     }
 
-    public Double getMean(String productId) {
+    private Double getMean(String productId) {
         OptionalDouble mean = offerMap.values().stream()
                 .filter(offer -> Objects.equals(productId, offer.getProductId()))
                 .mapToDouble(Offer::getAmount).average();

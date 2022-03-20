@@ -18,9 +18,9 @@ public class OfferService {
     }
 
     public void createOffer(String productId, OfferRequest offerRequest) {
+        productRepository.findById(productId);
         Offer offer = offerFactory.createOffer(productId, offerRequest.name, offerRequest.email,
                 offerRequest.phoneNumber, offerRequest.amount, offerRequest.message);
-        productRepository.findById(productId);
         offerRepository.saveOffer(offer);
     }
 }
