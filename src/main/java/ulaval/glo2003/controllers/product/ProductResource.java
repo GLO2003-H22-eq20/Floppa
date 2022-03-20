@@ -77,7 +77,8 @@ public class ProductResource {
         }
     }
 
-    @POST @Path("{productId}/offers")
+    @POST
+    @Path("{productId}/offers")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createOffer(@PathParam("productId") String id, @NotNull OfferRequest offerRequest) {
         offerService.createOffer(id, offerRequest);

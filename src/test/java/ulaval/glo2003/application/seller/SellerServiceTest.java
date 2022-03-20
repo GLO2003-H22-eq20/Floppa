@@ -137,6 +137,7 @@ public class SellerServiceTest {
         willReturn(products).given(productRepository).findProductsBySellerId(anyString());
         return products;
     }
+
     private Offers givenOffersCanBeFound() {
         Offers offers =  mock(Offers.class);
         willReturn(offers).given(offerRepository).getOffers(anyString());
