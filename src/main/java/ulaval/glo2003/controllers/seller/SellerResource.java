@@ -5,6 +5,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import ulaval.glo2003.application.seller.SellerService;
+import ulaval.glo2003.controllers.offer.dtos.OfferRequest;
 import ulaval.glo2003.controllers.seller.dtos.SellerPresenter;
 import ulaval.glo2003.controllers.seller.dtos.SellerRequest;
 import ulaval.glo2003.controllers.seller.dtos.SellerResponse;

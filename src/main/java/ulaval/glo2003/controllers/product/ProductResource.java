@@ -10,7 +10,9 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import ulaval.glo2003.application.offer.OfferService;
 import ulaval.glo2003.application.product.ProductService;
+import ulaval.glo2003.controllers.offer.dtos.OfferRequest;
 import ulaval.glo2003.controllers.product.dtos.ProductPresenter;
 import ulaval.glo2003.controllers.product.dtos.ProductRequest;
 import ulaval.glo2003.controllers.product.dtos.ProductResponse;
@@ -23,11 +25,14 @@ import java.util.List;
 @Path("products")
 public class ProductResource {
     private final ProductService productService;
+    private final OfferService offerService;
     private final ProductPresenter productPresenter;
     private final URI baseUri;
 
-    public ProductResource(ProductService productService, ProductPresenter productPresenter, URI baseUri) {
+    public ProductResource(ProductService productService, OfferService offerService,
+                           ProductPresenter productPresenter, URI baseUri) {
         this.productService = productService;
+        this.offerService = offerService;
         this.baseUri = baseUri;
         this.productPresenter = productPresenter;
     }
@@ -70,5 +75,12 @@ public class ProductResource {
         } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
+    }
+
+    @POST @Path("{productId}/offers")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createOffer(@PathParam("productId") String id, @NotNull OfferRequest offerRequest) {
+        offerService.createOffer(id, offerRequest);
+        return Response.status(Response.Status.OK).build();
     }
 }

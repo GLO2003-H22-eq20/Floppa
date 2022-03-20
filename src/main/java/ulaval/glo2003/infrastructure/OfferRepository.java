@@ -3,6 +3,7 @@ package ulaval.glo2003.infrastructure;
 import ulaval.glo2003.domain.Offer;
 import ulaval.glo2003.domain.Offers;
 
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.Objects;
 import java.util.OptionalDouble;
 
 public class OfferRepository {
+    private final DecimalFormat decimalFormat = new DecimalFormat("#.##");
     private final Map<String, Offer> offerMap = Collections.synchronizedMap(new HashMap<>());
 
     public void saveOffer(Offer offer) {
@@ -25,7 +27,7 @@ public class OfferRepository {
                 .filter(offer -> Objects.equals(productId, offer.getProductId()))
                 .mapToDouble(Offer::getAmount).average();
         if (mean.isPresent()) {
-            return mean.getAsDouble();
+            return Double.valueOf(decimalFormat.format(mean.getAsDouble()));
         } else {
             return Double.NaN;
         }
