@@ -3,6 +3,8 @@ package ulaval.glo2003;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import ulaval.glo2003.application.offer.OfferFactory;
+import ulaval.glo2003.application.offer.OfferService;
 import ulaval.glo2003.application.product.ProductFactory;
 import ulaval.glo2003.application.product.ProductService;
 import ulaval.glo2003.application.seller.SellerFactory;
@@ -40,13 +42,16 @@ public class Main {
         ProductService productService = new ProductService(productRepository, sellerRepository, offerRepository,
                 productFactory);
         ProductPresenter productPresenter = new ProductPresenter();
+        OfferFactory offerFactory = new OfferFactory();
+        OfferService offerService = new OfferService(offerRepository, productRepository, offerFactory);
+
 
         ResourceConfig resourceConfig = new ResourceConfig()
                 .register(ItemNotFoundExceptionsMapper.class)
                 .register(InvalidParameterExceptionMapper.class)
                 .register(MissingParameterExceptionMapper.class)
                 .register(new SellerResource(sellerService, sellerPresenter, uri))
-                .register(new ProductResource(productService, productPresenter, uri))
+                .register(new ProductResource(productService, offerService, productPresenter, uri))
                 .register(HealthResource.class)
                 .packages("ulaval.glo2003");
 

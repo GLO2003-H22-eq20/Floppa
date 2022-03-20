@@ -8,10 +8,10 @@ public class Offer {
     private final String name;
     private final String email;
     private final String phoneNumber;
-    private final Float amount;
+    private final Double amount;
     private final String message;
 
-    public Offer(String productId, String name, String email, String phoneNumber, Float amount, String message) {
+    public Offer(String productId, String name, String email, String phoneNumber, Double amount, String message) {
         this.id = UUID.randomUUID();
         this.productId = productId;
         this.name = name;
@@ -41,7 +41,7 @@ public class Offer {
         return phoneNumber;
     }
 
-    public Float getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
