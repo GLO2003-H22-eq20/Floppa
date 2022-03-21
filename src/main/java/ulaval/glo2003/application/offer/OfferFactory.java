@@ -3,6 +3,7 @@ package ulaval.glo2003.application.offer;
 import ulaval.glo2003.controllers.exceptions.InvalidParameterException;
 import ulaval.glo2003.controllers.exceptions.MissingParameterException;
 import ulaval.glo2003.domain.Offer;
+import ulaval.glo2003.domain.Product;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -13,7 +14,7 @@ public class OfferFactory {
     private final String PHONENUMBER_REGEX = "[0-9]+";
     private final String EMAIL_REGEX = "^(.+)@(.+)[.](.+)$";
 
-    public Offer createOffer(String productId,
+    public Offer createOffer(Product product,
                              String name,
                              String email,
                              String phoneNumber,
@@ -22,9 +23,9 @@ public class OfferFactory {
         validateName(name);
         validateEmail(email);
         validatePhoneNumber(phoneNumber);
-        validateAmount(amount);
+        validateAmount(amount, product);
         validateMessage(message);
-        return new Offer(productId, name, email, phoneNumber, amount, message);
+        return new Offer(product.getId(), name, email, phoneNumber, amount, message);
     }
 
     private void validateName(String name) {
@@ -51,11 +52,12 @@ public class OfferFactory {
         }
     }
 
-    private void validateAmount(Double amount) {
+    private void validateAmount(Double amount, Product product) {
         if (Optional.ofNullable(amount).isEmpty()) {
             throw new MissingParameterException("Missing amount");
+        } else if (amount < product.getSuggestedPrice()) {
+            throw new InvalidParameterException("Amount is lower than suggested price");
         }
-        // TODO: validate that the amount is higher than the suggested price of the product
     }
 
     private void validateMessage(String message) {

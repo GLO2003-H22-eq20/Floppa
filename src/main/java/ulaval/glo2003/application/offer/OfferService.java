@@ -2,6 +2,7 @@ package ulaval.glo2003.application.offer;
 
 import ulaval.glo2003.controllers.offer.dtos.OfferRequest;
 import ulaval.glo2003.domain.Offer;
+import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.infrastructure.OfferRepository;
 import ulaval.glo2003.infrastructure.ProductRepository;
 
@@ -18,8 +19,8 @@ public class OfferService {
     }
 
     public void createOffer(String productId, OfferRequest offerRequest) {
-        productRepository.findById(productId);
-        Offer offer = offerFactory.createOffer(productId, offerRequest.name, offerRequest.email,
+        Product product = productRepository.findById(productId);
+        Offer offer = offerFactory.createOffer(product, offerRequest.name, offerRequest.email,
                 offerRequest.phoneNumber, offerRequest.amount, offerRequest.message);
         offerRepository.saveOffer(offer);
     }

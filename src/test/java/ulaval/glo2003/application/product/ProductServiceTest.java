@@ -29,8 +29,8 @@ public class ProductServiceTest {
     static final String PRODUCT_ID = "1";
     static final String SELLER_ID = "1";
     private static final String TITLE = "titleOfProduct";
-    private static final Float MIMINUM_PRICE = 7.7f;
-    private static final Float MAXIMUM_PRICE = 7.7f;
+    private static final Double MIMINUM_PRICE = 7.7;
+    private static final Double MAXIMUM_PRICE = 7.7;
     private final List<String> CATEGORIES = new ArrayList<>() {
         {
             add("beauty");
@@ -57,7 +57,7 @@ public class ProductServiceTest {
         {
             title = "productTitle";
             description = "productDescription";
-            suggestedPrice = 777.77f;
+            suggestedPrice = 777.77;
             categories = new ArrayList<>() {
                 {
                     add("beauty");
@@ -150,7 +150,7 @@ public class ProductServiceTest {
     public void whenGettingFilteredProducts_thenSearchesForFilteredProductsInRepository() {
         productService.getFilteredProducts(SELLER_ID, TITLE, CATEGORIES, MIMINUM_PRICE, MAXIMUM_PRICE);
 
-        verify(productRepository).findFilteredProducts(anyString(), anyString(), any(), anyFloat(), anyFloat());
+        verify(productRepository).findFilteredProducts(anyString(), anyString(), any(), anyDouble(), anyDouble());
     }
 
     @Test
@@ -168,7 +168,7 @@ public class ProductServiceTest {
         willReturn(product).given(productFactory).createProduct(anyString(),
                 anyString(),
                 anyString(),
-                anyFloat(),
+                anyDouble(),
                 any());
         willReturn(PRODUCT_ID).given(product).getId();
         return product;

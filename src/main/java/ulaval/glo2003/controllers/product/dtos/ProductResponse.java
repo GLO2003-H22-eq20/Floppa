@@ -10,7 +10,7 @@ public class ProductResponse {
     private String createdAt;
     private String title;
     private String description;
-    private Float suggestedPrice;
+    private Double suggestedPrice;
     private Offers offers;
     private List<String> categories;
     private SellerResponse seller;
@@ -18,7 +18,7 @@ public class ProductResponse {
     public ProductResponse() {
     }
 
-    public ProductResponse(String id, String createdAt, String title, String description, Float suggestedPrice,
+    public ProductResponse(String id, String createdAt, String title, String description, Double suggestedPrice,
                            Offers offers, List<String> categories, SellerResponse seller) {
         this.id = id;
         this.createdAt = createdAt;
@@ -31,7 +31,7 @@ public class ProductResponse {
     }
 
     public ProductResponse(String id, String createdAt, String title, String description,
-                           Float suggestedPrice, Offers offers, List<String> categories) {
+                           Double suggestedPrice, Offers offers, List<String> categories) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
@@ -57,7 +57,7 @@ public class ProductResponse {
         return description;
     }
 
-    public Float getSuggestedPrice() {
+    public Double getSuggestedPrice() {
         return suggestedPrice;
     }
 
