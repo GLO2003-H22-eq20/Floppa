@@ -50,8 +50,8 @@ public class ProductService {
     public List<SellerProduct> getFilteredProducts(String sellerId,
                                                    String title,
                                                    List<String> categories,
-                                                   Float minPrice,
-                                                   Float maxPrice) {
+                                                   Double minPrice,
+                                                   Double maxPrice) {
         for (String category : categories) {
             if (!category.equals(category.toLowerCase(Locale.ROOT))) {
                 throw new IllegalArgumentException();

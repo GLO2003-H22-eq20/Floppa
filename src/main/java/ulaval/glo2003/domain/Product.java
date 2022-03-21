@@ -10,13 +10,13 @@ public class Product {
     private final Instant createdAt;
     private final String title;
     private final String description;
-    private final Float suggestedPrice;
+    private final Double suggestedPrice;
     private final List<ProductCategory> categories;
 
     public Product(String sellerId,
             String title,
             String description,
-            Float suggestedPrice,
+            Double suggestedPrice,
             List<ProductCategory> categories) {
         this.id = UUID.randomUUID();
         this.sellerId = sellerId;
@@ -47,7 +47,7 @@ public class Product {
         return description;
     }
 
-    public Float getSuggestedPrice() {
+    public Double getSuggestedPrice() {
         return suggestedPrice;
     }
 

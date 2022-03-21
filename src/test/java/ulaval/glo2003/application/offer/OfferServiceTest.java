@@ -5,13 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ulaval.glo2003.application.product.ProductFactoryTest;
 import ulaval.glo2003.controllers.offer.dtos.OfferRequest;
 import ulaval.glo2003.domain.Offer;
+import ulaval.glo2003.domain.Product;
 import ulaval.glo2003.infrastructure.OfferRepository;
 import ulaval.glo2003.infrastructure.ProductRepository;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.willReturn;
@@ -27,6 +30,8 @@ public class OfferServiceTest {
     private static final String MESSAGE = "Donec porttitor interdum lacus sed finibus. Nam pulvinar facilisis "
             + "posuere. Maecenas vel lorem amet.";
 
+    @Mock
+    private Product product;
     @Mock
     private Offer offer;
     @Mock
@@ -56,12 +61,13 @@ public class OfferServiceTest {
     @Test
     public void whenCreatingNewOffer_thenCreatesNewOffer() {
         givenNewOfferCanBeCreated();
+        givenProductCanBeFound();
 
         offerService.createOffer(PRODUCT_ID, request);
 
         verify(offerFactory)
                 .createOffer(
-                        PRODUCT_ID,
+                        product,
                         NAME,
                         EMAIL,
                         PHONENUMBER,
@@ -73,6 +79,7 @@ public class OfferServiceTest {
     @Test
     public void whenCreatingNewOffer_thenSavesNewOffer() {
         givenNewOfferCanBeCreated();
+        givenProductCanBeFound();
 
         offerService.createOffer(PRODUCT_ID, request);
 
@@ -80,15 +87,19 @@ public class OfferServiceTest {
     }
 
     @Test
-    private Offer givenNewOfferCanBeCreated() {
+    private void givenNewOfferCanBeCreated() {
         willReturn(offer).given(offerFactory)
                 .createOffer(
-                        anyString(),
+                        any(Product.class),
                         anyString(),
                         anyString(),
                         anyString(),
                         anyDouble(),
                         anyString());
-        return offer;
+    }
+
+    @Test
+    private void givenProductCanBeFound() {
+        willReturn(product).given(productRepository).findById(PRODUCT_ID);
     }
 }

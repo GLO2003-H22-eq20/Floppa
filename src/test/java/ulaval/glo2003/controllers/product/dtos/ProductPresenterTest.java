@@ -22,7 +22,7 @@ public class ProductPresenterTest {
     private static final String SELLER_BIO = "testSellerBio";
     private static final String PRODUCT_TITLE = "testProductTitle";
     private static final String PRODUCT_DESCRIPTION = "testProductDescription";
-    private static final Float PRODUCT_SUGGESTED_PRICE = 1.0f;
+    private static final Double PRODUCT_SUGGESTED_PRICE = 1.;
     private static final List<ProductCategory> PRODUCT_CATEGORIES = new ArrayList<>() {
         {
             add(ProductCategory.APPAREL);
