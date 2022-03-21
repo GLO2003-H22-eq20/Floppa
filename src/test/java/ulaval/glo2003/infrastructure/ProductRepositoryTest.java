@@ -49,7 +49,13 @@ class ProductRepositoryTest {
     @Test
     public void givenProducts_whenSavingTwoProducts_thenCanRetrieveAListOfProductsWithASellerId() {
         productRepository.saveProduct(product);
-        Product anotherProductWithSameSellerId = new Product(SELLER_ID, TITLE, DESCRIPTION, SUGGESTED_PRICE, CATEGORIES);
+        Product anotherProductWithSameSellerId = new Product(
+                SELLER_ID,
+                TITLE,
+                DESCRIPTION,
+                SUGGESTED_PRICE,
+                CATEGORIES
+        );
         productRepository.saveProduct(anotherProductWithSameSellerId);
 
         Collection<Product> products = productRepository.findProductsBySellerId(SELLER_ID);
@@ -81,7 +87,13 @@ class ProductRepositoryTest {
     public void givenProductAndInvalidId_whenFilteringProductsBySellerId_thenReturnFilteredProductList() {
         productRepository.saveProduct(product);
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(INVALID_ID, null, List.of(), null, null);
+        List<Product> filteredProducts = productRepository.findFilteredProducts(
+                INVALID_ID,
+                null,
+                List.of(),
+                null,
+                null
+        );
 
         assertEquals(ZERO, filteredProducts.size());
         assertTrue(filteredProducts.stream().noneMatch(filteredProduct -> filteredProduct.equals(product)));
