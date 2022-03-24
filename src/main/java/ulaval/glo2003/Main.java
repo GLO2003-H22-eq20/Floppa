@@ -1,8 +1,8 @@
 package ulaval.glo2003;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import ulaval.glo2003.product.application.ProductFactory;
 import ulaval.glo2003.product.application.ProductService;
@@ -24,6 +24,9 @@ import ulaval.glo2003.seller.persistence.SellerMongoRepository;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class Main {
 
@@ -42,7 +45,11 @@ public class Main {
         ProductService productService = new ProductService(productRepository, sellerRepository, productFactory);
         ProductPresenter productPresenter = new ProductPresenter();
 
+        LoggingFeature loggingFeature = new LoggingFeature(Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME),
+                Level.INFO, LoggingFeature.Verbosity.PAYLOAD_ANY, 10000);
+
         ResourceConfig resourceConfig = new ResourceConfig()
+                .register(loggingFeature)
                 .register(ItemNotFoundExceptionsMapper.class)
                 .register(InvalidParameterExceptionMapper.class)
                 .register(MissingParameterExceptionMapper.class)
