@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.OptionalDouble;
 
+
 public class OfferRepository {
     private final DecimalFormat decimalFormat = new DecimalFormat(
             String.format(
@@ -31,6 +32,7 @@ public class OfferRepository {
     }
 
     private Double getMean(String productId) {
+        Locale.setDefault(Locale.US);
         OptionalDouble mean = offerMap.values().stream()
                 .filter(offer -> Objects.equals(productId, offer.getProductId()))
                 .mapToDouble(Offer::getAmount).average();
@@ -42,7 +44,7 @@ public class OfferRepository {
     }
 
     public Offers getOffers(String productId) {
-        var offersMean = getMean(productId);
+        Double offersMean = getMean(productId);
         if (offersMean.isNaN()) {
             return new Offers(getCount(productId));
         } else {
