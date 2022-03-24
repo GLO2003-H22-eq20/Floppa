@@ -25,3 +25,9 @@ mvn exec:java
 ```
 mvn checkstyle:check
 ```
+
+### MongoDB
+```
+Community Server : https://www.mongodb.com/try/download
+MongoDB Compass UI : https://www.mongodb.com/try/download/tools
+```
