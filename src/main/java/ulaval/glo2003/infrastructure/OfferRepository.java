@@ -6,12 +6,20 @@ import ulaval.glo2003.domain.Offers;
 import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.OptionalDouble;
 
 public class OfferRepository {
-    private final DecimalFormat decimalFormat = new DecimalFormat("#.##");
+    private final DecimalFormat decimalFormat = new DecimalFormat(
+            String.format(
+                    "#%s##",
+                    ((DecimalFormat) DecimalFormat.getInstance(Locale.ROOT))
+                            .getDecimalFormatSymbols()
+                            .getDecimalSeparator()
+            )
+    );
     private final Map<String, Offer> offerMap = Collections.synchronizedMap(new HashMap<>());
 
     public void saveOffer(Offer offer) {
