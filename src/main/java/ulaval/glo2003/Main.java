@@ -4,13 +4,14 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
+import ulaval.glo2003.exceptions.mappers.DefaultExceptionMapper;
 import ulaval.glo2003.product.application.ProductFactory;
 import ulaval.glo2003.product.application.ProductService;
 import ulaval.glo2003.seller.application.SellerFactory;
 import ulaval.glo2003.seller.application.SellerService;
 import ulaval.glo2003.context.DatastoreProvider;
 import ulaval.glo2003.exceptions.mappers.InvalidParameterExceptionMapper;
-import ulaval.glo2003.exceptions.mappers.ItemNotFoundExceptionsMapper;
+import ulaval.glo2003.exceptions.mappers.ItemNotFoundExceptionMapper;
 import ulaval.glo2003.exceptions.mappers.MissingParameterExceptionMapper;
 import ulaval.glo2003.health.HealthResource;
 import ulaval.glo2003.product.api.ProductResource;
@@ -50,9 +51,10 @@ public class Main {
 
         ResourceConfig resourceConfig = new ResourceConfig()
                 .register(loggingFeature)
-                .register(ItemNotFoundExceptionsMapper.class)
+                .register(ItemNotFoundExceptionMapper.class)
                 .register(InvalidParameterExceptionMapper.class)
                 .register(MissingParameterExceptionMapper.class)
+                .register(DefaultExceptionMapper.class)
                 .register(new SellerResource(sellerService, sellerPresenter, uri))
                 .register(new ProductResource(productService, productPresenter, uri))
                 .register(HealthResource.class)

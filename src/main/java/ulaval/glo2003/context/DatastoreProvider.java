@@ -8,6 +8,7 @@ import com.mongodb.client.MongoDatabase;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.bson.UuidRepresentation;
 
 public class DatastoreProvider {
 
@@ -20,7 +21,11 @@ public class DatastoreProvider {
 
         String mongoUrl = environmentVars.get("FLOPPA_MONGO_CONNECTION_STRING", "mongodb://localhost");
         String mongoDatabase = environmentVars.get("FLOPPA_MONGO_DATABASE", "floppa-dev");
-        MongoClientSettings mongoClientSettings = MongoClientSettings.builder().applyConnectionString(new ConnectionString(mongoUrl)).build();
+
+        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
+                .applyConnectionString(new ConnectionString(mongoUrl))
+                .uuidRepresentation(UuidRepresentation.STANDARD)
+                .build();
 
         this.mongoClient = MongoClients.create(mongoClientSettings);
         this.database = getMongoClient().getDatabase(mongoDatabase);

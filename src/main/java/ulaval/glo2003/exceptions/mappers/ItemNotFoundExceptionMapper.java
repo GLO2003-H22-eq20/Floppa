@@ -6,7 +6,7 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 import ulaval.glo2003.exceptions.mappers.response.ExceptionResponse;
 import ulaval.glo2003.exceptions.ItemNotFoundException;
 
-public class ItemNotFoundExceptionsMapper implements ExceptionMapper<ItemNotFoundException> {
+public class ItemNotFoundExceptionMapper implements ExceptionMapper<ItemNotFoundException> {
     @Override
     public Response toResponse(ItemNotFoundException itemNotFoundException) {
         return Response.status(Response.Status.NOT_FOUND)

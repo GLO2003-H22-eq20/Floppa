@@ -9,6 +9,8 @@ import ulaval.glo2003.exceptions.ItemNotFoundException;
 import ulaval.glo2003.seller.SellerRepository;
 import ulaval.glo2003.seller.Seller;
 
+import java.util.UUID;
+
 public class SellerMongoRepository implements SellerRepository {
     private final DatastoreProvider datastoreProvider;
 
@@ -18,7 +20,7 @@ public class SellerMongoRepository implements SellerRepository {
 
     @Override
     public void saveSeller(Seller seller) {
-        SellerEntity sellerEntity = new SellerEntity(new ObjectId(), seller.getName(), seller.getBio(), seller.getBirthDate(), seller.getCreatedAt());
+        SellerEntity sellerEntity = new SellerEntity(UUID.fromString(seller.getId()), seller.getName(), seller.getBio(), seller.getBirthDate(), seller.getCreatedAt());
         datastoreProvider.getDatastore().save(sellerEntity);
     }
 
