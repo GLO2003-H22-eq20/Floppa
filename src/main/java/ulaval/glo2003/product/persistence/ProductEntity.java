@@ -24,7 +24,15 @@ public class ProductEntity {
     private final List<ProductCategory> categories;
 
 
-    public ProductEntity(ObjectId id, ObjectId sellerId, Instant createdAt, String title, String description, Float suggestedPrice, List<ProductCategory> categories) {
+    public ProductEntity(
+            ObjectId id,
+            ObjectId sellerId,
+            Instant createdAt,
+            String title,
+            String description,
+            Float suggestedPrice,
+            List<ProductCategory> categories
+    ) {
         this.id = id;
         this.sellerId = sellerId;
         this.createdAt = createdAt;

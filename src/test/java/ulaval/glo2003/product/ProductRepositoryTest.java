@@ -71,7 +71,13 @@ class ProductRepositoryTest {
         productInMemoryRepository.saveProduct(product);
         String invalidId = UUID.randomUUID().toString();
 
-        List<Product> filteredProducts = productInMemoryRepository.findFilteredProducts(invalidId, null, List.of(), null, null);
+        List<Product> filteredProducts = productInMemoryRepository.findFilteredProducts(
+                invalidId,
+                null,
+                List.of(),
+                null,
+                null
+        );
 
         assertEquals(0, filteredProducts.size());
         assertTrue(filteredProducts.stream().noneMatch(filteredProduct -> filteredProduct.equals(product)));

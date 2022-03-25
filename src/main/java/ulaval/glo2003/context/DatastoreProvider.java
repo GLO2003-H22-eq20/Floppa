@@ -16,7 +16,7 @@ public class DatastoreProvider {
     private final MongoDatabase database;
     private final MongoClient mongoClient;
 
-    public DatastoreProvider(){
+    public DatastoreProvider() {
         Dotenv environmentVars = Dotenv.load();
 
         String mongoUrl = environmentVars.get("FLOPPA_MONGO_CONNECTION_STRING", "mongodb://localhost");
@@ -38,11 +38,11 @@ public class DatastoreProvider {
         return mongoClient;
     }
 
-    private MongoDatabase getMongoDatabase(){
+    private MongoDatabase getMongoDatabase() {
         return database;
     }
 
-    public Datastore getDatastore(){
+    public Datastore getDatastore() {
         return datastore;
     }
 }
