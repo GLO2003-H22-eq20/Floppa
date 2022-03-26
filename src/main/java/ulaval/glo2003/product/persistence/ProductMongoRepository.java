@@ -5,6 +5,7 @@ import ulaval.glo2003.product.ProductRepository;
 import ulaval.glo2003.product.Product;
 import ulaval.glo2003.product.ProductCategory;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ProductMongoRepository implements ProductRepository {
@@ -26,7 +27,7 @@ public class ProductMongoRepository implements ProductRepository {
     public List<Product> findProductsBySellerId(String sellerId) {
 
         //TODO
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -36,8 +37,14 @@ public class ProductMongoRepository implements ProductRepository {
     }
 
     @Override
-    public List<Product> findFilteredProducts(String sellerId, String title, List<ProductCategory> categories, Float minPrice, Float maxPrice) {
+    public List<Product> findFilteredProducts(
+            String sellerId,
+            String title,
+            List<ProductCategory> categories,
+            Float minPrice,
+            Float maxPrice
+    ) {
         //TODO
-        return null;
+        return Collections.emptyList();
     }
 }

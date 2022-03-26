@@ -7,7 +7,8 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
-import dev.morphia.query.DefaultQueryFactory;
+import io.github.cdimascio.dotenv.Dotenv;
+import org.bson.UuidRepresentation;
 
 public class DatastoreProvider {
 
@@ -15,10 +16,16 @@ public class DatastoreProvider {
     private final MongoDatabase database;
     private final MongoClient mongoClient;
 
-    public DatastoreProvider(){
-        String mongoUrl = System.getenv().getOrDefault("FLOPPA_MONGO_CLUSTER", "mongodb://localhost");
-        String mongoDatabase = System.getenv().getOrDefault("FLOPPA_MONGO_DATABASE", "floppa-dev");
-        MongoClientSettings mongoClientSettings = MongoClientSettings.builder().applyConnectionString(new ConnectionString(mongoUrl)).build();
+    public DatastoreProvider() {
+        Dotenv environmentVars = Dotenv.load();
+
+        String mongoUrl = environmentVars.get("FLOPPA_MONGO_CONNECTION_STRING", "mongodb://localhost");
+        String mongoDatabase = environmentVars.get("FLOPPA_MONGO_DATABASE", "floppa-dev");
+
+        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
+                .applyConnectionString(new ConnectionString(mongoUrl))
+                .uuidRepresentation(UuidRepresentation.STANDARD)
+                .build();
 
         this.mongoClient = MongoClients.create(mongoClientSettings);
         this.database = getMongoClient().getDatabase(mongoDatabase);
@@ -31,11 +38,11 @@ public class DatastoreProvider {
         return mongoClient;
     }
 
-    private MongoDatabase getMongoDatabase(){
+    private MongoDatabase getMongoDatabase() {
         return database;
     }
 
-    public Datastore getDatastore(){
+    public Datastore getDatastore() {
         return datastore;
     }
 }

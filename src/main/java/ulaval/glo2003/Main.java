@@ -2,14 +2,16 @@ package ulaval.glo2003;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
+import ulaval.glo2003.exceptions.mappers.DefaultExceptionMapper;
 import ulaval.glo2003.product.application.ProductFactory;
 import ulaval.glo2003.product.application.ProductService;
 import ulaval.glo2003.seller.application.SellerFactory;
 import ulaval.glo2003.seller.application.SellerService;
 import ulaval.glo2003.context.DatastoreProvider;
 import ulaval.glo2003.exceptions.mappers.InvalidParameterExceptionMapper;
-import ulaval.glo2003.exceptions.mappers.ItemNotFoundExceptionsMapper;
+import ulaval.glo2003.exceptions.mappers.ItemNotFoundExceptionMapper;
 import ulaval.glo2003.exceptions.mappers.MissingParameterExceptionMapper;
 import ulaval.glo2003.health.HealthResource;
 import ulaval.glo2003.product.api.ProductResource;
@@ -23,6 +25,9 @@ import ulaval.glo2003.seller.persistence.SellerMongoRepository;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class Main {
 
@@ -41,10 +46,15 @@ public class Main {
         ProductService productService = new ProductService(productRepository, sellerRepository, productFactory);
         ProductPresenter productPresenter = new ProductPresenter();
 
+        LoggingFeature loggingFeature = new LoggingFeature(Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME),
+                Level.INFO, LoggingFeature.Verbosity.PAYLOAD_ANY, 10000);
+
         ResourceConfig resourceConfig = new ResourceConfig()
-                .register(ItemNotFoundExceptionsMapper.class)
+                .register(loggingFeature)
+                .register(ItemNotFoundExceptionMapper.class)
                 .register(InvalidParameterExceptionMapper.class)
                 .register(MissingParameterExceptionMapper.class)
+                .register(DefaultExceptionMapper.class)
                 .register(new SellerResource(sellerService, sellerPresenter, uri))
                 .register(new ProductResource(productService, productPresenter, uri))
                 .register(HealthResource.class)

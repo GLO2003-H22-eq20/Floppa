@@ -13,13 +13,13 @@ import java.util.UUID;
 
 public class SellerEntity {
     @Id
-    private final ObjectId id;
+    private final UUID id;
     private final String name;
     private final String bio;
     private final LocalDate birthDate;
     private final Instant createdAt;
 
-    public SellerEntity(ObjectId id, String name, String bio, LocalDate birthDate, Instant createdAt) {
+    public SellerEntity(UUID id, String name, String bio, LocalDate birthDate, Instant createdAt) {
         this.id = id;
         this.name = name;
         this.bio = bio;
@@ -27,7 +27,7 @@ public class SellerEntity {
         this.createdAt = createdAt;
     }
 
-    public ObjectId getId() {
+    public UUID getId() {
         return id;
     }
 

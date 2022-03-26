@@ -21,7 +21,7 @@ public class Seller {
         this.createdAt = Instant.now();
     }
 
-    public Seller(String id, String name, String bio, LocalDate birthDate, Instant createdAt){
+    public Seller(String id, String name, String bio, LocalDate birthDate, Instant createdAt) {
         this.id = UUID.fromString(id);
         this.name = name;
         this.bio = bio;
