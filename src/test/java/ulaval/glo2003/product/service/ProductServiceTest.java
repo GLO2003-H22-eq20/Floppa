@@ -1,4 +1,4 @@
-package ulaval.glo2003.product.application;
+package ulaval.glo2003.product.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ulaval.glo2003.offer.persistence.OfferInMemoryRepository;
 import ulaval.glo2003.product.domain.*;
-import ulaval.glo2003.product.service.ProductService;
 import ulaval.glo2003.product.ui.request.ProductRequest;
 import ulaval.glo2003.seller.domain.Seller;
 import ulaval.glo2003.seller.domain.SellerRepository;

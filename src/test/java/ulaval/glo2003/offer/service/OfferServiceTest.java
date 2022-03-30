@@ -1,4 +1,4 @@
-package ulaval.glo2003.application.offer;
+package ulaval.glo2003.offer.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

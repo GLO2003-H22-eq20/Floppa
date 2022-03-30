@@ -1,4 +1,4 @@
-package ulaval.glo2003.infrastructure;
+package ulaval.glo2003.offer.persistence;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

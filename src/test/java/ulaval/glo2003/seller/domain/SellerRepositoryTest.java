@@ -1,4 +1,4 @@
-package ulaval.glo2003.seller;
+package ulaval.glo2003.seller.domain;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,7 +1,7 @@
 package ulaval.glo2003.seller.persistence;
 
 import ulaval.glo2003.seller.domain.SellerRepository;
-import ulaval.glo2003.seller.SellerRepositoryTest;
+import ulaval.glo2003.seller.domain.SellerRepositoryTest;
 
 public class SellerInMemoryRepositoryTest extends SellerRepositoryTest {
 
