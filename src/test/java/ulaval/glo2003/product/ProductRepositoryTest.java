@@ -2,10 +2,11 @@ package ulaval.glo2003.product;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ulaval.glo2003.product.Product;
-import ulaval.glo2003.product.ProductCategory;
+import ulaval.glo2003.product.domain.Product;
+import ulaval.glo2003.product.domain.ProductCategory;
 import ulaval.glo2003.product.persistence.ProductInMemoryRepository;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,7 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ProductRepositoryTest {
+    private static final UUID PRODUCT_ID = UUID.randomUUID();
+    private static final UUID PRODUCT_ID_2 = UUID.randomUUID();
     private static final String SELLER_ID = "1";
+    private static final Instant PRODUCT_CREATED_AT = Instant.now();
     private static final String TITLE = "item";
     private static final String DESCRIPTION = "anItem";
     private static final Float SUGGESTED_PRICE = 1.0f;
@@ -32,13 +36,13 @@ class ProductRepositoryTest {
     @BeforeEach
     public void setUp() {
         productInMemoryRepository = new ProductInMemoryRepository();
-        product = new Product(SELLER_ID, TITLE, DESCRIPTION, SUGGESTED_PRICE, CATEGORIES);
+        product = new Product(PRODUCT_ID, SELLER_ID, PRODUCT_CREATED_AT, TITLE, DESCRIPTION, SUGGESTED_PRICE, CATEGORIES);
     }
 
     @Test
     public void givenProducts_whenSavingTwoProducts_thenCanRetrieveAListOfProductsWithASellerId() {
         productInMemoryRepository.saveProduct(product);
-        Product anotherProductWithSameSellerId = new Product("1", "title", "anItem", 1.0f, CATEGORIES);
+        Product anotherProductWithSameSellerId = new Product(PRODUCT_ID_2, SELLER_ID, PRODUCT_CREATED_AT, TITLE, DESCRIPTION, SUGGESTED_PRICE, CATEGORIES);
         productInMemoryRepository.saveProduct(anotherProductWithSameSellerId);
 
         Collection<Product> products = productInMemoryRepository.findProductsBySellerId(SELLER_ID);

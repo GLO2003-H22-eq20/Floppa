@@ -4,7 +4,7 @@ import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.Test;
 import ulaval.glo2003.exceptions.mappers.response.ExceptionResponse;
-import ulaval.glo2003.seller.api.response.SellerResponse;
+import ulaval.glo2003.seller.ui.response.SellerResponse;
 import ulaval.glo2003.E2E.EndToEndTest;
 
 import java.net.URI;

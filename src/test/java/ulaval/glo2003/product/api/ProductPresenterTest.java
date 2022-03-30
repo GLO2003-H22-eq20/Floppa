@@ -3,25 +3,31 @@ package ulaval.glo2003.product.api;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import ulaval.glo2003.product.Product;
-import ulaval.glo2003.product.ProductCategory;
-import ulaval.glo2003.product.api.response.ProductPresenter;
-import ulaval.glo2003.product.api.response.ProductResponse;
-import ulaval.glo2003.product.api.response.ProductsResponse;
-import ulaval.glo2003.seller.Seller;
-import ulaval.glo2003.product.application.SellerProduct;
+import ulaval.glo2003.product.domain.Product;
+import ulaval.glo2003.product.domain.ProductCategory;
+import ulaval.glo2003.product.ui.response.ProductResponseAssembler;
+import ulaval.glo2003.product.ui.response.ProductResponse;
+import ulaval.glo2003.product.ui.response.ProductsResponse;
+import ulaval.glo2003.seller.domain.Seller;
+import ulaval.glo2003.product.domain.SellerProduct;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ProductPresenterTest {
+    private static final UUID SELLER_ID = UUID.randomUUID();
     private static final String SELLER_NAME = "testSellerName";
     private static final LocalDate SELLER_BIRTHDATE = LocalDate.of(1996, 2, 3);
+    private static final Instant SELLER_CREATED_AT = Instant.now();
     private static final String SELLER_BIO = "testSellerBio";
+    private static final UUID PRODUCT_ID = UUID.randomUUID();
+    private static final Instant PRODUCT_CREATED_AT = Instant.now();
     private static final String PRODUCT_TITLE = "testProductTitle";
     private static final String PRODUCT_DESCRIPTION = "testProductDescription";
     private static final Float PRODUCT_SUGGESTED_PRICE = 1.0f;
@@ -32,7 +38,7 @@ public class ProductPresenterTest {
         }
     };
 
-    private ProductPresenter productPresenter;
+    private ProductResponseAssembler productResponseAssembler;
     private SellerProduct sellerProduct;
 
     @Mock
@@ -42,10 +48,12 @@ public class ProductPresenterTest {
 
     @BeforeEach
     public void setUp() {
-        productPresenter = new ProductPresenter();
+        productResponseAssembler = new ProductResponseAssembler();
 
-        seller = new Seller(SELLER_NAME, SELLER_BIO, SELLER_BIRTHDATE);
-        product = new Product(seller.getId(),
+        seller = new Seller(SELLER_ID, SELLER_NAME, SELLER_BIO, SELLER_BIRTHDATE, SELLER_CREATED_AT);
+        product = new Product(PRODUCT_ID,
+                seller.getId(),
+                PRODUCT_CREATED_AT,
                 PRODUCT_TITLE,
                 PRODUCT_DESCRIPTION,
                 PRODUCT_SUGGESTED_PRICE,
@@ -55,7 +63,7 @@ public class ProductPresenterTest {
 
     @Test
     public void givenSellerProduct_whenPresenting_thenReturnProductResponse() {
-        ProductResponse productResponse = productPresenter.presentProduct(sellerProduct);
+        ProductResponse productResponse = productResponseAssembler.presentProduct(sellerProduct);
 
         assertEquals(productResponse.getId(), sellerProduct.getProduct().getId());
         assertEquals(productResponse.getCreatedAt(), sellerProduct.getProduct().getCreatedAt().toString());
@@ -75,7 +83,7 @@ public class ProductPresenterTest {
             }
         };
 
-        ProductsResponse productsResponse = productPresenter.presentProducts(sellerProductList);
+        ProductsResponse productsResponse = productResponseAssembler.presentProducts(sellerProductList);
 
         assertNotNull(productsResponse.getProducts());
     }

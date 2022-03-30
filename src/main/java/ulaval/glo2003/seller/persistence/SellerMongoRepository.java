@@ -1,49 +1,45 @@
 package ulaval.glo2003.seller.persistence;
 
 import dev.morphia.query.Query;
-import dev.morphia.query.experimental.filters.Filter;
 import dev.morphia.query.experimental.filters.Filters;
-import org.bson.types.ObjectId;
 import ulaval.glo2003.context.DatastoreProvider;
 import ulaval.glo2003.exceptions.ItemNotFoundException;
-import ulaval.glo2003.seller.SellerRepository;
-import ulaval.glo2003.seller.Seller;
+import ulaval.glo2003.exceptions.MissingParameterException;
+import ulaval.glo2003.seller.domain.SellerRepository;
+import ulaval.glo2003.seller.domain.Seller;
 
 import java.util.UUID;
 
 public class SellerMongoRepository implements SellerRepository {
     private final DatastoreProvider datastoreProvider;
+    private final SellerModelAssembler sellerModelAssembler;
 
-    public SellerMongoRepository(DatastoreProvider datastoreProvider) {
+    public SellerMongoRepository(DatastoreProvider datastoreProvider, SellerModelAssembler sellerModelAssembler) {
         this.datastoreProvider = datastoreProvider;
+        this.sellerModelAssembler = sellerModelAssembler;
     }
 
     @Override
     public void saveSeller(Seller seller) {
-        SellerEntity sellerEntity = new SellerEntity(
-                UUID.fromString(seller.getId()),
-                seller.getName(),
-                seller.getBio(),
-                seller.getBirthDate(),
-                seller.getCreatedAt()
-        );
-        datastoreProvider.getDatastore().save(sellerEntity);
+        SellerMongoModel sellerMongoModel = sellerModelAssembler.assembleEntityToMongoModel(seller);
+        datastoreProvider.getDatastore().save(sellerMongoModel);
     }
 
     @Override
     public Seller findById(String id) {
-        Query<SellerEntity> sellerEntityQuery = datastoreProvider.getDatastore().find(SellerEntity.class);
-        sellerEntityQuery.filter(Filters.eq("_id", UUID.fromString(id)));
-        SellerEntity sellerEntity = sellerEntityQuery.first();
-        if (sellerEntity == null) {
+        if (id.isBlank()){
+            throw new MissingParameterException("Missing seller ID");
+        }
+        Query<SellerMongoModel> sellerEntityQuery = datastoreProvider.getDatastore().find(SellerMongoModel.class);
+        try {
+            sellerEntityQuery.filter(Filters.eq("_id", UUID.fromString(id)));
+        }catch (Exception e){
             throw new ItemNotFoundException();
         }
-        return new Seller(
-                sellerEntity.getId().toString(),
-                sellerEntity.getName(),
-                sellerEntity.getBio(),
-                sellerEntity.getBirthDate(),
-                sellerEntity.getCreatedAt()
-        );
+        SellerMongoModel sellerMongoModel = sellerEntityQuery.first();
+        if (sellerMongoModel == null) {
+            throw new ItemNotFoundException();
+        }
+        return sellerModelAssembler.assembleMongoModelToEntity(sellerMongoModel);
     }
 }

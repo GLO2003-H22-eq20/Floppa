@@ -5,27 +5,33 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ulaval.glo2003.product.Product;
-import ulaval.glo2003.product.ProductCategory;
-import ulaval.glo2003.seller.Seller;
-import ulaval.glo2003.seller.application.SellerProducts;
-import ulaval.glo2003.seller.api.response.SellerPresenter;
-import ulaval.glo2003.seller.api.response.SellerResponse;
+import ulaval.glo2003.product.domain.Product;
+import ulaval.glo2003.product.domain.ProductCategory;
+import ulaval.glo2003.seller.domain.Seller;
+import ulaval.glo2003.seller.domain.SellerProducts;
+import ulaval.glo2003.seller.ui.response.SellerResponseAssembler;
+import ulaval.glo2003.seller.ui.response.SellerResponse;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith({MockitoExtension.class})
 public class SellerPresenterTest {
+    private static final UUID SELLER_ID = UUID.randomUUID();
     private static final String SELLER_NAME = "testSellerName";
     private static final LocalDate SELLER_BIRTHDATE = LocalDate.of(1996, 2, 3);
     private static final String SELLER_BIO = "testSellerBio";
+    private static final Instant SELLER_CREATED_AT = Instant.now();
+    private static final UUID PRODUCT_ID = UUID.randomUUID();
     private static final String PRODUCT_TITLE = "testProductTitle";
     private static final String PRODUCT_DESCRIPTION = "testProductDescription";
+    private static final Instant PRODUCT_CREATED_AT = Instant.now();
     private static final Float PRODUCT_SUGGESTED_PRICE = 1.0f;
     private static final List<ProductCategory> PRODUCT_CATEGORIES = new ArrayList<>() {
         {
@@ -34,7 +40,7 @@ public class SellerPresenterTest {
         }
     };
 
-    private SellerPresenter sellerPresenter;
+    private SellerResponseAssembler sellerResponseAssembler;
     private SellerProducts sellerProducts;
 
     @Mock
@@ -42,12 +48,14 @@ public class SellerPresenterTest {
 
     @BeforeEach
     public void setUp() {
-        sellerPresenter = new SellerPresenter();
+        sellerResponseAssembler = new SellerResponseAssembler();
 
-        seller = new Seller(SELLER_NAME, SELLER_BIO, SELLER_BIRTHDATE);
+        seller = new Seller(SELLER_ID, SELLER_NAME, SELLER_BIO, SELLER_BIRTHDATE, SELLER_CREATED_AT);
         List<Product> products = new ArrayList<>() {
             {
-                add(new Product(seller.getId(),
+                add(new Product(PRODUCT_ID,
+                        seller.getId(),
+                        PRODUCT_CREATED_AT,
                         PRODUCT_TITLE,
                         PRODUCT_DESCRIPTION,
                         PRODUCT_SUGGESTED_PRICE,
@@ -59,7 +67,7 @@ public class SellerPresenterTest {
 
     @Test
     public void givenSellerProducts_whenPresenting_thenReturnSellerResponse() {
-        SellerResponse sellerResponse = sellerPresenter.presentSeller(sellerProducts);
+        SellerResponse sellerResponse = sellerResponseAssembler.presentSeller(sellerProducts);
 
         assertEquals(sellerResponse.getId(), sellerProducts.getSeller().getId());
         assertEquals(sellerResponse.getName(), sellerProducts.getSeller().getName());

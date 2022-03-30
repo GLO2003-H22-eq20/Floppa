@@ -1,9 +1,9 @@
 package ulaval.glo2003.product.persistence;
 
 import ulaval.glo2003.exceptions.ItemNotFoundException;
-import ulaval.glo2003.product.ProductRepository;
-import ulaval.glo2003.product.Product;
-import ulaval.glo2003.product.ProductCategory;
+import ulaval.glo2003.product.domain.ProductRepository;
+import ulaval.glo2003.product.domain.Product;
+import ulaval.glo2003.product.domain.ProductCategory;
 
 import java.util.*;
 import java.util.stream.Collectors;

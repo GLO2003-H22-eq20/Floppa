@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.exceptions.InvalidParameterException;
 import ulaval.glo2003.exceptions.MissingParameterException;
-import ulaval.glo2003.seller.Seller;
-import ulaval.glo2003.seller.application.SellerFactory;
+import ulaval.glo2003.seller.domain.Seller;
+import ulaval.glo2003.seller.domain.SellerFactory;
 
 import java.time.LocalDate;
 

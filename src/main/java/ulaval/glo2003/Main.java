@@ -5,22 +5,24 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import ulaval.glo2003.exceptions.mappers.DefaultExceptionMapper;
-import ulaval.glo2003.product.application.ProductFactory;
-import ulaval.glo2003.product.application.ProductService;
-import ulaval.glo2003.seller.application.SellerFactory;
-import ulaval.glo2003.seller.application.SellerService;
+import ulaval.glo2003.product.domain.ProductFactory;
+import ulaval.glo2003.product.persistence.ProductModelAssembler;
+import ulaval.glo2003.product.service.ProductService;
+import ulaval.glo2003.seller.domain.SellerFactory;
+import ulaval.glo2003.seller.domain.SellerService;
 import ulaval.glo2003.context.DatastoreProvider;
 import ulaval.glo2003.exceptions.mappers.InvalidParameterExceptionMapper;
 import ulaval.glo2003.exceptions.mappers.ItemNotFoundExceptionMapper;
 import ulaval.glo2003.exceptions.mappers.MissingParameterExceptionMapper;
 import ulaval.glo2003.health.HealthResource;
-import ulaval.glo2003.product.api.ProductResource;
-import ulaval.glo2003.product.ProductRepository;
-import ulaval.glo2003.product.api.response.ProductPresenter;
-import ulaval.glo2003.seller.api.SellerResource;
-import ulaval.glo2003.seller.api.response.SellerPresenter;
+import ulaval.glo2003.product.ui.ProductResource;
+import ulaval.glo2003.product.domain.ProductRepository;
+import ulaval.glo2003.product.ui.response.ProductResponseAssembler;
+import ulaval.glo2003.seller.ui.SellerResource;
+import ulaval.glo2003.seller.ui.response.SellerResponseAssembler;
 import ulaval.glo2003.product.persistence.ProductMongoRepository;
-import ulaval.glo2003.seller.SellerRepository;
+import ulaval.glo2003.seller.domain.SellerRepository;
+import ulaval.glo2003.seller.persistence.SellerModelAssembler;
 import ulaval.glo2003.seller.persistence.SellerMongoRepository;
 
 import java.io.IOException;
@@ -37,14 +39,16 @@ public class Main {
         URI uri = URI.create("http://localhost:8080/");
 
         DatastoreProvider datastoreProvider = new DatastoreProvider();
-        SellerRepository sellerRepository = new SellerMongoRepository(datastoreProvider);
-        ProductRepository productRepository = new ProductMongoRepository(datastoreProvider);
+        SellerModelAssembler sellerModelAssembler = new SellerModelAssembler();
+        ProductModelAssembler productModelAssembler = new ProductModelAssembler();
+        SellerRepository sellerRepository = new SellerMongoRepository(datastoreProvider, sellerModelAssembler);
+        ProductRepository productRepository = new ProductMongoRepository(datastoreProvider, productModelAssembler);
         SellerFactory sellerFactory = new SellerFactory();
         SellerService sellerService = new SellerService(sellerRepository, productRepository, sellerFactory);
-        SellerPresenter sellerPresenter = new SellerPresenter();
+        SellerResponseAssembler sellerResponseAssembler = new SellerResponseAssembler();
         ProductFactory productFactory = new ProductFactory();
         ProductService productService = new ProductService(productRepository, sellerRepository, productFactory);
-        ProductPresenter productPresenter = new ProductPresenter();
+        ProductResponseAssembler productResponseAssembler = new ProductResponseAssembler();
 
         LoggingFeature loggingFeature = new LoggingFeature(Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME),
                 Level.INFO, LoggingFeature.Verbosity.PAYLOAD_ANY, 10000);
@@ -55,8 +59,8 @@ public class Main {
                 .register(InvalidParameterExceptionMapper.class)
                 .register(MissingParameterExceptionMapper.class)
                 .register(DefaultExceptionMapper.class)
-                .register(new SellerResource(sellerService, sellerPresenter, uri))
-                .register(new ProductResource(productService, productPresenter, uri))
+                .register(new SellerResource(sellerService, sellerResponseAssembler, uri))
+                .register(new ProductResource(productService, productResponseAssembler, uri))
                 .register(HealthResource.class)
                 .packages("ulaval.glo2003");
 

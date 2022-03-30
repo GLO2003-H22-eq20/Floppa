@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.exceptions.InvalidParameterException;
 import ulaval.glo2003.exceptions.MissingParameterException;
-import ulaval.glo2003.product.Product;
-import ulaval.glo2003.product.application.ProductFactory;
+import ulaval.glo2003.product.domain.Product;
+import ulaval.glo2003.product.domain.ProductFactory;
 
 import java.util.ArrayList;
 import java.util.List;

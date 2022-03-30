@@ -1,19 +1,27 @@
 package ulaval.glo2003.seller;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.exceptions.ItemNotFoundException;
+import ulaval.glo2003.seller.domain.Seller;
+import ulaval.glo2003.seller.domain.SellerRepository;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static com.google.common.truth.Truth.assertThat;
 
 public abstract class SellerRepositoryTest {
-    private static final String ID = "50";
+    private static final UUID ID = UUID.randomUUID();
+    private static final UUID NONE_EXISTING_ID = UUID.randomUUID();
     private static final String NAME = "Carey Price";
     private static final String BIO = "Hockey";
     private static final LocalDate BIRTH_DATE = LocalDate.of(1987, 8, 16);
+    private static final Instant CREATED_AT = Instant.now();
 
     private SellerRepository sellerRepository;
     private Seller seller;
@@ -21,7 +29,7 @@ public abstract class SellerRepositoryTest {
     @BeforeEach
     public void setUp() {
         sellerRepository = createSellerRepository();
-        seller = new Seller(NAME, BIO, BIRTH_DATE);
+        seller = new Seller(ID, NAME, BIO, BIRTH_DATE, CREATED_AT);
     }
 
     @Test
@@ -34,7 +42,7 @@ public abstract class SellerRepositoryTest {
 
     @Test
     public void whenRetrievingNonExistantSeller_thenRetrievingByIdThrowsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class, () -> sellerRepository.findById(ID));
+        assertThrows(ItemNotFoundException.class, () -> sellerRepository.findById(NONE_EXISTING_ID.toString()));
     }
 
     protected abstract SellerRepository createSellerRepository();

@@ -6,12 +6,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ulaval.glo2003.product.api.request.ProductRequest;
-import ulaval.glo2003.product.Product;
-import ulaval.glo2003.product.application.ProductFactory;
-import ulaval.glo2003.product.application.ProductService;
-import ulaval.glo2003.seller.Seller;
-import ulaval.glo2003.product.application.SellerProduct;
+import ulaval.glo2003.product.ui.request.ProductRequest;
+import ulaval.glo2003.product.domain.Product;
+import ulaval.glo2003.product.domain.ProductFactory;
+import ulaval.glo2003.product.service.ProductService;
+import ulaval.glo2003.product.domain.SellerProduct;
+import ulaval.glo2003.seller.domain.Seller;
 import ulaval.glo2003.product.persistence.ProductInMemoryRepository;
 import ulaval.glo2003.seller.persistence.SellerInMemoryRepository;
 
