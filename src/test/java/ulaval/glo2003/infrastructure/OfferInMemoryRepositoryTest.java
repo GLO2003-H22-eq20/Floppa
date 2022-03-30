@@ -4,12 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Spy;
 import ulaval.glo2003.domain.Offer;
+import ulaval.glo2003.offer.persistence.OfferInMemoryRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class OfferRepositoryTest {
+public class OfferInMemoryRepositoryTest {
     private static final String PRODUCT_ID = "1";
     private static final String NAME = "John Doe";
     private static final String EMAIL = "john.doe@gmail.com";
@@ -21,26 +22,26 @@ public class OfferRepositoryTest {
     private static final Long ONE = 1L;
 
     @Spy
-    private OfferRepository offerRepository;
+    private OfferInMemoryRepository offerInMemoryRepository;
     private Offer offer;
 
     @BeforeEach
     public void setUp() {
-        offerRepository = new OfferRepository();
+        offerInMemoryRepository = new OfferInMemoryRepository();
         offer = new Offer(PRODUCT_ID, NAME, EMAIL, PHONENUMBER, AMOUNT, MESSAGE);
     }
 
     @Test
     public void givenOffer_whenSaving_thenCanGetProductOffers() {
-        offerRepository.saveOffer(offer);
+        offerInMemoryRepository.saveOffer(offer);
 
-        assertEquals(offerRepository.getOffers(PRODUCT_ID).getCount(), ONE);
-        assertNotNull(offerRepository.getOffers(PRODUCT_ID).getMean());
+        assertEquals(offerInMemoryRepository.getOffers(PRODUCT_ID).getCount(), ONE);
+        assertNotNull(offerInMemoryRepository.getOffers(PRODUCT_ID).getMean());
     }
 
     @Test
     public void whenRetrievingMissingProductOffers_thenReturnsValidOffers() {
-        assertEquals(offerRepository.getOffers(PRODUCT_ID).getCount(), ZERO);
-        assertNull(offerRepository.getOffers(PRODUCT_ID).getMean());
+        assertEquals(offerInMemoryRepository.getOffers(PRODUCT_ID).getCount(), ZERO);
+        assertNull(offerInMemoryRepository.getOffers(PRODUCT_ID).getMean());
     }
 }

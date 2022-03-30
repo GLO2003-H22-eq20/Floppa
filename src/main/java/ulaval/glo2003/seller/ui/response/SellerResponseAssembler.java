@@ -1,6 +1,6 @@
 package ulaval.glo2003.seller.ui.response;
 
-import ulaval.glo2003.domain.valueObject.ProductOffers;
+import ulaval.glo2003.offer.domain.ProductOffers;
 import ulaval.glo2003.product.ui.response.ProductResponse;
 import ulaval.glo2003.seller.domain.SellerProducts;
 

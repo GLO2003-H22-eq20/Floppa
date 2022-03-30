@@ -5,12 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ulaval.glo2003.domain.Offer;
-import ulaval.glo2003.infrastructure.OfferRepository;
+import ulaval.glo2003.offer.persistence.OfferInMemoryRepository;
+import ulaval.glo2003.offer.domain.OfferFactory;
+import ulaval.glo2003.offer.service.OfferService;
 import ulaval.glo2003.product.domain.Product;
-import ulaval.glo2003.controllers.offer.dtos.OfferRequest;
+import ulaval.glo2003.offer.ui.request.OfferRequest;
 import ulaval.glo2003.product.domain.ProductRepository;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -34,7 +35,7 @@ public class OfferServiceTest {
     @Mock
     private Offer offer;
     @Mock
-    private OfferRepository offerRepository;
+    private OfferInMemoryRepository offerInMemoryRepository;
     @Mock
     private ProductRepository productRepository;
     @Mock
@@ -54,7 +55,7 @@ public class OfferServiceTest {
 
     @BeforeEach
     public void setUp() {
-        offerService = new OfferService(offerRepository, productRepository, offerFactory);
+        offerService = new OfferService(offerInMemoryRepository, productRepository, offerFactory);
     }
 
     @Test
@@ -82,7 +83,7 @@ public class OfferServiceTest {
 
         offerService.createOffer(PRODUCT_ID, request);
 
-        verify(offerRepository).saveOffer(offer);
+        verify(offerInMemoryRepository).saveOffer(offer);
     }
 
     @Test

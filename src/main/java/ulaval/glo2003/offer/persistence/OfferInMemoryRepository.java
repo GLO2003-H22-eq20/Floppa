@@ -1,6 +1,7 @@
-package ulaval.glo2003.infrastructure;
+package ulaval.glo2003.offer.persistence;
 
 import ulaval.glo2003.domain.Offer;
+import ulaval.glo2003.offer.domain.OfferRepository;
 import ulaval.glo2003.product.domain.Offers;
 
 import java.text.DecimalFormat;
@@ -12,7 +13,7 @@ import java.util.Objects;
 import java.util.OptionalDouble;
 
 
-public class OfferRepository {
+public class OfferInMemoryRepository implements OfferRepository {
     private final DecimalFormat decimalFormat = new DecimalFormat(
             String.format(
                     "#%s##",

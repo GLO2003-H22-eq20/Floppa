@@ -1,4 +1,4 @@
-package ulaval.glo2003.application.offer;
+package ulaval.glo2003.offer.domain;
 
 
 

@@ -10,7 +10,8 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import ulaval.glo2003.application.offer.OfferService;
+import ulaval.glo2003.offer.service.OfferService;
+import ulaval.glo2003.offer.ui.request.OfferRequest;
 import ulaval.glo2003.product.domain.SellerProduct;
 import ulaval.glo2003.product.service.ProductService;
 import ulaval.glo2003.product.ui.request.ProductRequest;
@@ -80,7 +81,7 @@ public class ProductResource {
     @POST
     @Path("{productId}/offers")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createOffer(@PathParam("productId") String id, @NotNull ulaval.glo2003.controllers.offer.dtos.OfferRequest offerRequest) {
+    public Response createOffer(@PathParam("productId") String id, @NotNull OfferRequest offerRequest) {
         offerService.createOffer(id, offerRequest);
         return Response.status(Response.Status.OK).build();
     }

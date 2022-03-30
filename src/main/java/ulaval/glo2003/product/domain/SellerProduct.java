@@ -1,7 +1,7 @@
 package ulaval.glo2003.product.domain;
 
 
-import ulaval.glo2003.domain.valueObject.ProductOffers;
+import ulaval.glo2003.offer.domain.ProductOffers;
 import ulaval.glo2003.seller.domain.Seller;
 
 public class SellerProduct {

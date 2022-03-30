@@ -2,8 +2,8 @@ package ulaval.glo2003.seller.domain;
 
 
 
-import ulaval.glo2003.domain.valueObject.ProductOffers;
-import ulaval.glo2003.infrastructure.OfferRepository;
+import ulaval.glo2003.offer.domain.ProductOffers;
+import ulaval.glo2003.offer.persistence.OfferInMemoryRepository;
 import ulaval.glo2003.product.domain.ProductRepository;
 import ulaval.glo2003.seller.ui.request.SellerRequest;
 
@@ -13,16 +13,16 @@ import java.util.stream.Collectors;
 public class SellerService {
     private final SellerRepository sellerRepository;
     private final ProductRepository productRepository;
-    private final OfferRepository offerRepository;
+    private final OfferInMemoryRepository offerInMemoryRepository;
     private final SellerFactory sellerFactory;
 
     public SellerService(SellerRepository sellerRepository,
             ProductRepository productRepository,
-            OfferRepository offerRepository,
+            OfferInMemoryRepository offerInMemoryRepository,
             SellerFactory sellerFactory) {
         this.sellerRepository = sellerRepository;
         this.productRepository = productRepository;
-        this.offerRepository = offerRepository;
+        this.offerInMemoryRepository = offerInMemoryRepository;
         this.sellerFactory = sellerFactory;
     }
 
@@ -37,7 +37,7 @@ public class SellerService {
     public SellerProducts getSeller(String id) {
         Seller seller = sellerRepository.findById(id);
         List<ProductOffers> products = productRepository.findProductsBySellerId(id)
-                .stream().map(product -> new ProductOffers(product, offerRepository.getOffers(product.getId())))
+                .stream().map(product -> new ProductOffers(product, offerInMemoryRepository.getOffers(product.getId())))
                 .collect(Collectors.toList());
 
         return new SellerProducts(seller, products);

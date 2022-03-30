@@ -1,4 +1,4 @@
-package ulaval.glo2003.domain.valueObject;
+package ulaval.glo2003.offer.domain;
 
 
 import ulaval.glo2003.product.domain.Offers;

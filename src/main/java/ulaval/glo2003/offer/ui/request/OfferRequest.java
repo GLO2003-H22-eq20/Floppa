@@ -1,4 +1,4 @@
-package ulaval.glo2003.controllers.offer.dtos;
+package ulaval.glo2003.offer.ui.request;
 
 public class OfferRequest {
     public String name;

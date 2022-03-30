@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ulaval.glo2003.domain.Offer;
 import ulaval.glo2003.exceptions.InvalidParameterException;
 import ulaval.glo2003.exceptions.MissingParameterException;
+import ulaval.glo2003.offer.domain.OfferFactory;
 import ulaval.glo2003.product.domain.Product;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;

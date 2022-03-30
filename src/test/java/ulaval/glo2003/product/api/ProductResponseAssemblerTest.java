@@ -3,7 +3,7 @@ package ulaval.glo2003.product.api;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import ulaval.glo2003.domain.valueObject.ProductOffers;
+import ulaval.glo2003.offer.domain.ProductOffers;
 import ulaval.glo2003.product.domain.Offers;
 import ulaval.glo2003.product.domain.Product;
 import ulaval.glo2003.product.domain.ProductCategory;
