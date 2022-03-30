@@ -6,18 +6,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ulaval.glo2003.seller.ui.request.SellerRequest;
+import ulaval.glo2003.domain.valueObject.ProductOffers;
+import ulaval.glo2003.infrastructure.OfferRepository;
+import ulaval.glo2003.product.domain.Offers;
 import ulaval.glo2003.product.domain.Product;
-import ulaval.glo2003.seller.domain.Seller;
-import ulaval.glo2003.product.persistence.ProductInMemoryRepository;
-import ulaval.glo2003.seller.domain.SellerFactory;
-import ulaval.glo2003.seller.domain.SellerProducts;
-import ulaval.glo2003.seller.domain.SellerService;
-import ulaval.glo2003.seller.persistence.SellerInMemoryRepository;
+import ulaval.glo2003.product.domain.ProductRepository;
+import ulaval.glo2003.seller.domain.*;
+import ulaval.glo2003.seller.ui.request.SellerRequest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -34,9 +34,11 @@ public class SellerServiceTest {
     @Mock
     private SellerFactory sellerFactory;
     @Mock
-    private SellerInMemoryRepository sellerInMemoryRepository;
+    private SellerRepository sellerRepository;
     @Mock
-    private ProductInMemoryRepository productRepository;
+    private ProductRepository productRepository;
+    @Mock
+    private OfferRepository offerRepository;
 
     SellerRequest request = new SellerRequest() {
         {
@@ -51,7 +53,7 @@ public class SellerServiceTest {
 
     @BeforeEach
     public void setUp() {
-        sellerService = new SellerService(sellerInMemoryRepository, productRepository, sellerFactory);
+        sellerService = new SellerService(sellerRepository, productRepository, offerRepository, sellerFactory);
     }
 
     @Test
@@ -69,7 +71,7 @@ public class SellerServiceTest {
 
         sellerService.createSeller(request);
 
-        verify(sellerInMemoryRepository).saveSeller(seller);
+        verify(sellerRepository).saveSeller(seller);
     }
 
     @Test
@@ -88,7 +90,7 @@ public class SellerServiceTest {
 
         sellerService.getSeller(anyString());
 
-        verify(sellerInMemoryRepository).findById(anyString());
+        verify(sellerRepository).findById(anyString());
     }
 
     @Test
@@ -105,7 +107,9 @@ public class SellerServiceTest {
     public void whenGettingASeller_thenReturnsSellerProducts() {
         Seller seller = givenASellerCanBeFound();
         List<Product> products = givenProductsExist();
-        SellerProducts expectedSellerProducts = new SellerProducts(seller, products);
+        List<ProductOffers> productsOffers = products.stream()
+                .map(product -> new ProductOffers(product, givenOffersCanBeFound())).collect(Collectors.toList());
+        SellerProducts expectedSellerProducts = new SellerProducts(seller, productsOffers);
 
         SellerProducts sellerProducts = sellerService.getSeller(anyString());
 
@@ -121,7 +125,7 @@ public class SellerServiceTest {
 
     private Seller givenASellerCanBeFound() {
         Seller seller = mock(Seller.class);
-        willReturn(seller).given(sellerInMemoryRepository).findById(anyString());
+        willReturn(seller).given(sellerRepository).findById(anyString());
         return seller;
     }
 
@@ -129,5 +133,11 @@ public class SellerServiceTest {
         List<Product> products = new ArrayList<>();
         willReturn(products).given(productRepository).findProductsBySellerId(anyString());
         return products;
+    }
+
+    private Offers givenOffersCanBeFound() {
+        Offers offers =  mock(Offers.class);
+        willReturn(offers).given(offerRepository).getOffers(anyString());
+        return offers;
     }
 }

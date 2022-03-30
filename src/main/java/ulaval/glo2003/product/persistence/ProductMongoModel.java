@@ -19,7 +19,7 @@ public class ProductMongoModel {
     private final Instant createdAt;
     private final String title;
     private final String description;
-    private final Float suggestedPrice;
+    private final Double suggestedPrice;
     private final List<UUID> offers;
     private final List<ProductCategory> categories;
 
@@ -29,7 +29,7 @@ public class ProductMongoModel {
             Instant createdAt,
             String title,
             String description,
-            Float suggestedPrice,
+            Double suggestedPrice,
             List<ProductCategory> categories
     ) {
         this.id = id;
@@ -62,7 +62,7 @@ public class ProductMongoModel {
         return description;
     }
 
-    public Float getSuggestedPrice() {
+    public Double getSuggestedPrice() {
         return suggestedPrice;
     }
 

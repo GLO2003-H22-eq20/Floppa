@@ -62,8 +62,8 @@ public class ProductMongoRepository implements ProductRepository {
             String sellerId,
             String title,
             List<ProductCategory> categories,
-            Float minPrice,
-            Float maxPrice
+            Double minPrice,
+            Double maxPrice
     ) {
         Query<ProductMongoModel> productEntityQuery = datastoreProvider.getDatastore().find(ProductMongoModel.class);
 

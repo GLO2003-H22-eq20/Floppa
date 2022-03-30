@@ -10,6 +10,6 @@ public interface ProductRepository {
     Product findById(String id);
 
     List<Product> findFilteredProducts(String sellerId, String title,
-                                       List<ProductCategory> categories, Float minPrice,
-                                       Float maxPrice);
+                                       List<ProductCategory> categories, Double minPrice,
+                                       Double maxPrice);
 }

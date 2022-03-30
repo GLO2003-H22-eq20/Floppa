@@ -10,12 +10,14 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import ulaval.glo2003.application.offer.OfferService;
+import ulaval.glo2003.product.domain.SellerProduct;
 import ulaval.glo2003.product.service.ProductService;
 import ulaval.glo2003.product.ui.request.ProductRequest;
-import ulaval.glo2003.product.ui.response.ProductResponseAssembler;
-import ulaval.glo2003.product.domain.SellerProduct;
 import ulaval.glo2003.product.ui.response.ProductResponse;
+import ulaval.glo2003.product.ui.response.ProductResponseAssembler;
 import ulaval.glo2003.product.ui.response.ProductsResponse;
+
 
 import java.net.URI;
 import java.util.List;
@@ -23,11 +25,14 @@ import java.util.List;
 @Path("products")
 public class ProductResource {
     private final ProductService productService;
+    private final OfferService offerService;
     private final ProductResponseAssembler productResponseAssembler;
     private final URI baseUri;
 
-    public ProductResource(ProductService productService, ProductResponseAssembler productResponseAssembler, URI baseUri) {
+    public ProductResource(ProductService productService, OfferService offerService,
+                           ProductResponseAssembler productResponseAssembler, URI baseUri) {
         this.productService = productService;
+        this.offerService = offerService;
         this.baseUri = baseUri;
         this.productResponseAssembler = productResponseAssembler;
     }
@@ -55,8 +60,8 @@ public class ProductResource {
     public Response getFilteredProducts(@QueryParam("sellerId") String sellerId,
                                         @QueryParam("title") String title,
                                         @QueryParam("categories") List<String> categories,
-                                        @QueryParam("minPrice") Float minPrice,
-                                        @QueryParam("maxPrice") Float maxPrice) {
+                                        @QueryParam("minPrice") Double minPrice,
+                                        @QueryParam("maxPrice") Double maxPrice) {
         try {
             List<SellerProduct> sellersProducts = productService.getFilteredProducts(sellerId,
                                                                                      title,
@@ -70,5 +75,13 @@ public class ProductResource {
         } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
+    }
+
+    @POST
+    @Path("{productId}/offers")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createOffer(@PathParam("productId") String id, @NotNull ulaval.glo2003.controllers.offer.dtos.OfferRequest offerRequest) {
+        offerService.createOffer(id, offerRequest);
+        return Response.status(Response.Status.OK).build();
     }
 }

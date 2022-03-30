@@ -1,7 +1,7 @@
 package ulaval.glo2003.seller.ui.response;
 
+import ulaval.glo2003.domain.valueObject.ProductOffers;
 import ulaval.glo2003.product.ui.response.ProductResponse;
-import ulaval.glo2003.product.domain.Product;
 import ulaval.glo2003.seller.domain.SellerProducts;
 
 import java.util.List;
@@ -16,16 +16,16 @@ public class SellerResponseAssembler {
                 presentProducts(sellerProducts.getProducts()));
     }
 
-    private List<ProductResponse> presentProducts(List<Product> productList) {
-        return productList.stream()
-                .map(product ->
-                        new ProductResponse(product.getId(),
-                                product.getCreatedAt().toString(),
-                                product.getTitle(),
-                                product.getDescription(),
-                                product.getSuggestedPrice(),
-                                product.getOffer(),
-                                product.getCategories().stream()
+    private List<ProductResponse> presentProducts(List<ProductOffers> productsOffers) {
+        return productsOffers.stream()
+                .map(productOffers ->
+                        new ProductResponse(productOffers.getProduct().getId(),
+                                productOffers.getProduct().getCreatedAt().toString(),
+                                productOffers.getProduct().getTitle(),
+                                productOffers.getProduct().getDescription(),
+                                productOffers.getProduct().getSuggestedPrice(),
+                                productOffers.getOffers(),
+                                productOffers.getProduct().getCategories().stream()
                                         .map(Enum::toString)
                                         .collect(Collectors.toList())))
                 .collect(Collectors.toList());

@@ -4,11 +4,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import ulaval.glo2003.seller.ui.request.SellerRequest;
-import ulaval.glo2003.seller.domain.SellerService;
-import ulaval.glo2003.seller.ui.response.SellerResponseAssembler;
-import ulaval.glo2003.seller.ui.response.SellerResponse;
 import ulaval.glo2003.seller.domain.SellerProducts;
+import ulaval.glo2003.seller.domain.SellerService;
+import ulaval.glo2003.seller.ui.request.SellerRequest;
+import ulaval.glo2003.seller.ui.response.SellerResponse;
+import ulaval.glo2003.seller.ui.response.SellerResponseAssembler;
 
 import java.net.URI;
 

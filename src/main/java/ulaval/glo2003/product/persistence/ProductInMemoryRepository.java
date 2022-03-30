@@ -33,8 +33,8 @@ public class ProductInMemoryRepository implements ProductRepository {
 
     @Override
     public List<Product> findFilteredProducts(String sellerId, String title,
-                                              List<ProductCategory> categories, Float minPrice,
-                                              Float maxPrice) {
+                                              List<ProductCategory> categories, Double minPrice,
+                                              Double maxPrice) {
         List<Product> products = new ArrayList<>(productMap.values());
         if (Optional.ofNullable(sellerId).isPresent()) {
             products = filterBySellerId(sellerId, products);
@@ -73,13 +73,13 @@ public class ProductInMemoryRepository implements ProductRepository {
                 .collect(Collectors.toList());
     }
 
-    private List<Product> filterByMinPrice(Float minPrice, List<Product> products) {
+    private List<Product> filterByMinPrice(Double minPrice, List<Product> products) {
         return products.stream()
                 .filter(product -> product.getSuggestedPrice() >= minPrice)
                 .collect(Collectors.toList());
     }
 
-    private List<Product> filterByMaxPrice(Float maxPrice, List<Product> products) {
+    private List<Product> filterByMaxPrice(Double maxPrice, List<Product> products) {
         return products.stream()
                 .filter(product -> product.getSuggestedPrice() <= maxPrice)
                 .collect(Collectors.toList());

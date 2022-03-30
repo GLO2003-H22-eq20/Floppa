@@ -11,6 +11,7 @@ import static io.restassured.RestAssured.given;
 import static ulaval.glo2003.E2E.fixtures.SellerFixture.getIdFromLocation;
 
 public class ProductFixture extends EndToEndTest {
+    public static final String JSON = "application/json";
 
     public static Map<String, Object> createProductRequest(String title,
             String description,
@@ -26,6 +27,22 @@ public class ProductFixture extends EndToEndTest {
         return productRequest;
     }
 
+    public static Map<String, Object> createOfferRequest(
+            String name,
+            String email,
+            String phoneNumber,
+            Double amount,
+            String message) {
+        Map<String, Object> offerRequest = new HashMap<>();
+        offerRequest.put("name", name);
+        offerRequest.put("email", email);
+        offerRequest.put("phoneNumber", phoneNumber);
+        offerRequest.put("amount", amount);
+        offerRequest.put("message", message);
+
+        return offerRequest;
+    }
+
     public static Map<String, Object> givenValidProductRequest() {
         return createProductRequest("Willy Waller 2006", "Epeluche patate", "10.85", new String[]{"sports"});
     }
@@ -37,13 +54,13 @@ public class ProductFixture extends EndToEndTest {
 
     public static RequestSpecification givenNewProductForSeller(Map<String, Object> request, String sellerId) {
         return given()
-                .contentType("application/json")
+                .contentType(JSON)
                 .header(new Header("X-Seller-Id", sellerId))
                 .body(request);
     }
 
     public static String givenExistingProductLocation(Map<String, Object> request, String sellerId) {
-        return given().contentType("application/json").body(request)
+        return given().contentType(JSON).body(request)
                 .header(new Header("X-Seller-Id", sellerId))
                 .when().post("/products")
                 .then().extract()

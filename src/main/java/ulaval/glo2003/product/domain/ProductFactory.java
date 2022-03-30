@@ -11,12 +11,12 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ProductFactory {
-    private final float MINIMUM_SUGGESTED_PRICE = 1.0f;
+    private final Double MINIMUM_SUGGESTED_PRICE = 1.;
 
     public Product createProduct(String sellerId,
                                  String title,
                                  String description,
-                                 Float suggestedPrice,
+                                 Double suggestedPrice,
                                  List<String> categories) {
         validateTitle(title);
         validateDescription(description);
@@ -41,7 +41,7 @@ public class ProductFactory {
         }
     }
 
-    private void validateSuggestedPrice(Float suggestedPrice) {
+    private void validateSuggestedPrice(Double suggestedPrice) {
         if (suggestedPrice == null) {
             throw new MissingParameterException("Missing suggested price");
         } else if (suggestedPrice < MINIMUM_SUGGESTED_PRICE) {

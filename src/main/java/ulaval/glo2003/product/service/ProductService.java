@@ -1,12 +1,11 @@
 package ulaval.glo2003.product.service;
 
+
+import ulaval.glo2003.domain.valueObject.ProductOffers;
+import ulaval.glo2003.infrastructure.OfferRepository;
+import ulaval.glo2003.product.domain.*;
 import ulaval.glo2003.product.ui.request.ProductRequest;
-import ulaval.glo2003.product.domain.Product;
-import ulaval.glo2003.product.domain.ProductCategory;
-import ulaval.glo2003.product.domain.ProductFactory;
-import ulaval.glo2003.product.domain.SellerProduct;
 import ulaval.glo2003.seller.domain.Seller;
-import ulaval.glo2003.product.domain.ProductRepository;
 import ulaval.glo2003.seller.domain.SellerRepository;
 
 import java.util.List;
@@ -15,14 +14,16 @@ import java.util.stream.Collectors;
 
 public class ProductService {
     private final ProductRepository productRepository;
-    private final ProductFactory productFactory;
     private final SellerRepository sellerRepository;
+    private final OfferRepository offerRepository;
+    private final ProductFactory productFactory;
 
     public ProductService(ProductRepository productRepository, SellerRepository sellerRepository,
-                          ProductFactory productFactory) {
+                          OfferRepository offerRepository, ProductFactory productFactory) {
         this.productRepository = productRepository;
-        this.productFactory = productFactory;
         this.sellerRepository = sellerRepository;
+        this.offerRepository = offerRepository;
+        this.productFactory = productFactory;
     }
 
     public String createProduct(String sellerId, ProductRequest productRequest) {
@@ -37,16 +38,17 @@ public class ProductService {
 
     public SellerProduct getProduct(String id) {
         Product product = productRepository.findById(id);
+        Offers offers = offerRepository.getOffers(id);
         Seller seller = sellerRepository.findById(product.getSellerId());
-
-        return new SellerProduct(seller, product);
+        ProductOffers productOffers = new ProductOffers(product, offers);
+        return new SellerProduct(seller, productOffers);
     }
 
     public List<SellerProduct> getFilteredProducts(String sellerId,
                                                    String title,
                                                    List<String> categories,
-                                                   Float minPrice,
-                                                   Float maxPrice) {
+                                                   Double minPrice,
+                                                   Double maxPrice) {
         for (String category : categories) {
             if (!category.equals(category.toLowerCase(Locale.ROOT))) {
                 throw new IllegalArgumentException();
@@ -59,7 +61,8 @@ public class ProductService {
 
         return productRepository.findFilteredProducts(sellerId, title, productCategories, minPrice, maxPrice)
                 .stream()
-                .map(product -> new SellerProduct(sellerRepository.findById(product.getSellerId()), product))
+                .map(product -> new SellerProduct(sellerRepository.findById(product.getSellerId()),
+                        new ProductOffers(product, offerRepository.getOffers(product.getId()))))
                 .collect(Collectors.toList());
     }
 }

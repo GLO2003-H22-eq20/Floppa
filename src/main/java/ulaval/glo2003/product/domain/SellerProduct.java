@@ -1,14 +1,16 @@
 package ulaval.glo2003.product.domain;
 
+
+import ulaval.glo2003.domain.valueObject.ProductOffers;
 import ulaval.glo2003.seller.domain.Seller;
 
 public class SellerProduct {
     private final Seller seller;
-    private final Product product;
+    private final ProductOffers productOffers;
 
-    public SellerProduct(Seller seller, Product product) {
+    public SellerProduct(Seller seller, ProductOffers productOffers) {
         this.seller = seller;
-        this.product = product;
+        this.productOffers = productOffers;
     }
 
     public Seller getSeller() {
@@ -16,6 +18,10 @@ public class SellerProduct {
     }
 
     public Product getProduct() {
-        return product;
+        return productOffers.getProduct();
+    }
+
+    public Offers getOffers() {
+        return productOffers.getOffers();
     }
 }

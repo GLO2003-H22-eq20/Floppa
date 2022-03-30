@@ -5,6 +5,6 @@ import java.util.List;
 public class ProductRequest {
     public String title;
     public String description;
-    public Float suggestedPrice;
+    public Double suggestedPrice;
     public List<String> categories;
 }

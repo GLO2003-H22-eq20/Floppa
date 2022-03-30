@@ -15,7 +15,7 @@ public class ProductResponseAssembler {
                 sellerProduct.getProduct().getTitle(),
                 sellerProduct.getProduct().getDescription(),
                 sellerProduct.getProduct().getSuggestedPrice(),
-                sellerProduct.getProduct().getOffer(),
+                sellerProduct.getOffers(),
                 sellerProduct.getProduct().getCategories().stream()
                         .map(Enum::toString)
                         .collect(Collectors.toList()),

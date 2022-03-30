@@ -17,17 +17,20 @@ import java.util.UUID;
 
 import static com.google.common.truth.Truth.assertThat;
 import static io.restassured.RestAssured.given;
-import static ulaval.glo2003.E2E.fixtures.ProductFixture.createProductRequest;
-import static ulaval.glo2003.E2E.fixtures.ProductFixture.givenExistingProductIdForSeller;
-import static ulaval.glo2003.E2E.fixtures.ProductFixture.givenExistingProductLocation;
-import static ulaval.glo2003.E2E.fixtures.ProductFixture.givenInvalidPriceProductRequest;
-import static ulaval.glo2003.E2E.fixtures.ProductFixture.givenNewProductForSeller;
-import static ulaval.glo2003.E2E.fixtures.ProductFixture.givenValidProductRequest;
+import static ulaval.glo2003.E2E.fixtures.ProductFixture.*;
 import static ulaval.glo2003.E2E.fixtures.SellerFixture.givenNewSellerId;
 
 public class ProductResourceE2ETest extends EndToEndTest {
 
     public static final String PRODUCTS_ENDPOINT = "/products";
+    public static final String OFFERS_ENDPOINT = "offers";
+    private static final String INVALID_ID = "INVALID";
+    private static final String NAME = "John Doe";
+    private static final String EMAIL = "john.doe@gmail.com";
+    private static final String PHONE_NUMBER = "18191234567";
+    private static final Double AMOUNT = 2000.333333;
+    private static final String MESSAGE = "Donec porttitor interdum lacus sed finibus. Nam pulvinar facilisis "
+            + "posuere. Maecenas vel lorem amet.";
 
     @Test
     public void givenSellerAndValidProductRequest_whenCreatingProduct_shouldReturnCreated201() {
@@ -169,5 +172,39 @@ public class ProductResourceE2ETest extends EndToEndTest {
         ProductsResponse productsResponse = response.body().as(ProductsResponse.class);
 
         assertThat(productsResponse.getProducts()).isEmpty();
+    }
+
+    @Test
+    public void givenExistingProduct_whenCreatingOffer_thenReturnsCreated() {
+        String sellerId = givenNewSellerId();
+        String productId = givenExistingProductIdForSeller(sellerId);
+
+        var offerRequest = createOfferRequest(
+                NAME,
+                EMAIL,
+                PHONE_NUMBER,
+                AMOUNT,
+                MESSAGE
+        );
+
+        ExtractableResponse<Response> response = given()
+                .contentType(JSON).body(offerRequest).when()
+                .post(String.format("%s/%s/%s", PRODUCTS_ENDPOINT, productId, OFFERS_ENDPOINT)).then().extract();
+        assertThat(response.statusCode()).isEqualTo(STATUS_OK);
+    }
+
+    @Test
+    public void givenInvalidProduct_whenCreatingOffer_thenReturns() {
+        var offerRequest = createOfferRequest(
+                NAME,
+                EMAIL,
+                PHONE_NUMBER,
+                AMOUNT,
+                MESSAGE
+        );
+        ExtractableResponse<Response> response = given()
+                .contentType(JSON).body(offerRequest).when()
+                .post(String.format("%s/%s/%s", PRODUCTS_ENDPOINT, INVALID_ID, OFFERS_ENDPOINT)).then().extract();
+        assertThat(response.statusCode()).isEqualTo(STATUS_NOT_FOUND);
     }
 }

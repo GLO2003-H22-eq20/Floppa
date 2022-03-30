@@ -17,13 +17,10 @@ public class DatastoreProvider {
     private final MongoClient mongoClient;
 
     public DatastoreProvider() {
-        //Dotenv environmentVars = Dotenv.load();
+        Dotenv environmentVars = Dotenv.load();
 
-        //String mongoUrl = environmentVars.get("FLOPPA_MONGO_CONNECTION_STRING", "mongodb://localhost");
-        //String mongoDatabase = environmentVars.get("FLOPPA_MONGO_DATABASE", "floppa-dev");
-
-        String mongoUrl = System.getenv().getOrDefault("FLOPPA_MONGO_CLUSTER", "mongodb://localhost");
-        String mongoDatabase = System.getenv().getOrDefault("FLOPPA_MONGO_DATABASE", "floppa-dev");
+        String mongoUrl = environmentVars.get("FLOPPA_MONGO_CONNECTION_STRING", "mongodb://localhost");
+        String mongoDatabase = environmentVars.get("FLOPPA_MONGO_DATABASE", "floppa-dev");
 
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                 .applyConnectionString(new ConnectionString(mongoUrl))

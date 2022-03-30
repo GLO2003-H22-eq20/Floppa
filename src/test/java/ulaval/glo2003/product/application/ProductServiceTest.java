@@ -6,14 +6,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ulaval.glo2003.product.ui.request.ProductRequest;
-import ulaval.glo2003.product.domain.Product;
-import ulaval.glo2003.product.domain.ProductFactory;
+import ulaval.glo2003.infrastructure.OfferRepository;
+import ulaval.glo2003.product.domain.*;
 import ulaval.glo2003.product.service.ProductService;
-import ulaval.glo2003.product.domain.SellerProduct;
+import ulaval.glo2003.product.ui.request.ProductRequest;
 import ulaval.glo2003.seller.domain.Seller;
-import ulaval.glo2003.product.persistence.ProductInMemoryRepository;
-import ulaval.glo2003.seller.persistence.SellerInMemoryRepository;
+import ulaval.glo2003.seller.domain.SellerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +26,8 @@ public class ProductServiceTest {
     static final String PRODUCT_ID = "1";
     static final String SELLER_ID = "1";
     private static final String TITLE = "titleOfProduct";
-    private static final Float MIMINUM_PRICE = 7.7f;
-    private static final Float MAXIMUM_PRICE = 7.7f;
+    private static final Double MIMINUM_PRICE = 7.7;
+    private static final Double MAXIMUM_PRICE = 7.7;
     private final List<String> CATEGORIES = new ArrayList<>() {
         {
             add("beauty");
@@ -38,21 +36,25 @@ public class ProductServiceTest {
     };
 
     @Mock
-    private ProductInMemoryRepository productRepository;
+    private ProductRepository productRepository;
     @Mock
-    private SellerInMemoryRepository sellerInMemoryRepository;
+    private SellerRepository sellerRepository;
+    @Mock
+    private OfferRepository offerRepository;
     @Mock
     private ProductFactory productFactory;
     @Mock
     private Product product;
     @Mock
     private Seller seller;
+    @Mock
+    private Offers offers;
 
     ProductRequest request = new ProductRequest() {
         {
             title = "productTitle";
             description = "productDescription";
-            suggestedPrice = 777.77f;
+            suggestedPrice = 777.77;
             categories = new ArrayList<>() {
                 {
                     add("beauty");
@@ -67,7 +69,7 @@ public class ProductServiceTest {
 
     @BeforeEach
     public void setUp() {
-        productService = new ProductService(productRepository, sellerInMemoryRepository, productFactory);
+        productService = new ProductService(productRepository, sellerRepository, offerRepository, productFactory);
     }
 
     @Test
@@ -107,7 +109,7 @@ public class ProductServiceTest {
 
         productService.getProduct(anyString());
 
-        verify(sellerInMemoryRepository).findById(product.getSellerId());
+        verify(sellerRepository).findById(product.getSellerId());
     }
 
     @Test
@@ -121,9 +123,20 @@ public class ProductServiceTest {
     }
 
     @Test
+    public void whenGettingAProduct_thenSearchesForOffersInRepository() {
+        givenAProductCanBeFound();
+        givenAOfferCanBeFound();
+
+        productService.getProduct(anyString());
+
+        verify(offerRepository).getOffers(anyString());
+    }
+
+    @Test
     public void whenGettingAProduct_thenReturnsSellerProduct() {
         givenASellerCanBeFound();
         givenAProductCanBeFound();
+        givenAOfferCanBeFound();
 
         SellerProduct sellerProduct = productService.getProduct(anyString());
 
@@ -134,7 +147,7 @@ public class ProductServiceTest {
     public void whenGettingFilteredProducts_thenSearchesForFilteredProductsInRepository() {
         productService.getFilteredProducts(SELLER_ID, TITLE, CATEGORIES, MIMINUM_PRICE, MAXIMUM_PRICE);
 
-        verify(productRepository).findFilteredProducts(anyString(), anyString(), any(), anyFloat(), anyFloat());
+        verify(productRepository).findFilteredProducts(anyString(), anyString(), any(), anyDouble(), anyDouble());
     }
 
     @Test
@@ -152,7 +165,7 @@ public class ProductServiceTest {
         willReturn(product).given(productFactory).createProduct(anyString(),
                 anyString(),
                 anyString(),
-                anyFloat(),
+                anyDouble(),
                 any());
         willReturn(PRODUCT_ID).given(product).getId();
         return product;
@@ -163,7 +176,11 @@ public class ProductServiceTest {
     }
 
     private void givenASellerCanBeFound() {
-        willReturn(seller).given(sellerInMemoryRepository).findById(SELLER_ID);
+        willReturn(seller).given(sellerRepository).findById(SELLER_ID);
         willReturn(SELLER_ID).given(product).getSellerId();
+    }
+
+    private void givenAOfferCanBeFound() {
+        willReturn(offers).given(offerRepository).getOffers(anyString());
     }
 }

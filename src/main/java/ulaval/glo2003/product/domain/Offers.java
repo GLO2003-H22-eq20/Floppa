@@ -1,22 +1,25 @@
 package ulaval.glo2003.product.domain;
 
 public class Offers {
-    private Float mean;
-    private Integer count;
+    private Double mean;
+    private Long count;
 
-    public Offers() {
+    public Offers() {}
+
+    public Offers(Long count) {
+        this.count = count;
     }
 
-    public Offers(Float mean, Integer count) {
+    public Offers(Double mean, Long count) {
         this.mean = mean;
         this.count = count;
     }
 
-    public Float getMean() {
+    public Double getMean() {
         return mean;
     }
 
-    public Integer getCount() {
+    public Long getCount() {
         return count;
     }
 }
