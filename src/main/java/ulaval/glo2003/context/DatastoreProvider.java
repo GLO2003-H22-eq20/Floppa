@@ -17,7 +17,7 @@ public class DatastoreProvider {
     private final MongoClient mongoClient;
 
     public DatastoreProvider() {
-        Dotenv environmentVars = Dotenv.load();
+        Dotenv environmentVars = Dotenv.configure().ignoreIfMissing().load();
 
         String mongoUrl = environmentVars.get("FLOPPA_MONGO_CONNECTION_STRING", "mongodb://localhost");
         String mongoDatabase = environmentVars.get("FLOPPA_MONGO_DATABASE", "floppa-dev");
