@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - 'master'
+env:
+  FLOPPA_MONGO_CONNECTION_STRING: 'mongodb+srv://aemond:LQFBM2LFCS8fgTUa@local-antoine.eivt9.mongodb.net/Floppa?retryWrites=true&w=majority'
+  FLOPPA_MONGO_DATABASE: Floppa
 
 jobs:
   checkstyle-and-tests:
