@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - 'master'
-env:
-  FLOPPA_MONGO_CONNECTION_STRING: 'mongodb+srv://aemond:LQFBM2LFCS8fgTUa@local-antoine.eivt9.mongodb.net/Floppa?retryWrites=true&w=majority'
-  FLOPPA_MONGO_DATABASE: Floppa
 
 jobs:
   checkstyle-and-tests:
@@ -19,6 +16,9 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven
+
+      - name: MongoDB in GitHub Actions
+        uses: supercharge/mongodb-github-action@1.7.0
 
       - name: Step 1 Checkstyle
         run: mvn checkstyle:check
