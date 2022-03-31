@@ -4,7 +4,8 @@ public class Offers {
     private Double mean;
     private Integer count;
 
-    public Offers() {}
+    public Offers() {
+    }
 
     public Offers(Integer count) {
         this.count = count;

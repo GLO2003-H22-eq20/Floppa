@@ -56,7 +56,13 @@ public class SellerServiceTest {
 
     @BeforeEach
     public void setUp() {
-        sellerService = new SellerService(sellerRepository, productRepository, offerInMemoryRepository, sellerFactory, offersAssembler);
+        sellerService = new SellerService(
+                sellerRepository,
+                productRepository,
+                offerInMemoryRepository,
+                sellerFactory,
+                offersAssembler
+        );
     }
 
     @Test

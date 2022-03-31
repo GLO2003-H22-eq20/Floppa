@@ -7,7 +7,6 @@ import org.mockito.Spy;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static com.google.common.truth.Truth.assertThat;
 
 

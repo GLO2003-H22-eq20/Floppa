@@ -51,7 +51,15 @@ class ProductRepositoryTest {
     public void setUp() {
 
         productRepository = new ProductInMemoryRepository();
-        product = new Product(PRODUCT_ID, SELLER_ID, PRODUCT_CREATED_AT, TITLE, DESCRIPTION, SUGGESTED_PRICE, CATEGORIES);
+        product = new Product(
+                PRODUCT_ID,
+                SELLER_ID,
+                PRODUCT_CREATED_AT,
+                TITLE,
+                DESCRIPTION,
+                SUGGESTED_PRICE,
+                CATEGORIES
+        );
     }
 
     @Test

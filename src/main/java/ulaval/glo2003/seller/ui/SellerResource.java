@@ -37,7 +37,7 @@ public class SellerResource {
     @Path("{id}")
     @GET
     public Response getSeller(@PathParam("id") String id) {
-        if (id.isBlank()){
+        if (id.isBlank()) {
             throw new MissingParameterException("Missing 'seller' ID");
         }
         SellerProducts sellerProducts = sellerService.getSeller(id);

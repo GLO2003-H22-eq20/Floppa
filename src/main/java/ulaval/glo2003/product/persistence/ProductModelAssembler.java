@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class ProductModelAssembler {
 
-    public ProductMongoModel assembleEntityToMongoModel(Product product){
+    public ProductMongoModel assembleEntityToMongoModel(Product product) {
         return new ProductMongoModel(
                 UUID.fromString(product.getId()),
                 UUID.fromString(product.getSellerId()),
@@ -17,7 +17,7 @@ public class ProductModelAssembler {
                 product.getCategories());
     }
 
-    public Product assembleMongoModelToEntity(ProductMongoModel productMongoModel){
+    public Product assembleMongoModelToEntity(ProductMongoModel productMongoModel) {
         return new Product(
                 productMongoModel.getId(),
                 productMongoModel.getSellerId().toString(),

@@ -15,7 +15,8 @@ public class ProductResponse {
     private List<String> categories;
     private SellerResponse seller;
 
-    public ProductResponse() {}
+    public ProductResponse() {
+    }
 
     public ProductResponse(String id, String createdAt, String title, String description, Double suggestedPrice,
                            Offers offers, List<String> categories, SellerResponse seller) {

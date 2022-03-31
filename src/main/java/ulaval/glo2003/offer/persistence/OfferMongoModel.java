@@ -16,7 +16,15 @@ public class OfferMongoModel {
     private final Double amount;
     private final String message;
 
-    public OfferMongoModel(UUID id, String productId, String name, String email, String phoneNumber, Double amount, String message) {
+    public OfferMongoModel(
+            UUID id,
+            String productId,
+            String name,
+            String email,
+            String phoneNumber,
+            Double amount,
+            String message
+    ) {
         this.id = id;
         this.productId = productId;
         this.name = name;

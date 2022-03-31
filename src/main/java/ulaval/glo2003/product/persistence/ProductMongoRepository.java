@@ -44,7 +44,7 @@ public class ProductMongoRepository implements ProductRepository {
         Query<ProductMongoModel> productEntityQuery = datastoreProvider.getDatastore().find(ProductMongoModel.class);
         try {
             productEntityQuery.filter(Filters.eq("_id", UUID.fromString(id)));
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ItemNotFoundException();
         }
         ProductMongoModel productMongoModel = productEntityQuery.first();

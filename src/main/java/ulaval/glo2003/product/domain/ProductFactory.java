@@ -22,7 +22,15 @@ public class ProductFactory {
         validateDescription(description);
         validateSuggestedPrice(suggestedPrice);
         validateCategories(categories);
-        return new Product(UUID.randomUUID(), sellerId, Instant.now(), title, description, suggestedPrice, parseToProductCategory(categories));
+        return new Product(
+                UUID.randomUUID(),
+                sellerId,
+                Instant.now(),
+                title,
+                description,
+                suggestedPrice,
+                parseToProductCategory(categories)
+        );
     }
 
     private void validateTitle(String title) {

@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class SellerModelAssembler {
 
-    public SellerMongoModel assembleEntityToMongoModel(Seller seller){
+    public SellerMongoModel assembleEntityToMongoModel(Seller seller) {
         return new SellerMongoModel(
                 UUID.fromString(seller.getId()),
                 seller.getName(),
@@ -17,7 +17,7 @@ public class SellerModelAssembler {
         );
     }
 
-    public Seller assembleMongoModelToEntity(SellerMongoModel sellerMongoModel){
+    public Seller assembleMongoModelToEntity(SellerMongoModel sellerMongoModel) {
         return new Seller(
                 sellerMongoModel.getId(),
                 sellerMongoModel.getName(),

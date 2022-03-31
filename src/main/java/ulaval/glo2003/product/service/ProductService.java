@@ -21,7 +21,8 @@ public class ProductService {
     private final OffersAssembler offersAssembler;
 
     public ProductService(ProductRepository productRepository, SellerRepository sellerRepository,
-                          OfferRepository offerRepository, ProductFactory productFactory, OffersAssembler offersAssembler) {
+                          OfferRepository offerRepository, ProductFactory productFactory,
+                          OffersAssembler offersAssembler) {
         this.productRepository = productRepository;
         this.sellerRepository = sellerRepository;
         this.offerInMemoryRepository = offerRepository;
@@ -65,7 +66,13 @@ public class ProductService {
         return productRepository.findFilteredProducts(sellerId, title, productCategories, minPrice, maxPrice)
                 .stream()
                 .map(product -> new SellerProduct(sellerRepository.findById(product.getSellerId()),
-                        new ProductOffers(product, offersAssembler.assembleOffers(offerInMemoryRepository.getOffersBy(product.getId())))))
+                                new ProductOffers(
+                                        product,
+                                        offersAssembler.assembleOffers(
+                                                offerInMemoryRepository.getOffersBy(product.getId()))
+                                )
+                        )
+                )
                 .collect(Collectors.toList());
     }
 }

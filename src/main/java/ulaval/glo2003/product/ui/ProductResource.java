@@ -44,7 +44,7 @@ public class ProductResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createProduct(@HeaderParam(value = "X-Seller-Id") String sellerId,
                                   @NotNull ProductRequest productRequest) {
-        if (sellerId.isBlank()){
+        if (sellerId.isBlank()) {
             throw new MissingParameterException("Missing seller ID");
         }
         String productId = productService.createProduct(sellerId, productRequest);
@@ -55,7 +55,7 @@ public class ProductResource {
     @Path("{id}")
     @GET
     public Response getProduct(@PathParam("id") String id) {
-        if (id.isBlank()){
+        if (id.isBlank()) {
             throw new MissingParameterException("Missing product ID");
         }
         SellerProduct sellerProduct = productService.getProduct(id);
@@ -73,10 +73,10 @@ public class ProductResource {
                                         @QueryParam("maxPrice") Double maxPrice) {
         try {
             List<SellerProduct> sellersProducts = productService.getFilteredProducts(sellerId,
-                                                                                     title,
-                                                                                     categories,
-                                                                                     minPrice,
-                                                                                     maxPrice);
+                    title,
+                    categories,
+                    minPrice,
+                    maxPrice);
 
             ProductsResponse productsResponse = productResponseAssembler.presentProducts(sellersProducts);
 

@@ -1,7 +1,6 @@
 package ulaval.glo2003.seller.domain;
 
 
-
 import ulaval.glo2003.offer.domain.OfferRepository;
 import ulaval.glo2003.offer.domain.OffersAssembler;
 import ulaval.glo2003.offer.domain.ProductOffers;
@@ -19,9 +18,9 @@ public class SellerService {
     private final OffersAssembler offersAssembler;
 
     public SellerService(SellerRepository sellerRepository,
-            ProductRepository productRepository,
-            OfferRepository offerRepository,
-            SellerFactory sellerFactory, OffersAssembler offersAssembler) {
+                         ProductRepository productRepository,
+                         OfferRepository offerRepository,
+                         SellerFactory sellerFactory, OffersAssembler offersAssembler) {
         this.sellerRepository = sellerRepository;
         this.productRepository = productRepository;
         this.offerRepository = offerRepository;
@@ -40,7 +39,11 @@ public class SellerService {
     public SellerProducts getSeller(String id) {
         Seller seller = sellerRepository.findById(id);
         List<ProductOffers> products = productRepository.findProductsBySellerId(id)
-                .stream().map(product -> new ProductOffers(product, offersAssembler.assembleOffers(offerRepository.getOffersBy(product.getId()))))
+                .stream().map(product -> new ProductOffers(
+                                product,
+                                offersAssembler.assembleOffers(offerRepository.getOffersBy(product.getId()))
+                        )
+                )
                 .collect(Collectors.toList());
 
         return new SellerProducts(seller, products);

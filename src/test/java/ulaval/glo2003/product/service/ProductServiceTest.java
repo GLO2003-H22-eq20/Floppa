@@ -74,7 +74,13 @@ public class ProductServiceTest {
 
     @BeforeEach
     public void setUp() {
-        productService = new ProductService(productRepository, sellerRepository, offerInMemoryRepository, productFactory, offersAssembler);
+        productService = new ProductService(
+                productRepository,
+                sellerRepository,
+                offerInMemoryRepository,
+                productFactory,
+                offersAssembler
+        );
     }
 
     @Test

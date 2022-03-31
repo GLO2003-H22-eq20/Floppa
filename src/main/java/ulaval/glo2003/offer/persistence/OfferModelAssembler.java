@@ -4,7 +4,7 @@ import ulaval.glo2003.offer.domain.Offer;
 
 public class OfferModelAssembler {
 
-    public OfferMongoModel assembleEntityToMongoModel(Offer offer){
+    public OfferMongoModel assembleEntityToMongoModel(Offer offer) {
         return new OfferMongoModel(
                 offer.getId(),
                 offer.getProductId(),
@@ -15,7 +15,7 @@ public class OfferModelAssembler {
                 offer.getMessage());
     }
 
-    public Offer assembleMongoModelToEntity(OfferMongoModel offerMongoModel){
+    public Offer assembleMongoModelToEntity(OfferMongoModel offerMongoModel) {
         return new Offer(
                 offerMongoModel.getId(),
                 offerMongoModel.getProductId(),

@@ -30,7 +30,7 @@ public class SellerMongoRepository implements SellerRepository {
         Query<SellerMongoModel> sellerEntityQuery = datastoreProvider.getDatastore().find(SellerMongoModel.class);
         try {
             sellerEntityQuery.filter(Filters.eq("_id", UUID.fromString(id)));
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ItemNotFoundException();
         }
         SellerMongoModel sellerMongoModel = sellerEntityQuery.first();
