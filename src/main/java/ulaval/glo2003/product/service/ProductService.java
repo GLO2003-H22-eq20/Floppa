@@ -1,8 +1,9 @@
 package ulaval.glo2003.product.service;
 
 
+import ulaval.glo2003.offer.domain.OfferRepository;
+import ulaval.glo2003.offer.domain.OffersAssembler;
 import ulaval.glo2003.offer.domain.ProductOffers;
-import ulaval.glo2003.offer.persistence.OfferInMemoryRepository;
 import ulaval.glo2003.product.domain.*;
 import ulaval.glo2003.product.ui.request.ProductRequest;
 import ulaval.glo2003.seller.domain.Seller;
@@ -15,15 +16,17 @@ import java.util.stream.Collectors;
 public class ProductService {
     private final ProductRepository productRepository;
     private final SellerRepository sellerRepository;
-    private final OfferInMemoryRepository offerInMemoryRepository;
+    private final OfferRepository offerInMemoryRepository;
     private final ProductFactory productFactory;
+    private final OffersAssembler offersAssembler;
 
     public ProductService(ProductRepository productRepository, SellerRepository sellerRepository,
-                          OfferInMemoryRepository offerInMemoryRepository, ProductFactory productFactory) {
+                          OfferRepository offerRepository, ProductFactory productFactory, OffersAssembler offersAssembler) {
         this.productRepository = productRepository;
         this.sellerRepository = sellerRepository;
-        this.offerInMemoryRepository = offerInMemoryRepository;
+        this.offerInMemoryRepository = offerRepository;
         this.productFactory = productFactory;
+        this.offersAssembler = offersAssembler;
     }
 
     public String createProduct(String sellerId, ProductRequest productRequest) {
@@ -38,7 +41,7 @@ public class ProductService {
 
     public SellerProduct getProduct(String id) {
         Product product = productRepository.findById(id);
-        Offers offers = offerInMemoryRepository.getOffers(id);
+        Offers offers = offersAssembler.assembleOffers(offerInMemoryRepository.getOffersBy(id));
         Seller seller = sellerRepository.findById(product.getSellerId());
         ProductOffers productOffers = new ProductOffers(product, offers);
         return new SellerProduct(seller, productOffers);
@@ -62,7 +65,7 @@ public class ProductService {
         return productRepository.findFilteredProducts(sellerId, title, productCategories, minPrice, maxPrice)
                 .stream()
                 .map(product -> new SellerProduct(sellerRepository.findById(product.getSellerId()),
-                        new ProductOffers(product, offerInMemoryRepository.getOffers(product.getId()))))
+                        new ProductOffers(product, offersAssembler.assembleOffers(offerInMemoryRepository.getOffersBy(product.getId())))))
                 .collect(Collectors.toList());
     }
 }

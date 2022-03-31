@@ -2,15 +2,15 @@ package ulaval.glo2003.product.domain;
 
 public class Offers {
     private Double mean;
-    private Long count;
+    private Integer count;
 
     public Offers() {}
 
-    public Offers(Long count) {
+    public Offers(Integer count) {
         this.count = count;
     }
 
-    public Offers(Double mean, Long count) {
+    public Offers(Double mean, Integer count) {
         this.mean = mean;
         this.count = count;
     }
@@ -19,7 +19,7 @@ public class Offers {
         return mean;
     }
 
-    public Long getCount() {
+    public Integer getCount() {
         return count;
     }
 }

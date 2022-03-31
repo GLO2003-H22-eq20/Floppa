@@ -24,7 +24,7 @@ public class SellerResponse {
         this.name = name;
     }
 
-    public SellerResponse(){}
+    public SellerResponse() {}
 
     public String getId() {
         return id;

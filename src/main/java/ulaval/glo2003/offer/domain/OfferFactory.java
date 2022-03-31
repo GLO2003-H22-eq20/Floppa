@@ -1,14 +1,12 @@
 package ulaval.glo2003.offer.domain;
 
-
-
-import ulaval.glo2003.domain.Offer;
 import ulaval.glo2003.exceptions.InvalidParameterException;
 import ulaval.glo2003.exceptions.MissingParameterException;
 import ulaval.glo2003.product.domain.Product;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 public class OfferFactory {
     private final Integer MIN_MESSAGE_LENGTH = 100;
@@ -27,7 +25,7 @@ public class OfferFactory {
         validatePhoneNumber(phoneNumber);
         validateAmount(amount, product);
         validateMessage(message);
-        return new Offer(product.getId(), name, email, phoneNumber, amount, message);
+        return new Offer(UUID.randomUUID(), product.getId(), name, email, phoneNumber, amount, message);
     }
 
     private void validateName(String name) {

@@ -5,6 +5,10 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import ulaval.glo2003.offer.domain.OfferFactory;
+import ulaval.glo2003.offer.domain.OfferRepository;
+import ulaval.glo2003.offer.domain.OffersAssembler;
+import ulaval.glo2003.offer.persistence.OfferModelAssembler;
+import ulaval.glo2003.offer.persistence.OfferMongoRepository;
 import ulaval.glo2003.offer.service.OfferService;
 import ulaval.glo2003.context.DatastoreProvider;
 import ulaval.glo2003.exceptions.mappers.DefaultExceptionMapper;
@@ -46,10 +50,12 @@ public class Main {
 
         SellerModelAssembler sellerModelAssembler = new SellerModelAssembler();
         ProductModelAssembler productModelAssembler = new ProductModelAssembler();
+        OfferModelAssembler offerModelAssembler = new OfferModelAssembler();
+        OffersAssembler offersAssembler = new OffersAssembler();
 
         SellerRepository sellerRepository = new SellerMongoRepository(datastoreProvider, sellerModelAssembler);
         ProductRepository productRepository = new ProductMongoRepository(datastoreProvider, productModelAssembler);
-        OfferInMemoryRepository offerInMemoryRepository = new OfferInMemoryRepository();
+        OfferRepository offerRepository = new OfferMongoRepository(datastoreProvider, offerModelAssembler);
 
         SellerFactory sellerFactory = new SellerFactory();
         ProductFactory productFactory = new ProductFactory();
@@ -58,18 +64,20 @@ public class Main {
         SellerResponseAssembler sellerResponseAssembler = new SellerResponseAssembler();
         ProductResponseAssembler productResponseAssembler = new ProductResponseAssembler();
 
+
         SellerService sellerService = new SellerService(
                 sellerRepository,
                 productRepository,
-                offerInMemoryRepository,
-                sellerFactory);
+                offerRepository,
+                sellerFactory,
+                offersAssembler);
         ProductService productService = new ProductService(
                 productRepository,
                 sellerRepository,
-                offerInMemoryRepository,
-                productFactory
-        );
-        OfferService offerService = new OfferService(offerInMemoryRepository, productRepository, offerFactory);
+                offerRepository,
+                productFactory,
+                offersAssembler);
+        OfferService offerService = new OfferService(offerRepository, productRepository, offerFactory);
 
 
         LoggingFeature loggingFeature = new LoggingFeature(Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME),

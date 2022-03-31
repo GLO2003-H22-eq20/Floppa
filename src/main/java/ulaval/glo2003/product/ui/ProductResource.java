@@ -1,5 +1,6 @@
 package ulaval.glo2003.product.ui;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -10,6 +11,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import ulaval.glo2003.exceptions.MissingParameterException;
 import ulaval.glo2003.offer.service.OfferService;
 import ulaval.glo2003.offer.ui.request.OfferRequest;
 import ulaval.glo2003.product.domain.SellerProduct;
@@ -42,6 +44,9 @@ public class ProductResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createProduct(@HeaderParam(value = "X-Seller-Id") String sellerId,
                                   @NotNull ProductRequest productRequest) {
+        if (sellerId.isBlank()){
+            throw new MissingParameterException("Missing seller ID");
+        }
         String productId = productService.createProduct(sellerId, productRequest);
 
         return Response.created(URI.create(baseUri.toString() + "products/" + productId)).build();
@@ -50,6 +55,9 @@ public class ProductResource {
     @Path("{id}")
     @GET
     public Response getProduct(@PathParam("id") String id) {
+        if (id.isBlank()){
+            throw new MissingParameterException("Missing product ID");
+        }
         SellerProduct sellerProduct = productService.getProduct(id);
 
         ProductResponse productResponse = productResponseAssembler.presentProduct(sellerProduct);

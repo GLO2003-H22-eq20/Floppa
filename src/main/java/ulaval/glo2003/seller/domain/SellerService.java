@@ -2,8 +2,9 @@ package ulaval.glo2003.seller.domain;
 
 
 
+import ulaval.glo2003.offer.domain.OfferRepository;
+import ulaval.glo2003.offer.domain.OffersAssembler;
 import ulaval.glo2003.offer.domain.ProductOffers;
-import ulaval.glo2003.offer.persistence.OfferInMemoryRepository;
 import ulaval.glo2003.product.domain.ProductRepository;
 import ulaval.glo2003.seller.ui.request.SellerRequest;
 
@@ -13,17 +14,19 @@ import java.util.stream.Collectors;
 public class SellerService {
     private final SellerRepository sellerRepository;
     private final ProductRepository productRepository;
-    private final OfferInMemoryRepository offerInMemoryRepository;
+    private final OfferRepository offerRepository;
     private final SellerFactory sellerFactory;
+    private final OffersAssembler offersAssembler;
 
     public SellerService(SellerRepository sellerRepository,
             ProductRepository productRepository,
-            OfferInMemoryRepository offerInMemoryRepository,
-            SellerFactory sellerFactory) {
+            OfferRepository offerRepository,
+            SellerFactory sellerFactory, OffersAssembler offersAssembler) {
         this.sellerRepository = sellerRepository;
         this.productRepository = productRepository;
-        this.offerInMemoryRepository = offerInMemoryRepository;
+        this.offerRepository = offerRepository;
         this.sellerFactory = sellerFactory;
+        this.offersAssembler = offersAssembler;
     }
 
     public String createSeller(SellerRequest sellerRequest) {
@@ -37,7 +40,7 @@ public class SellerService {
     public SellerProducts getSeller(String id) {
         Seller seller = sellerRepository.findById(id);
         List<ProductOffers> products = productRepository.findProductsBySellerId(id)
-                .stream().map(product -> new ProductOffers(product, offerInMemoryRepository.getOffers(product.getId())))
+                .stream().map(product -> new ProductOffers(product, offersAssembler.assembleOffers(offerRepository.getOffersBy(product.getId()))))
                 .collect(Collectors.toList());
 
         return new SellerProducts(seller, products);

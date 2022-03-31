@@ -46,7 +46,7 @@ public class ProductResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenBlankId_whenCreatingProduct_shouldReturnNotFound() {
+    public void givenBlankSellerId_whenCreatingProduct_shouldReturnMissingParameterException() {
         Map<String, Object> productRequest = givenValidProductRequest();
 
         ExtractableResponse<Response> response = givenNewProductForSeller(productRequest, " ")

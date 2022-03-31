@@ -6,6 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ulaval.glo2003.offer.domain.Offer;
+import ulaval.glo2003.offer.domain.OffersAssembler;
 import ulaval.glo2003.offer.persistence.OfferInMemoryRepository;
 import ulaval.glo2003.product.domain.*;
 import ulaval.glo2003.product.ui.request.ProductRequest;
@@ -48,6 +50,10 @@ public class ProductServiceTest {
     private Seller seller;
     @Mock
     private Offers offers;
+    @Mock
+    private Offer offer;
+    @Mock
+    private OffersAssembler offersAssembler;
 
     ProductRequest request = new ProductRequest() {
         {
@@ -68,7 +74,7 @@ public class ProductServiceTest {
 
     @BeforeEach
     public void setUp() {
-        productService = new ProductService(productRepository, sellerRepository, offerInMemoryRepository, productFactory);
+        productService = new ProductService(productRepository, sellerRepository, offerInMemoryRepository, productFactory, offersAssembler);
     }
 
     @Test
@@ -124,18 +130,33 @@ public class ProductServiceTest {
     @Test
     public void whenGettingAProduct_thenSearchesForOffersInRepository() {
         givenAProductCanBeFound();
-        givenAOfferCanBeFound();
+        givenOffersCanBeFound();
+        givenOffersCanBeAssembled();
 
         productService.getProduct(anyString());
 
-        verify(offerInMemoryRepository).getOffers(anyString());
+        verify(offerInMemoryRepository).getOffersBy(anyString());
+    }
+
+    @Test
+    public void whenGettingAProduct_thenAssembleOffers() {
+        givenAProductCanBeFound();
+        givenOffersCanBeFound();
+        givenOffersCanBeAssembled();
+
+
+        productService.getProduct(anyString());
+
+        verify(offersAssembler).assembleOffers(anyList());
     }
 
     @Test
     public void whenGettingAProduct_thenReturnsSellerProduct() {
         givenASellerCanBeFound();
         givenAProductCanBeFound();
-        givenAOfferCanBeFound();
+        givenOffersCanBeFound();
+        givenOffersCanBeAssembled();
+
 
         SellerProduct sellerProduct = productService.getProduct(anyString());
 
@@ -179,7 +200,11 @@ public class ProductServiceTest {
         willReturn(SELLER_ID).given(product).getSellerId();
     }
 
-    private void givenAOfferCanBeFound() {
-        willReturn(offers).given(offerInMemoryRepository).getOffers(anyString());
+    private void givenOffersCanBeFound() {
+        willReturn(List.of(offer)).given(offerInMemoryRepository).getOffersBy(anyString());
+    }
+
+    private void givenOffersCanBeAssembled() {
+        willReturn(offers).given(offersAssembler).assembleOffers(anyList());
     }
 }

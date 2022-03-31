@@ -42,7 +42,7 @@ public class SellerResponseAssemblerTest {
         }
     };
     private static final Double OFFERS_MEAN = 20.5;
-    private static final Long OFFERS_COUNT = 2L;
+    private static final int OFFERS_COUNT = 2;
 
     private SellerResponseAssembler sellerResponseAssembler;
     private SellerProducts sellerProducts;

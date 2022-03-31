@@ -41,9 +41,6 @@ public class ProductMongoRepository implements ProductRepository {
 
     @Override
     public Product findById(String id) {
-        if (id.isBlank()){
-            throw new MissingParameterException("Missing product ID");
-        }
         Query<ProductMongoModel> productEntityQuery = datastoreProvider.getDatastore().find(ProductMongoModel.class);
         try {
             productEntityQuery.filter(Filters.eq("_id", UUID.fromString(id)));

@@ -27,9 +27,6 @@ public class SellerMongoRepository implements SellerRepository {
 
     @Override
     public Seller findById(String id) {
-        if (id.isBlank()){
-            throw new MissingParameterException("Missing seller ID");
-        }
         Query<SellerMongoModel> sellerEntityQuery = datastoreProvider.getDatastore().find(SellerMongoModel.class);
         try {
             sellerEntityQuery.filter(Filters.eq("_id", UUID.fromString(id)));

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ulaval.glo2003.offer.domain.OffersAssembler;
 import ulaval.glo2003.offer.domain.ProductOffers;
 import ulaval.glo2003.offer.persistence.OfferInMemoryRepository;
 import ulaval.glo2003.product.domain.Offers;
@@ -39,6 +40,8 @@ public class SellerServiceTest {
     private ProductRepository productRepository;
     @Mock
     private OfferInMemoryRepository offerInMemoryRepository;
+    @Mock
+    private OffersAssembler offersAssembler;
 
     SellerRequest request = new SellerRequest() {
         {
@@ -53,7 +56,7 @@ public class SellerServiceTest {
 
     @BeforeEach
     public void setUp() {
-        sellerService = new SellerService(sellerRepository, productRepository, offerInMemoryRepository, sellerFactory);
+        sellerService = new SellerService(sellerRepository, productRepository, offerInMemoryRepository, sellerFactory, offersAssembler);
     }
 
     @Test
@@ -137,7 +140,7 @@ public class SellerServiceTest {
 
     private Offers givenOffersCanBeFound() {
         Offers offers =  mock(Offers.class);
-        willReturn(offers).given(offerInMemoryRepository).getOffers(anyString());
+        willReturn(offers).given(offerInMemoryRepository).getOffersBy(anyString());
         return offers;
     }
 }

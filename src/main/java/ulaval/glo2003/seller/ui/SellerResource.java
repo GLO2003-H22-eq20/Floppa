@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import ulaval.glo2003.exceptions.MissingParameterException;
 import ulaval.glo2003.seller.domain.SellerProducts;
 import ulaval.glo2003.seller.domain.SellerService;
 import ulaval.glo2003.seller.ui.request.SellerRequest;
@@ -36,6 +37,9 @@ public class SellerResource {
     @Path("{id}")
     @GET
     public Response getSeller(@PathParam("id") String id) {
+        if (id.isBlank()){
+            throw new MissingParameterException("Missing 'seller' ID");
+        }
         SellerProducts sellerProducts = sellerService.getSeller(id);
 
         SellerResponse sellerResponse = sellerResponseAssembler.presentSeller(sellerProducts);

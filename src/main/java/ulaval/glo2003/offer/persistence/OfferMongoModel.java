@@ -1,8 +1,13 @@
-package ulaval.glo2003.domain;
+package ulaval.glo2003.offer.persistence;
+
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
 
 import java.util.UUID;
 
-public class Offer {
+@Entity("offer")
+public class OfferMongoModel {
+    @Id
     private final UUID id;
     private final String productId;
     private final String name;
@@ -11,8 +16,8 @@ public class Offer {
     private final Double amount;
     private final String message;
 
-    public Offer(String productId, String name, String email, String phoneNumber, Double amount, String message) {
-        this.id = UUID.randomUUID();
+    public OfferMongoModel(UUID id, String productId, String name, String email, String phoneNumber, Double amount, String message) {
+        this.id = id;
         this.productId = productId;
         this.name = name;
         this.email = email;
