@@ -7,6 +7,9 @@ public class OfferResponse {
     private String createdAt;
     private BuyerResponse buyer;
 
+    public OfferResponse() {
+    }
+
     public OfferResponse(String id, Double amount, String message, String createdAt, BuyerResponse buyer) {
         this.id = id;
         this.amount = amount;

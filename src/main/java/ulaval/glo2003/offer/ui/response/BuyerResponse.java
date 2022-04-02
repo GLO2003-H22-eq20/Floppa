@@ -5,6 +5,9 @@ public class BuyerResponse {
     private String email;
     private String phoneNumber;
 
+    public BuyerResponse() {
+    }
+
     public BuyerResponse(String name, String email, String phoneNumber) {
         this.name = name;
         this.email = email;

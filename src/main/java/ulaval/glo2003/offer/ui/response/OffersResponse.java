@@ -9,6 +9,9 @@ public class OffersResponse {
     private Double max;
     private List<OfferResponse> items;
 
+    public OffersResponse() {
+    }
+
     public OffersResponse(Double mean, Integer count) {
         this.mean = mean;
         this.count = count;
