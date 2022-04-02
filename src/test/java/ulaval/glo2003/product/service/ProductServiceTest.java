@@ -102,7 +102,7 @@ public class ProductServiceTest {
 
         productService.createProduct(SELLER_ID, request);
 
-        verify(productRepository).saveProduct(product);
+        verify(productRepository).save(product);
     }
 
     @Test

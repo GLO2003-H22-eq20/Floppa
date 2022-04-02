@@ -2,12 +2,7 @@ package ulaval.glo2003.product.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ulaval.glo2003.context.DatastoreProvider;
-import ulaval.glo2003.product.domain.Product;
-import ulaval.glo2003.product.domain.ProductCategory;
-import ulaval.glo2003.product.domain.ProductRepository;
 import ulaval.glo2003.product.persistence.ProductInMemoryRepository;
-import ulaval.glo2003.product.persistence.ProductMongoRepository;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -64,7 +59,7 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProducts_whenSavingTwoProducts_thenCanRetrieveAListOfProductsWithASellerId() {
-        productRepository.saveProduct(product);
+        productRepository.save(product);
         Product anotherProductWithSameSellerId = new Product(PRODUCT_ID_2,
                 SELLER_ID,
                 PRODUCT_CREATED_AT,
@@ -73,7 +68,7 @@ class ProductRepositoryTest {
                 SUGGESTED_PRICE,
                 CATEGORIES
         );
-        productRepository.saveProduct(anotherProductWithSameSellerId);
+        productRepository.save(anotherProductWithSameSellerId);
 
         Collection<Product> products = productRepository.findProductsBySellerId(SELLER_ID);
         assertEquals(TWO, products.size());
@@ -88,7 +83,7 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProduct_whenFilteringProductsBySellerId_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productRepository.save(product);
 
         List<Product> filteredProducts = productRepository.findFilteredProducts(product.getSellerId(),
                 null,
@@ -102,7 +97,7 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndInvalidId_whenFilteringProductsBySellerId_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productRepository.save(product);
 
         List<Product> filteredProducts = productRepository.findFilteredProducts(
                 INVALID_ID,
@@ -118,7 +113,7 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProduct_whenFilteringProductsByTitle_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productRepository.save(product);
         List<Product> filteredProducts = productRepository.findFilteredProducts(null,
                 product.getTitle(),
                 List.of(),
@@ -131,7 +126,7 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndInvalidTitle_whenFilteringProductsByTitle_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productRepository.save(product);
 
         List<Product> filteredProducts = productRepository.findFilteredProducts(null,
                 INVALID_TITLE,
@@ -145,7 +140,7 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProduct_whenFilteringProductsByCategories_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productRepository.save(product);
         List<Product> filteredProducts = productRepository.findFilteredProducts(null,
                 null,
                 product.getCategories(),
@@ -158,7 +153,7 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndInvalidCategories_whenFilteringProductsByCategories_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productRepository.save(product);
         List<Product> filteredProducts = productRepository.findFilteredProducts(null,
                 null,
                 INVALID_CATEGORIES,
@@ -171,7 +166,7 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndValidMinPrice_whenFilteringProductsByEmptyCategories_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productRepository.save(product);
 
         List<Product> filteredProducts = productRepository.findFilteredProducts(null,
                 null,
@@ -185,7 +180,7 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndInvalidMinPrice_whenFilteringProductsByEmptyCategories_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productRepository.save(product);
 
         List<Product> filteredProducts = productRepository.findFilteredProducts(null,
                 null,
@@ -199,7 +194,7 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndValidMaxPrice_whenFilteringProductsByEmptyCategories_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productRepository.save(product);
 
         List<Product> filteredProducts = productRepository.findFilteredProducts(null,
                 null,
@@ -213,7 +208,7 @@ class ProductRepositoryTest {
 
     @Test
     public void givenProductAndInvalidMaxPrice_whenFilteringProductsByEmptyCategories_thenReturnFilteredProductList() {
-        productRepository.saveProduct(product);
+        productRepository.save(product);
 
         List<Product> filteredProducts = productRepository.findFilteredProducts(null,
                 null,

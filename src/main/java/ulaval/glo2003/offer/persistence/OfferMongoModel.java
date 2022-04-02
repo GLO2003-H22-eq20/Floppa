@@ -8,13 +8,16 @@ import java.util.UUID;
 @Entity("offer")
 public class OfferMongoModel {
     @Id
-    private final UUID id;
-    private final String productId;
-    private final String name;
-    private final String email;
-    private final String phoneNumber;
-    private final Double amount;
-    private final String message;
+    private UUID id;
+    private String productId;
+    private String name;
+    private String email;
+    private String phoneNumber;
+    private Double amount;
+    private String message;
+
+    public OfferMongoModel() {
+    }
 
     public OfferMongoModel(
             UUID id,

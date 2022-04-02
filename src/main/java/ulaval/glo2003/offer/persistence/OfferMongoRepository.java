@@ -7,11 +7,9 @@ import ulaval.glo2003.offer.domain.Offer;
 import ulaval.glo2003.offer.domain.OfferRepository;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class OfferMongoRepository implements OfferRepository {
-
     private final DatastoreProvider datastoreProvider;
     private final OfferModelAssembler offerModelAssembler;
 
@@ -21,7 +19,7 @@ public class OfferMongoRepository implements OfferRepository {
     }
 
     @Override
-    public void saveOffer(Offer offer) {
+    public void save(Offer offer) {
         OfferMongoModel offerMongoModel = offerModelAssembler.assembleEntityToMongoModel(offer);
         datastoreProvider.getDatastore().save(offerMongoModel);
     }

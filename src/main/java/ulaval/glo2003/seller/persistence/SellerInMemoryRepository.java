@@ -12,7 +12,7 @@ public class SellerInMemoryRepository implements SellerRepository {
     private final Map<String, Seller> sellerMap = Collections.synchronizedMap(new HashMap<>());
 
     @Override
-    public void saveSeller(Seller seller) {
+    public void save(Seller seller) {
         sellerMap.put(seller.getId(), seller);
     }
 

@@ -3,7 +3,6 @@ package ulaval.glo2003.offer.persistence;
 import ulaval.glo2003.offer.domain.Offer;
 
 public class OfferModelAssembler {
-
     public OfferMongoModel assembleEntityToMongoModel(Offer offer) {
         return new OfferMongoModel(
                 offer.getId(),
@@ -25,6 +24,5 @@ public class OfferModelAssembler {
                 offerMongoModel.getAmount(),
                 offerMongoModel.getMessage()
         );
-
     }
 }

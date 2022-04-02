@@ -20,7 +20,7 @@ public class SellerMongoRepository implements SellerRepository {
     }
 
     @Override
-    public void saveSeller(Seller seller) {
+    public void save(Seller seller) {
         SellerMongoModel sellerMongoModel = sellerModelAssembler.assembleEntityToMongoModel(seller);
         datastoreProvider.getDatastore().save(sellerMongoModel);
     }

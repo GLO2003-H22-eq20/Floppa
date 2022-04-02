@@ -36,7 +36,7 @@ public abstract class OfferRepositoryTest {
 
     @Test
     public void givenSavedOffer_whenGettingProductOffers_thenReturnsOffer() {
-        offerRepository.saveOffer(offer);
+        offerRepository.save(offer);
 
         List<Offer> offerList = offerRepository.getOffersBy(offer.getProductId());
 

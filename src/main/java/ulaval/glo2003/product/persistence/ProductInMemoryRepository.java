@@ -12,7 +12,7 @@ public class ProductInMemoryRepository implements ProductRepository {
     private final Map<String, Product> productMap = Collections.synchronizedMap(new HashMap<>());
 
     @Override
-    public void saveProduct(Product product) {
+    public void save(Product product) {
         productMap.put(product.getId(), product);
     }
 

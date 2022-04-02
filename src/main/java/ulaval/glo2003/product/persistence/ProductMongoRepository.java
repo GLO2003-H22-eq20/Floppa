@@ -25,7 +25,7 @@ public class ProductMongoRepository implements ProductRepository {
     }
 
     @Override
-    public void saveProduct(Product product) {
+    public void save(Product product) {
         ProductMongoModel productMongoModel = productModelAssembler.assembleEntityToMongoModel(product);
         datastoreProvider.getDatastore().save(productMongoModel);
     }

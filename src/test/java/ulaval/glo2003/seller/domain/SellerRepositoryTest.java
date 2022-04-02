@@ -1,11 +1,8 @@
 package ulaval.glo2003.seller.domain;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.exceptions.ItemNotFoundException;
-import ulaval.glo2003.seller.domain.Seller;
-import ulaval.glo2003.seller.domain.SellerRepository;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -34,7 +31,7 @@ public abstract class SellerRepositoryTest {
 
     @Test
     public void givenASeller_whenSaving_thenCanFindItById() {
-        sellerRepository.saveSeller(seller);
+        sellerRepository.save(seller);
 
         Seller currentSeller = sellerRepository.findById(seller.getId());
         assertEquals(seller, currentSeller);

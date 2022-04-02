@@ -7,6 +7,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
+import dev.morphia.mapping.MapperOptions;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.bson.UuidRepresentation;
 
@@ -26,10 +27,13 @@ public class DatastoreProvider {
                 .applyConnectionString(new ConnectionString(mongoUrl))
                 .uuidRepresentation(UuidRepresentation.STANDARD)
                 .build();
+        MapperOptions.Builder builder = MapperOptions.builder(MapperOptions.DEFAULT);
+        builder.storeEmpties(true);
 
         this.mongoClient = MongoClients.create(mongoClientSettings);
         this.database = getMongoClient().getDatabase(mongoDatabase);
-        this.datastore = Morphia.createDatastore(getMongoClient(), database.getName());
+        this.datastore = Morphia.createDatastore(getMongoClient(), database.getName(), builder.build());
+
         datastore.getMapper().mapPackage("ulaval.glo2003.controllers.seller.dtos");
         datastore.ensureIndexes();
     }

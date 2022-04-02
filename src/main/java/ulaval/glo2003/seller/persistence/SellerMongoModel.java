@@ -11,11 +11,14 @@ import java.util.UUID;
 
 public class SellerMongoModel {
     @Id
-    private final UUID id;
-    private final String name;
-    private final String bio;
-    private final LocalDate birthDate;
-    private final String createdAt;
+    private UUID id;
+    private String name;
+    private String bio;
+    private LocalDate birthDate;
+    private String createdAt;
+
+    public SellerMongoModel() {
+    }
 
     public SellerMongoModel(UUID id, String name, String bio, LocalDate birthDate, String createdAt) {
         this.id = id;

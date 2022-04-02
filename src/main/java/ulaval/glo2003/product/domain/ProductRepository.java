@@ -3,7 +3,7 @@ package ulaval.glo2003.product.domain;
 import java.util.*;
 
 public interface ProductRepository {
-    void saveProduct(Product product);
+    void save(Product product);
 
     List<Product> findProductsBySellerId(String sellerId);
 

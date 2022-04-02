@@ -35,7 +35,7 @@ public class ProductService {
         Product product = productFactory.createProduct(sellerId, productRequest.title, productRequest.description,
                 productRequest.suggestedPrice, productRequest.categories);
 
-        productRepository.saveProduct(product);
+        productRepository.save(product);
 
         return product.getId();
     }

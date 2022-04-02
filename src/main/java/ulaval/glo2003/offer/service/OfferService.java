@@ -23,6 +23,6 @@ public class OfferService {
         Product product = productRepository.findById(productId);
         Offer offer = offerFactory.createOffer(product, offerRequest.name, offerRequest.email,
                 offerRequest.phoneNumber, offerRequest.amount, offerRequest.message);
-        offerRepository.saveOffer(offer);
+        offerRepository.save(offer);
     }
 }

@@ -11,7 +11,7 @@ public class OfferInMemoryRepository implements OfferRepository {
 
     private final Map<String, Offer> offerMap = Collections.synchronizedMap(new HashMap<>());
 
-    public void saveOffer(Offer offer) {
+    public void save(Offer offer) {
         offerMap.put(offer.getId().toString(), offer);
     }
 

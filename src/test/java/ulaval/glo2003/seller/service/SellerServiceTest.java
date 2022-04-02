@@ -80,7 +80,7 @@ public class SellerServiceTest {
 
         sellerService.createSeller(request);
 
-        verify(sellerRepository).saveSeller(seller);
+        verify(sellerRepository).save(seller);
     }
 
     @Test

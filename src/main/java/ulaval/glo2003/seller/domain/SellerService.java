@@ -31,7 +31,7 @@ public class SellerService {
     public String createSeller(SellerRequest sellerRequest) {
         Seller seller = sellerFactory.createSeller(sellerRequest.name, sellerRequest.bio, sellerRequest.birthDate);
 
-        sellerRepository.saveSeller(seller);
+        sellerRepository.save(seller);
 
         return seller.getId();
     }

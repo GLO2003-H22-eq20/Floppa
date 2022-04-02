@@ -5,23 +5,23 @@ import dev.morphia.annotations.Id;
 import ulaval.glo2003.product.domain.ProductCategory;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Entity("product")
 
 public class ProductMongoModel {
-
     @Id
-    private final UUID id;
-    private final UUID sellerId;
-    private final Instant createdAt;
-    private final String title;
-    private final String description;
-    private final Double suggestedPrice;
-    private final List<UUID> offers;
-    private final List<ProductCategory> categories;
+    private UUID id;
+    private UUID sellerId;
+    private Instant createdAt;
+    private String title;
+    private String description;
+    private Double suggestedPrice;
+    private List<ProductCategory> categories;
+
+    public ProductMongoModel() {
+    }
 
     public ProductMongoModel(
             UUID id,
@@ -38,7 +38,6 @@ public class ProductMongoModel {
         this.title = title;
         this.description = description;
         this.suggestedPrice = suggestedPrice;
-        this.offers = new ArrayList<UUID>();
         this.categories = categories;
     }
 
@@ -64,10 +63,6 @@ public class ProductMongoModel {
 
     public Double getSuggestedPrice() {
         return suggestedPrice;
-    }
-
-    public List<UUID> getOffers() {
-        return offers;
     }
 
     public List<ProductCategory> getCategories() {

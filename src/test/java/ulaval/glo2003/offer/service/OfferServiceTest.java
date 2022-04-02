@@ -82,7 +82,7 @@ public class OfferServiceTest {
 
         offerService.createOffer(PRODUCT_ID, request);
 
-        verify(offerInMemoryRepository).saveOffer(offer);
+        verify(offerInMemoryRepository).save(offer);
     }
 
     @Test
