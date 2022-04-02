@@ -1,29 +1,25 @@
-package ulaval.glo2003.product.domain;
-
-import ulaval.glo2003.offer.domain.Offer;
+package ulaval.glo2003.offer.ui.response;
 
 import java.util.List;
 
-public class Offers {
+public class OffersResponse {
     private Double mean;
     private Integer count;
     private Double min;
     private Double max;
-    private List<Offer> offers;
+    private List<OfferResponse> items;
 
-    public Offers() {
-    }
-
-    public Offers(Integer count) {
+    public OffersResponse(Double mean, Integer count) {
+        this.mean = mean;
         this.count = count;
     }
 
-    public Offers(Double mean, Integer count, Double min, Double max, List<Offer> offers) {
+    public OffersResponse(Double mean, Integer count, Double min, Double max, List<OfferResponse> items) {
         this.mean = mean;
         this.count = count;
         this.min = min;
         this.max = max;
-        this.offers = offers;
+        this.items = items;
     }
 
     public Double getMean() {
@@ -42,7 +38,7 @@ public class Offers {
         return max;
     }
 
-    public List<Offer> getOffers() {
-        return offers;
+    public List<OfferResponse> getItems() {
+        return items;
     }
 }

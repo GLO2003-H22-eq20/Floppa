@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ulaval.glo2003.offer.domain.Offer;
 import ulaval.glo2003.offer.domain.ProductOffers;
 import ulaval.glo2003.product.domain.Offers;
 import ulaval.glo2003.product.domain.Product;
@@ -43,6 +44,9 @@ public class SellerResponseAssemblerTest {
     };
     private static final Double OFFERS_MEAN = 20.5;
     private static final int OFFERS_COUNT = 2;
+    private static final double OFFERS_MIN = 2;
+    private static final double OFFERS_MAX = 2;
+    private static final List<Offer> OFFER_LIST = new ArrayList<>() {};
 
     private SellerResponseAssembler sellerResponseAssembler;
     private SellerProducts sellerProducts;
@@ -64,7 +68,7 @@ public class SellerResponseAssemblerTest {
                         PRODUCT_CATEGORIES));
             }
         };
-        Offers offers = new Offers(OFFERS_MEAN, OFFERS_COUNT);
+        Offers offers = new Offers(OFFERS_MEAN, OFFERS_COUNT, OFFERS_MIN, OFFERS_MAX, OFFER_LIST);
         List<ProductOffers> productsOffers = products.stream()
                 .map(product -> new ProductOffers(product, offers)).collect(Collectors.toList());
         sellerProducts = new SellerProducts(seller, productsOffers);
