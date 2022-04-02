@@ -1,7 +1,5 @@
 package ulaval.glo2003.offer.domain;
 
-import ulaval.glo2003.seller.domain.Seller;
-
 import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
@@ -22,8 +20,7 @@ public class Offer {
                  String phoneNumber,
                  Double amount,
                  String message,
-                 Instant createdAt)
-    {
+                 Instant createdAt) {
         this.id = id;
         this.productId = productId;
         this.name = name;

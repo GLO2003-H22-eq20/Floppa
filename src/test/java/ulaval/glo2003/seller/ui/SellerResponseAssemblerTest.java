@@ -75,13 +75,25 @@ public class SellerResponseAssemblerTest {
     }
 
     @Test
-    public void givenSellerProducts_whenPresenting_thenReturnSellerResponse() {
+    public void givenSellerProducts_whenPresentingSeller_thenReturnSellerResponse() {
         SellerResponse sellerResponse = sellerResponseAssembler.presentSeller(sellerProducts);
 
         assertEquals(sellerResponse.getId(), sellerProducts.getSeller().getId());
         assertEquals(sellerResponse.getName(), sellerProducts.getSeller().getName());
         assertEquals(sellerResponse.getCreatedAt(), sellerProducts.getSeller().getCreatedAt().toString());
         assertEquals(sellerResponse.getBio(), sellerProducts.getSeller().getBio());
+        assertNotNull(sellerResponse.getProducts());
+    }
+
+    @Test
+    public void givenSellerProducts_whenPresentingCurrentSeller_thenReturnSellerResponse() {
+        SellerResponse sellerResponse = sellerResponseAssembler.presentCurrentSeller(sellerProducts);
+
+        assertEquals(sellerResponse.getId(), sellerProducts.getSeller().getId());
+        assertEquals(sellerResponse.getName(), sellerProducts.getSeller().getName());
+        assertEquals(sellerResponse.getCreatedAt(), sellerProducts.getSeller().getCreatedAt().toString());
+        assertEquals(sellerResponse.getBio(), sellerProducts.getSeller().getBio());
+        assertEquals(sellerResponse.getBirthDate(), sellerProducts.getSeller().getBirthDate().toString());
         assertNotNull(sellerResponse.getProducts());
     }
 }

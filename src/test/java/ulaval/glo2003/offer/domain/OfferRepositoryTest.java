@@ -21,8 +21,6 @@ public abstract class OfferRepositoryTest {
     private static final String MESSAGE = "Donec porttitor interdum lacus sed finibus. Nam pulvinar facilisis "
             + "posuere. Maecenas vel lorem amet.";
     private static final Instant CREATED_AT = Instant.now();
-    private static final int ZERO = 0;
-    private static final int ONE = 1;
 
     @Spy
     private OfferRepository offerRepository;
@@ -36,14 +34,14 @@ public abstract class OfferRepositoryTest {
         offer = new Offer(OFFER_ID, PRODUCT_ID, NAME, EMAIL, PHONENUMBER, AMOUNT, MESSAGE, CREATED_AT);
     }
 
-//    @Test
-//    public void givenSavedOffer_whenGettingProductOffers_thenReturnsOffer() {
-//        offerRepository.save(offer);
-//
-//        List<Offer> offerList = offerRepository.getOffersBy(offer.getProductId());
-//
-//        assertThat(offerList).contains(offer);
-//    }
+    @Test
+    public void givenAProductId_whenGettingOffers_thenReturnsOfferList() {
+        offerRepository.save(offer);
+
+        List<Offer> offerList = offerRepository.getOffersBy(offer.getProductId());
+
+        assertThat(offerList).isNotEmpty();
+    }
 
     @Test
     public void givenNoOfferForProduct_whenGettingProductOffers_thenReturnsNone() {
