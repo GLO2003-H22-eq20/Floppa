@@ -2,4 +2,4 @@ deploy:
   staging:
     url: "https://staging-team20floppa.herokuapp.com"
   production:
-    url: "https://production-team20floppa.herokuapp.com/"
+    url: "https://production-team20floppa.herokuapp.com"

@@ -1,6 +1,5 @@
 package ulaval.glo2003;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.logging.LoggingFeature;
@@ -18,7 +17,6 @@ import ulaval.glo2003.exceptions.mappers.InvalidParameterExceptionMapper;
 import ulaval.glo2003.exceptions.mappers.ItemNotFoundExceptionMapper;
 import ulaval.glo2003.exceptions.mappers.MissingParameterExceptionMapper;
 import ulaval.glo2003.health.HealthResource;
-import ulaval.glo2003.offer.persistence.OfferInMemoryRepository;
 import ulaval.glo2003.product.domain.ProductFactory;
 import ulaval.glo2003.product.domain.ProductRepository;
 import ulaval.glo2003.product.persistence.ProductModelAssembler;
