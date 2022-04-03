@@ -18,7 +18,7 @@ public class HealthResource {
     public Response getHealth() {
         try {
             datastoreProvider.getDatastore().getDatabase().listCollectionNames().first();
-        }catch (Exception e){
+        } catch (Exception e) {
             return Response.serverError().entity(new HealthResponse(true, false)).build();
         }
         return Response.status(Response.Status.OK).entity(new HealthResponse(true, true)).build();
