@@ -5,6 +5,7 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
+import ulaval.glo2003.context.Configuration;
 import ulaval.glo2003.offer.domain.OfferFactory;
 import ulaval.glo2003.offer.domain.OfferRepository;
 import ulaval.glo2003.offer.domain.OffersAssembler;
@@ -45,13 +46,10 @@ public class Main {
     private static HttpServer server;
 
     public static void main(String[] args) throws IOException {
-        Dotenv environmentVars = Dotenv.configure().ignoreIfMissing().load();
+        Configuration configuration = new Configuration();
 
-        final String port = environmentVars.get("PORT", "8080");
-        final String baseUri = "http://0.0.0.0:" + port + "/";
-        URI uri = URI.create(baseUri);
-
-        DatastoreProvider datastoreProvider = new DatastoreProvider();
+        URI uri = configuration.getUri();
+        DatastoreProvider datastoreProvider = configuration.createDatastoreProvider();
 
         SellerModelAssembler sellerModelAssembler = new SellerModelAssembler();
         ProductModelAssembler productModelAssembler = new ProductModelAssembler();
