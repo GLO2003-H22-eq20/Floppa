@@ -37,5 +37,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: staging-team20floppa
           heroku_email: maxime.imbeau@hotmail.com
+          healthcheck: "https://staging-team20floppa.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
+          delay: 5
 
 

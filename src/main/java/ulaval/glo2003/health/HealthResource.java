@@ -9,6 +9,6 @@ public class HealthResource {
 
     @GET
     public Response getHealth() {
-        return Response.ok().build();
+        return Response.serverError().build();
     }
 }
