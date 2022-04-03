@@ -50,7 +50,7 @@ public class Main {
 
 
         final String port = environmentVars.get("PORT", "8080");
-        final String baseUri = "http://localhost:" + port;
+        final String baseUri = "http://localhost:" + port + "/";
         URI uri = URI.create(baseUri);
 
         DatastoreProvider datastoreProvider = new DatastoreProvider();
