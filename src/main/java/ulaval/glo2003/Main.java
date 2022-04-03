@@ -91,7 +91,7 @@ public class Main {
                 .register(DefaultExceptionMapper.class)
                 .register(new SellerResource(sellerService, sellerResponseAssembler, uri))
                 .register(new ProductResource(productService,offerService,productResponseAssembler,uri))
-                .register(HealthResource.class)
+                .register(new HealthResource(datastoreProvider))
                 .packages("ulaval.glo2003");
 
         server = GrizzlyHttpServerFactory.createHttpServer(uri, resourceConfig);
