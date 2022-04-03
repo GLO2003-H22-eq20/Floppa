@@ -8,7 +8,6 @@ import com.mongodb.client.MongoDatabase;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
 import dev.morphia.mapping.MapperOptions;
-import io.github.cdimascio.dotenv.Dotenv;
 import org.bson.UuidRepresentation;
 
 public class DatastoreProvider {
@@ -17,21 +16,16 @@ public class DatastoreProvider {
     private final MongoDatabase database;
     private final MongoClient mongoClient;
 
-    public DatastoreProvider() {
-        Dotenv environmentVars = Dotenv.configure().ignoreIfMissing().load();
-
-        String mongoUrl = environmentVars.get("FLOPPA_MONGO_CONNECTION_STRING", "mongodb://localhost");
-        String mongoDatabase = environmentVars.get("FLOPPA_MONGO_DATABASE", "floppa-dev");
-
+    public DatastoreProvider(String connectionString, String dbName) {
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
-                .applyConnectionString(new ConnectionString(mongoUrl))
+                .applyConnectionString(new ConnectionString(connectionString))
                 .uuidRepresentation(UuidRepresentation.STANDARD)
                 .build();
         MapperOptions.Builder builder = MapperOptions.builder(MapperOptions.DEFAULT);
         builder.storeEmpties(true);
 
         this.mongoClient = MongoClients.create(mongoClientSettings);
-        this.database = getMongoClient().getDatabase(mongoDatabase);
+        this.database = getMongoClient().getDatabase(dbName);
         this.datastore = Morphia.createDatastore(getMongoClient(), database.getName(), builder.build());
 
         datastore.getMapper().mapPackage("ulaval.glo2003.controllers.seller.dtos");

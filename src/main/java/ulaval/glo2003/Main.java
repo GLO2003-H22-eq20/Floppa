@@ -4,6 +4,7 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
+import ulaval.glo2003.context.Configuration;
 import ulaval.glo2003.offer.domain.OfferFactory;
 import ulaval.glo2003.offer.domain.OfferRepository;
 import ulaval.glo2003.offer.domain.OffersAssembler;
@@ -16,7 +17,6 @@ import ulaval.glo2003.exceptions.mappers.InvalidParameterExceptionMapper;
 import ulaval.glo2003.exceptions.mappers.ItemNotFoundExceptionMapper;
 import ulaval.glo2003.exceptions.mappers.MissingParameterExceptionMapper;
 import ulaval.glo2003.health.HealthResource;
-import ulaval.glo2003.offer.persistence.OfferInMemoryRepository;
 import ulaval.glo2003.product.domain.ProductFactory;
 import ulaval.glo2003.product.domain.ProductRepository;
 import ulaval.glo2003.product.persistence.ProductModelAssembler;
@@ -44,9 +44,10 @@ public class Main {
     private static HttpServer server;
 
     public static void main(String[] args) throws IOException {
-        URI uri = URI.create("http://localhost:8080/");
+        Configuration configuration = new Configuration();
 
-        DatastoreProvider datastoreProvider = new DatastoreProvider();
+        URI uri = configuration.getUri();
+        DatastoreProvider datastoreProvider = configuration.createDatastoreProvider();
 
         SellerModelAssembler sellerModelAssembler = new SellerModelAssembler();
         ProductModelAssembler productModelAssembler = new ProductModelAssembler();

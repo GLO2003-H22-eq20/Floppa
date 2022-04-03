@@ -1,9 +1,6 @@
 name: Build CI
 on:
   pull_request:
-  push:
-    branches:
-      - 'master'
 
 jobs:
   checkstyle-and-tests:
