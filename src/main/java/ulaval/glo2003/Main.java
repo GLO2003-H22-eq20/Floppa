@@ -44,6 +44,7 @@ public class Main {
     private static HttpServer server;
 
     public static void main(String[] args) throws IOException {
+
         final String port = System.getenv("PORT");
         final String baseUri = "http://localhost:" + port;
         URI uri = URI.create(baseUri);

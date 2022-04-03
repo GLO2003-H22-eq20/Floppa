@@ -5,7 +5,8 @@ on:
     branches:
       - 'master'
       - 'deploy/setup-heroku'
-
+env:
+  PORT: 8080
 jobs:
   tests-and-deploy-staging:
     runs-on: ubuntu-latest
