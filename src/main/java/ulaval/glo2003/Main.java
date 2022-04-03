@@ -44,7 +44,9 @@ public class Main {
     private static HttpServer server;
 
     public static void main(String[] args) throws IOException {
-        URI uri = URI.create("http://localhost:8080/");
+        final String port = System.getenv("PORT");
+        final String baseUri = "http://0.0.0.0:" + port;
+        URI uri = URI.create(baseUri);
 
         DatastoreProvider datastoreProvider = new DatastoreProvider();
 

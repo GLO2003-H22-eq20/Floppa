@@ -1,1 +1,1 @@
-web: java -jar -Dserver.port=$PORT target/floppa-1.0-SNAPSHOT.jar
+web: java $JAVA_OPTS -Dserver.port=$PORT -cp target/classes:target/dependency/* ulaval.glo2003.Main
