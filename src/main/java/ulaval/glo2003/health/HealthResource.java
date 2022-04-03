@@ -5,10 +5,9 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 import ulaval.glo2003.context.DatastoreProvider;
 
-
 @Path("health")
 public class HealthResource {
-    private final DatastoreProvider datastoreProvider;
+    private DatastoreProvider datastoreProvider;
 
     public HealthResource(DatastoreProvider datastoreProvider) {
         this.datastoreProvider = datastoreProvider;
