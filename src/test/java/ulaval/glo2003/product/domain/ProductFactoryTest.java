@@ -17,6 +17,7 @@ public class ProductFactoryTest {
     private static final String SELLER_ID = "1";
     private static final String TITLE = "titleOfProduct";
     private static final String DESCRIPTION = "descriptionOfProduct";
+    private static final String BLANK_STRING = " ";
     private static final Double SUGGESTED_PRICE = 7.7;
     private static final Double INVALID_SUGGESTED_PRICE = 0.5;
     private final List<String> CATEGORIES = new ArrayList<>() {
@@ -42,13 +43,13 @@ public class ProductFactoryTest {
     @Test
     public void givenEmptyTitle_whenCreatingProduct_thenThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
-                productFactory.createProduct(SELLER_ID, "", DESCRIPTION, SUGGESTED_PRICE, CATEGORIES));
+                productFactory.createProduct(SELLER_ID, BLANK_STRING, DESCRIPTION, SUGGESTED_PRICE, CATEGORIES));
     }
 
     @Test
     public void givenEmptyDescription_whenCreatingProduct_thenThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
-                productFactory.createProduct(SELLER_ID, TITLE, "", SUGGESTED_PRICE, CATEGORIES));
+                productFactory.createProduct(SELLER_ID, TITLE, BLANK_STRING, SUGGESTED_PRICE, CATEGORIES));
     }
 
     @Test

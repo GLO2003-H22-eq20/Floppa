@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Spy;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,8 +20,7 @@ public abstract class OfferRepositoryTest {
     private static final Double AMOUNT = 2000.333333;
     private static final String MESSAGE = "Donec porttitor interdum lacus sed finibus. Nam pulvinar facilisis "
             + "posuere. Maecenas vel lorem amet.";
-    private static final int ZERO = 0;
-    private static final int ONE = 1;
+    private static final Instant CREATED_AT = Instant.now();
 
     @Spy
     private OfferRepository offerRepository;
@@ -31,16 +31,16 @@ public abstract class OfferRepositoryTest {
     @BeforeEach
     public void setUp() {
         offerRepository = createOfferRepository();
-        offer = new Offer(OFFER_ID, PRODUCT_ID, NAME, EMAIL, PHONENUMBER, AMOUNT, MESSAGE);
+        offer = new Offer(OFFER_ID, PRODUCT_ID, NAME, EMAIL, PHONENUMBER, AMOUNT, MESSAGE, CREATED_AT);
     }
 
     @Test
-    public void givenSavedOffer_whenGettingProductOffers_thenReturnsOffer() {
+    public void givenAProductId_whenGettingOffers_thenReturnsOfferList() {
         offerRepository.save(offer);
 
         List<Offer> offerList = offerRepository.getOffersBy(offer.getProductId());
 
-        assertThat(offerList).contains(offer);
+        assertThat(offerList).isNotEmpty();
     }
 
     @Test

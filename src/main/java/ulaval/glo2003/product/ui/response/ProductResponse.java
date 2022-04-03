@@ -1,5 +1,6 @@
 package ulaval.glo2003.product.ui.response;
 
+import ulaval.glo2003.offer.ui.response.OffersResponse;
 import ulaval.glo2003.seller.ui.response.SellerResponse;
 import ulaval.glo2003.product.domain.Offers;
 
@@ -11,15 +12,15 @@ public class ProductResponse {
     private String title;
     private String description;
     private Double suggestedPrice;
-    private Offers offers;
     private List<String> categories;
     private SellerResponse seller;
+    private OffersResponse offers;
 
     public ProductResponse() {
     }
 
     public ProductResponse(String id, String createdAt, String title, String description, Double suggestedPrice,
-                           Offers offers, List<String> categories, SellerResponse seller) {
+                           OffersResponse offers, List<String> categories, SellerResponse seller) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
@@ -31,7 +32,7 @@ public class ProductResponse {
     }
 
     public ProductResponse(String id, String createdAt, String title, String description,
-                           Double suggestedPrice, Offers offers, List<String> categories) {
+                           Double suggestedPrice, OffersResponse offers, List<String> categories) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
@@ -61,7 +62,7 @@ public class ProductResponse {
         return suggestedPrice;
     }
 
-    public Offers getOffers() {
+    public OffersResponse getOffers() {
         return offers;
     }
 

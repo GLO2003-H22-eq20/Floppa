@@ -1,6 +1,8 @@
 package ulaval.glo2003.E2E.fixtures;
 
 import io.restassured.http.Header;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import ulaval.glo2003.E2E.EndToEndTest;
 
@@ -12,6 +14,11 @@ import static ulaval.glo2003.E2E.fixtures.SellerFixture.getIdFromLocation;
 
 public class ProductFixture extends EndToEndTest {
     public static final String JSON = "application/json";
+    public static final String PRODUCT_TITLE = "Willy Waller 2006";
+    public static final String PRODUCT_DESCRIPTION = "Epeluche patate";
+    public static final String INVALID_PRODUCT_PRICE = "0.0";
+    public static final String PRODUCT_PRICE = "10.85";
+    public static final String[] PRODUCT_CATEGORY = new String[]{"sports"};
 
     public static Map<String, Object> createProductRequest(String title,
             String description,
@@ -44,11 +51,11 @@ public class ProductFixture extends EndToEndTest {
     }
 
     public static Map<String, Object> givenValidProductRequest() {
-        return createProductRequest("Willy Waller 2006", "Epeluche patate", "10.85", new String[]{"sports"});
+        return createProductRequest(PRODUCT_TITLE, PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_CATEGORY);
     }
 
     public static Map<String, Object> givenInvalidPriceProductRequest() {
-        return createProductRequest("Willy Waller 2006", "Epeluche patate", "0.0", new String[]{"sports"});
+        return createProductRequest(PRODUCT_TITLE, PRODUCT_DESCRIPTION, INVALID_PRODUCT_PRICE, PRODUCT_CATEGORY);
 
     }
 
@@ -65,6 +72,13 @@ public class ProductFixture extends EndToEndTest {
                 .when().post("/products")
                 .then().extract()
                 .headers().get("location").getValue();
+    }
+
+    public static ExtractableResponse<Response> givenExistingProduct(Map<String, Object> request, String sellerId) {
+        return given().contentType(JSON).body(request)
+                .header(new Header("X-Seller-Id", sellerId))
+                .when().post("/products")
+                .then().extract();
     }
 
     public static String givenExistingProductIdForSeller(String sellerId) {

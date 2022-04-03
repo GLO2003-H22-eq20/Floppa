@@ -33,7 +33,7 @@ public class ProductResourceE2ETest extends EndToEndTest {
             + "posuere. Maecenas vel lorem amet.";
 
     @Test
-    public void givenSellerAndValidProductRequest_whenCreatingProduct_shouldReturnCreated201() {
+    public void givenSellerAndValidProductRequest_whenCreatingProduct_thenReturnCreated201() {
         String sellerId = givenNewSellerId();
         Map<String, Object> productRequest = givenValidProductRequest();
 
@@ -46,7 +46,7 @@ public class ProductResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenBlankSellerId_whenCreatingProduct_shouldReturnMissingParameterException() {
+    public void givenBlankSellerId_whenCreatingProduct_thenReturnMissingParameterException() {
         Map<String, Object> productRequest = givenValidProductRequest();
 
         ExtractableResponse<Response> response = givenNewProductForSeller(productRequest, " ")
@@ -57,7 +57,7 @@ public class ProductResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenProductWithSuggestedPriceBelowMinimum_whenCreatingProduct_shouldReturnInvalidParameter() {
+    public void givenProductWithSuggestedPriceBelowMinimum_whenCreatingProduct_thenReturnInvalidParameter() {
         String sellerId = givenNewSellerId();
         Map<String, Object> emptyRequest = givenInvalidPriceProductRequest();
 
@@ -73,7 +73,7 @@ public class ProductResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenProductWithMissingParameters_whenCreatingProduct_shouldReturnMissingParameter() {
+    public void givenProductWithMissingParameters_whenCreatingProduct_thenReturnMissingParameter() {
         String sellerId = givenNewSellerId();
         Map<String, String> emptyRequest = new HashMap<>();
 
@@ -89,7 +89,7 @@ public class ProductResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenExistingProductLocation_whenGettingProduct_shouldReturnProduct() throws URISyntaxException {
+    public void givenExistingProductLocation_whenGettingProduct_thenReturnProduct() throws URISyntaxException {
         Map<String, Object> productRequest = givenValidProductRequest();
         String sellerId = givenNewSellerId();
         String productLocation = givenExistingProductLocation(productRequest, sellerId);
@@ -107,7 +107,7 @@ public class ProductResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenNotExistingProductLocation_whenGettingProduct_shouldNotFound() throws URISyntaxException {
+    public void givenNotExistingProductLocation_whenGettingProduct_thenNotFound() throws URISyntaxException {
         UUID invalidId = UUID.randomUUID();
         ExtractableResponse<Response> response = given().when().get("/products/" + invalidId).then().extract();
         ExceptionResponse error = response.body().as(ExceptionResponse.class);
@@ -117,7 +117,19 @@ public class ProductResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenInclusiveFilters_whenGettingProducts_shouldReturnMatchingProducts() {
+    public void givenExistingProductsAndNoFilters_whenGettingProducts_thenReturnAllProducts() {
+        String sellerId = givenNewSellerId();
+        String firstProductId = givenExistingProductIdForSeller(sellerId);
+        String secondProductId = givenExistingProductIdForSeller(sellerId);
+
+        ExtractableResponse<Response> response = given().when().get("/products").then().extract();
+        ProductsResponse productsResponse = response.body().as(ProductsResponse.class);
+
+        assertThat(productsResponse.getProducts()).isNotEmpty();
+    }
+
+    @Test
+    public void givenInclusiveFilters_whenGettingProducts_thenReturnMatchingProducts() {
         String sellerId = givenNewSellerId();
         String productTitle = "health potion";
         Map<String, Object> productRequest = createProductRequest(productTitle,
@@ -141,7 +153,7 @@ public class ProductResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenExistingProductsAndExclusiveFilters_whenGettingProducts_shouldNotReturnProducts() {
+    public void givenExistingProductsAndExclusiveFilters_whenGettingProducts_thenNotReturnProducts() {
         String sellerId = givenNewSellerId();
         String anotherSellerId = givenNewSellerId();
         String productTitle = "mana potion";

@@ -47,7 +47,7 @@ public class SellerServiceTest {
         {
             name = "name";
             bio = "bio";
-            birthDate = LocalDate.of(1996, 1, 12);
+            birthDate = "1996, 1, 12";
         }
     };
 
