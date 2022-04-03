@@ -45,9 +45,7 @@ public class Main {
     private static HttpServer server;
 
     public static void main(String[] args) throws IOException {
-
         Dotenv environmentVars = Dotenv.configure().ignoreIfMissing().load();
-
 
         final String port = environmentVars.get("PORT", "8080");
         final String baseUri = "http://localhost:" + port + "/";
