@@ -24,7 +24,7 @@ public class SellerResourceE2ETest extends EndToEndTest {
     public static final String SELLERS_ENDPOINT = "/sellers";
 
     @Test
-    public void givenValidSellerRequest_whenCreatingSeller_shouldReturnCreated201() {
+    public void givenValidSellerRequest_whenCreatingSeller_thenReturnCreated201() {
         Map<String, String> sellerRequest = givenValidSellerRequest();
 
         ExtractableResponse<Response> response = given().contentType("application/json")
@@ -37,7 +37,7 @@ public class SellerResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenInvalidSellerAge_whenCreatingSeller_shouldReturnInvalidParameter() {
+    public void givenInvalidSellerAge_whenCreatingSeller_thenReturnInvalidParameter() {
         Map<String, String> invalidSellerRequest = givenInvalidAgeSellerRequest();
 
         ExtractableResponse<Response> response = given().contentType("application/json")
@@ -51,7 +51,7 @@ public class SellerResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenMissingParams_whenCreatingSeller_shouldReturnMissingParameter() {
+    public void givenMissingParams_whenCreatingSeller_thenReturnMissingParameter() {
         Map<String, String> emptyRequest = new HashMap<>();
 
         ExtractableResponse<Response> response = given().contentType("application/json")
@@ -65,7 +65,7 @@ public class SellerResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenExistingSeller_whenGettingSeller_shouldReturnSeller() throws URISyntaxException {
+    public void givenExistingSeller_whenGettingSeller_thenReturnSeller() throws URISyntaxException {
         Map<String, String> sellerRequest = givenValidSellerRequest();
         String sellerLocation = givenExistingSellerLocation(sellerRequest);
 
@@ -81,7 +81,7 @@ public class SellerResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenInvalidId_whenGettingSeller_shouldReturnNotFound() throws URISyntaxException {
+    public void givenInvalidId_whenGettingSeller_thenReturnNotFound() throws URISyntaxException {
         ExtractableResponse<Response> response = given().when().get(SELLERS_ENDPOINT + "/notfound").then().extract();
         ExceptionResponse error = response.body().as(ExceptionResponse.class);
 
@@ -90,7 +90,7 @@ public class SellerResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenSellerWithProducts_whenGettingSeller_shouldSellerWithItsProducts() throws URISyntaxException {
+    public void givenSellerWithProducts_whenGettingSeller_thenSellerWithItsProducts() throws URISyntaxException {
         Map<String, String> sellerRequest = givenValidSellerRequest();
         String sellerLocation = givenExistingSellerLocation(sellerRequest);
         String sellerId = getIdFromLocation(sellerLocation);
