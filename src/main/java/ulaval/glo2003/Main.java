@@ -45,7 +45,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         final String port = System.getenv("PORT");
-        final String baseUri = "http://0.0.0.0:" + port;
+        final String baseUri = "http://localhost:" + port;
         URI uri = URI.create(baseUri);
 
         DatastoreProvider datastoreProvider = new DatastoreProvider();
