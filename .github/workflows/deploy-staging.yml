@@ -7,7 +7,7 @@ on:
       - 'deploy/setup-heroku'
 
 jobs:
-  checkstyle-and-tests:
+  tests-and-deploy-staging:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
