@@ -3,6 +3,7 @@ package ulaval.glo2003.offer.persistence;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Entity("offer")
@@ -15,6 +16,7 @@ public class OfferMongoModel {
     private String phoneNumber;
     private Double amount;
     private String message;
+    private Instant createdAt;
 
     public OfferMongoModel() {
     }
@@ -26,7 +28,8 @@ public class OfferMongoModel {
             String email,
             String phoneNumber,
             Double amount,
-            String message
+            String message,
+            Instant createdAt
     ) {
         this.id = id;
         this.productId = productId;
@@ -35,6 +38,7 @@ public class OfferMongoModel {
         this.phoneNumber = phoneNumber;
         this.amount = amount;
         this.message = message;
+        this.createdAt = createdAt;
     }
 
     public String getProductId() {
@@ -63,5 +67,9 @@ public class OfferMongoModel {
 
     public String getMessage() {
         return message;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 }

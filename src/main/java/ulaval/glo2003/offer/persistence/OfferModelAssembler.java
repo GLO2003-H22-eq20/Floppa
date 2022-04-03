@@ -11,7 +11,8 @@ public class OfferModelAssembler {
                 offer.getEmail(),
                 offer.getPhoneNumber(),
                 offer.getAmount(),
-                offer.getMessage());
+                offer.getMessage(),
+                offer.getCreatedAt());
     }
 
     public Offer assembleMongoModelToEntity(OfferMongoModel offerMongoModel) {
@@ -22,7 +23,9 @@ public class OfferModelAssembler {
                 offerMongoModel.getEmail(),
                 offerMongoModel.getPhoneNumber(),
                 offerMongoModel.getAmount(),
-                offerMongoModel.getMessage()
+                offerMongoModel.getMessage(),
+                offerMongoModel.getCreatedAt()
         );
+
     }
 }

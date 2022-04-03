@@ -4,6 +4,7 @@ import ulaval.glo2003.exceptions.InvalidParameterException;
 import ulaval.glo2003.exceptions.MissingParameterException;
 import ulaval.glo2003.product.domain.Product;
 
+import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,7 +26,7 @@ public class OfferFactory {
         validatePhoneNumber(phoneNumber);
         validateAmount(amount, product);
         validateMessage(message);
-        return new Offer(UUID.randomUUID(), product.getId(), name, email, phoneNumber, amount, message);
+        return new Offer(UUID.randomUUID(), product.getId(), name, email, phoneNumber, amount, message, Instant.now());
     }
 
     private void validateName(String name) {

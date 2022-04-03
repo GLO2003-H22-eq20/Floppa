@@ -1,7 +1,6 @@
 package ulaval.glo2003.offer.domain;
 
-import ulaval.glo2003.seller.domain.Seller;
-
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -13,16 +12,15 @@ public class Offer {
     private final String phoneNumber;
     private final Double amount;
     private final String message;
+    private final Instant createdAt;
 
-    public Offer(
-            UUID id,
-            String productId,
-            String name,
-            String email,
-            String phoneNumber,
-            Double amount,
-            String message
-    ) {
+    public Offer(UUID id,
+                 String productId,
+                 String name, String email,
+                 String phoneNumber,
+                 Double amount,
+                 String message,
+                 Instant createdAt) {
         this.id = id;
         this.productId = productId;
         this.name = name;
@@ -30,6 +28,7 @@ public class Offer {
         this.phoneNumber = phoneNumber;
         this.amount = amount;
         this.message = message;
+        this.createdAt = createdAt;
     }
 
     public String getProductId() {
@@ -60,6 +59,10 @@ public class Offer {
         return message;
     }
 
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -75,6 +78,7 @@ public class Offer {
                 && Objects.equals(this.email, that.email)
                 && Objects.equals(this.phoneNumber, that.phoneNumber)
                 && Objects.equals(this.amount, that.amount)
-                && Objects.equals(this.message, that.message);
+                && Objects.equals(this.message, that.message)
+                && Objects.equals(this.createdAt, that.createdAt);
     }
 }
