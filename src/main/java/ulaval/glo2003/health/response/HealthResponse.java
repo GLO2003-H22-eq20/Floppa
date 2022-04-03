@@ -1,22 +1,22 @@
-package ulaval.glo2003.health;
+package ulaval.glo2003.health.response;
 
 public class HealthResponse {
     private boolean api;
     private boolean db;
+
+    public HealthResponse() {
+    }
 
     public HealthResponse(boolean api, boolean db) {
         this.api = api;
         this.db = db;
     }
 
-    public HealthResponse() {
-    }
-
-    public boolean getApi() {
+    public boolean isApi() {
         return api;
     }
 
-    public boolean getDb() {
+    public boolean isDb() {
         return db;
     }
 }

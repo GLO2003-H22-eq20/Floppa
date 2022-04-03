@@ -4,6 +4,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 import ulaval.glo2003.context.DatastoreProvider;
+import ulaval.glo2003.health.response.HealthResponse;
 
 @Path("health")
 public class HealthResource {
