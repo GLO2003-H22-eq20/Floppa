@@ -1,0 +1,5 @@
+deploy:
+  staging:
+    url: <url_staging>
+  production:
+    url: <url_production>

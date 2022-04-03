@@ -1,6 +1,10 @@
-name: Build CI
+name: Deploy Staging
 on:
-  pull_request:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'master'
+      - 'deploy/setup-heroku'
 
 jobs:
   checkstyle-and-tests:
@@ -25,3 +29,12 @@ jobs:
 
       - name: Step 3 Tests
         run: mvn verify
+
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: staging-team20floppa
+          heroku_email: maxime.imbeau@hotmail.com
+
+
