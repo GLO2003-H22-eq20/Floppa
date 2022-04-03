@@ -117,18 +117,6 @@ public class ProductResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenExistingProductsAndNoFilters_whenGettingProducts_shouldReturnAllProducts() {
-        String sellerId = givenNewSellerId();
-        String firstProductId = givenExistingProductIdForSeller(sellerId);
-        String secondProductId = givenExistingProductIdForSeller(sellerId);
-
-        ExtractableResponse<Response> response = given().when().get("/products").then().extract();
-        ProductsResponse productsResponse = response.body().as(ProductsResponse.class);
-
-        assertThat(productsResponse.getProducts()).isNotEmpty();
-    }
-
-    @Test
     public void givenInclusiveFilters_whenGettingProducts_shouldReturnMatchingProducts() {
         String sellerId = givenNewSellerId();
         String productTitle = "health potion";
