@@ -28,7 +28,12 @@ public class SellerResponse {
         this.name = name;
     }
 
-    public SellerResponse(String id, String name, String createdAt, String bio, String birthDate, List<ProductResponse> products) {
+    public SellerResponse(String id,
+                          String name,
+                          String createdAt,
+                          String bio,
+                          String birthDate,
+                          List<ProductResponse> products) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;

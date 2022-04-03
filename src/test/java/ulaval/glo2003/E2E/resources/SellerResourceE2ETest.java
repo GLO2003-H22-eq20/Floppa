@@ -136,7 +136,8 @@ public class SellerResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenSellerWithProducts_whenGettingCurrentSeller_thenReturnSellerWithItsProducts() throws URISyntaxException {
+    public void givenSellerWithProducts_whenGettingCurrentSeller_thenReturnSellerWithItsProducts()
+            throws URISyntaxException {
         String sellerId = givenNewSellerId();
         Map<String, Object> productRequest = givenValidProductRequest();
         givenExistingProduct(productRequest, sellerId);
