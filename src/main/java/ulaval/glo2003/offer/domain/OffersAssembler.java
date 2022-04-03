@@ -21,11 +21,7 @@ public class OffersAssembler {
         Locale.setDefault(Locale.US);
         OptionalDouble mean = offers.stream().mapToDouble(Offer::getAmount).average();
         if (mean.isPresent()) {
-            double test1 = mean.getAsDouble();
-            long test = Math.round(test1*100.0);
-            return test/100.0;
-            //return Math.round(mean.getAsDouble()*100.0)/100.0;
-            //return Double.valueOf(decimalFormat.format(mean.getAsDouble()));
+            return Math.round(mean.getAsDouble()*100.0)/100.0;
         } else {
             return null;
         }

@@ -40,8 +40,7 @@ public class SellerFactory {
         }
         try {
             testingDate = LocalDate.parse(birthDate);
-        }
-        catch (DateTimeException e) {
+        } catch (DateTimeException e) {
             throw new InvalidParameterException("Birth date is not valid");
         }
         if (testingDate.isAfter(LocalDate.now().minusYears(18))) {
