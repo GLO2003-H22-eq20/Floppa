@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.exceptions.InvalidParameterException;
 import ulaval.glo2003.exceptions.MissingParameterException;
-import ulaval.glo2003.seller.domain.Seller;
-import ulaval.glo2003.seller.domain.SellerFactory;
 
 import java.time.LocalDate;
 
@@ -16,6 +14,7 @@ public class SellerFactoryTest {
     private static final String BIO = "Hockey";
     private static final LocalDate VALID_BIRTH_DATE = LocalDate.of(1987, 8, 16);
     private static final LocalDate INVALID_BIRTH_DATE = LocalDate.of(2004, 8, 16);
+    private static final String BLANK_STRING = " ";
 
     private SellerFactory sellerFactory;
 
@@ -27,31 +26,31 @@ public class SellerFactoryTest {
     @Test
     public void givenNameIsEmpty_whenCreatingSeller_thenThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
-                sellerFactory.createSeller("", BIO, VALID_BIRTH_DATE));
+                sellerFactory.createSeller(BLANK_STRING, BIO, VALID_BIRTH_DATE.toString()));
     }
 
     @Test
     public void givenBioIsEmpty_whenCreatingSeller_thenThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
-                sellerFactory.createSeller(NAME, "", VALID_BIRTH_DATE));
+                sellerFactory.createSeller(NAME, BLANK_STRING, VALID_BIRTH_DATE.toString()));
     }
 
     @Test
     public void givenAgeIsUnder18YearsOld_whenCreatingSeller_thenThrowsInvalidParameterException() {
         assertThrows(InvalidParameterException.class, () ->
-                sellerFactory.createSeller(NAME, BIO, INVALID_BIRTH_DATE));
+                sellerFactory.createSeller(NAME, BIO, INVALID_BIRTH_DATE.toString()));
     }
 
     @Test
     public void givenNameIsNotInRequest_whenCreatingSeller_thenThrowsMissingParameterException() {
         assertThrows(MissingParameterException.class, () ->
-                sellerFactory.createSeller(null, BIO, INVALID_BIRTH_DATE));
+                sellerFactory.createSeller(null, BIO, VALID_BIRTH_DATE.toString()));
     }
 
     @Test
     public void givenBioIsNotInRequest_whenCreatingSeller_thenThrowsMissingParameterException() {
         assertThrows(MissingParameterException.class, () ->
-                sellerFactory.createSeller(NAME, null, INVALID_BIRTH_DATE));
+                sellerFactory.createSeller(NAME, null, VALID_BIRTH_DATE.toString()));
     }
 
     @Test
@@ -62,14 +61,14 @@ public class SellerFactoryTest {
 
     @Test
     public void whenCreatingSeller_thenSellerHasAnIdGenerated() {
-        Seller seller = sellerFactory.createSeller(NAME, BIO, VALID_BIRTH_DATE);
+        Seller seller = sellerFactory.createSeller(NAME, BIO, VALID_BIRTH_DATE.toString());
 
         assertNotNull(seller.getId());
     }
 
     @Test
     public void whenCreatingSeller_thenSellerHasATimeOfCreation() {
-        Seller seller = sellerFactory.createSeller(NAME, BIO, VALID_BIRTH_DATE);
+        Seller seller = sellerFactory.createSeller(NAME, BIO, VALID_BIRTH_DATE.toString());
 
         assertNotNull(seller.getCreatedAt());
     }

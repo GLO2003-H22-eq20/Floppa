@@ -12,21 +12,25 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 public class SellerFixture extends EndToEndTest {
+    public static final String SELLER_NAME = "Boba Fett";
+    public static final String SELLER_BIO = "Bounty Hunter";
+    public static final String SELLER_BIRTH_DATE = "1996-09-15";
+    public static final String SELLER_INVALID_BIRTH_DATE = LocalDate.now().toString();
 
     public static Map<String, String> givenInvalidAgeSellerRequest() {
         Map<String, String> invalidRequest = new HashMap<>();
-        invalidRequest.put("name", "Boba Fett");
-        invalidRequest.put("bio", "Bounty Hunter");
-        invalidRequest.put("birthDate", LocalDate.now().toString());
+        invalidRequest.put("name", SELLER_NAME);
+        invalidRequest.put("bio", SELLER_BIO);
+        invalidRequest.put("birthDate", SELLER_INVALID_BIRTH_DATE);
 
         return invalidRequest;
     }
 
     public static Map<String, String> givenValidSellerRequest() {
         Map<String, String> sellerRequest = new HashMap<>();
-        sellerRequest.put("name", "Boba Fett");
-        sellerRequest.put("bio", "Bounty Hunter");
-        sellerRequest.put("birthDate", "1996-09-15");
+        sellerRequest.put("name", SELLER_NAME);
+        sellerRequest.put("bio", SELLER_BIO);
+        sellerRequest.put("birthDate", SELLER_BIRTH_DATE);
 
         return sellerRequest;
     }

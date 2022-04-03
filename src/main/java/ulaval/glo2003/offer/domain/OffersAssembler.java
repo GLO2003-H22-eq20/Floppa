@@ -18,9 +18,10 @@ public class OffersAssembler {
     }
 
     private Double getMean(List<Offer> offers) {
+        Locale.setDefault(Locale.US);
         OptionalDouble mean = offers.stream().mapToDouble(Offer::getAmount).average();
         if (mean.isPresent()) {
-            return Double.valueOf(decimalFormat.format(mean.getAsDouble()));
+            return Math.round(mean.getAsDouble() * 100.0) / 100.0;
         } else {
             return null;
         }

@@ -36,7 +36,7 @@ public class ProductFactory {
     private void validateTitle(String title) {
         if (title == null) {
             throw new MissingParameterException("Missing title");
-        } else if (title.isEmpty()) {
+        } else if (title.isBlank()) {
             throw new InvalidParameterException("Title is empty");
         }
     }
@@ -44,7 +44,7 @@ public class ProductFactory {
     private void validateDescription(String description) {
         if (description == null) {
             throw new MissingParameterException("Missing description");
-        } else if (description.isEmpty()) {
+        } else if (description.isBlank()) {
             throw new InvalidParameterException("Description is empty");
         }
     }

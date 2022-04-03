@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.when;
 public class HealthResourceE2ETest extends EndToEndTest {
 
     @Test
-    public void whenGettingHealthStatus_itShouldReturnOk() {
+    public void whenGettingHealthStatus_thenReturnOk() {
         var response = when().get("/health").then().extract();
 
         assertThat(response.statusCode()).isEqualTo(STATUS_OK);
