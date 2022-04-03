@@ -48,7 +48,7 @@ public class Main {
         Dotenv environmentVars = Dotenv.configure().ignoreIfMissing().load();
 
         final String port = environmentVars.get("PORT", "8080");
-        final String baseUri = "http://localhost:" + port + "/";
+        final String baseUri = "http://0.0.0.0:" + port + "/";
         URI uri = URI.create(baseUri);
 
         DatastoreProvider datastoreProvider = new DatastoreProvider();
