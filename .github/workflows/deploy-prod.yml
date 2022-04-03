@@ -1,14 +1,11 @@
-name: Deploy Staging
+name: Deploy Prod
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - 'master'
 env:
   PORT: 8080
 
 jobs:
-  tests-and-deploy-staging:
+  tests-and-deploy-prod:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -35,9 +32,9 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: staging-team20floppa
+          heroku_app_name: production-team20floppa
           heroku_email: maxime.imbeau@hotmail.com
-          healthcheck: "https://staging-team20floppa.herokuapp.com/health"
+          healthcheck: "https://production-team20floppa.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
           delay: 5
 
