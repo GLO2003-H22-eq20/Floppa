@@ -157,12 +157,16 @@ public class OfferFactoryTest {
 
     @Test
     public void whenCreatingOffer_thenOfferHasAnIdGenerated() {
-        givenProductWithSuggestedAmount();
-
         Offer offer = offerFactory.createOffer(product, NAME, EMAIL, PHONENUMBER, AMOUNT, MESSAGE);
 
-        verify(product).getId();
         assertNotNull(offer.getId());
+    }
+
+    @Test
+    public void whenCreatingOffer_thenOfferHasAnCreatedAtDateGenerated() {
+        Offer offer = offerFactory.createOffer(product, NAME, EMAIL, PHONENUMBER, AMOUNT, MESSAGE);
+
+        assertNotNull(offer.getCreatedAt());
     }
 
 

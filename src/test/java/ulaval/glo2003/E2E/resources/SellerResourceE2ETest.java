@@ -1,5 +1,6 @@
 package ulaval.glo2003.E2E.resources;
 
+import io.restassured.http.Header;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.Test;
@@ -14,14 +15,12 @@ import java.util.Map;
 
 import static com.google.common.truth.Truth.assertThat;
 import static io.restassured.RestAssured.given;
-import static ulaval.glo2003.E2E.fixtures.ProductFixture.givenExistingProductIdForSeller;
-import static ulaval.glo2003.E2E.fixtures.SellerFixture.getIdFromLocation;
-import static ulaval.glo2003.E2E.fixtures.SellerFixture.givenExistingSellerLocation;
-import static ulaval.glo2003.E2E.fixtures.SellerFixture.givenInvalidAgeSellerRequest;
-import static ulaval.glo2003.E2E.fixtures.SellerFixture.givenValidSellerRequest;
+import static ulaval.glo2003.E2E.fixtures.ProductFixture.*;
+import static ulaval.glo2003.E2E.fixtures.SellerFixture.*;
 
 public class SellerResourceE2ETest extends EndToEndTest {
     public static final String SELLERS_ENDPOINT = "/sellers";
+    public static final String CURRENT_SELLERS_ENDPOINT = "/sellers/@me";
 
     @Test
     public void givenValidSellerRequest_whenCreatingSeller_thenReturnCreated201() {
@@ -81,7 +80,7 @@ public class SellerResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenInvalidId_whenGettingSeller_thenReturnNotFound() throws URISyntaxException {
+    public void givenInvalidId_whenGettingSeller_thenReturnNotFoundException() {
         ExtractableResponse<Response> response = given().when().get(SELLERS_ENDPOINT + "/notfound").then().extract();
         ExceptionResponse error = response.body().as(ExceptionResponse.class);
 
@@ -90,12 +89,11 @@ public class SellerResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenSellerWithProducts_whenGettingSeller_thenSellerWithItsProducts() throws URISyntaxException {
+    public void givenSellerWithProducts_whenGettingSeller_thenReturnSellerWithItsProducts() throws URISyntaxException {
         Map<String, String> sellerRequest = givenValidSellerRequest();
         String sellerLocation = givenExistingSellerLocation(sellerRequest);
         String sellerId = getIdFromLocation(sellerLocation);
         String productId = givenExistingProductIdForSeller(sellerId);
-
 
         ExtractableResponse<Response> response = given().when().get(new URI(sellerLocation)).then().extract();
         SellerResponse sellerResponse = response.body().as(SellerResponse.class);
@@ -103,5 +101,66 @@ public class SellerResourceE2ETest extends EndToEndTest {
         assertThat(response.statusCode()).isEqualTo(STATUS_OK);
         assertThat(sellerResponse.getProducts()).isNotEmpty();
         assertThat(sellerResponse.getProducts().get(0).getId()).isEqualTo(productId);
+    }
+
+    @Test
+    public void givenExistingSeller_whenGettingCurrentSeller_thenReturnCurrentSeller() {
+        String sellerId = givenNewSellerId();
+
+        ExtractableResponse<Response> response = given().urlEncodingEnabled(false)
+                .contentType("application/json")
+                .header(new Header("X-Seller-Id", sellerId))
+                .when().get(CURRENT_SELLERS_ENDPOINT)
+                .then().extract();
+        SellerResponse sellerResponse = response.body().as(SellerResponse.class);
+
+        assertThat(response.statusCode()).isEqualTo(STATUS_OK);
+        assertThat(sellerResponse.getId()).isNotNull();
+        assertThat(sellerResponse.getName()).isNotNull();
+        assertThat(sellerResponse.getBio()).isNotNull();
+        assertThat(sellerResponse.getCreatedAt()).isNotNull();
+        assertThat(sellerResponse.getBirthDate()).isNotNull();
+        assertThat(sellerResponse.getProducts()).isEmpty();
+    }
+
+    @Test
+    public void givenInvalidId_whenGettingCurrentSeller_thenReturnNotFoundException() {
+        ExtractableResponse<Response> response = given().urlEncodingEnabled(false)
+                .contentType("application/json")
+                .header(new Header("X-Seller-Id", "invalidSellerId"))
+                .when().get(CURRENT_SELLERS_ENDPOINT).then().extract();
+        ExceptionResponse error = response.body().as(ExceptionResponse.class);
+
+        assertThat(response.statusCode()).isEqualTo(STATUS_NOT_FOUND);
+        assertThat(error.getCode()).isEqualTo("ITEM_NOT_FOUND");
+    }
+
+    @Test
+    public void givenSellerWithProducts_whenGettingCurrentSeller_thenReturnSellerWithItsProducts()
+            throws URISyntaxException {
+        String sellerId = givenNewSellerId();
+        Map<String, Object> productRequest = givenValidProductRequest();
+        givenExistingProduct(productRequest, sellerId);
+
+        ExtractableResponse<Response> response = given().urlEncodingEnabled(false)
+                .contentType("application/json")
+                .header(new Header("X-Seller-Id", sellerId))
+                .when().get(CURRENT_SELLERS_ENDPOINT)
+                .then().extract();
+        SellerResponse sellerResponse = response.body().as(SellerResponse.class);
+
+        assertThat(response.statusCode()).isEqualTo(STATUS_OK);
+        assertThat(sellerResponse.getId()).isNotNull();
+        assertThat(sellerResponse.getName()).isNotNull();
+        assertThat(sellerResponse.getBio()).isNotNull();
+        assertThat(sellerResponse.getCreatedAt()).isNotNull();
+        assertThat(sellerResponse.getBirthDate()).isNotNull();
+        assertThat(sellerResponse.getProducts().get(0).getId()).isNotNull();
+        assertThat(sellerResponse.getProducts().get(0).getCreatedAt()).isNotNull();
+        assertThat(sellerResponse.getProducts().get(0).getDescription()).isNotNull();
+        assertThat(sellerResponse.getProducts().get(0).getSuggestedPrice()).isNotNull();
+        assertThat(sellerResponse.getProducts().get(0).getTitle()).isNotNull();
+        assertThat(sellerResponse.getProducts().get(0).getOffers().getCount()).isEqualTo(0);
+        assertThat(sellerResponse.getProducts().get(0).getOffers().getItems()).isEmpty();
     }
 }

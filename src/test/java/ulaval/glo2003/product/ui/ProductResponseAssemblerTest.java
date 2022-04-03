@@ -3,6 +3,7 @@ package ulaval.glo2003.product.ui;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import ulaval.glo2003.offer.domain.Offer;
 import ulaval.glo2003.offer.domain.ProductOffers;
 import ulaval.glo2003.product.domain.Offers;
 import ulaval.glo2003.product.domain.Product;
@@ -41,6 +42,9 @@ public class ProductResponseAssemblerTest {
     };
     private static final Double OFFERS_MEAN = 20.5;
     private static final int OFFERS_COUNT = 2;
+    private static final double OFFERS_MIN = 2;
+    private static final double OFFERS_MAX = 2;
+    private static final List<Offer> OFFER_LIST = new ArrayList<>() {};
 
     private ProductResponseAssembler productResponseAssembler;
     private SellerProduct sellerProduct;
@@ -62,7 +66,7 @@ public class ProductResponseAssemblerTest {
                 PRODUCT_DESCRIPTION,
                 PRODUCT_SUGGESTED_PRICE,
                 PRODUCT_CATEGORIES);
-        Offers offers = new Offers(OFFERS_MEAN, OFFERS_COUNT);
+        Offers offers = new Offers(OFFERS_MEAN, OFFERS_COUNT, OFFERS_MIN, OFFERS_MAX, OFFER_LIST);
         ProductOffers productOffers = new ProductOffers(product, offers);
         sellerProduct = new SellerProduct(seller, productOffers);
     }

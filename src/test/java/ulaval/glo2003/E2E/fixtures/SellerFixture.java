@@ -1,5 +1,8 @@
 package ulaval.glo2003.E2E.fixtures;
 
+import io.restassured.http.Header;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 import ulaval.glo2003.E2E.EndToEndTest;
 
 import java.time.LocalDate;

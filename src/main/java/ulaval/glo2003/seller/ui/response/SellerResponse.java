@@ -9,7 +9,11 @@ public class SellerResponse {
     private String name;
     private String createdAt;
     private String bio;
+    private String birthDate;
     private List<ProductResponse> products;
+
+    public SellerResponse() {
+    }
 
     public SellerResponse(String id, String name, String createdAt, String bio, List<ProductResponse> products) {
         this.id = id;
@@ -24,7 +28,18 @@ public class SellerResponse {
         this.name = name;
     }
 
-    public SellerResponse() {
+    public SellerResponse(String id,
+                          String name,
+                          String createdAt,
+                          String bio,
+                          String birthDate,
+                          List<ProductResponse> products) {
+        this.id = id;
+        this.name = name;
+        this.createdAt = createdAt;
+        this.bio = bio;
+        this.birthDate = birthDate;
+        this.products = products;
     }
 
     public String getId() {
@@ -41,6 +56,10 @@ public class SellerResponse {
 
     public String getBio() {
         return bio;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
     }
 
     public List<ProductResponse> getProducts() {

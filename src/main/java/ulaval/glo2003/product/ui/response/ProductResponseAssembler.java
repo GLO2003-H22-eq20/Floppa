@@ -1,5 +1,7 @@
 package ulaval.glo2003.product.ui.response;
 
+import ulaval.glo2003.offer.ui.response.OffersResponse;
+import ulaval.glo2003.product.domain.Offers;
 import ulaval.glo2003.seller.ui.response.SellerResponse;
 import ulaval.glo2003.seller.domain.Seller;
 import ulaval.glo2003.product.domain.SellerProduct;
@@ -15,7 +17,7 @@ public class ProductResponseAssembler {
                 sellerProduct.getProduct().getTitle(),
                 sellerProduct.getProduct().getDescription(),
                 sellerProduct.getProduct().getSuggestedPrice(),
-                sellerProduct.getOffers(),
+                presentOffers(sellerProduct.getOffers()),
                 sellerProduct.getProduct().getCategories().stream()
                         .map(Enum::toString)
                         .collect(Collectors.toList()),
@@ -30,5 +32,9 @@ public class ProductResponseAssembler {
 
     private SellerResponse presentSeller(Seller seller) {
         return new SellerResponse(seller.getId(), seller.getName());
+    }
+
+    private OffersResponse presentOffers(Offers offers) {
+        return new OffersResponse(offers.getMean(), offers.getCount());
     }
 }

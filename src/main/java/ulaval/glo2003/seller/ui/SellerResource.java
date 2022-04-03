@@ -46,4 +46,17 @@ public class SellerResource {
 
         return Response.status(Response.Status.OK).entity(sellerResponse).build();
     }
+
+    @Path("@me")
+    @GET
+    public Response getCurrentSeller(@HeaderParam(value = "X-Seller-Id") String id) {
+        if (id.isBlank()) {
+            throw new MissingParameterException("Missing 'seller' ID");
+        }
+        SellerProducts sellerProducts = sellerService.getSeller(id);
+
+        SellerResponse sellerResponse = sellerResponseAssembler.presentCurrentSeller(sellerProducts);
+
+        return Response.status(Response.Status.OK).entity(sellerResponse).build();
+    }
 }

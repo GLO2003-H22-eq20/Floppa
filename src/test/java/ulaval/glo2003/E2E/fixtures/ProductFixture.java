@@ -1,6 +1,8 @@
 package ulaval.glo2003.E2E.fixtures;
 
 import io.restassured.http.Header;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import ulaval.glo2003.E2E.EndToEndTest;
 
@@ -70,6 +72,13 @@ public class ProductFixture extends EndToEndTest {
                 .when().post("/products")
                 .then().extract()
                 .headers().get("location").getValue();
+    }
+
+    public static ExtractableResponse<Response> givenExistingProduct(Map<String, Object> request, String sellerId) {
+        return given().contentType(JSON).body(request)
+                .header(new Header("X-Seller-Id", sellerId))
+                .when().post("/products")
+                .then().extract();
     }
 
     public static String givenExistingProductIdForSeller(String sellerId) {
