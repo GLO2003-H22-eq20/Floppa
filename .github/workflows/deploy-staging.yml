@@ -39,17 +39,17 @@ jobs:
     needs: tests
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy current branch (Not manual)
+      - name: Checkout current branch (Not manual)
         uses: actions/checkout@v2
         if: github.event.inputs.target == ''
 
-      - name: Manual Deploy with target
+      - name: Checkout target (Manual)
         uses: actions/checkout@v2
         if: github.event.inputs.target != ''
         with:
           ref: ${{github.event.inputs.target}}
 
-      - name: Deploy to Heroku
+      - name: Deploy to Heroku (Staging)
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
