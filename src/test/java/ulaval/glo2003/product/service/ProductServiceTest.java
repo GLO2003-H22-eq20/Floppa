@@ -7,8 +7,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ulaval.glo2003.offer.domain.Offer;
+import ulaval.glo2003.offer.domain.OfferRepository;
 import ulaval.glo2003.offer.domain.OffersAssembler;
-import ulaval.glo2003.offer.persistence.OfferInMemoryRepository;
 import ulaval.glo2003.product.domain.*;
 import ulaval.glo2003.product.ui.request.ProductRequest;
 import ulaval.glo2003.seller.domain.Seller;
@@ -41,7 +41,7 @@ public class ProductServiceTest {
     @Mock
     private SellerRepository sellerRepository;
     @Mock
-    private OfferInMemoryRepository offerInMemoryRepository;
+    private OfferRepository offerRepository;
     @Mock
     private ProductFactory productFactory;
     @Mock
@@ -77,7 +77,7 @@ public class ProductServiceTest {
         productService = new ProductService(
                 productRepository,
                 sellerRepository,
-                offerInMemoryRepository,
+                offerRepository,
                 productFactory,
                 offersAssembler
         );
@@ -141,7 +141,7 @@ public class ProductServiceTest {
 
         productService.getProduct(anyString());
 
-        verify(offerInMemoryRepository).getOffersBy(anyString());
+        verify(offerRepository).getOffersBy(anyString());
     }
 
     @Test
@@ -207,7 +207,7 @@ public class ProductServiceTest {
     }
 
     private void givenOffersCanBeFound() {
-        willReturn(List.of(offer)).given(offerInMemoryRepository).getOffersBy(anyString());
+        willReturn(List.of(offer)).given(offerRepository).getOffersBy(anyString());
     }
 
     private void givenOffersCanBeAssembled() {

@@ -2,8 +2,6 @@ package ulaval.glo2003.product.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ulaval.glo2003.product.persistence.ProductInMemoryRepository;
-import ulaval.glo2003.seller.domain.SellerRepository;
 
 import java.time.Instant;
 import java.util.ArrayList;

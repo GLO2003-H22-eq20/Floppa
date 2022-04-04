@@ -6,16 +6,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ulaval.glo2003.offer.domain.OfferRepository;
 import ulaval.glo2003.offer.domain.OffersAssembler;
 import ulaval.glo2003.offer.domain.ProductOffers;
-import ulaval.glo2003.offer.persistence.OfferInMemoryRepository;
 import ulaval.glo2003.product.domain.Offers;
 import ulaval.glo2003.product.domain.Product;
 import ulaval.glo2003.product.domain.ProductRepository;
 import ulaval.glo2003.seller.domain.*;
 import ulaval.glo2003.seller.ui.request.SellerRequest;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,7 +38,7 @@ public class SellerServiceTest {
     @Mock
     private ProductRepository productRepository;
     @Mock
-    private OfferInMemoryRepository offerInMemoryRepository;
+    private OfferRepository offerRepository;
     @Mock
     private OffersAssembler offersAssembler;
 
@@ -59,7 +58,7 @@ public class SellerServiceTest {
         sellerService = new SellerService(
                 sellerRepository,
                 productRepository,
-                offerInMemoryRepository,
+                offerRepository,
                 sellerFactory,
                 offersAssembler
         );
@@ -146,7 +145,7 @@ public class SellerServiceTest {
 
     private Offers givenOffersCanBeFound() {
         Offers offers =  mock(Offers.class);
-        willReturn(offers).given(offerInMemoryRepository).getOffersBy(anyString());
+        willReturn(offers).given(offerRepository).getOffersBy(anyString());
         return offers;
     }
 }
