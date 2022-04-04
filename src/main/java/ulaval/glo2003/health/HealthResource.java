@@ -21,6 +21,6 @@ public class HealthResource {
         } catch (Exception e) {
             return Response.serverError().entity(new HealthResponse(true, false)).build();
         }
-        return Response.status(Response.Status.OK).entity(new HealthResponse(true, true)).build();
+        return Response.status(Response.Status.OK).entity(new HealthResponse(false, true)).build();
     }
 }
