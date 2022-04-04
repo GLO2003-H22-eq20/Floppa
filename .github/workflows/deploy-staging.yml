@@ -36,6 +36,7 @@ jobs:
     needs: tests
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
