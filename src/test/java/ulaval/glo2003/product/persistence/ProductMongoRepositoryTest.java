@@ -24,6 +24,6 @@ public class ProductMongoRepositoryTest extends ProductRepositoryTest {
     public void tearDown() {
         datastoreProvider.getDatastore()
                 .find(ProductMongoModel.class)
-                .delete( new DeleteOptions().multi(true));
+                .delete(new DeleteOptions().multi(true));
     }
 }
