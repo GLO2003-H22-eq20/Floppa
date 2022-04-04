@@ -4,11 +4,12 @@ on:
   push:
     branches:
       - 'master'
+      - 'ci/manual-deploy'
 env:
   PORT: 8080
 
 jobs:
-  tests-and-deploy-staging:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,6 +32,10 @@ jobs:
       - name: Step 3 Tests
         run: mvn verify
 
+  deploy-staging:
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
@@ -40,5 +45,4 @@ jobs:
           healthcheck: "https://staging-team20floppa.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
           delay: 5
-
 
