@@ -39,15 +39,5 @@ public abstract class SellerRepositoryTest {
         assertEquals(seller, currentSeller);
     }
 
-    @Test
-    public void whenRetrievingNonExistantSeller_thenRetrievingByIdThrowsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class, () -> sellerRepository.findById(NONE_EXISTING_ID.toString()));
-    }
-
-    @Test
-    public void givenIdIsBlank_whenRetrievingNonExistantSeller_thenRetrievingByIdThrowsMissingParameterException() {
-        assertThrows(MissingParameterException.class, () -> sellerRepository.findById(BLANK_STRING));
-    }
-
     protected abstract SellerRepository createSellerRepository();
 }

@@ -13,8 +13,8 @@ import java.util.UUID;
 public class ProductMongoModel {
     @Id
     private UUID id;
-    private UUID sellerId;
-    private Instant createdAt;
+    private String sellerId;
+    private String createdAt;
     private String title;
     private String description;
     private Double suggestedPrice;
@@ -25,8 +25,8 @@ public class ProductMongoModel {
 
     public ProductMongoModel(
             UUID id,
-            UUID sellerId,
-            Instant createdAt,
+            String sellerId,
+            String createdAt,
             String title,
             String description,
             Double suggestedPrice,
@@ -45,11 +45,11 @@ public class ProductMongoModel {
         return id;
     }
 
-    public UUID getSellerId() {
+    public String getSellerId() {
         return sellerId;
     }
 
-    public Instant getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 

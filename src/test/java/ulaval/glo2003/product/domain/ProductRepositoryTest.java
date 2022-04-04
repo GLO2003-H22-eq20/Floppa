@@ -3,6 +3,7 @@ package ulaval.glo2003.product.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.product.persistence.ProductInMemoryRepository;
+import ulaval.glo2003.seller.domain.SellerRepository;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -10,13 +11,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class ProductRepositoryTest {
+public abstract class ProductRepositoryTest {
     private static final UUID PRODUCT_ID = UUID.randomUUID();
     private static final UUID PRODUCT_ID_2 = UUID.randomUUID();
-    private static final String SELLER_ID = "1";
+    private static final String SELLER_ID = UUID.randomUUID().toString();
     private static final Instant PRODUCT_CREATED_AT = Instant.now();
     private static final String TITLE = "item";
     private static final String DESCRIPTION = "anItem";
@@ -45,7 +47,7 @@ class ProductRepositoryTest {
     @BeforeEach
     public void setUp() {
 
-        productRepository = new ProductInMemoryRepository();
+        productRepository = createProductRepository();
         product = new Product(
                 PRODUCT_ID,
                 SELLER_ID,
@@ -57,8 +59,10 @@ class ProductRepositoryTest {
         );
     }
 
+    protected abstract ProductRepository createProductRepository();
+
     @Test
-    public void givenProducts_whenSavingTwoProducts_thenCanRetrieveAListOfProductsWithASellerId() {
+    public void givenProductsFromSameSeller_whenGettingProductsBySellerId_thenCanRetrieveSellersProduct() {
         productRepository.save(product);
         Product anotherProductWithSameSellerId = new Product(PRODUCT_ID_2,
                 SELLER_ID,
@@ -71,6 +75,7 @@ class ProductRepositoryTest {
         productRepository.save(anotherProductWithSameSellerId);
 
         Collection<Product> products = productRepository.findProductsBySellerId(SELLER_ID);
+
         assertEquals(TWO, products.size());
     }
 
@@ -85,7 +90,8 @@ class ProductRepositoryTest {
     public void givenProduct_whenFilteringProductsBySellerId_thenReturnFilteredProductList() {
         productRepository.save(product);
 
-        List<Product> filteredProducts = productRepository.findFilteredProducts(product.getSellerId(),
+        List<Product> filteredProducts = productRepository.findFilteredProducts(
+                product.getSellerId(),
                 null,
                 List.of(),
                 null,
@@ -121,7 +127,7 @@ class ProductRepositoryTest {
                 null);
 
         assertEquals(ONE, filteredProducts.size());
-        assertTrue(filteredProducts.stream().anyMatch(filteredProduct -> filteredProduct.equals(product)));
+        assertThat(filteredProducts.stream().findFirst().get()).isEqualTo(product);
     }
 
     @Test

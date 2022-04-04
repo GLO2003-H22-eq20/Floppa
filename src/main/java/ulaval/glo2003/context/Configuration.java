@@ -24,5 +24,4 @@ public class Configuration {
         return new DatastoreProvider(mongoUrl, mongoDatabase);
     }
 
-
 }

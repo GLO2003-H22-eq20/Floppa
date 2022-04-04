@@ -194,7 +194,7 @@ public class ProductResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenInvalidProduct_whenCreatingOffer_thenReturns() {
+    public void givenInvalidProduct_whenCreatingOffer_thenReturnsNotFound() {
         var offerRequest = createOfferRequest(
                 NAME,
                 EMAIL,

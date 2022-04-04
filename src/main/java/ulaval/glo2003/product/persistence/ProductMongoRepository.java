@@ -33,7 +33,7 @@ public class ProductMongoRepository implements ProductRepository {
     @Override
     public List<Product> findProductsBySellerId(String sellerId) {
         Query<ProductMongoModel> productEntityQuery = datastoreProvider.getDatastore().find(ProductMongoModel.class);
-        productEntityQuery.filter(Filters.eq("sellerId", UUID.fromString(sellerId)));
+        productEntityQuery.filter(Filters.eq("sellerId", sellerId));
 
         return productEntityQuery.stream().map(productModelAssembler::assembleMongoModelToEntity)
                 .collect(Collectors.toList());
@@ -71,7 +71,7 @@ public class ProductMongoRepository implements ProductRepository {
             productEntityQuery.filter(Filters.regex("title").caseInsensitive().pattern(title));
         }
         if (!categories.isEmpty()) {
-            productEntityQuery.filter(Filters.all("categories", categories));
+            productEntityQuery.filter(Filters.in("categories", categories));
         }
         if (Optional.ofNullable(minPrice).isPresent()) {
             productEntityQuery.filter(Filters.gte("suggestedPrice", minPrice));

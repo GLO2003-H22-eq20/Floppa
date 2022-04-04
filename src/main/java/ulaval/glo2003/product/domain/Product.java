@@ -1,7 +1,10 @@
 package ulaval.glo2003.product.domain;
 
+import ulaval.glo2003.seller.domain.Seller;
+
 import java.time.Instant;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Product {
@@ -55,5 +58,24 @@ public class Product {
 
     public List<ProductCategory> getCategories() {
         return categories;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Product)) {
+            return false;
+        }
+        Product that = (Product) o;
+
+        return this.id.compareTo(that.id) == 0
+                && this.createdAt.compareTo(that.createdAt) == 0
+                && this.sellerId.equals(that.sellerId)
+                && this.title.equals(that.title)
+                && this.description.equals(that.description)
+                && this.suggestedPrice.equals(that.suggestedPrice)
+                && this.categories.containsAll(that.categories);
     }
 }
