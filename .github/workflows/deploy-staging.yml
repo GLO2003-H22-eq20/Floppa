@@ -1,6 +1,10 @@
 name: Deploy Staging
 on:
   workflow_dispatch:
+    inputs:
+      target:
+        description: 'Target (Commit, Branch, Tag)'
+        required: true
   push:
     branches:
       - 'master'
@@ -36,7 +40,16 @@ jobs:
     needs: tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Deploy current branch (Not manual)
+        uses: actions/checkout@v2
+        if: github.event.inputs.target == ''
+
+      - name: Manual Deploy with target
+        uses: actions/checkout@v2
+        if: github.event.inputs.target != ''
+        with:
+          ref: ${{github.event.inputs.target}}
+
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:

@@ -1,11 +1,15 @@
-name: Deploy Prod
+name: Deploy Staging
 on:
   workflow_dispatch:
+    inputs:
+      target:
+        description: 'Target (Commit, Branch, Tag)'
+        required: true
 env:
   PORT: 8080
 
 jobs:
-  tests-and-deploy-prod:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -28,6 +32,14 @@ jobs:
       - name: Step 3 Tests
         run: mvn verify
 
+  deploy-staging:
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Manual Deploy with target
+        uses: actions/checkout@v2
+        with:
+          ref: ${{github.event.inputs.target}}
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
@@ -37,5 +49,4 @@ jobs:
           healthcheck: "https://production-team20floppa.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
           delay: 5
-
 
