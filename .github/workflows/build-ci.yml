@@ -25,3 +25,7 @@ jobs:
 
       - name: Step 3 Tests
         run: mvn verify
+
+      - name: Codecov
+        uses: codecov/codecov-action@v3.1.0
+
