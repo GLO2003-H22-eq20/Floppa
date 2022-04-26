@@ -1,10 +1,7 @@
 package ulaval.glo2003.product.domain;
 
-import ulaval.glo2003.seller.domain.Seller;
-
 import java.time.Instant;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 public class Product {
@@ -15,14 +12,16 @@ public class Product {
     private final String description;
     private final Double suggestedPrice;
     private final List<ProductCategory> categories;
+    private final int viewsCount;
 
     public Product(UUID id,
-            String sellerId,
-            Instant createdAt,
-            String title,
-            String description,
-            Double suggestedPrice,
-            List<ProductCategory> categories) {
+                   String sellerId,
+                   Instant createdAt,
+                   String title,
+                   String description,
+                   Double suggestedPrice,
+                   List<ProductCategory> categories,
+                   int viewsCount) {
         this.id = id;
         this.sellerId = sellerId;
         this.createdAt = createdAt;
@@ -30,6 +29,7 @@ public class Product {
         this.description = description;
         this.suggestedPrice = suggestedPrice;
         this.categories = categories;
+        this.viewsCount = viewsCount;
     }
 
     public String getId() {
@@ -59,6 +59,8 @@ public class Product {
     public List<ProductCategory> getCategories() {
         return categories;
     }
+
+    public int getViewsCount() {return viewsCount;}
 
     @Override
     public boolean equals(Object o) {
