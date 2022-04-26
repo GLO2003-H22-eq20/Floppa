@@ -19,7 +19,8 @@ public class SellerStatisticsResponseAssembler {
         List<Product> products = sellerProducts.getProducts().stream()
                 .map(it -> it.getProduct()).collect(Collectors.toList());
 
-        List<ProductStatisticsResponse> productStatisticsResponses = productStatisticsResponseAssembler.presentProductsStatistics(products);
+        List<ProductStatisticsResponse> productStatisticsResponses =
+                productStatisticsResponseAssembler.presentProductsStatistics(products);
 
         return new SellerStatisticsResponse(productStatisticsResponses);
     }

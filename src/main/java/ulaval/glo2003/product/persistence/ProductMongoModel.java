@@ -73,7 +73,7 @@ public class ProductMongoModel {
     }
 
     public  Integer getViewsCount() {
-        if(viewsCount != null) {
+        if (viewsCount != null) {
             return viewsCount;
         }
         return ProductFactory.INITIAL_VIEWS_COUNT;

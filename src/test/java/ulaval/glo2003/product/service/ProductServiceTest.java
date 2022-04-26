@@ -170,6 +170,17 @@ public class ProductServiceTest {
     }
 
     @Test
+    public void whenGettingAProduct_thenIncreaseViewCount() {
+        givenAProductCanBeFound();
+        givenOffersCanBeFound();
+        givenOffersCanBeAssembled();
+
+        productService.getProduct(anyString());
+
+        verify(product).increaseViewCount();
+    }
+
+    @Test
     public void whenGettingFilteredProducts_thenSearchesForFilteredProductsInRepository() {
         productService.getFilteredProducts(SELLER_ID, TITLE, CATEGORIES, MIMINUM_PRICE, MAXIMUM_PRICE);
 

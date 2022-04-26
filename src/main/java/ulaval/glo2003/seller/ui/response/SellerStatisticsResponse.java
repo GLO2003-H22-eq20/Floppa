@@ -5,14 +5,16 @@ import ulaval.glo2003.product.ui.response.ProductStatisticsResponse;
 import java.util.List;
 
 public class SellerStatisticsResponse {
-
-    private List<ProductStatisticsResponse> products;
+    private List<ProductStatisticsResponse> productsStatistics;
 
     public SellerStatisticsResponse(List<ProductStatisticsResponse> products) {
-        this.products = products;
+        this.productsStatistics = products;
     }
 
-    public SellerStatisticsResponse() {}
+    public SellerStatisticsResponse() {
+    }
 
-    public List<ProductStatisticsResponse> getProductsStatistics() { return products; }
+    public List<ProductStatisticsResponse> getProductsStatistics() {
+        return productsStatistics;
+    }
 }

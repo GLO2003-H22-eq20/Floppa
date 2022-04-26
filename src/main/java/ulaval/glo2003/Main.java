@@ -66,8 +66,10 @@ public class Main {
 
         SellerResponseAssembler sellerResponseAssembler = new SellerResponseAssembler();
         ProductResponseAssembler productResponseAssembler = new ProductResponseAssembler();
-        ProductStatisticsResponseAssembler productStatisticsResponseAssembler = new ProductStatisticsResponseAssembler();
-        SellerStatisticsResponseAssembler sellerStatisticsResponseAssembler = new SellerStatisticsResponseAssembler(productStatisticsResponseAssembler);
+        ProductStatisticsResponseAssembler productStatisticsResponseAssembler =
+                new ProductStatisticsResponseAssembler();
+        SellerStatisticsResponseAssembler sellerStatisticsResponseAssembler =
+                new SellerStatisticsResponseAssembler(productStatisticsResponseAssembler);
 
 
         SellerService sellerService = new SellerService(
@@ -94,7 +96,12 @@ public class Main {
                 .register(InvalidParameterExceptionMapper.class)
                 .register(MissingParameterExceptionMapper.class)
                 .register(DefaultExceptionMapper.class)
-                .register(new SellerResource(sellerService, sellerResponseAssembler, sellerStatisticsResponseAssembler, uri))
+                .register(new SellerResource(
+                        sellerService,
+                        sellerResponseAssembler,
+                        sellerStatisticsResponseAssembler,
+                        uri)
+                )
                 .register(new ProductResource(productService,offerService,productResponseAssembler,uri))
                 .register(new HealthResource(datastoreProvider))
                 .packages("ulaval.glo2003");

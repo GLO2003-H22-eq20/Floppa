@@ -60,7 +60,9 @@ public class Product {
         return categories;
     }
 
-    public int getViewsCount() {return viewsCount;}
+    public int getViewsCount() {
+        return viewsCount;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -82,6 +84,6 @@ public class Product {
     }
 
     public void increaseViewCount() {
-        this.viewsCount ++;
+        this.viewsCount++;
     }
 }

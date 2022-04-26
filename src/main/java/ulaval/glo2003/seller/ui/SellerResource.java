@@ -77,7 +77,8 @@ public class SellerResource {
         }
         SellerProducts sellerProducts = sellerService.getSeller(id);
 
-        SellerStatisticsResponse sellerStatisticsResponse = sellerStatisticsResponseAssembler.presentSellerStatistics(sellerProducts);
+        SellerStatisticsResponse sellerStatisticsResponse =
+                sellerStatisticsResponseAssembler.presentSellerStatistics(sellerProducts);
 
         return Response.status(Response.Status.OK).entity(sellerStatisticsResponse).build();
     }
