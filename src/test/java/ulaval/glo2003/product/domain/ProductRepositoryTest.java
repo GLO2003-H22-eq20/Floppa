@@ -21,6 +21,7 @@ public abstract class ProductRepositoryTest {
     private static final String TITLE = "item";
     private static final String DESCRIPTION = "anItem";
     private static final Double SUGGESTED_PRICE = 1.;
+    private static final int VIEWS_COUNT = 0;
     private static final List<ProductCategory> CATEGORIES = new ArrayList<>() {
         {
             add(ProductCategory.APPAREL);
@@ -53,7 +54,8 @@ public abstract class ProductRepositoryTest {
                 TITLE,
                 DESCRIPTION,
                 SUGGESTED_PRICE,
-                CATEGORIES
+                CATEGORIES,
+                VIEWS_COUNT
         );
     }
 
@@ -68,7 +70,8 @@ public abstract class ProductRepositoryTest {
                 TITLE,
                 DESCRIPTION,
                 SUGGESTED_PRICE,
-                CATEGORIES
+                CATEGORIES,
+                VIEWS_COUNT
         );
         productRepository.save(anotherProductWithSameSellerId);
 

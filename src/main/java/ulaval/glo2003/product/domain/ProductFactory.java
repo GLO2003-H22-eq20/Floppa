@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class ProductFactory {
     private final Double MINIMUM_SUGGESTED_PRICE = 1.;
-    private final int INITIAL_VIEWS_COUNT = 0;
+    public static final int INITIAL_VIEWS_COUNT = 0;
 
     public Product createProduct(String sellerId,
                                  String title,

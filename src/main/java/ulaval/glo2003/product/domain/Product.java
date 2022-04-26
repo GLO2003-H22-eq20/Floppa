@@ -12,7 +12,7 @@ public class Product {
     private final String description;
     private final Double suggestedPrice;
     private final List<ProductCategory> categories;
-    private final int viewsCount;
+    private int viewsCount;
 
     public Product(UUID id,
                    String sellerId,
@@ -79,5 +79,9 @@ public class Product {
                 && this.description.equals(that.description)
                 && this.suggestedPrice.equals(that.suggestedPrice)
                 && this.categories.containsAll(that.categories);
+    }
+
+    public void increaseViewCount() {
+        this.viewsCount ++;
     }
 }

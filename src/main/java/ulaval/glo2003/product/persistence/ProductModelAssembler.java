@@ -1,8 +1,11 @@
 package ulaval.glo2003.product.persistence;
 
 import ulaval.glo2003.product.domain.Product;
+import ulaval.glo2003.product.domain.ProductFactory;
 
 import java.time.Instant;
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.UUID;
 
 public class ProductModelAssembler {
@@ -15,7 +18,9 @@ public class ProductModelAssembler {
                 product.getTitle(),
                 product.getDescription(),
                 product.getSuggestedPrice(),
-                product.getCategories());
+                product.getCategories(),
+                product.getViewsCount()
+        );
     }
 
     public Product assembleMongoModelToEntity(ProductMongoModel productMongoModel) {
@@ -26,8 +31,8 @@ public class ProductModelAssembler {
                 productMongoModel.getTitle(),
                 productMongoModel.getDescription(),
                 productMongoModel.getSuggestedPrice(),
-                productMongoModel.getCategories()
-
+                productMongoModel.getCategories(),
+                productMongoModel.getViewsCount()
         );
     }
 }
