@@ -1,3 +1,4 @@
+
 # TP4
 
 # Statistique de visionnements
@@ -44,5 +45,4 @@ En tant que vendeur, je peux voir le nombre de visionnements de chacun de mes pr
 ### Exceptions
 
 - `ITEM_NOT_FOUND` si le seller n'existe pas.
-- `INVALID_PARAMETER` si un des champs est invalide.
 - `MISSING_PARAMETER` si un des champs est manquant (`null`).
