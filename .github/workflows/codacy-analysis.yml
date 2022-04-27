@@ -3,7 +3,7 @@ name: Codacy Analysis CLI and Code Coverage
 on:
   push:
     branches:
-      - ci/sonarqube
+      - master
 
 jobs:
   codacy-analysis-cli:
