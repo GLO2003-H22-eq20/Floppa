@@ -13,3 +13,24 @@ Un des conseils serait de ne pas trop attendre avant de commencer coder. Surtout
 5) Quels apprentissages, trucs ou techniques appris dans ce projet croyez-vous pouvoir utiliser plus tard? Décrivez-en au moins 2. Cela peut être des apprentissages techniques, pratiques, sur le travail d'équipe ou encore par rapport au processus.
 Il est quasi impossible de passer à côté d'un environnement CI/CD. Ce processus nous permet entre autre d'avoir un développement plus agile, d'avoir une meilleure qualité du code et d'avoir des cycles de test beaucoup plus fréquent.
 L'utilisation de technologie cloud est un gros avantage qui permet à n'importe quel équipe de développement d'avoir un déploiement rapide et une simplicité d’intégration.
+
+
+### Screenshots
+
+1. Project
+   ![Alt text](tp4_screenshots/Project.PNG?raw=true "1. Project")
+2. Milestones
+   ![Alt text](tp4_screenshots/Milestones1.PNG?raw=true "2. Milestones")
+   ![Alt text](tp4_screenshots/Milestones2.PNG?raw=true "2. Milestones")
+3. Issues
+   ![Alt text](tp4_screenshots/Issue1.PNG?raw=true "3. Issue 1")
+   ![Alt text](tp4_screenshots/Issue2.PNG?raw=true "3. Issue 2")
+   ![Alt text](tp4_screenshots/Issue3.PNG?raw=true "3. Issue 3")
+4. Pull requests
+   ![Alt text](tp4_screenshots/PR1.PNG?raw=true "4. Pull request 1")
+   ![Alt text](tp4_screenshots/PR2(1).PNG?raw=true "4. Pull request 2(1)")
+   ![Alt text](tp4_screenshots/PR2(2).PNG?raw=true "4. Pull request 2(2)")
+   ![Alt text](tp4_screenshots/PR3(1).PNG?raw=true "4. Pull request 3(1)")
+   ![Alt text](tp4_screenshots/PR3(2).PNG?raw=true "4. Pull request 3(2)")
+5. Arbre de commits et de branches
+   ![Alt text](tp4_screenshots/Git_arbre_commits_branches.PNG?raw=true "4. Arbre commits et branches")
