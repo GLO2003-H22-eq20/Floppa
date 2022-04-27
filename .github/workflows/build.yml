@@ -31,4 +31,4 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build and analyze
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar -Dsonar.projectKey=ulaval.glo2003:floppa -Dsonar.login="admin" -Dsonar.password="password"
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.projectKey=ulaval.glo2003:floppa -Dsonar.login="admin" -Dsonar.password="password"
