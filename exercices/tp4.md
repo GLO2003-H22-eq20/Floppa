@@ -21,8 +21,20 @@ Il est quasi impossible de passer à côté d'un environnement CI/CD. Ce process
 L'utilisation de technologie cloud est un gros avantage qui permet à n'importe quel équipe de développement d'avoir un déploiement rapide et une simplicité d’intégration.
 
 
-### Screenshots
+### Screenshots for metric tools
+1. Global view
+   ![Alt text](tp4_screenshots/global-vue.PNG?raw=true "1. Global view")
+2. Code Analysis
+   ![Alt text](tp4_screenshots/error-prone.PNG?raw=true "2. Code Analysis")
+   ![Alt text](tp4_screenshots/code-style.PNG?raw=true "2. Code Analysis")
+3. Security Vulnerabilities (0 found)
+   ![Alt text](tp4_screenshots/security.PNG?raw=true "3. Security")
+4. Code Coverage
+   ![Alt text](tp4_screenshots/test-coverage.PNG?raw=true "3. Issue 1")
+   ![Alt text](tp4_screenshots/test-example-coverage.PNG?raw=true "3. Issue 2")
+   ![Alt text](tp4_screenshots/example-datastore-provider.PNG?raw=true "3. Issue 3")
 
+### Screenshots for project
 1. Project
    ![Alt text](tp4_screenshots/Project.PNG?raw=true "1. Project")
 2. Milestones
