@@ -18,6 +18,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven
+
       - name: MongoDB in GitHub Actions
         uses: supercharge/mongodb-github-action@1.7.0
       - name: Step 2 Compile
