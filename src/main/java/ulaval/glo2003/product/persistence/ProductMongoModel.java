@@ -3,8 +3,8 @@ package ulaval.glo2003.product.persistence;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import ulaval.glo2003.product.domain.ProductCategory;
+import ulaval.glo2003.product.domain.ProductFactory;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +19,7 @@ public class ProductMongoModel {
     private String description;
     private Double suggestedPrice;
     private List<ProductCategory> categories;
+    private Integer viewsCount;
 
     public ProductMongoModel() {
     }
@@ -30,7 +31,8 @@ public class ProductMongoModel {
             String title,
             String description,
             Double suggestedPrice,
-            List<ProductCategory> categories
+            List<ProductCategory> categories,
+            Integer viewsCount
     ) {
         this.id = id;
         this.sellerId = sellerId;
@@ -39,6 +41,7 @@ public class ProductMongoModel {
         this.description = description;
         this.suggestedPrice = suggestedPrice;
         this.categories = categories;
+        this.viewsCount = viewsCount;
     }
 
     public UUID getId() {
@@ -67,6 +70,13 @@ public class ProductMongoModel {
 
     public List<ProductCategory> getCategories() {
         return categories;
+    }
+
+    public  Integer getViewsCount() {
+        if (viewsCount != null) {
+            return viewsCount;
+        }
+        return ProductFactory.INITIAL_VIEWS_COUNT;
     }
 }
 

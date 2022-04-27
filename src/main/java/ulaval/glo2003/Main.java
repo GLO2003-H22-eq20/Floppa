@@ -24,6 +24,7 @@ import ulaval.glo2003.product.persistence.ProductMongoRepository;
 import ulaval.glo2003.product.service.ProductService;
 import ulaval.glo2003.product.ui.ProductResource;
 import ulaval.glo2003.product.ui.response.ProductResponseAssembler;
+import ulaval.glo2003.product.ui.response.ProductStatisticsResponseAssembler;
 import ulaval.glo2003.seller.domain.SellerFactory;
 import ulaval.glo2003.seller.domain.SellerRepository;
 import ulaval.glo2003.seller.domain.SellerService;
@@ -31,6 +32,7 @@ import ulaval.glo2003.seller.persistence.SellerModelAssembler;
 import ulaval.glo2003.seller.persistence.SellerMongoRepository;
 import ulaval.glo2003.seller.ui.SellerResource;
 import ulaval.glo2003.seller.ui.response.SellerResponseAssembler;
+import ulaval.glo2003.seller.ui.response.SellerStatisticsResponseAssembler;
 
 
 import java.io.IOException;
@@ -64,6 +66,10 @@ public class Main {
 
         SellerResponseAssembler sellerResponseAssembler = new SellerResponseAssembler();
         ProductResponseAssembler productResponseAssembler = new ProductResponseAssembler();
+        ProductStatisticsResponseAssembler productStatisticsResponseAssembler =
+                new ProductStatisticsResponseAssembler();
+        SellerStatisticsResponseAssembler sellerStatisticsResponseAssembler =
+                new SellerStatisticsResponseAssembler(productStatisticsResponseAssembler);
 
 
         SellerService sellerService = new SellerService(
@@ -90,7 +96,12 @@ public class Main {
                 .register(InvalidParameterExceptionMapper.class)
                 .register(MissingParameterExceptionMapper.class)
                 .register(DefaultExceptionMapper.class)
-                .register(new SellerResource(sellerService, sellerResponseAssembler, uri))
+                .register(new SellerResource(
+                        sellerService,
+                        sellerResponseAssembler,
+                        sellerStatisticsResponseAssembler,
+                        uri)
+                )
                 .register(new ProductResource(productService,offerService,productResponseAssembler,uri))
                 .register(new HealthResource(datastoreProvider))
                 .packages("ulaval.glo2003");
