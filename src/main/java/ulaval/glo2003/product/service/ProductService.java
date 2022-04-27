@@ -45,6 +45,10 @@ public class ProductService {
         Offers offers = offersAssembler.assembleOffers(offerRepository.getOffersBy(id));
         Seller seller = sellerRepository.findById(product.getSellerId());
         ProductOffers productOffers = new ProductOffers(product, offers);
+
+        product.increaseViewCount();
+        productRepository.save(product);
+
         return new SellerProduct(seller, productOffers);
     }
 
@@ -75,4 +79,6 @@ public class ProductService {
                 )
                 .collect(Collectors.toList());
     }
+
+
 }

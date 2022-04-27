@@ -7,6 +7,7 @@ import org.junit.Test;
 import ulaval.glo2003.exceptions.mappers.response.ExceptionResponse;
 import ulaval.glo2003.seller.ui.response.SellerResponse;
 import ulaval.glo2003.E2E.EndToEndTest;
+import ulaval.glo2003.seller.ui.response.SellerStatisticsResponse;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -21,6 +22,7 @@ import static ulaval.glo2003.E2E.fixtures.SellerFixture.*;
 public class SellerResourceE2ETest extends EndToEndTest {
     public static final String SELLERS_ENDPOINT = "/sellers";
     public static final String CURRENT_SELLERS_ENDPOINT = "/sellers/@me";
+    public static final String CURRENT_SELLERS_STATS_ENDPOINT = "/sellers/@me/stats";
 
     @Test
     public void givenValidSellerRequest_whenCreatingSeller_thenReturnCreated201() {
@@ -256,5 +258,48 @@ public class SellerResourceE2ETest extends EndToEndTest {
 
         assertThat(response.statusCode()).isEqualTo(STATUS_OK);
 
+    }
+
+    @Test
+    public void givenSellerWithUnViewedProducts_whenGettingSellerStatistics_thenReturnSellerViewCounts() {
+        Map<String, String> sellerRequest = givenValidSellerRequest();
+        String sellerLocation = givenExistingSellerLocation(sellerRequest);
+        String sellerId = getIdFromLocation(sellerLocation);
+        String productId = givenExistingProductIdForSeller(sellerId);
+
+        ExtractableResponse<Response> response = given().urlEncodingEnabled(false)
+                .contentType("application/json")
+                .header(new Header("X-Seller-Id", sellerId))
+                .when().get(CURRENT_SELLERS_STATS_ENDPOINT)
+                .then().extract();
+        SellerStatisticsResponse sellerStatisticsResponse = response.body().as(SellerStatisticsResponse.class);
+
+        assertThat(sellerStatisticsResponse.getProductsStatistics()).isNotEmpty();
+        assertThat(sellerStatisticsResponse.getProductsStatistics().size()).isEqualTo(1);
+        assertThat(sellerStatisticsResponse.getProductsStatistics().get(0).getId()).isEqualTo(productId);
+        assertThat(sellerStatisticsResponse.getProductsStatistics().get(0).getViewsCount()).isEqualTo(0);
+        assertThat(sellerStatisticsResponse.getProductsStatistics().get(0).getTitle()).isEqualTo(PRODUCT_TITLE);
+    }
+
+    @Test
+    public void givenSellerWithViewedProducts_whenGettingSellerStatistics_thenReturnSellerViewCounts() {
+        Map<String, String> sellerRequest = givenValidSellerRequest();
+        String sellerLocation = givenExistingSellerLocation(sellerRequest);
+        String sellerId = getIdFromLocation(sellerLocation);
+        String productId = givenExistingProductIdForSeller(sellerId);
+        given().when().get("/products/" + productId).then().extract();
+
+        ExtractableResponse<Response> response = given().urlEncodingEnabled(false)
+                .contentType("application/json")
+                .header(new Header("X-Seller-Id", sellerId))
+                .when().get(CURRENT_SELLERS_STATS_ENDPOINT)
+                .then().extract();
+        SellerStatisticsResponse sellerStatisticsResponse = response.body().as(SellerStatisticsResponse.class);
+
+        assertThat(sellerStatisticsResponse.getProductsStatistics()).isNotEmpty();
+        assertThat(sellerStatisticsResponse.getProductsStatistics().size()).isEqualTo(1);
+        assertThat(sellerStatisticsResponse.getProductsStatistics().get(0).getId()).isEqualTo(productId);
+        assertThat(sellerStatisticsResponse.getProductsStatistics().get(0).getViewsCount()).isEqualTo(1);
+        assertThat(sellerStatisticsResponse.getProductsStatistics().get(0).getTitle()).isEqualTo(PRODUCT_TITLE);
     }
 }

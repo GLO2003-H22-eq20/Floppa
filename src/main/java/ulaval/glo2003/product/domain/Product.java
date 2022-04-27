@@ -1,6 +1,5 @@
 package ulaval.glo2003.product.domain;
 
-
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
@@ -13,14 +12,16 @@ public class Product {
     private final String description;
     private final Double suggestedPrice;
     private final List<ProductCategory> categories;
+    private int viewsCount;
 
     public Product(UUID id,
-            String sellerId,
-            Instant createdAt,
-            String title,
-            String description,
-            Double suggestedPrice,
-            List<ProductCategory> categories) {
+                   String sellerId,
+                   Instant createdAt,
+                   String title,
+                   String description,
+                   Double suggestedPrice,
+                   List<ProductCategory> categories,
+                   int viewsCount) {
         this.id = id;
         this.sellerId = sellerId;
         this.createdAt = createdAt;
@@ -28,6 +29,7 @@ public class Product {
         this.description = description;
         this.suggestedPrice = suggestedPrice;
         this.categories = categories;
+        this.viewsCount = viewsCount;
     }
 
     public String getId() {
@@ -58,6 +60,10 @@ public class Product {
         return categories;
     }
 
+    public int getViewsCount() {
+        return viewsCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -75,5 +81,9 @@ public class Product {
                 && this.description.equals(that.description)
                 && this.suggestedPrice.equals(that.suggestedPrice)
                 && this.categories.containsAll(that.categories);
+    }
+
+    public void increaseViewCount() {
+        this.viewsCount++;
     }
 }

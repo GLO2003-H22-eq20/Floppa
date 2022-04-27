@@ -1,5 +1,7 @@
 package ulaval.glo2003.product.persistence;
 
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.UpdateResult;
 import dev.morphia.query.Query;
 import dev.morphia.query.experimental.filters.Filters;
 import ulaval.glo2003.context.DatastoreProvider;
@@ -81,4 +83,5 @@ public class ProductMongoRepository implements ProductRepository {
                 .collect(Collectors.toList());
 
     }
+
 }
