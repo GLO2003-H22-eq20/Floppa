@@ -164,7 +164,8 @@ public class ProductResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenNotExistingProductLocation_whenGettingProduct_thenReturnStatusNotFound404() throws URISyntaxException {
+    public void givenNotExistingProductLocation_whenGettingProduct_thenReturnStatusNotFound404()
+            throws URISyntaxException {
         UUID invalidId = UUID.randomUUID();
         ExtractableResponse<Response> response = given().when().get("/products/" + invalidId).then().extract();
         ExceptionResponse error = response.body().as(ExceptionResponse.class);
