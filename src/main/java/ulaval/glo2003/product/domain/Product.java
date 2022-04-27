@@ -1,10 +1,8 @@
 package ulaval.glo2003.product.domain;
 
-import ulaval.glo2003.seller.domain.Seller;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 public class Product {

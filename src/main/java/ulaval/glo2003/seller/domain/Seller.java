@@ -1,6 +1,5 @@
 package ulaval.glo2003.seller.domain;
 
-import org.bson.types.ObjectId;
 
 import java.time.Instant;
 import java.time.LocalDate;

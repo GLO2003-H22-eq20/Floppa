@@ -4,7 +4,6 @@ import dev.morphia.query.Query;
 import dev.morphia.query.experimental.filters.Filters;
 import ulaval.glo2003.context.DatastoreProvider;
 import ulaval.glo2003.exceptions.ItemNotFoundException;
-import ulaval.glo2003.exceptions.MissingParameterException;
 import ulaval.glo2003.seller.domain.SellerRepository;
 import ulaval.glo2003.seller.domain.Seller;
 

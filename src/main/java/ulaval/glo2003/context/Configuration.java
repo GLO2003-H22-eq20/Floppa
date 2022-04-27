@@ -13,7 +13,7 @@ public class Configuration {
 
     public URI getUri() {
         final String port = environmentVars.get("PORT", "8080");
-        final String baseUri = "http://0.0.0.0:" + port + "/";
+        final String baseUri = "http://localhost:" + port + "/";
         return URI.create(baseUri);
     }
 

@@ -50,7 +50,7 @@ public class SellerResource {
     @Path("@me")
     @GET
     public Response getCurrentSeller(@HeaderParam(value = "X-Seller-Id") String id) {
-        if (id.isBlank()) {
+        if (id == null || id.isBlank()) {
             throw new MissingParameterException("Missing 'seller' ID");
         }
         SellerProducts sellerProducts = sellerService.getSeller(id);

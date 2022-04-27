@@ -4,7 +4,6 @@ import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import ulaval.glo2003.product.domain.ProductCategory;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 

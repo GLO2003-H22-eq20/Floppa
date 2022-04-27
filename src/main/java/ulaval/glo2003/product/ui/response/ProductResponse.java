@@ -2,7 +2,6 @@ package ulaval.glo2003.product.ui.response;
 
 import ulaval.glo2003.offer.ui.response.OffersResponse;
 import ulaval.glo2003.seller.ui.response.SellerResponse;
-import ulaval.glo2003.product.domain.Offers;
 
 import java.util.List;
 

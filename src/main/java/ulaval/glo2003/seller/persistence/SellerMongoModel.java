@@ -3,7 +3,6 @@ package ulaval.glo2003.seller.persistence;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.UUID;
 

@@ -30,7 +30,7 @@ public class OffersAssembler {
     private Double getMin(List<Offer> offers) {
         OptionalDouble min = offers.stream().mapToDouble(Offer::getAmount).min();
         if (min.isPresent()) {
-            return Double.valueOf(decimalFormat.format(min.getAsDouble()));
+            return min.getAsDouble();
         } else {
             return null;
         }
@@ -39,18 +39,10 @@ public class OffersAssembler {
     private Double getMax(List<Offer> offers) {
         OptionalDouble max = offers.stream().mapToDouble(Offer::getAmount).max();
         if (max.isPresent()) {
-            return Double.valueOf(decimalFormat.format(max.getAsDouble()));
+            return max.getAsDouble();
         } else {
             return null;
         }
     }
 
-    private final DecimalFormat decimalFormat = new DecimalFormat(
-            String.format(
-                    "#%s##",
-                    ((DecimalFormat) DecimalFormat.getInstance(Locale.ROOT))
-                            .getDecimalFormatSymbols()
-                            .getDecimalSeparator()
-            )
-    );
 }
