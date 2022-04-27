@@ -1,3 +1,5 @@
+![Staging](https://github.com/GLO2003-H22-eq20/Floppa/actions/workflows/deploy-staging.yml/badge.svg)
+![Deploy](https://github.com/GLO2003-H22-eq20/Floppa/actions/workflows/deploy-prod.yml/badge.svg)
 # Floppa
 
 Le meilleur site de vente anonyme au Québec!
@@ -45,6 +47,7 @@ Since we use the dotenv-java package you'll need to create a `.env` file at the 
 FLOPPA_MONGO_CONNECTION_STRING=<either localhost or an atlas connection string>
 FLOPPA_MONGO_DATABASE=Floppa
 ```
+## Open Source
 
 ### Code of conduct
 Our code of conduct is present here: [Code of Conduct](CodeOfConduct.md)
@@ -56,13 +59,6 @@ Our Contribution Guide is present here: [Contribution Guide](Contributions.md)
 The License used is detailed here: [License](License.md)
 
 ### Open Source Sources
-Source Code of Conduct: https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md
-Source Contributions: https://gist.github.com/briandk/3d2e8b3ec8daf5a27a62#file-contributing-md
-Source License: https://choosealicense.com/licenses/mit/
-
-### CI Pipeline Badges
-#### staging
-https://github.com/GLO2003-H22-eq20/Floppa/actions/workflows/deploy-staging.yml/badge.svg
-#### Deploy
-https://github.com/GLO2003-H22-eq20/Floppa/actions/workflows/deploy-prod.yml/badge.svg
-
+* [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md)
+* [Contributions](https://gist.github.com/briandk/3d2e8b3ec8daf5a27a62#file-contributing-md)
+* [License](https://choosealicense.com/licenses/mit/)
