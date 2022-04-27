@@ -4,12 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ulaval.glo2003.exceptions.InvalidParameterException;
 import ulaval.glo2003.exceptions.MissingParameterException;
-import ulaval.glo2003.product.domain.Product;
-import ulaval.glo2003.product.domain.ProductFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -20,6 +19,7 @@ public class ProductFactoryTest {
     private static final String BLANK_STRING = " ";
     private static final Double SUGGESTED_PRICE = 7.7;
     private static final Double INVALID_SUGGESTED_PRICE = 0.5;
+    private static final int INITIAL_VIEWS_COUNT = 0;
     private final List<String> CATEGORIES = new ArrayList<>() {
         {
             add("beauty");
@@ -95,4 +95,19 @@ public class ProductFactoryTest {
 
         assertNotNull(product.getCreatedAt());
     }
+
+    @Test
+    public void whenCreatingProduct_thenProductHasAViewsCount() {
+        Product product = productFactory.createProduct(SELLER_ID, TITLE, DESCRIPTION, SUGGESTED_PRICE, CATEGORIES);
+
+        assertNotNull(product.getViewsCount());
+    }
+
+    @Test
+    public void whenCreatingProduct_thenProductViewsCountIsSetToInitialValue() {
+        Product product = productFactory.createProduct(SELLER_ID, TITLE, DESCRIPTION, SUGGESTED_PRICE, CATEGORIES);
+
+        assertEquals(product.getViewsCount(), INITIAL_VIEWS_COUNT);
+    }
+
 }

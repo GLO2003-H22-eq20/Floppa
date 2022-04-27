@@ -34,6 +34,7 @@ public class ProductResponseAssemblerTest {
     private static final String PRODUCT_TITLE = "testProductTitle";
     private static final String PRODUCT_DESCRIPTION = "testProductDescription";
     private static final Double PRODUCT_SUGGESTED_PRICE = 1.;
+    private static final int VIEWS_COUNT = 0;
     private static final List<ProductCategory> PRODUCT_CATEGORIES = new ArrayList<>() {
         {
             add(ProductCategory.APPAREL);
@@ -65,7 +66,8 @@ public class ProductResponseAssemblerTest {
                 PRODUCT_TITLE,
                 PRODUCT_DESCRIPTION,
                 PRODUCT_SUGGESTED_PRICE,
-                PRODUCT_CATEGORIES);
+                PRODUCT_CATEGORIES,
+                VIEWS_COUNT);
         Offers offers = new Offers(OFFERS_MEAN, OFFERS_COUNT, OFFERS_MIN, OFFERS_MAX, OFFER_LIST);
         ProductOffers productOffers = new ProductOffers(product, offers);
         sellerProduct = new SellerProduct(seller, productOffers);
