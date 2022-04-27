@@ -21,7 +21,7 @@ jobs:
           max-allowed-issues: 2147483647
 
       - name: Codacy Coverage Reporter
-        uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        uses: codacy/codacy-coverage-reporter-action@v1
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          coverage-reporter: jacoco.xml
+          jacoco-csv-file: target/site/jacoco/jacoco.csv
