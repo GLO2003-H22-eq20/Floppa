@@ -1,9 +1,7 @@
 name: Codacy Analysis CLI and Code Coverage
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
 
 jobs:
   codacy-analysis-cli:
