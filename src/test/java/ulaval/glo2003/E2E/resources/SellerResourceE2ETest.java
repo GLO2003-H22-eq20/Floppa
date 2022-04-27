@@ -154,7 +154,6 @@ public class SellerResourceE2ETest extends EndToEndTest {
     public void givenSellerWithProducts_whenGettingSeller_thenReturnStatusOk200() throws URISyntaxException {
         Map<String, String> sellerRequest = givenValidSellerRequest();
         String sellerLocation = givenExistingSellerLocation(sellerRequest);
-        String sellerId = getIdFromLocation(sellerLocation);
 
         ExtractableResponse<Response> response = given().when().get(new URI(sellerLocation)).then().extract();
 
