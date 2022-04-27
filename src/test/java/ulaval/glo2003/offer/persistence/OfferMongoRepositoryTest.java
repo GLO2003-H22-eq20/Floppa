@@ -1,7 +1,6 @@
 package ulaval.glo2003.offer.persistence;
 
 import ulaval.glo2003.context.Configuration;
-import ulaval.glo2003.context.DatastoreProvider;
 import ulaval.glo2003.offer.domain.OfferRepository;
 import ulaval.glo2003.offer.domain.OfferRepositoryTest;
 

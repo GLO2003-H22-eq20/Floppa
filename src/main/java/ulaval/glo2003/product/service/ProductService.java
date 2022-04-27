@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class ProductService {
     private final ProductRepository productRepository;
     private final SellerRepository sellerRepository;
-    private final OfferRepository offerInMemoryRepository;
+    private final OfferRepository offerRepository;
     private final ProductFactory productFactory;
     private final OffersAssembler offersAssembler;
 
@@ -25,7 +25,7 @@ public class ProductService {
                           OffersAssembler offersAssembler) {
         this.productRepository = productRepository;
         this.sellerRepository = sellerRepository;
-        this.offerInMemoryRepository = offerRepository;
+        this.offerRepository = offerRepository;
         this.productFactory = productFactory;
         this.offersAssembler = offersAssembler;
     }
@@ -42,7 +42,7 @@ public class ProductService {
 
     public SellerProduct getProduct(String id) {
         Product product = productRepository.findById(id);
-        Offers offers = offersAssembler.assembleOffers(offerInMemoryRepository.getOffersBy(id));
+        Offers offers = offersAssembler.assembleOffers(offerRepository.getOffersBy(id));
         Seller seller = sellerRepository.findById(product.getSellerId());
         ProductOffers productOffers = new ProductOffers(product, offers);
 
@@ -73,7 +73,7 @@ public class ProductService {
                                 new ProductOffers(
                                         product,
                                         offersAssembler.assembleOffers(
-                                                offerInMemoryRepository.getOffersBy(product.getId()))
+                                                offerRepository.getOffersBy(product.getId()))
                                 )
                         )
                 )

@@ -43,7 +43,7 @@ public class ProductResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createProduct(@HeaderParam(value = "X-Seller-Id") String sellerId,
                                   @NotNull ProductRequest productRequest) {
-        if (sellerId.isBlank()) {
+        if (sellerId == null || sellerId.isBlank()) {
             throw new MissingParameterException("Missing seller ID");
         }
         String productId = productService.createProduct(sellerId, productRequest);

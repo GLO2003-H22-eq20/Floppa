@@ -6,12 +6,10 @@ import dev.morphia.query.Query;
 import dev.morphia.query.experimental.filters.Filters;
 import ulaval.glo2003.context.DatastoreProvider;
 import ulaval.glo2003.exceptions.ItemNotFoundException;
-import ulaval.glo2003.exceptions.MissingParameterException;
 import ulaval.glo2003.product.domain.ProductRepository;
 import ulaval.glo2003.product.domain.Product;
 import ulaval.glo2003.product.domain.ProductCategory;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

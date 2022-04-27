@@ -42,6 +42,17 @@ public class ProductResourceE2ETest extends EndToEndTest {
                 .then().extract();
 
         assertThat(response.statusCode()).isEqualTo(STATUS_CREATED);
+    }
+
+    @Test
+    public void givenSellerAndValidProductRequest_whenCreatingProduct_thenReturnLocationHeaderNotEmpty() {
+        String sellerId = givenNewSellerId();
+        Map<String, Object> productRequest = givenValidProductRequest();
+
+        ExtractableResponse<Response> response = givenNewProductForSeller(productRequest, sellerId)
+                .when().post(PRODUCTS_ENDPOINT)
+                .then().extract();
+
         assertThat(response.headers().get("location").getValue()).isNotEmpty();
     }
 
@@ -50,6 +61,20 @@ public class ProductResourceE2ETest extends EndToEndTest {
         Map<String, Object> productRequest = givenValidProductRequest();
 
         ExtractableResponse<Response> response = givenNewProductForSeller(productRequest, " ")
+                .when().post(PRODUCTS_ENDPOINT)
+                .then().extract();
+
+        assertThat(response.statusCode()).isEqualTo(STATUS_BAD_REQUEST);
+    }
+
+    @Test
+    public void givenProductWithSuggestedPriceBelowMinimum_whenCreatingProduct_thenReturnStatusBadRequest400() {
+        String sellerId = givenNewSellerId();
+        Map<String, Object> emptyRequest = givenInvalidPriceProductRequest();
+
+        ExtractableResponse<Response> response = given().contentType("application/json")
+                .header(new Header("X-Seller-Id", sellerId))
+                .body(emptyRequest)
                 .when().post(PRODUCTS_ENDPOINT)
                 .then().extract();
 
@@ -68,7 +93,6 @@ public class ProductResourceE2ETest extends EndToEndTest {
                 .then().extract();
         ExceptionResponse error = response.body().as(ExceptionResponse.class);
 
-        assertThat(response.statusCode()).isEqualTo(STATUS_BAD_REQUEST);
         assertThat(error.getCode()).isEqualTo("INVALID_PARAMETER");
     }
 
@@ -84,8 +108,21 @@ public class ProductResourceE2ETest extends EndToEndTest {
                 .then().extract();
         ExceptionResponse error = response.body().as(ExceptionResponse.class);
 
-        assertThat(response.statusCode()).isEqualTo(STATUS_BAD_REQUEST);
         assertThat(error.getCode()).isEqualTo("MISSING_PARAMETER");
+    }
+
+    @Test
+    public void givenProductWithMissingParameters_whenCreatingProduct_thenReturnStatusBadRequest400() {
+        String sellerId = givenNewSellerId();
+        Map<String, String> emptyRequest = new HashMap<>();
+
+        ExtractableResponse<Response> response = given().contentType("application/json")
+                .header(new Header("X-Seller-Id", sellerId))
+                .body(emptyRequest)
+                .when().post(PRODUCTS_ENDPOINT)
+                .then().extract();
+
+        assertThat(response.statusCode()).isEqualTo(STATUS_BAD_REQUEST);
     }
 
     @Test
@@ -97,7 +134,6 @@ public class ProductResourceE2ETest extends EndToEndTest {
         ExtractableResponse<Response> response = given().when().get(new URI(productLocation)).then().extract();
         ProductResponse productResponse = response.body().as(ProductResponse.class);
 
-        assertThat(response.statusCode()).isEqualTo(STATUS_OK);
         assertThat(productResponse.getTitle()).isEqualTo(productRequest.get("title"));
         assertThat(productResponse.getDescription()).isEqualTo(productRequest.get("description"));
         assertThat(productResponse.getSeller().getId()).isEqualTo(sellerId);
@@ -107,13 +143,32 @@ public class ProductResourceE2ETest extends EndToEndTest {
     }
 
     @Test
-    public void givenNotExistingProductLocation_whenGettingProduct_thenNotFound() throws URISyntaxException {
+    public void givenExistingProductLocation_whenGettingProduct_thenReturnStatusOk200() throws URISyntaxException {
+        Map<String, Object> productRequest = givenValidProductRequest();
+        String sellerId = givenNewSellerId();
+        String productLocation = givenExistingProductLocation(productRequest, sellerId);
+
+        ExtractableResponse<Response> response = given().when().get(new URI(productLocation)).then().extract();
+
+        assertThat(response.statusCode()).isEqualTo(STATUS_OK);
+    }
+
+    @Test
+    public void givenNotExistingProductLocation_whenGettingProduct_thenReturnItemNotFound() throws URISyntaxException {
         UUID invalidId = UUID.randomUUID();
         ExtractableResponse<Response> response = given().when().get("/products/" + invalidId).then().extract();
         ExceptionResponse error = response.body().as(ExceptionResponse.class);
 
-        assertThat(response.statusCode()).isEqualTo(STATUS_NOT_FOUND);
         assertThat(error.getCode()).isEqualTo("ITEM_NOT_FOUND");
+    }
+
+    @Test
+    public void givenNotExistingProductLocation_whenGettingProduct_thenReturnStatusNotFound404()
+            throws URISyntaxException {
+        UUID invalidId = UUID.randomUUID();
+        ExtractableResponse<Response> response = given().when().get("/products/" + invalidId).then().extract();
+
+        assertThat(response.statusCode()).isEqualTo(STATUS_NOT_FOUND);
     }
 
     @Test
