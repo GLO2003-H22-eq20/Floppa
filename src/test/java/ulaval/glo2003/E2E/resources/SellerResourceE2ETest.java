@@ -92,7 +92,6 @@ public class SellerResourceE2ETest extends EndToEndTest {
                 .body(emptyRequest)
                 .when().post(SELLERS_ENDPOINT)
                 .then().extract();
-        ExceptionResponse error = response.body().as(ExceptionResponse.class);
 
         assertThat(response.statusCode()).isEqualTo(STATUS_BAD_REQUEST);
     }
@@ -156,7 +155,6 @@ public class SellerResourceE2ETest extends EndToEndTest {
         Map<String, String> sellerRequest = givenValidSellerRequest();
         String sellerLocation = givenExistingSellerLocation(sellerRequest);
         String sellerId = getIdFromLocation(sellerLocation);
-        String productId = givenExistingProductIdForSeller(sellerId);
 
         ExtractableResponse<Response> response = given().when().get(new URI(sellerLocation)).then().extract();
 

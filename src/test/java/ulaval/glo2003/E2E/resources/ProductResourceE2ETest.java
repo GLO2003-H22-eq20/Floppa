@@ -121,7 +121,6 @@ public class ProductResourceE2ETest extends EndToEndTest {
                 .body(emptyRequest)
                 .when().post(PRODUCTS_ENDPOINT)
                 .then().extract();
-        ExceptionResponse error = response.body().as(ExceptionResponse.class);
 
         assertThat(response.statusCode()).isEqualTo(STATUS_BAD_REQUEST);
     }
