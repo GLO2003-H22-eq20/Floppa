@@ -38,17 +38,14 @@ L'utilisation de technologie cloud est un gros avantage qui permet à n'importe 
 1. Project
    ![Alt text](tp4_screenshots/Project.PNG?raw=true "1. Project")
 2. Milestones
-   ![Alt text](tp4_screenshots/Milestones1.PNG?raw=true "2. Milestones")
-   ![Alt text](tp4_screenshots/Milestones2.PNG?raw=true "2. Milestones")
+   ![Alt text](tp4_screenshots/Milestones.PNG?raw=true "2. Milestones")
 3. Issues
    ![Alt text](tp4_screenshots/Issue1.PNG?raw=true "3. Issue 1")
    ![Alt text](tp4_screenshots/Issue2.PNG?raw=true "3. Issue 2")
    ![Alt text](tp4_screenshots/Issue3.PNG?raw=true "3. Issue 3")
 4. Pull requests
    ![Alt text](tp4_screenshots/PR1.PNG?raw=true "4. Pull request 1")
-   ![Alt text](tp4_screenshots/PR2(1).PNG?raw=true "4. Pull request 2(1)")
-   ![Alt text](tp4_screenshots/PR2(2).PNG?raw=true "4. Pull request 2(2)")
-   ![Alt text](tp4_screenshots/PR3(1).PNG?raw=true "4. Pull request 3(1)")
-   ![Alt text](tp4_screenshots/PR3(2).PNG?raw=true "4. Pull request 3(2)")
+   ![Alt text](tp4_screenshots/PR2.PNG?raw=true "4. Pull request 2(1)")
+   ![Alt text](tp4_screenshots/PR3.PNG?raw=true "4. Pull request 3(1)")
 5. Arbre de commits et de branches
    ![Alt text](tp4_screenshots/Git_arbre_commits_branches.PNG?raw=true "4. Arbre commits et branches")
