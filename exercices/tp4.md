@@ -1,4 +1,5 @@
 # TP4
+
 ### Nommez 3 avantages à contribuer à des projets open source en tant qu’entreprise.
 1) Le premier avantage est qu’il est possible d’améliorer le logiciel qu’on utilise. Comme le décrit le texte 
 “How to contribute to Open Source”, souvent, ceux qui viennent apporter des améliorations au logiciel sont 
@@ -129,3 +130,18 @@ document déjà produit pour s'assurer de ne rien oublier. De plus, nous avions 
 essentielles qui devaient s'y trouver. Ce guide nous semble adéquat, léger et facile à comprendre. De plus, il est 
 détaillé pour permettre à tout type d'utilisateur de soumettre une pull request ou tout simplement rapporter un bug.
 Source: https://gist.github.com/briandk/3d2e8b3ec8daf5a27a62#file-contributing-md
+
+
+### Screenshots
+1. Global view
+   ![Alt text](tp4_screenshots/global-vue.PNG?raw=true "1. Global view")
+2. Code Analysis
+   ![Alt text](tp4_screenshots/error-prone.PNG?raw=true "2. Code Analysis")
+   ![Alt text](tp4_screenshots/code-style.PNG?raw=true "2. Code Analysis")
+3. Security Vulnerabilities (0 found)
+   ![Alt text](tp4_screenshots/security.PNG?raw=true "3. Security")
+4. Code Coverage
+   ![Alt text](tp4_screenshots/test-coverage.PNG?raw=true "3. Issue 1")
+   ![Alt text](tp4_screenshots/test-example-coverage.PNG?raw=true "3. Issue 2")
+   ![Alt text](tp4_screenshots/example-datastore-provider.PNG?raw=true "3. Issue 3")
+
